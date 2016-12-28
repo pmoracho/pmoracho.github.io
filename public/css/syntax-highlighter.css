@@ -1,5 +1,5 @@
 div.highlight {background-color: #333}
-pre.highlight {background-color: #333;white-space: pre;}
+pre.highlight {background-color: #333;white-space: pre;color:chartreuse;}
 .highlight overflow-y: auto;
 .highlight overflow-x: auto;
 .highlight code {color:#eee; background-color: #333;}
