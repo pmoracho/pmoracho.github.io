@@ -8,7 +8,7 @@ sitemap: false
 category: base
 ---
 {:.text-center}
-## <i class="fa fa-paperclip" title="Destacados"></i> <a href="{{ site.url }}/featured">Featured Posts</a>
+## <i class="fa fa-paperclip" title="Destacados"></i> <a href="{{ site.url }}/featured">Destacados</a>
 <hr class="style17" style="margin:1.0rem 0;">
 {% comment %}
   Tag generation is experimental and dynamic size for tag box may need to be adjusted if you have more than 100 posts with one or two frequently occurring tags. Also,all for loop operations will increase site build time.

@@ -2,7 +2,7 @@
 ---
 
 /* TEAM */
-Primary Contact: foo
+Primary Contact: pmoracho@gmail.com
 Site: {{ site.url }}/about/
 Twitter: https://twitter.com/{{ site.owner.twitter }}
 
@@ -12,4 +12,4 @@ Design Contributors: {{ site.url }}/disclosure/
 /* SITE */
 Last Updated: {{ site.time | date:"%Y/%m/%d" }}
 Standards: HTML5, CSS3
-Software: Sublime Text, Chrome, Jekyll, Git, Sass
+Software: Vim, Chrome, Jekyll, Git
