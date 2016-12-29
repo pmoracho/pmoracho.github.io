@@ -52,7 +52,4 @@ Disallow: /CNAME
 Disallow: /*.md$
 Disallow: /files/
 
-User-agent: *
-Disallow: /
-
 Sitemap: https://pmoracho.github.io/sitemap.xml
