@@ -18,6 +18,8 @@ tags:
   - address
 ---
 
+|  |  |
+| - | :- |
 | <i class="fa fa-twitter"></i> | [@{{ site.owner.twitter }}](https://twitter.com/{{ site.owner.twitter }})  | 
 | - | :- |
 | <i class="fa fa-envelope"></i> | pmoracho@gmail.com   | 
