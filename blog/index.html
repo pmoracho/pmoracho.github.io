@@ -11,8 +11,14 @@ description: "Blogging on ...."
         {{ post.title }}
       </a>
     </h1>
-    {% if post.modified.size > 2 %}<span class="post-date indexpg" itemprop="dateModified" content="{{ post.modified | date: "%Y-%m-%d" }}"><i class="fa fa-edit" title="Last updated"> {{ post.modified | date_to_string }}</i> {% if post.category contains "featured" %}<a href="{{ site.url }}/featured" title="Featured posts"><i class="fa fa-paperclip" title="Featured" class="social-icons"></i></a>{% endif %}</span>{% else %}<span class="post-date indexpg" itemprop="datePublished" content="{{ post.date | date: "%Y-%m-%d" }}"><i class="fa fa-calendar" title="Date published"> {{ post.date | date_to_string }}</i> {% if post.category contains "featured" %}<a href="{{ site.url }}/featured" title="Featured posts"><i class="fa fa-paperclip" title="Featured" class="social-icons"></i></a>{% endif %}</span>{% endif %}
-    {% if post.description.size > 140 %}{{ post.description | markdownify | remove: '<p>' | remove: '</p>' }}{% else %}{{ post.excerpt | markdownify | remove: '<p>' | remove: '</p>' }}{% endif %} <a href="{{ site.url }}{{ post.url }}" title="Read more"><strong>Read more...</strong></a>
+    {% if post.modified.size > 2 %}<span class="post-date indexpg" itemprop="dateModified" content="{{ post.modified | date: "%Y-%m-%d" }}"><i class="fa fa-edit" title="Última actualización"> {{ post.modified | date_to_string }}</i></span>{% else %}<span class="post-date indexpg" itemprop="datePublished" content="{{ post.date | date: "%Y-%m-%d" }}"><i class="fa fa-calendar" title="Publicado"> {{ post.date | date_to_string }}</i></span>  {% endif %}
+      {% if post.content contains '<!--break-->' %}
+        {{ post.content | split:'<!--break-->' | first }}
+        <a href="{{ site.url }}{{ post.url }}" title="Read more"><strong> [Leer mas]</strong></a>
+      {% else %}
+        {{ post.content | strip_html | truncatewords:75 }}
+        <a href="{{ site.url }}{{ post.url }}" title="Read more"><strong> [Leer mas]</strong></a>
+      {% endif %}
   </div>
   {% unless forloop.last %}<hr class="transp">{% endunless %}
   {% endfor %}
