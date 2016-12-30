@@ -18,12 +18,10 @@ tags:
   - address
 ---
 
-|  |  |
-| - | :- |
 | <i class="fa fa-twitter"></i> | [@{{ site.owner.twitter }}](https://twitter.com/{{ site.owner.twitter }})  | 
-| - | :- |
+| :- | :- |
 | <i class="fa fa-envelope"></i> | pmoracho@gmail.com   | 
-| - | :- |
+| :- | :- |
 
 <!--
 <a href="https://twitter.com/share" class="twitter-share-button" data-via="{{ site.owner.twitter }}" data-size="small" data-dnt="true">Tweet</a> <a href="javascript:window.print()" class="social-icons" title="Printer friendly format"><i class="fa fa-print"></i></a>
