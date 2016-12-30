@@ -1,7 +1,7 @@
 ---
 layout: page
 permalink: /contact/
-title: Contact
+title: Contacto
 show_meta: false
 published: true
 description: "Contactar al autor de pmoracho.github.io"
@@ -12,10 +12,6 @@ sitemap:
     priority: 0.5
     changefreq: 'monthly'
     lastmod: 2016-02-13
-tags:
-  - "foo boo"
-  - "driving directions"
-  - address
 ---
 
 | <i class="fa fa-twitter"></i> | [@{{ site.owner.twitter }}](https://twitter.com/{{ site.owner.twitter }})  | 
