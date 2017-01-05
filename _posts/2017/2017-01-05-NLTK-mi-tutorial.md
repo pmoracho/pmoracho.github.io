@@ -19,8 +19,6 @@ hide_printmsg: false
 sitemap: true
 summaryfeed: false
 ---
-# NLTK - Tutorial 1
-
 Hay muchos tutoriales y ejemplos del uso de esta fantástica librería, lamentablemente casi todo está orientado a la lengua inglesa. Vamos a tratar de ir desarrollando el contenido de este tutorial orientado al español. 
 
 ## Análisis de texto básico
@@ -138,4 +136,5 @@ Ya conformada la variable `nltk.text` podemos empezar a hacer análisis interesa
 
 El "Stemming" es un algoritmo de reducción de una palabra a su raíz o "stem".  Es muy útil en aplicaciones o funcionalidad de recuperación de información (los buscadores como el de Google usan este mecanismo), pensemos al buscar por el término "familia" usando una búsqueda exacta perderíamos documentos dónde aparecen los términos "familiar", "familias", etc. El "Stemming" reduce  los términos mencionados a la raíz "famili", por lo que la búsqueda
 
-
+----
+**..Continuara**
