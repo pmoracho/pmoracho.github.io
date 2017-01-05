@@ -67,7 +67,6 @@ layout: default
 <div class="related">
   <h2>Posts relacionados</h2>
   <ul>
-  {% strip %}
   {% for post in site.posts %}
     {% if post.url != page.url %}
       {% for tag in page.tags %}
@@ -77,7 +76,6 @@ layout: default
       {% endfor %}
     {% endif %}
   {% endfor %}
-  {% endstrip %}
   </ul>
 </div>
 <div class="prevnext">
