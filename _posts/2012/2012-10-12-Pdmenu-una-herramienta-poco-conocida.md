@@ -67,7 +67,7 @@ rm $menufile
 
 ## Less pero en una ventana
 
-El comando `less` es muy habitual usarlo para mostrar una salida paginada por ejemplo de otro comando usando la clásica función de tubería "|". Por ejemplo, supongamos que queremos listar el contenido de un paquete instalado en el sistema:
+El comando `less` es muy habitual usarlo para mostrar una salida paginada por ejemplo de otro comando usando la clásica función de tubería `|`. Por ejemplo, supongamos que queremos listar el contenido de un paquete instalado en el sistema:
 
 Lo habitual sería: `dpkg -L pdmenu | less`
 
