@@ -21,10 +21,35 @@ layout: default
         {% when '11' %}Nov
         {% when '12' %}Dec
       {% endcase %}
-      {{ page.date | date: "%Y" }}</a></i>
+      {{ page.date | date: "%Y" }}
+    </a></i>
   </span>
   {% include read_time.html %}
-  {% if page.modified.size > 2 %}{% assign moddate = page.modified | date_to_string %}{% assign pgdate = page.date | date_to_string %}{% unless moddate == pgdate | date_to_string %}<span class="post-date" itemprop="dateModified" content="{{ page.modified | date: "%Y-%m-%d" }}"><i class="fa fa-edit" title="Last updated"> {{ page.modified | date_to_string }}</i></span>{% endunless %}{% endif %}
+  {% if page.modified.size > 2 %}
+    {% assign moddate = page.modified | date_to_string %}
+    {% assign pgdate = page.date | date_to_string %}
+  {% unless moddate == pgdate | date_to_string %}
+  <span class="post-date" itemprop="dateModified" content="{{ page.modified | date: "%Y-%m-%d" }}">
+    <i class="fa fa-edit" title="Last updated"> 
+      {% assign m = page.modified | date: "%-m" %}
+      {{ page.modified | date: "%-d" }}
+      {% case m %}
+        {% when '1' %}Ene
+        {% when '2' %}Feb
+        {% when '3' %}Mar
+        {% when '4' %}Abr
+        {% when '5' %}May
+        {% when '6' %}Jun
+        {% when '7' %}Jul
+        {% when '8' %}Ago
+        {% when '9' %}Sep
+        {% when '10' %}Oct
+        {% when '11' %}Nov
+        {% when '12' %}Dec
+      {% endcase %}
+      {{ page.modified | date: "%Y" }}
+    </i>
+  </span>{% endunless %}{% endif %}
   <span class="post-tags" itemprop="keywords" content="{{ page.tags | array_to_sentence_string }}">{% for tag in page.tags %}{% if forloop.first %}<i class="fa fa-tags" title="page tags"></i>{% endif %} <a href="{{ site.url }}/tags/#{{ tag | cgi_escape }}" title="Pages tagged {{ tag }}" rel="tag">{{ tag }}</a>{% unless forloop.last %} &bull; {% endunless %}{% endfor %}</span>
     {% unless page.show_meta == false %}
       {% include meta_info.html %}
