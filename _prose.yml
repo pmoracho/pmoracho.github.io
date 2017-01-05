@@ -9,7 +9,11 @@ prose:
     - /_layouts
     - /blog
     - .htaccess
+    - .travis.yml
+    - CNAME
     - _config.yml
+    - _devconfig.yml
+    - _prose.yml
     - Gemfile
     - Gemfile.lock
     - .gitignore
@@ -17,6 +21,7 @@ prose:
     - .gitattributes
     - favicon.ico
     - favicon.png
+    - google6283d8a94789a607.html
   metadata:
     _posts:
       - name: "published"
