@@ -1,7 +1,7 @@
 ---
 layout: post
-title: "NLTK -  mi primer Tutorial"
-date: 2017-01-05
+title: NLTK -  mi primer Tutorial
+date: 'Wed Jan 04 2017 21:00:00 GMT-0300 (Hora estándar de Argentina)'
 description: Introducción a la NLTK
 tag:
   - nltk
@@ -9,6 +9,15 @@ tag:
   - python
 show_meta: true
 comments: true
+published: true
+modified: '2017-01-05 14:31 -0300'
+imagefeature: sitelogo.png
+mathjax: false
+gistembed: false
+noindex: false
+hide_printmsg: false
+sitemap: true
+summaryfeed: false
 ---
 # NLTK - Tutorial 1
 
@@ -128,3 +137,6 @@ Ya conformada la variable `nltk.text` podemos empezar a hacer análisis interesa
 ### Que es el "Stemming" y para que es útil?
 
 El "Stemming" es un algoritmo de reducción de una palabra a su raíz o "stem".  Es muy útil en aplicaciones o funcionalidad de recuperación de información (los buscadores como el de Google usan este mecanismo), pensemos al buscar por el término "familia" usando una búsqueda exacta perderíamos documentos dónde aparecen los términos "familiar", "familias", etc. El "Stemming" reduce  los términos mencionados a la raíz "famili", por lo que la búsqueda
+
+![animal_bear.jpg]({{site.baseurl}}/images/media/animal_bear.jpg)
+
