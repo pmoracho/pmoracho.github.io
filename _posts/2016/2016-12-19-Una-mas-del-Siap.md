@@ -15,3 +15,6 @@ Estamos con la DDJJ de Iva, usando el aplicativo de Compras y Ventas, la situaci
 
 Hay tres tipos, 0 - Jurídico, 1 - Físico y 2 - Otro tipo de entidad, al ser el proveedor una empresa informamos con el jurídico y ohhh, sorpresa! el SIAP nos dá error al importar, más concrectamente **"EL CAMPO NUMERO DE IDENTIFICACION DEL VENDEDOR ES INVALIDO"**. Que nos ocurre, amor de mi vida? nada, simplemente que la CUIT es errónea, no valida el dígito verificador!!!.  Hay varios países en esta situación, en el caso de Granada, tanto el físico como el jurídico no validan, por lo que la única solución posible, fue informar las operación con el único CUIT  valido, el tipo 2. 
 Me gustaría realmente saber por qué alguién del propio Afip, en su momento, cuando definió las CUITS de los países, no las validó o si las hizo y vió que no eran válidas, por que siguió adelante. La máxima de siempre: "Por que hacer algo bien, si lo podemos hacer mal?"
+
+
+.. Continuara..//
