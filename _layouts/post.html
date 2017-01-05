@@ -67,15 +67,17 @@ layout: default
 <div class="related">
   <h2>Posts relacionados</h2>
   <ul>
-  {%- for post in site.posts -%}
-    {%- if post.url != page.url -%}
-      {%- for tag in page.tags -%}
-        {%- if post.tags contains tag -%}
+  {% capture cache %}  
+  {% for post in site.posts %}
+    {% if post.url != page.url %}
+      {% for tag in page.tags %}
+        {% if post.tags contains tag %}
           <li><a href="{{ site.url }}{{ post.url }}">{{ post.title }}</a><br /></li>
-        {%- endif -%}
-      {%- endfor -%}
-    {%- endif -%}
-  {%- endfor -%}
+        {% endif %}
+      {% endfor %}
+    {% endif %}
+  {% endfor %}
+  {% endcapture %}{% assign cache = nil %}
   </ul>
 </div>
 <div class="prevnext">
