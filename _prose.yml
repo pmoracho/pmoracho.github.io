@@ -1,7 +1,7 @@
 prose:
   rooturl: ''
-  siteurl: 'https://pmoracho.github.io/'
-  relativeLinks: 'https://pmoracho.github.io/links.jsonp'
+  siteurl: 'https://pmoracho.github.io/starter'
+  relativeLinks: 'https://pmoracho.github.io/starter/links.jsonp'
   media: 'images/media'
   ignore:
     - /_data
