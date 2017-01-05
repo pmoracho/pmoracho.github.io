@@ -138,5 +138,4 @@ Ya conformada la variable `nltk.text` podemos empezar a hacer análisis interesa
 
 El "Stemming" es un algoritmo de reducción de una palabra a su raíz o "stem".  Es muy útil en aplicaciones o funcionalidad de recuperación de información (los buscadores como el de Google usan este mecanismo), pensemos al buscar por el término "familia" usando una búsqueda exacta perderíamos documentos dónde aparecen los términos "familiar", "familias", etc. El "Stemming" reduce  los términos mencionados a la raíz "famili", por lo que la búsqueda
 
-![animal_bear.jpg]({{site.baseurl}}/images/media/animal_bear.jpg)
 
