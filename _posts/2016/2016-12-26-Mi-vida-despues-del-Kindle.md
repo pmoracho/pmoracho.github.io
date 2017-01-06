@@ -1,15 +1,24 @@
 ---
 layout: post
 title: Mi vida después del Kindle
-date: 2016-12-26
+date: 'Sun Dec 25 2016 21:00:00 GMT-0300 (ART)'
 tag:
   - literatura
   - opinion
 show_meta: true
-comments: true  
+comments: true
+published: true
+modified: '2017-01-05 22:28 -0300'
+imagefeature: sitelogo.png
+mathjax: false
+gistembed: false
+noindex: false
+hide_printmsg: false
+sitemap: true
+summaryfeed: false
 ---
 
-![kindle](https://docs.google.com/uc?id=0B9CCeU2RwGFlaHFISkFONE9uUTg)
+![kindle.jpg]({{site.baseurl}}/images/media/kindle.jpg)
 
 Hace algo más de tres años compré un kindle paperwhite v2 de Amazon, fue una
 decisión que demoré mucho tiempo en tomar. Soy uno de esos románticos del papel
