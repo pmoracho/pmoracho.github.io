@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Mi vida después del Kindle
-date: '2016-12-25'
+date: '2016-12-26'
 tag:
   - literatura
   - opinion
