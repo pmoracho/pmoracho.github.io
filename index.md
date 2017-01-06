@@ -71,7 +71,7 @@ Suerte!!
 		<span class="post-date indexpg" itemprop="datePublished" content="{{ post.date | date: "%Y-%m-%d" }}">
 		<i class="fa fa-calendar" title="Publicado"> 
 		{% assign m = post.date | date: "%-m" %}
-			{{ page.date | date: "%-d" }}
+			{{ post.date | date: "%-d" }}
 			{% case m %}
 			{% when '1' %}Ene
 			{% when '2' %}Feb
