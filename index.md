@@ -94,8 +94,7 @@ Suerte!!
 	  	{{ post.content | split:'<!--break-->' | first }}
 		<a href="{{ site.url }}{{ post.url }}" title="Read more"><strong> [Leer mas]</strong></a>
 	{% else %}
-    	{{ post.content | strip_html | truncatewords:75 }}
-		<a href="{{ site.url }}{{ post.url }}" title="Read more"><strong> [Leer mas]</strong></a>
+    	{{ post.content }}
 	{% endif %}
   </div>
   {% unless forloop.last %}<hr class="transp">{% endunless %}
