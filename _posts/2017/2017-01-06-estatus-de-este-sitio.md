@@ -15,6 +15,7 @@ summaryfeed: false
 title: Estatus de este sitio
 description: Estatus de este sitio
 ---
+
 ## Estatus de este sitio
 
 {% assign counter = 0 %}
@@ -23,7 +24,7 @@ description: Estatus de este sitio
   {% assign prevyear = post.previous.date | date: "%B %Y" %}
   {% assign counter = counter | plus: 1 %}
   {% if thisyear != prevyear %}
-    <li><a href="/archive/#{{ post.date | date:"%B %Y" }}">{{ thisyear }} ({{ counter }})</a></li>
+    {{ thisyear }} ({{ counter }})
     {% assign counter = 0 %}
   {% endif %}
 {% endfor %}
