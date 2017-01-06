@@ -2,9 +2,10 @@
 layout: default
 permalink: index.html
 title: Blog de pmoracho
-description: "El blog de Patricio Moracho en github"
+description: El blog de Patricio Moracho en github
+published: true
 ---
-![Palier I](http://3.bp.blogspot.com/-OmhFAG6cKMI/UBgQEQHGnUI/AAAAAAAAAy8/DqaXCMY3Cj4/s1600/img006.xcf.bz2.jpg "Palier I")
+![img006.xcf.bz2.jpg]({{site.baseurl}}/images/media/img006.xcf.bz2.jpg)
 
 # Bienvenido
 
