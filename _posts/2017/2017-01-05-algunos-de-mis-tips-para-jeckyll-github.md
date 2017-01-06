@@ -15,6 +15,27 @@ summaryfeed: false
 title: Algunos de mis "tips" para Jeckyll & Github
 description: Algunos de mis "tips" para Jeckyll & Github
 ---
-## A New Post
+## Comprimir HTML
 
-Enter text in [Markdown](http://daringfireball.net/projects/markdown/). Use the toolbar above, or click the **?** button for formatting help.
+Sin plugins ni cosas raras. Desde [aquí](http://jch.penibelst.de/) podremos bajar un "template", compress.html que deberemos incluir en la página default.html de la siguiente forma
+
+```
+---
+layout: compress
+---
+```
+
+Luego, simplemente agregar las opcion de configuración en `_config.yml`
+
+```
+compress_html:
+  clippings: all
+  comments: ["<!-- ", " -->"]
+  endings: all
+  ignore:
+    envs: [local]
+  blanklines: false
+  profile: false
+  startings: [html, head, body]
+```
+
