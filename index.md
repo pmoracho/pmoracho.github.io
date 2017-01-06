@@ -48,8 +48,8 @@ Suerte!!
 	{% if post.modified.size > 2 %}
 		<span class="post-date indexpg" itemprop="dateModified" content="{{ post.modified | date: "%Y-%m-%d" }}">
 		<i class="fa fa-edit" title="Última actualización"> 
-		{% assign m = page.modified | date: "%-m" %}
-		{{ page.modified | date: "%-d" }}
+		{% assign m = post.modified | date: "%-m" %}
+		{{ post.modified | date: "%-d" }}
 		{% case m %}
 			{% when '1' %}Ene
 			{% when '2' %}Feb
@@ -64,7 +64,7 @@ Suerte!!
 			{% when '11' %}Nov
 			{% when '12' %}Dec
 		{% endcase %}
-		{{ page.modified | date: "%Y" }}
+		{{ post.modified | date: "%Y" }}
 		</i>
 		</span>
 	{% else %}
