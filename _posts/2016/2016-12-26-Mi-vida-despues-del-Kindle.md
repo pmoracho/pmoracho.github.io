@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Mi vida después del Kindle
-date: 'Sun Dec 25 2016 21:00:00 GMT-0300 (ART)'
+date: '2016-12-25'
 tag:
   - literatura
   - opinion
@@ -16,6 +16,11 @@ noindex: false
 hide_printmsg: false
 sitemap: true
 summaryfeed: false
+description: Mi vida después del Kindle
+tags:
+  - literatura
+  - opinion
+  - kindle
 ---
 
 ![kindle.jpg]({{site.baseurl}}/images/media/kindle.jpg)
