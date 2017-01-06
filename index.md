@@ -45,12 +45,56 @@ Suerte!!
         {{ post.title }}
       </a>
     </h1>
-	{% if post.modified.size > 2 %}<span class="post-date indexpg" itemprop="dateModified" content="{{ post.modified | date: "%Y-%m-%d" }}"><i class="fa fa-edit" title="Última actualización"> {{ post.modified | date_to_string }}</i></span>{% else %}<span class="post-date indexpg" itemprop="datePublished" content="{{ post.date | date: "%Y-%m-%d" }}"><i class="fa fa-calendar" title="Publicado"> {{ post.date | date_to_string }}</i></span>  {% endif %}
+	{% if post.modified.size > 2 %}
+	<span class="post-date indexpg" itemprop="dateModified" content="{{ post.modified | date: "%Y-%m-%d" }}">
+	<i class="fa fa-edit" title="Última actualización"> 
+	{% assign m = page.modified | date: "%-m" %}
+      	{{ page.modified | date: "%-d" }}
+      	{% case m %}
+        	{% when '1' %}Ene
+        	{% when '2' %}Feb
+        	{% when '3' %}Mar
+        	{% when '4' %}Abr
+        	{% when '5' %}May
+        	{% when '6' %}Jun
+        	{% when '7' %}Jul
+        	{% when '8' %}Ago
+        	{% when '9' %}Sep
+        	{% when '10' %}Oct
+        	{% when '11' %}Nov
+        	{% when '12' %}Dec
+      		{% endcase %}
+      	{{ page.modified | date: "%Y" }}
+	</i>
+	</span>
+	{% else %}
+	<span class="post-date indexpg" itemprop="datePublished" content="{{ post.date | date: "%Y-%m-%d" }}">
+	<i class="fa fa-calendar" title="Publicado"> 
+	{% assign m = page.date | date: "%-m" %}
+      	{{ page.date | date: "%-d" }}
+      	{% case m %}
+		{% when '1' %}Ene
+		{% when '2' %}Feb
+		{% when '3' %}Mar
+		{% when '4' %}Abr
+		{% when '5' %}May
+		{% when '6' %}Jun
+		{% when '7' %}Jul
+		{% when '8' %}Ago
+		{% when '9' %}Sep
+		{% when '10' %}Oct
+		{% when '11' %}Nov
+		{% when '12' %}Dec
+      	{% endcase %}
+      	{{ page.date | date: "%Y" }}
+	</i>
+	</span>
+	{% endif %}
 	{% if post.content contains '<!--break-->' %}
-	  {{ post.content | split:'<!--break-->' | first }}
+	  	{{ post.content | split:'<!--break-->' | first }}
 		<a href="{{ site.url }}{{ post.url }}" title="Read more"><strong> [Leer mas]</strong></a>
 	{% else %}
-    {{ post.content | strip_html | truncatewords:75 }}
+    		{{ post.content | strip_html | truncatewords:75 }}
 		<a href="{{ site.url }}{{ post.url }}" title="Read more"><strong> [Leer mas]</strong></a>
 	{% endif %}
   </div>
@@ -61,6 +105,6 @@ Suerte!!
 <h3 class="post-title">
 <div class="pagination" style="margin: 0.5rem;">
     <a class="pagination-item older" href="{{ site.url }}/blog"><i class="fa fa-edit"> Blog</i></a>
-    <a class="pagination-item newer" href="{{ site.url }}/tags"><i class="fa fa-tags"> Tags</i></a>
+    <a class="pagination-item newer" href="{{ site.url }}/tags"><i class="fa fa-tags"> Etiquetas</i></a>
 </div>
 </h3>
