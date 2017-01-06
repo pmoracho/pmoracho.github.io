@@ -39,3 +39,4 @@ compress_html:
   startings: [html, head, body]
 ```
 
+**Nota**: El "strip" de los comentarios puede generar distintos problemas en particular si el comienzo o el final del mismo no está correctamente escrito. Tener en cuenta el espacio final e inicial siempre.
