@@ -1,8 +1,8 @@
 ---
 layout: post
 published: true
-date: 201-03-01
-modified: 201-03-01
+date: 2013-03-01
+modified: 2013-03-01
 imagefeature: sitelogo.png
 show_meta: true
 comments: true
