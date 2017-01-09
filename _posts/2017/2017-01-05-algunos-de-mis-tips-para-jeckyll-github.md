@@ -14,6 +14,10 @@ sitemap: true
 summaryfeed: false
 title: Algunos de mis "tips" para Jeckyll & Github
 description: Algunos de mis "tips" para Jeckyll & Github
+tags:
+  - desarrollo
+  - jeckyll
+  - github
 ---
 ## Comprimir HTML
 
@@ -39,4 +43,4 @@ compress_html:
   startings: [html, head, body]
 ```
 
-**Nota**: El "strip" de los comentarios puede generar distintos problemas en particular si el comienzo o el final del mismo no está correctamente escrito. Tener en cuenta el espacio final e inicial siempre. Por otro lado, si usan **disqus**, hay que editar de `disqus_comments.html` el dósigo: `(function() { // DON'T EDIT BELOW THIS LINE`y quitar el comentario, sino es probable que deje de funcionar.
+**Nota**: El "strip" de los comentarios puede generar distintos problemas en particular si el comienzo o el final del mismo no está correctamente escrito. Tener en cuenta el espacio final e inicial siempre. Por otro lado, si usan **disqus**, hay que editar de `disqus_comments.html` el dósigo: `(function() { // DON'T EDIT BELOW THIS LINE` y quitar el comentario, sino es probable que deje de funcionar.
