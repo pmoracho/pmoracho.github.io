@@ -2,6 +2,7 @@
 layout: post
 title: El otoño en Pekín
 date: 2004-08-11
+comments: true
 tag:
   - literatura
   - vian
