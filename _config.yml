@@ -113,8 +113,7 @@ google_analytics:   UA-317698-6
 
 compress_html:
   clippings: all
-  # comments: ["<!-- ", " -->"]
-  comments: []
+  comments: ["<!-- ", " -->"]
   endings: all
   ignore:
     envs: [local]
