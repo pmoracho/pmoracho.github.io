@@ -14,7 +14,7 @@ MIT Licensed
 
 .super-search {
 	position: fixed;
-	background-color: rgba(0, 191, 255, 0.85);
+	background-color: rgba(101, 106, 107, 0.68);
 	left: 0;
 	right: 0;
 	top: 0;
@@ -30,9 +30,11 @@ MIT Licensed
 	right: 10px;
 	top: 15px;
 	z-index: 1;
+	font-family: "PT Sans",Georgia,"Times New Roman",serif;
 }
 .super-search__input {
 	border: 0;
+	font-family: "PT Sans",Georgia,"Times New Roman",serif;
 	font-size: 50px;
 	border-left: none;
 	border-right: none;

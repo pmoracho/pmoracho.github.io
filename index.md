@@ -15,7 +15,7 @@ Suerte!!
 
 
 
-## Recuerde que puede presionar <ESC> o '/' para hacer una búsqueda en el sitio
+->**Recuerde que puede presionar ESCAPE o '/' para hacer una búsqueda en el sitio**<-
 
 <div class="super-search" id="js-super-search">
 	<a href="javascript:void(0)" onclick="superSearch.toggle()" class="super-search__close-btn">X</a>

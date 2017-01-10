@@ -4,13 +4,14 @@ layout: compress
 
 <!DOCTYPE html>
 <html lang="en-us">
-<!--
+<!-- 
 ====================================================
 Homepage: {{ site.url }}
 Credits: {{ site.url }}/disclosure
 ====================================================
--->
+ -->
 {% include head_minimal.html %}
+{% seo %}
 <body>
 {% include sidebar.html %}
     <!-- Wrap is the content to shift when toggling the sidebar. We wrap the
@@ -19,7 +20,7 @@ Credits: {{ site.url }}/disclosure
       <div class="masthead">
         <div class="container">
           <h3 class="masthead-title">
-            <a href="{{ site.baseurl }}/" title="Home">{{ site.title }}</a>
+            <a href="{{ site.baseurl }}/" title="Inicio">{{ site.title }}</a>
             <!-- <small>{{ site.tagline }}</small> -->
             <div class="headicons">
               <small><a href="{{ site.url }}/about" rel="me" title="Acerca de mí"><i class="iconm iconm-user"></i></a></small>
@@ -50,5 +51,6 @@ Credits: {{ site.url }}/disclosure
       })(document);
     </script>
     {% include scripts.html %}
+    {% include css.html %}
 </body>
 </html>
