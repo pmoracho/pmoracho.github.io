@@ -39,12 +39,9 @@ function goBack() {
     s.parentNode.insertBefore(gcse, s);
   })();
 </script>
-<gcse:search></gcse:search>
-
-  
+<gcse:searchresults-only queryParameterName="searchString2" enableAutoComplete="true" autoCompleteMatchType='any' autoCompleteMaxCompletions="5" autoCompleteMaxPromotions="1"></gcse:searchresults-only>
 <!-- 
 var cx = '{{ site.google_search }}'; 
-<gcse:searchresults-only queryParameterName="searchString2" enableAutoComplete="true" autoCompleteMatchType='any' autoCompleteMaxCompletions="5" autoCompleteMaxPromotions="1"></gcse:searchresults-only>
 -->
 <!-- <gcse:searchbox-only resultsUrl="{{ site.url }}/cse/" queryParameterName="searchString"></gcse:searchbox-only> -->
 {% else %}
