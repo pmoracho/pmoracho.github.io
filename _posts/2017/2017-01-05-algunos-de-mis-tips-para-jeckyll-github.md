@@ -12,8 +12,8 @@ noindex: false
 hide_printmsg: false
 sitemap: true
 summaryfeed: false
-title: Algunos de mis "tips" para Jeckyll & Github
-description: Algunos de mis "tips" para Jeckyll & Github
+title: Algunos de mis "tips" para Jeckyll y Github
+description: Algunos de mis "tips" para Jeckyll y Github
 tags:
   - desarrollo
   - jeckyll
