@@ -10,14 +10,15 @@ category: base
 ---
 
 {% if site.google_search %}
-<div id="search">
+<div id="home-search" class="home">
+    <div id="search">
     <form role="search" method="get" action="{{ site.baseurl }}//search/">
         <input id="searchString" name="searchString"
                placeholder="Learn Ionic, Be a Better Developer, etc." type="text">
         <input id="searchButton" name="googleSearchName" type="button" value="Search">
     </form>
-</div>
-<div id="home-search" class="home">
+    </div>
+
      <script>
          (function() {
              var cx = '006172462016279589704:keh0roaynmg';
@@ -31,7 +32,7 @@ category: base
          })();
      </script>
      <gcse:search queryParameterName="searchString"></gcse:search>
- </div>
+</div>
 {% else %}
 Google Custom Search key is not set in `_config.yml`
 {% endif %}
