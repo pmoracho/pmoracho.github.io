@@ -12,7 +12,7 @@ category: base
 {% if site.google_search %}
 <div id="home-search" class="home">
     <div id="search">
-    <form role="search" method="get" action="{{ site.baseurl }}//search/">
+    <form role="search" method="get" action="{{ site.url }}//search/">
         <input id="searchString" name="searchString"
                placeholder="Learn Ionic, Be a Better Developer, etc." type="text">
         <input id="searchButton" name="googleSearchName" type="button" value="Search">
