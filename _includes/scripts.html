@@ -23,3 +23,10 @@
 
 <!-- disqus comments -->
 {% if page.comments %}{% include disqus_comments.html %}{% endif %}
+
+<!-- supersearch -->
+<script src="{{ site.baseurl }}/public/js/super-search.js"></script>
+ <script>superSearch({
+ 	// Change to your own rss feed file path
+ 	searchFile: '{{ site.baseurl }}/feed'
+ });</script>

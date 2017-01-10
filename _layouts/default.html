@@ -13,6 +13,12 @@ Credits: {{ site.url }}/disclosure
 {% include head.html %}
 {% seo %}
 <body>
+<h2>Press ESC or '/' key to open search</h2>
+ <div class="super-search" id="js-super-search">
+  <a href="javascript:void(0)" onclick="superSearch.toggle()" class="super-search__close-btn">X</a>
+  <input type="text" placeholder="Type here to search" class="super-search__input" id="js-super-search__input">
+  <ul class="super-search__results" id="js-super-search__results"></ul>
+ </div>
 {% include sidebar.html %}
     <!-- Wrap is the content to shift when toggling the sidebar. We wrap the
          content to avoid any CSS collisions with our real content. -->
