@@ -14,7 +14,7 @@ layout: null
     <author>
       <name>{{ site.author.name }}</name>
     </author>
-    {% for post in site.posts limit:10 %}
+    {% for post in site.posts limit:100 %}
       <item>
         <title>{{ post.title | xml_escape }}</title>
         {% if post.summaryfeed and post.excerpt %}
