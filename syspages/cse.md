@@ -24,7 +24,7 @@ function goBack() {
     <!-- span class="searchicon2"><i class="fa fa-search fa-2x"></i></span -->
     <form role="search" method="get" action="{{ site.url }}/cse/">
         <input id="searchString2" name="searchString2"
-               placeholder=" Search" type="text">
+               placeholder="Search" type="text">
     </form>
 </div>
 </div>
