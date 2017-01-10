@@ -10,14 +10,21 @@ category: base
 ---
 
 {% if site.google_search %}
-<div id="searchbox2" style="margin:0 auto; display: table;">
-<div class="searchcont2">
-    <!-- <span class="searchicon2"><i class="fa fa-search fa-2x"></i></span> -->
-    <form role="search" method="get" action="{{ site.url }}/cse/">
-        <input id="searchString2" name="searchString2" placeholder=" Search" type="text">
-    </form>
-</div>
-</div>
+<div id="home-search" class="home">
+     <script>
+         (function() {
+             var cx = '006172462016279589704:keh0roaynmg';
+             var gcse = document.createElement('script');
+             gcse.type = 'text/javascript';
+             gcse.async = true;
+             gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+             '//www.google.com/cse/cse.js?cx=' + cx;
+             var s = document.getElementsByTagName('script')[0];
+             s.parentNode.insertBefore(gcse, s);
+         })();
+     </script>
+     <gcse:search queryParameterName="searchString"></gcse:search>
+ </div>
 {% else %}
 Google Custom Search key is not set in `_config.yml`
 {% endif %}
