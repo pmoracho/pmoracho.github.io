@@ -17,12 +17,11 @@ function goBack() {
     window.history.back();
 }
 </script>
-
 {% if site.google_search %}
 <hr class="gh">
 <div id="searchbox2" align="center">
 <div class="searchcont2">
-    <!-- <span class="searchicon2"><i class="fa fa-search fa-2x"></i></span> -->
+    <!-- span class="searchicon2"><i class="fa fa-search fa-2x"></i></span -->
     <form role="search" method="get" action="{{ site.url }}/cse/">
         <input id="searchString2" name="searchString2"
                placeholder=" Search" type="text">
@@ -31,17 +30,17 @@ function goBack() {
 </div>
 <script>
   (function() {
-    var cx = '006172462016279589704:keh0roaynmg';
+    var cx = '{{ site.google_search }}';
     var gcse = document.createElement('script');
     gcse.type = 'text/javascript';
     gcse.async = true;
-    gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//cse.google.com/cse.js?cx=' + cx;
     var s = document.getElementsByTagName('script')[0];
     s.parentNode.insertBefore(gcse, s);
   })();
 </script>
 <gcse:searchresults-only queryParameterName="searchString2" enableAutoComplete="true" autoCompleteMatchType='any' autoCompleteMaxCompletions="5" autoCompleteMaxPromotions="1"></gcse:searchresults-only>
-<!-- var cx = '{{ site.google_search }}'; -->
 <!-- <gcse:searchbox-only resultsUrl="{{ site.url }}/cse/" queryParameterName="searchString"></gcse:searchbox-only> -->
 {% else %}
 This page will serve search results if Google Custom Search key is set in `_config.yml`
