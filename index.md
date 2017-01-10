@@ -13,6 +13,16 @@ Esto no es más que otro blog personal. No esperen demasiado de él, es simpleme
 
 Suerte!!
 
+
+
+##Recuerde que Puede presionar <ESC> o '/' para hacer una búsqueda en el sitio
+
+<div class="super-search" id="js-super-search">
+	<a href="javascript:void(0)" onclick="superSearch.toggle()" class="super-search__close-btn">X</a>
+	<input type="text" placeholder="Ingrese el texto a buscar" class="super-search__input" id="js-super-search__input">
+	<ul class="super-search__results" id="js-super-search__results"></ul>
+</div>
+
 ---------------------------------------
 <div class="posts">
   {% for post in site.categories.featured limit:5 %}
