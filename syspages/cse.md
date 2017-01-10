@@ -17,6 +17,7 @@ function goBack() {
     window.history.back();
 }
 </script>
+
 {% if site.google_search %}
 <hr class="gh">
 <div id="searchbox2" align="center">
@@ -26,6 +27,7 @@ function goBack() {
         <input id="searchString2" name="searchString2"
                placeholder="Search" type="text">
     </form>
+    <gcse:searchresults-only queryParameterName="searchString2" enableAutoComplete="true" autoCompleteMatchType='any' autoCompleteMaxCompletions="5" autoCompleteMaxPromotions="1"></gcse:searchresults-only> 
 </div>
 </div>
 <script>
@@ -39,11 +41,10 @@ function goBack() {
     s.parentNode.insertBefore(gcse, s);
   })();
 </script>
-<!-- <gcse:searchresults-only queryParameterName="searchString2" enableAutoComplete="true" autoCompleteMatchType='any' autoCompleteMaxCompletions="5" autoCompleteMaxPromotions="1"></gcse:searchresults-only> -->
-<gcse:searchbox-only resultsUrl="{{ site.url }}/cse/" queryParameterName="searchString"></gcse:searchbox-only>
-
 <!-- var cx = '{{ site.google_search }}'; -->
 <!-- <gcse:searchbox-only resultsUrl="{{ site.url }}/cse/" queryParameterName="searchString"></gcse:searchbox-only> -->
 {% else %}
 This page will serve search results if Google Custom Search key is set in `_config.yml`
 {% endif %}
+
+
