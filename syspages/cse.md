@@ -27,7 +27,6 @@ function goBack() {
         <input id="searchString2" name="searchString2"
                placeholder="Search" type="text">
     </form>
-    <gcse:searchresults-only queryParameterName="searchString2" enableAutoComplete="true" autoCompleteMatchType='any' autoCompleteMaxCompletions="5" autoCompleteMaxPromotions="1"></gcse:searchresults-only> 
 </div>
 </div>
 <script>
@@ -46,5 +45,4 @@ function goBack() {
 {% else %}
 This page will serve search results if Google Custom Search key is set in `_config.yml`
 {% endif %}
-
-
+<gcse:searchresults-only queryParameterName="searchString2" enableAutoComplete="true" autoCompleteMatchType='any' autoCompleteMaxCompletions="5" autoCompleteMaxPromotions="1"></gcse:searchresults-only>
