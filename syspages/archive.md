@@ -6,6 +6,14 @@ permalink: /archive/
 category: base
 ---
 
+<div id="search">
+    <form role="search" method="get" action="{{ site.baseurl }}//search/">
+        <input id="searchString" name="searchString"
+               placeholder="Learn Ionic, Be a Better Developer, etc." type="text">
+        <input id="searchButton" name="googleSearchName" type="button" value="Search">
+    </form>
+</div>
+
 <section id="archive">
   <h3>Durante este año</h3>
   {%for post in site.posts %}
