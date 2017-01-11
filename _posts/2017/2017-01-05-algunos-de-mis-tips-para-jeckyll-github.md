@@ -55,13 +55,13 @@ sitemap:
 
 Con esto se quta casi todo, pero por alguna razón extraña a mi particularmente y entiendo que a otros usuarios les suele incluir archivos de otra índole que no son efectivamente páginas, eso es por que jeckyll entiende todo archivo que nos es un "post" como una página. En el caso de el alojamiento y generación dinámica en Github lo que me ven´ñia ocurriendo es que me incluía un arachivo `..assets/style.css`, no era de los míos por lo que no lo podía excluir opté por lo más fácil que me pareció verificar si la "página" finalizaba con el texto "css" y entonces no considerarla en el sitemap. Acá va el código:
 
-{% raw  %}
 ```markdown
 ---
 layout: null
 sitemap:
   exclude: 'yes'
 ---
+{% raw  %}
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   {% for post in site.posts %}
@@ -113,8 +113,8 @@ sitemap:
     </url>
     {% endunless %}
   {% endfor %}
+{% endraw  %}
 </urlset>
 ```
-{% endraw  %}
 
 
