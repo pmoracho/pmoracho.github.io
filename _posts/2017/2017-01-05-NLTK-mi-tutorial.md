@@ -27,9 +27,10 @@ Hay algunas funciones elementales de análisis muy interesantes que podremos hac
 
 ### Para descargar "corpus" o "modelos"
 
-
-	>>> import nltk
-	>>> nltk.download()
+``` python
+import nltk
+nltk.download()
+```
 
 Hay que seleccionar el "corpus" Book, tengan en cuenta que si todo está correctamente instalado, debiera abrirse un ventana gráfica (Si se cuenta con TKinter/Tcl) o bien la selección se haría en modo texto.
 
@@ -40,15 +41,18 @@ Hay que seleccionar el "corpus" Book, tengan en cuenta que si todo está correct
 
 Lo primero es importar los textos, esto creara unas variables `text<n>`, cada una contiene el contenido completo del libro
 
-	>>> from nltk.book import *
-	>>> text1
-	<Text: Moby Dick by Herman Melville 1851>
+``` python
+from nltk.book import *
+text1
+<Text: Moby Dick by Herman Melville 1851>
+```
 
 Conceptualmente, un objeto `nltk.text` no es más que una lista ordenada de `tokens`, siendo esto la unidad mínima de un texto, simplemente palabras o signos de puntuación. Esto podemos verlo fácilmente de la siguiente manera
 
-	>>> text1[0:9] # hacemos un "slice" de los primeros 10 tokens 
+``` python
+text1[0:9] # hacemos un "slice" de los primeros 10 tokens 
 	['[', 'Moby', 'Dick', 'by', 'Herman', 'Melville', '1851', ']', 'ETYMOLOGY', '.']
-
+```
 
 Si revisáramos el texto en la carpeta `nltk_data/corpora/gutemberg', veríamos en el caso del archivo de "Moby Dick" que justamente comienza de la siguiente forma:
 	
@@ -66,20 +70,20 @@ Vemos entonces que "tokenización" que se hizo hace algunas cosas interesantes y
 
 Vamos a empezar a trabajar sobre nuestros propios ejemplos, la idea es crear un `nltk.text` desde el principio y aprovecharlo para ir mostrando las funcionalidades elementales de análisis. Para empezar debemos contar con un "texto", que puede ser cualquier cosa: un mail, un libro, una nota, un twit, un chat, etc. Lo importante es partir de un "texto" claro. Lo que voy a hacer es importar directamente del Proyecto Gutemberg, un libro que nos hacían leer, al menos en mi época, en la secundaria, se trata de [Juvenilia](http://www.gutenberg.org/ebooks/41575.txt.utf-8).
 
+``` python 
+from urllib import request
+from nltk import word_tokenize
+"""
+Descarga de un texto
+"""
+url = "http://www.gutenberg.org/cache/epub/41575/pg41575.txt"
+response = request.urlopen(url)
+raw = response.read().decode('utf8')
 
-	from urllib import request
-	from nltk import word_tokenize
-
-	"""
-	Descarga de un texto
-	"""
-	url = "http://www.gutenberg.org/cache/epub/41575/pg41575.txt"
-	response = request.urlopen(url)
-	raw = response.read().decode('utf8')
-
-	print(type(raw))
-	print(len(raw))
-    print(raw[:75])
+print(type(raw))
+print(len(raw))
+print(raw[:75])
+``` 
     
 (*) El ejemplo descarga directamente un documento, pero se ve claro que lo que necesitamos en principio es una cadena de texto, por lo que se entiende que tranquilamente podemos leer el archivo, recuperarlo de una base de datos, etc.
 
