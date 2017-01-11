@@ -117,4 +117,13 @@ sitemap:
 </urlset>
 ```
 
+## Syntax highlighting 
+
+Jeckyll para "iluminar" código utiliza por defecto [rouge](https://github.com/jneen/rouge). La lista de lenguajes soportados se puede consultar [aquí](https://github.com/jneen/rouge/wiki/List-of-supported-languages-and-lexers). Configurar un bloque de código en un "post" es tan simple como esto:
+
+```
+  ``` bash
+  export path=$path:/bin
+  ```
+```
 
