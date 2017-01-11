@@ -30,7 +30,8 @@ sitemap:
     {% endunless %}
   {% endfor %}
   {% for page in site.pages %}
-    {% unless page.sitemap.exclude == "yes" %}
+    {% assign txt = page.url | slice: -3, 3 %}
+    {% unless page.sitemap.exclude == "yes" or txt == "css"  %}
     <url>
       <loc>{{ site.url }}{{ page.url | remove: "index.html" }}</loc>
       {% if page.sitemap.lastmod %}
