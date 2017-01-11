@@ -1,5 +1,9 @@
 ---
+layout: null
+sitemap:
+  exclude: 'yes'
 ---
+
 
 /* TEAM */
 Primary Contact: pmoracho@gmail.com
