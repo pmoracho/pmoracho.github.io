@@ -27,10 +27,10 @@ Hay algunas funciones elementales de análisis muy interesantes que podremos hac
 
 ### Para descargar "corpus" o "modelos"
 
-``` python
-import nltk
-nltk.download()
-```
+	``` python
+	import nltk
+	nltk.download()
+	```
 
 Hay que seleccionar el "corpus" Book, tengan en cuenta que si todo está correctamente instalado, debiera abrirse un ventana gráfica (Si se cuenta con TKinter/Tcl) o bien la selección se haría en modo texto.
 
@@ -41,18 +41,18 @@ Hay que seleccionar el "corpus" Book, tengan en cuenta que si todo está correct
 
 Lo primero es importar los textos, esto creara unas variables `text<n>`, cada una contiene el contenido completo del libro
 
-``` python
-from nltk.book import *
-text1
-<Text: Moby Dick by Herman Melville 1851>
-```
+	``` python
+	from nltk.book import *
+	text1
+	<Text: Moby Dick by Herman Melville 1851>
+	```
 
 Conceptualmente, un objeto `nltk.text` no es más que una lista ordenada de `tokens`, siendo esto la unidad mínima de un texto, simplemente palabras o signos de puntuación. Esto podemos verlo fácilmente de la siguiente manera
 
-``` python
-text1[0:9] # hacemos un "slice" de los primeros 10 tokens 
-	['[', 'Moby', 'Dick', 'by', 'Herman', 'Melville', '1851', ']', 'ETYMOLOGY', '.']
-```
+	``` python
+	text1[0:9] # hacemos un "slice" de los primeros 10 tokens 
+		['[', 'Moby', 'Dick', 'by', 'Herman', 'Melville', '1851', ']', 'ETYMOLOGY', '.']
+	```
 
 Si revisáramos el texto en la carpeta `nltk_data/corpora/gutemberg', veríamos en el caso del archivo de "Moby Dick" que justamente comienza de la siguiente forma:
 	
@@ -70,31 +70,34 @@ Vemos entonces que "tokenización" que se hizo hace algunas cosas interesantes y
 
 Vamos a empezar a trabajar sobre nuestros propios ejemplos, la idea es crear un `nltk.text` desde el principio y aprovecharlo para ir mostrando las funcionalidades elementales de análisis. Para empezar debemos contar con un "texto", que puede ser cualquier cosa: un mail, un libro, una nota, un twit, un chat, etc. Lo importante es partir de un "texto" claro. Lo que voy a hacer es importar directamente del Proyecto Gutemberg, un libro que nos hacían leer, al menos en mi época, en la secundaria, se trata de [Juvenilia](http://www.gutenberg.org/ebooks/41575.txt.utf-8).
 
-``` python 
-from urllib import request
-from nltk import word_tokenize
-"""
-Descarga de un texto
-"""
-url = "http://www.gutenberg.org/cache/epub/41575/pg41575.txt"
-response = request.urlopen(url)
-raw = response.read().decode('utf8')
+	``` python 
+	from urllib import request
+	from nltk import word_tokenize
+	"""
+	Descarga de un texto
+	"""
+	url = "http://www.gutenberg.org/cache/epub/41575/pg41575.txt"
+	response = request.urlopen(url)
+	raw = response.read().decode('utf8')
 
-print(type(raw))
-print(len(raw))
-print(raw[:75])
-``` 
+	print(type(raw))
+	print(len(raw))
+	print(raw[:75])
+	``` 
     
 (*) El ejemplo descarga directamente un documento, pero se ve claro que lo que necesitamos en principio es una cadena de texto, por lo que se entiende que tranquilamente podemos leer el archivo, recuperarlo de una base de datos, etc.
 
 La salida:
 
+	```
     <class 'str'>
     532748
     The Project Gutenberg EBook of Juvenilla; Prosa ligera, by Miguel Cané
-    
+	```     
+
 Como primer paso hay que "tokenizar" el texto de la siguiente forma:
 
+	``` python 
     """
     Tokenización del texto
     """
@@ -102,39 +105,49 @@ Como primer paso hay que "tokenizar" el texto de la siguiente forma:
     print(type(tokens))
     print(len(tokens))
     print(tokens[:10])
-    
+	``` 
+
 La salida:
 
+	``` 
     <class 'list'>
     101103
     ['\ufeffThe', 'Project', 'Gutenberg', 'EBook', 'of', 'Juvenilla', ';', 'Prosa', 'ligera', ',']
+	``` 
 
 Lo interesante que la rutina word_tokenize de nltk transformo una larga cadena de caracteres en una lista de tokens, lo siguiente es convertir esta lista en un `nltk.text`:
 
+	``` python	
     text = nltk.Text(tokens)
     print(type(tokens))
     print(len(tokens))
     print(tokens[:10])
-    
+    ```	
+
 La salida:
 
+	```	
     <class 'list'>
     101103
     ['\ufeffThe', 'Project', 'Gutenberg', 'EBook', 'of', 'Juvenilla', ';', 'Prosa', 'ligera', ',']
-
+	```	
 
 Ya conformada la variable `nltk.text` podemos empezar a hacer análisis interesantes:
 
 * Obtener las colocaciones. Las [colocaciones](https://es.wikipedia.org/wiki/Colocaci%C3%B3n) son una unidades fraseologicas de dos o más palabras que se usan muy habitualmente combinadas, más de lo que probabilísticamente se daría, por ejemplo "alto riesgo", "renta fija", "tomar en cuenta", "sin duda", etc. 
 
-        text.collocations()
+	``` python	
+	text.collocations()
+	```	
         
 * Obtener los [hapaxes](https://es.wikipedia.org/wiki/H%C3%A1pax) que no son más que una palabra que sólo aparece una vez dentro de un contexto, ya sea en el registro escrito de un idioma entero, en las obras de un autor o dentro de un solo texto. 
 
-        # Obtener 20 hapaxes
-        from nltk import FreqDist
-        fdist1 = FreqDist(text)
-        fdist1.hapaxes()[:20]
+	``` python	
+	# Obtener 20 hapaxes
+	from nltk import FreqDist
+	fdist1 = FreqDist(text)
+	fdist1.hapaxes()[:20]
+	``` 
         
 ### Que es el "Stemming" y para que es útil?
 
