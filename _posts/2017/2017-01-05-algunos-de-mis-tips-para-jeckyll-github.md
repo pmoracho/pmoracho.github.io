@@ -127,3 +127,16 @@ Jeckyll para "iluminar" código utiliza por defecto [rouge](https://github.com/j
   ```
 ```
 
+esto terminará mostrandose así:
+
+``` bash
+export path=$path:/bin
+```
+
+Si hay que mostrar código "liquid", el problema que tenemos es que Jeckyll lo considerará código y lo interpretará por lo que la solución es incluir:
+
+```
+{% raw  %}
+  ...
+{% endraw  %}
+```
