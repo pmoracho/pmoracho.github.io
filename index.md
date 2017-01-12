@@ -9,13 +9,14 @@ published: true
 
 # Bienvenido
 
-Esto no es más que otro blog personal. No esperen demasiado de él, es simplemente un lugar para dejar asentado aquello que necesito transcribir, datos, ideas, trabajos, proyectos, etc. Mis intereses son bien amplios, por lo seguramente el contenido va a ser bastante heterogeneo. 
+Esto no es más que otro blog personal. No esperen demasiado de él, es simplemente un lugar para dejar asentado aquello que necesito transcribir, datos, ideas, trabajos, proyectos, etc. Mis intereses son bien amplios, por lo seguramente el contenido va a ser bastante heterogéneo. Esta página principal, simplemente le muestra los últimos artículos escritos, tiene de todas formas, accesos a otras modalidades de lecturas:
+
+* Usando el teclado, las teclas ESC o / le abrirán un cuadro de texto para escribir un busqueda completa en el sitio, hablando técnicamente de los últimos 1000 artículos o páginas, ya veremos cuando lleguemos a ese límite.
+* Accediendo a [blog](/blog) podrá ver el contenido de forma histórica
+* Sino, por medio de [etiquetas](/tags) se accede a una vista de las "etiquetas" que caracterizan lso distintos contenidos
+* Por último [Archivo](/archive)
 
 Suerte!!
-
-
-|:--:|
-|**Recuerde que puede presionar ESCAPE o '/' para hacer una búsqueda en el sitio**|
 
 ---------------------------------------
 <div class="posts">
