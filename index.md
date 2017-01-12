@@ -19,88 +19,68 @@ Esto no es más que otro blog personal. No esperen demasiado de él, es simpleme
 Suerte!!
 
 ---------------------------------------
-<div class="posts">
-  {% for post in site.categories.featured limit:5 %}
-  <div class="post">
-    <h1 class="post-title">
-      <a href="{{ site.url }}{{ post.url }}">
-        {{ post.title }}
-      </a>
-    </h1>
-	{% if post.modified.size > 2 %}<span class="post-date indexpg" itemprop="dateModified" content="{{ post.modified | date: "%Y-%m-%d" }}"><i class="fa fa-edit" title="Última actualización"> {{ post.modified | date_to_string }}</i> <a href="{{ site.url }}/featured" title="Featured posts"><i class="fa fa-paperclip" title="Featured" class="social-icons"></i></a></span>{% else %}<span class="post-date indexpg" itemprop="datePublished" content="{{ post.date | date: "%Y-%m-%d" }}"><i class="fa fa-calendar" title="Publicado"> {{ post.date | date_to_string }}</i> <a href="{{ site.url }}/featured" title="Featured posts"><i class="fa fa-paperclip" title="Featured" class="social-icons"></i></a></span>{% endif %}
-	{% if post.content contains '<!--break-->' %}
-	  {{ post.content | split:'<!--break-->' | first }}
-		<a href="{{ site.url }}{{ post.url }}" title="Read more"><strong> [Leer mas]</strong></a>
-	{% else %}
-    {{ post.content | strip_html | truncatewords:75 }}
-		<a href="{{ site.url }}{{ post.url }}" title="Read more"><strong> [L	eer mas]</strong></a>
-	{% endif %}
-	
-  </div>
-  <hr class="transp">
+<div class="posts-list">
+  {% for post in paginator.posts %}
+  <article class="post-preview">
+    <a href="{{ post.url | prepend: site.baseurl }}">
+	  <h2 class="post-title">{{ post.title }}</h2>
+
+	  {% if post.subtitle %}
+	  <h3 class="post-subtitle">
+	    {{ post.subtitle }}
+	  </h3>
+	  {% endif %}
+    </a>
+
+    <p class="post-meta">
+      Posted on {{ post.date | date: "%B %-d, %Y" }}
+    </p>
+
+    <div class="post-entry-container">
+      {% if post.image %}
+      <div class="post-image">
+        <a href="{{ post.url | prepend: site.baseurl }}">
+          <img src="{{ post.image }}">
+        </a>
+      </div>
+      {% endif %}
+      <div class="post-entry">
+        {{ post.excerpt | strip_html | xml_escape | truncatewords: site.excerpt_length }}
+        {% assign excerpt_word_count = post.excerpt | number_of_words %}
+        {% if post.content != post.excerpt or excerpt_word_count > site.excerpt_length %}
+          <a href="{{ post.url | prepend: site.baseurl }}" class="post-read-more">[Read&nbsp;More]</a>
+        {% endif %}
+      </div>
+    </div>
+
+    {% if post.tags.size > 0 %}
+    <div class="blog-tags">
+      Tags:
+      {% if site.link-tags %}
+      {% for tag in post.tags %}
+      <a href="{{ site.baseurl }}/tag/{{ tag }}">{{ tag }}</a>
+      {% endfor %}
+      {% else %}
+        {{ post.tags | join: ", " }}
+      {% endif %}
+    </div>
+    {% endif %}
+
+   </article>
   {% endfor %}
 </div>
 
-<div class="post">
-  <h1 itemprop="name" class="post-title">{{ page.title }}</h1>
-  <span class="post-date" itemprop="datePublished" content="{{ page.date | date: "%Y-%m-%d" }}"><i class="fa fa-calendar" title="Date published"> 
-    <a class="permalink" href="{{ site.url }}{{ page.url }}" itemprop="url" title="Permanent link to this post">
-      {% assign m = page.date | date: "%-m" %}
-      {{ page.date | date: "%-d" }}
-      {% case m %}
-        {% when '1' %}Ene
-        {% when '2' %}Feb
-        {% when '3' %}Mar
-        {% when '4' %}Abr
-        {% when '5' %}May
-        {% when '6' %}Jun
-        {% when '7' %}Jul
-        {% when '8' %}Ago
-        {% when '9' %}Sep
-        {% when '10' %}Oct
-        {% when '11' %}Nov
-        {% when '12' %}Dec
-      {% endcase %}
-      {{ page.date | date: "%Y" }}
-    </a></i>
-  </span>
-  {% include read_time.html %}
-  {% if page.modified.size > 2 %}
-    {% assign moddate = page.modified | date_to_string %}
-    {% assign pgdate = page.date | date_to_string %}
-  {% unless moddate == pgdate | date_to_string %}
-  <span class="post-date" itemprop="dateModified" content="{{ page.modified | date: "%Y-%m-%d" }}">
-    <i class="fa fa-edit" title="Last updated"> 
-      {% assign m = page.modified | date: "%-m" %}
-      {{ page.modified | date: "%-d" }}
-      {% case m %}
-        {% when '1' %}Ene
-        {% when '2' %}Feb
-        {% when '3' %}Mar
-        {% when '4' %}Abr
-        {% when '5' %}May
-        {% when '6' %}Jun
-        {% when '7' %}Jul
-        {% when '8' %}Ago
-        {% when '9' %}Sep
-        {% when '10' %}Oct
-        {% when '11' %}Nov
-        {% when '12' %}Dec
-      {% endcase %}
-      {{ page.modified | date: "%Y" }}
-    </i>
-  </span>{% endunless %}{% endif %}
-  <span class="post-tags" itemprop="keywords" content="{{ page.tags | array_to_sentence_string }}">{% for tag in page.tags %}{% if forloop.first %}<i class="fa fa-tags" title="page tags"></i>{% endif %} <a href="{{ site.url }}/tags/#{{ tag | cgi_escape }}" title="Pages tagged {{ tag }}" rel="tag">{{ tag }}</a>{% unless forloop.last %} &bull; {% endunless %}{% endfor %}</span>
-    {% unless page.show_meta == false %}
-      {% include meta_info.html %}
-    {% endunless %}
-  {{ content }}
-  <hr>
-</div>
-
-<h3 class="post-title">
-<div class="pagination" style="margin: 0.5rem;">
-    <a class="pagination-item older" href="{{ site.url }}/blog"><i class="fa fa-edit"> Blog</i></a>
-    <a class="pagination-item newer" href="{{ site.url }}/tags"><i class="fa fa-tags"> Etiquetas</i></a>
-</div>
-</h3>
+{% if paginator.total_pages > 1 %}
+<ul class="pager main-pager">
+  {% if paginator.previous_page %}
+  <li class="previous">
+    <a href="{{ paginator.previous_page_path | prepend: site.baseurl | replace: '//', '/' }}">&larr; Newer Posts</a>
+  </li>
+  {% endif %}
+  {% if paginator.next_page %}
+  <li class="next">
+    <a href="{{ paginator.next_page_path | prepend: site.baseurl | replace: '//', '/' }}">Older Posts &rarr;</a>
+  </li>
+  {% endif %}
+</ul>
+{% endif %}
