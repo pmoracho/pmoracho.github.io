@@ -17,19 +17,27 @@ Esto no es más que otro blog personal. No esperen demasiado de él, es simpleme
 * Por último [Archivo](/archive) para ver el contenido cronológicamente
 
 Suerte!!
+--------------------------------------
 
----------------------------------------
+
+
+
+
+
+
+
+# Últimos 10 artículos
 
 <div class="home">
   <ul class="post-list">
-    {% for post in site.posts %}
+    {% for post in site.posts limit: 10 %}
       <li>
           <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">
           {{ post.title }}
           </a>
           <div class="post-meta">
 		  {% assign m = post.date | date: "%-m" %}
-		  {{ page.date | date: "%-d" }}
+		  {{ post.date | date: "%-d" }}
 		  {% case m %}
 			{% when '1' %}Ene
 			{% when '2' %}Feb
@@ -44,7 +52,7 @@ Suerte!!
 			{% when '11' %}Nov
 			{% when '12' %}Dec
 		  {% endcase %}
-		  {{ page.date | date: "%Y" }}
+		  {{ post.date | date: "%Y" }}
 		  </div>
       </li>
     {% endfor %}
