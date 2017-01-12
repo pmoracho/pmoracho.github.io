@@ -45,11 +45,11 @@ compress_html:
 
 Realmente funciona muy bien y comprime significativamente cada página.
 
-**Nota**: El "strip" de los comentarios puede generar distintos problemas en particular si el comienzo o el final del mismo no está correctamente escrito en cualquier página. Tener en cuenta el espacio final e inicial siempre. Por otro lado, si usan **disqus**, hay que editar de `disqus_comments.html` el cósigo: `(function() { // DON'T EDIT BELOW THIS LINE` y quitar el comentario, sino es probable que deje de funcionar.
+**Nota**: El "strip" de los comentarios puede generar distintos problemas en particular si el comienzo o el final del mismo no está correctamente escrito en cualquier página. Tener en cuenta el espacio final e inicial siempre. Por otro lado, si usan **disqus**, hay que editar de `disqus_comments.html` el código: `(function() { // DON'T EDIT BELOW THIS LINE` y quitar el comentario, sino es probable que deje de funcionar.
 
 ## Sitemap.xml
 
-Primero que nada, limpiar páginas y "posts" que no queremos en el sitemap editando cada archivo y agregando el siguiente codigo en la cabecera:
+Primero que nada, limpiar páginas y "posts" que no queremos en el sitemap editando cada archivo y agregando el siguiente código en la cabecera:
 
 ``` yaml
 ---
