@@ -33,7 +33,7 @@ Suerte!!
 		<a href="{{ site.url }}{{ post.url }}" title="Read more"><strong> [Leer mas]</strong></a>
 	{% else %}
     {{ post.content | strip_html | truncatewords:75 }}
-		<a href="{{ site.url }}{{ post.url }}" title="Read more"><strong> [Leer mas]</strong></a>
+		<a href="{{ site.url }}{{ post.url }}" title="Read more"><strong> [L	eer mas]</strong></a>
 	{% endif %}
 	
   </div>
@@ -41,71 +41,63 @@ Suerte!!
   {% endfor %}
 </div>
 
-<div class="posts">
-  {% for post in site.posts limit:5 %}
-  {% unless post.category contains "featured" %}
-  <div class="post">
-    <h1 class="post-title">
-      <a href="{{ site.url }}{{ post.url }}">
-        {{ post.title }}
-      </a>
-    </h1>
-	{% if post.modified.size > 2 %}
-		<span class="post-date indexpg" itemprop="dateModified" content="{{ post.modified | date: "%Y-%m-%d" }}">
-		<i class="fa fa-edit" title="Última actualización"> 
-		{% assign m = post.modified | date: "%-m" %}
-		{{ post.modified | date: "%-d" }}
-		{% case m %}
-			{% when '1' %}Ene
-			{% when '2' %}Feb
-			{% when '3' %}Mar
-			{% when '4' %}Abr
-			{% when '5' %}May
-			{% when '6' %}Jun
-			{% when '7' %}Jul
-			{% when '8' %}Ago
-			{% when '9' %}Sep
-			{% when '10' %}Oct
-			{% when '11' %}Nov
-			{% when '12' %}Dec
-		{% endcase %}
-		{{ post.modified | date: "%Y" }}
-		</i>
-		</span>
-	{% else %}
-		<span class="post-date indexpg" itemprop="datePublished" content="{{ post.date | date: "%Y-%m-%d" }}">
-		<i class="fa fa-calendar" title="Publicado"> 
-		{% assign m = post.date | date: "%-m" %}
-			{{ post.date | date: "%-d" }}
-			{% case m %}
-			{% when '1' %}Ene
-			{% when '2' %}Feb
-			{% when '3' %}Mar
-			{% when '4' %}Abr
-			{% when '5' %}May
-			{% when '6' %}Jun
-			{% when '7' %}Jul
-			{% when '8' %}Ago
-			{% when '9' %}Sep
-			{% when '10' %}Oct
-			{% when '11' %}Nov
-			{% when '12' %}Dec
-			{% endcase %}
-			{{ post.date | date: "%Y" }}
-		</i>
-		</span>
-	{% endif %}
-	{% if post.content contains '<!--break-->' %}
-	  	{{ post.content | split:'<!--break-->' | first }}
-		<a href="{{ site.url }}{{ post.url }}" title="Read more"><strong> [Leer mas]</strong></a>
-	{% else %}
-    	{{ post.content }}
-	{% endif %}
-  </div>
-  {% unless forloop.last %}<hr class="transp">{% endunless %}
-  {% endunless %}
-  {% endfor %}
+<div class="post">
+  <h1 itemprop="name" class="post-title">{{ page.title }}</h1>
+  <span class="post-date" itemprop="datePublished" content="{{ page.date | date: "%Y-%m-%d" }}"><i class="fa fa-calendar" title="Date published"> 
+    <a class="permalink" href="{{ site.url }}{{ page.url }}" itemprop="url" title="Permanent link to this post">
+      {% assign m = page.date | date: "%-m" %}
+      {{ page.date | date: "%-d" }}
+      {% case m %}
+        {% when '1' %}Ene
+        {% when '2' %}Feb
+        {% when '3' %}Mar
+        {% when '4' %}Abr
+        {% when '5' %}May
+        {% when '6' %}Jun
+        {% when '7' %}Jul
+        {% when '8' %}Ago
+        {% when '9' %}Sep
+        {% when '10' %}Oct
+        {% when '11' %}Nov
+        {% when '12' %}Dec
+      {% endcase %}
+      {{ page.date | date: "%Y" }}
+    </a></i>
+  </span>
+  {% include read_time.html %}
+  {% if page.modified.size > 2 %}
+    {% assign moddate = page.modified | date_to_string %}
+    {% assign pgdate = page.date | date_to_string %}
+  {% unless moddate == pgdate | date_to_string %}
+  <span class="post-date" itemprop="dateModified" content="{{ page.modified | date: "%Y-%m-%d" }}">
+    <i class="fa fa-edit" title="Last updated"> 
+      {% assign m = page.modified | date: "%-m" %}
+      {{ page.modified | date: "%-d" }}
+      {% case m %}
+        {% when '1' %}Ene
+        {% when '2' %}Feb
+        {% when '3' %}Mar
+        {% when '4' %}Abr
+        {% when '5' %}May
+        {% when '6' %}Jun
+        {% when '7' %}Jul
+        {% when '8' %}Ago
+        {% when '9' %}Sep
+        {% when '10' %}Oct
+        {% when '11' %}Nov
+        {% when '12' %}Dec
+      {% endcase %}
+      {{ page.modified | date: "%Y" }}
+    </i>
+  </span>{% endunless %}{% endif %}
+  <span class="post-tags" itemprop="keywords" content="{{ page.tags | array_to_sentence_string }}">{% for tag in page.tags %}{% if forloop.first %}<i class="fa fa-tags" title="page tags"></i>{% endif %} <a href="{{ site.url }}/tags/#{{ tag | cgi_escape }}" title="Pages tagged {{ tag }}" rel="tag">{{ tag }}</a>{% unless forloop.last %} &bull; {% endunless %}{% endfor %}</span>
+    {% unless page.show_meta == false %}
+      {% include meta_info.html %}
+    {% endunless %}
+  {{ content }}
+  <hr>
 </div>
+
 <h3 class="post-title">
 <div class="pagination" style="margin: 0.5rem;">
     <a class="pagination-item older" href="{{ site.url }}/blog"><i class="fa fa-edit"> Blog</i></a>
