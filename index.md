@@ -5,7 +5,7 @@ title: Blog de pmoracho
 description: El blog de Patricio Moracho en github
 published: true
 ---
-![img006.xcf.bz2.jpg]({{site.baseurl}}/images/media/front-page.jpg)
+![fron-page.jpg]({{site.baseurl}}/images/front-page.jpg)
 
 # Bienvenido
 
