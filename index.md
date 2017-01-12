@@ -25,9 +25,27 @@ Suerte!!
     {% for post in site.posts %}
       <li>
           <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">
-            {{ post.title }}
-            <div class="post-meta">{{ post.date | date: "%b %-d, %Y" }}</div>
+          {{ post.title }}
           </a>
+          <div class="post-meta">
+		  {% assign m = post.date | date: "%-m" %}
+		  {{ page.date | date: "%-d" }}
+		  {% case m %}
+			{% when '1' %}Ene
+			{% when '2' %}Feb
+			{% when '3' %}Mar
+			{% when '4' %}Abr
+			{% when '5' %}May
+			{% when '6' %}Jun
+			{% when '7' %}Jul
+			{% when '8' %}Ago
+			{% when '9' %}Sep
+			{% when '10' %}Oct
+			{% when '11' %}Nov
+			{% when '12' %}Dec
+		  {% endcase %}
+		  {{ page.date | date: "%Y" }}
+		  </div>
       </li>
     {% endfor %}
   </ul>
