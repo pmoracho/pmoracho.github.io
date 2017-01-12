@@ -27,10 +27,10 @@ Hay algunas funciones elementales de análisis muy interesantes que podremos hac
 
 ### Para descargar "corpus" o "modelos"
 
-	``` python
-	import nltk
-	nltk.download()
-	```
+```python
+import nltk
+nltk.download()
+```
 
 Hay que seleccionar el "corpus" Book, tengan en cuenta que si todo está correctamente instalado, debiera abrirse un ventana gráfica (Si se cuenta con TKinter/Tcl) o bien la selección se haría en modo texto.
 
@@ -41,11 +41,11 @@ Hay que seleccionar el "corpus" Book, tengan en cuenta que si todo está correct
 
 Lo primero es importar los textos, esto creara unas variables `text<n>`, cada una contiene el contenido completo del libro
 
-	``` python
-	from nltk.book import *
-	text1
-	<Text: Moby Dick by Herman Melville 1851>
-	```
+``` python
+from nltk.book import *
+text1
+<Text: Moby Dick by Herman Melville 1851>
+```
 
 Conceptualmente, un objeto `nltk.text` no es más que una lista ordenada de `tokens`, siendo esto la unidad mínima de un texto, simplemente palabras o signos de puntuación. Esto podemos verlo fácilmente de la siguiente manera
 
