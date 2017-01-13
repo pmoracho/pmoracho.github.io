@@ -56,9 +56,6 @@ layout: default
     {% endunless %}
   {{ content }}
   <hr>
-  {% if page.tags contains 'R' %}
-   {% include rblogger.html %}
-  {% endif %}
 </div>
 {% unless page.hide_printmsg == true %}
   {% include printmsgposts.html %}
