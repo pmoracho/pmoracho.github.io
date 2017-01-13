@@ -131,5 +131,3 @@ por la mañana cual diario de papel.
   torrents de manera online, útil para descargar del sitio mencionado en el
   punto anterior.
 
-La imagen de este post sería: 
-{{page.imagefeature}}
