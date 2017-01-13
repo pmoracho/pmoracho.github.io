@@ -20,15 +20,14 @@ tags:
   - kindle
 ---
 
-![kindle.jpg]({{site.baseurl}}/images/media/kindle.jpg)
+![kindle.jpg]({{site.baseurl}}/images/kindle.jpg)
 
-Hace algo más de tres años compré un **kindle paperwhite v2 de Amazon**, fue una
-decisión que demoré mucho tiempo en tomar. Soy uno de esos románticos del papel
-escrito y al olor a libro nuevo o viejo. Debo decir, pasado tanto tiempo, que
-no me equivoqué. Los beneficios de la lectura en dispositivos de tinta
+Hace algo más de tres años compré un **kindle paperwhite v2 de Amazon**, fue
+una decisión que demoré mucho tiempo en tomar. Soy uno de esos románticos del
+papel escrito y al olor a libro nuevo o viejo. Debo decir, pasado tanto tiempo,
+que no me equivoqué. Los beneficios de la lectura en dispositivos de tinta
 electrónica (no estoy hablando de "tablets") son muchos como para
-despreciarlos.  
-<!-- break -->
+despreciarlos.  <!-- break -->
 
 ## Espacio
 
@@ -131,3 +130,6 @@ por la mañana cual diario de papel.
 * [Zbigz](https://www.zbigz.com/): Está página es muy útil para la descarga de
   torrents de manera online, útil para descargar del sitio mencionado en el
   punto anterior.
+
+La imagen de este post sería: 
+{{page.imagefeature}}

@@ -143,7 +143,9 @@ Si hay que mostrar código "liquid", el problema que tenemos es que Jeckyll lo c
 ```
   ```
   {% raw  %}
+  {% raw  %}
   ...
+  {% endraw  %}
   {% endraw  %}
   ```
 ```
@@ -152,3 +154,4 @@ Si hay que mostrar código "liquid", el problema que tenemos es que Jeckyll lo c
 ## Enlaces interesantes
 
 * [Liquid text help](http://shopify.github.io/liquid/tags/iteration/)
+* [Temas](http://jekyllthemes.org/)
