@@ -1,4 +1,5 @@
 ---
+
 layout: post
 title: Mis tips de Vim
 description: Los atajos de teclado de Vim que no quiero olvidar
@@ -7,7 +8,9 @@ tag:
   - vim
 show_meta: true
 comments: true
+
 ---
+
 Mi particular lista de comandos de Vim. Los que en particular me resultan
 interesantes de usar. Trucos y keymaps interesantes y configuraciones
 particulares
@@ -92,16 +95,14 @@ Teclas			|Descripción
 ----------------|-----------
 Vu				| Lowercase line
 VU				| Uppercase line
-g				| ~~	Invert case
 vEU				| Switch word to uppercase
-vE				| ~	Modify word case
 ggguG			| Set all text to lowercase
 :set ignorecase	| Ignore case in searches
 :set smartcase	| Ignore case in searches excepted if an uppercase letter is used
-:%s/\<./\u&/g	| Sets first letter of each word to uppercase
-:%s/\<./\l&/g	| Sets first letter of each word to lowercase
-:%s/.*/\u&		| Sets first letter of each line to uppercase
-:%s/.*/\l&		| Sets first letter of each line to lowercase
+`:%s/\<./\u&/g`	| Sets first letter of each word to uppercase
+`:%s/\<./\l&/g`	| Sets first letter of each word to lowercase
+`:%s/.*/\u&`	| Sets first letter of each line to uppercase
+`:%s/.*/\l&`	| Sets first letter of each line to lowercase
 
 ### Selección
 
@@ -181,8 +182,8 @@ omap, onoremap, ounmap  | Operator pending mode
 
 Modo|Commands				| Descripción
 ----|-----------------------|-----------
-n,i	|`<A-k>` 					| **vim-signature**: Muestra lista de marcadores
-n	|`<leader>e`				| **scalpel**: Reemplazo de la palabra activa
+n,i	|`<A-k>` 				| **vim-signature**: Muestra lista de marcadores
+n	|`<leader>e`			| **scalpel**: Reemplazo de la palabra activa
 n	|`gc<motion>`			| **Commentary** para comentar, porej gcap para un parrafo
 n	|`gcc`					| **Commentary** para comentaruna línea
 n	|`[cmd]af` o `[cmd]if`	| **vim-textobj-python** "a function" o "inner function" Por ej: `vif`, `dif`, `vaf`, `daf`
@@ -199,25 +200,25 @@ vim-textobj-comment		|norm|`<action>ic` inner comment, por ej  `vic`, `dic`
 
 ### Comandos y Trucos
 
-Comando				|Descripción
---------------------|-----------
-!`n`Gsort`Enter`   	| Ordena mediante sort las `n` líneas a partir del cursor
-:marks				| Muestra las marcas activas
-:view `<f>`   		| Abre en modo Read only el archivo `<f>`
-:ab		 			| Abreviaciones (por ej. :abreviate pm Patricio Moracho)
-:g/^\s*$/d     		| Elimina todas la líneas en blanco
-:% s /`b`/`r`  		| Remplaza primera ocurencia de `<b>` por `<r>`
-:% s /`b`/`r`/g		| Remplaza todas las ocurencias de `<b>` por `<r>`
-:%s/ \s*$/			| Remplaza espacios y tabs finales de cada línea de un archivo
-:%retab!            | Retabular el archivo (convierte espacios en tabs)
-:changes			| Lista los cambios e el archivo
-:ju(mps)         	| Lista movimientos por los archivos
-:his c           	| Historia de comandos
-:his s           	| Historia de búsquedas
-Ctrl-w Ctrl-f		| open file under cursor in new window
+Comando					|Descripción
+------------------------|-----------
+!`n`Gsort`Enter`   		| Ordena mediante sort las `n` líneas a partir del cursor
+:marks					| Muestra las marcas activas
+:view `<f>`   			| Abre en modo Read only el archivo `<f>`
+:ab		 				| Abreviaciones (por ej. :abreviate pm Patricio Moracho)
+:g/^\s*$/d     			| Elimina todas la líneas en blanco
+:% s /`b`/`r`  			| Remplaza primera ocurencia de `<b>` por `<r>`
+:% s /`b`/`r`/g			| Remplaza todas las ocurencias de `<b>` por `<r>`
+:%s/ \s*$/				| Remplaza espacios y tabs finales de cada línea de un archivo
+:%retab!           		| Retabular el archivo (convierte espacios en tabs)
+:changes				| Lista los cambios e el archivo
+:ju(mps)         		| Lista movimientos por los archivos
+:his c           		| Historia de comandos
+:his s           		| Historia de búsquedas
+Ctrl-w Ctrl-f			| open file under cursor in new window
 `<esc>``n`i`c``<esc>`	| Inserta `n`veces el caracter `c`
 :`<Ctr-f>`          	| Historia de comandos
-gqap         	 	| Reformatea parrafo actual
+gqap         	 		| Reformatea parrafo actual
 
 ### Mapeos particulares
 
@@ -248,8 +249,8 @@ v		| `j,`, `j;`, `j `	| Join de líneas con separador
 
 ### Plugin: vim-signature
 
-Commands          |Mode
-------------------|-----------
+Commands          		|Mode
+------------------------|-----------
 mx           			| Toggle mark 'x' and display it in the leftmost column
 dmx          			| Remove mark 'x' where x is a-zA-Z
 m,           			| Place the next available mark
