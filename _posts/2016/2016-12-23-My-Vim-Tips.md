@@ -123,7 +123,7 @@ Teclas	|Descripción
 m`c`	| Establece una marca `c` (de la a a la z)
 '`c`	| Posiciona el cursor en la marca `c`
 '.		| Ir a la última linea modificada del archivo
-``.``		| Ir a la posición exacta del último cambio
+``.``	| Ir a la posición exacta del último cambio
 g;		| cycle thru recent changes (oldest first) (new in vim6.3)
 g,  	| Reverse direction (new in vim6.3)
 `C-O`   | Retroceder según lo movimientos realizados en el archivo
@@ -185,8 +185,7 @@ Modo|Commands				| Descripción
 n,i	|`<A-k>` 				| **vim-signature**: Muestra lista de marcadores
 n	|`<leader>e`			| **scalpel**: Reemplazo de la palabra activa
 n	|`gc<motion>`			| **Commentary** para comentar, porej gcap para un parrafo
-n	|`gcc`					| **Commentary** para comentaruna línea
-n	|`[cmd]af` o `[cmd]if`	| **vim-textobj-python** "a function" o "inner function" Por ej: `vif`, `dif`, `vaf`, `daf`
+n	|`gcc`					| **Commentary** para comentar una línea
 
 ### Plugins: vim-textobj
 
@@ -223,21 +222,21 @@ gqap         	 		| Reformatea parrafo actual
 
 ### Plugin: vim-signature
 
-Commands          		  |Mode
+Commands       		    |Mode
 ------------------------|-----------
-mx           			      | Toggle mark 'x' and display it in the leftmost column
-dmx          			      | Remove mark 'x' where x is a-zA-Z
-m,           			      | Place the next available mark
-m.           			      | If no mark on line, place the next available mark. Otherwise, remove (first) existing mark.
-m-           			      | Delete all marks from the current line
-m`<Space>`   			      | Delete all marks from the current buffer
-]           			      | Jump to next mark
-[\'          			      | Jump to prev mark
-]'           			      | Jump to start of next line containing a mark
-['           			      | Jump to start of prev line containing a mark
-\']           		      | Jump by alphabetical order to next mark
-']           			      | Jump by alphabetical order to start of next line having a mark
-'[           			      | Jump by alphabetical order to start of prev line having a mark
+mx           			| Toggle mark 'x' and display it in the leftmost column
+dmx          			| Remove mark 'x' where x is a-zA-Z
+m,           			| Place the next available mark
+m.           			| If no mark on line, place the next available mark. Otherwise, remove (first) existing mark.
+m-          	 		| Delete all marks from the current line
+m`<Space>`   			| Delete all marks from the current buffer
+]           			| Jump to next mark
+[\'          			| Jump to prev mark
+]'           			| Jump to start of next line containing a mark
+['           			| Jump to start of prev line containing a mark
+\']           			| Jump by alphabetical order to next mark
+']           			| Jump by alphabetical order to start of next line having a mark
+'[           			| Jump by alphabetical order to start of prev line having a mark
 m/           			| Open location list and display marks from current buffer
 m[0-9]       			| Toggle the corresponding marker !@#$%^&*()
 m`<S-[0-9]>` 			| Remove all markers of the same type
@@ -274,30 +273,3 @@ n, i, v	| `A-<Right>`		| Identado de la línea o selección a derecha
 n, i, v	| `A-<Left>`		| Identado de la línea o selección a izquierda
 v		| `j,`, `j;`, `j `	| Join de líneas con separador
 
-
-### Plugin: vim-signature
-
-Commands          		  |Mode
-------------------------|-----------
-mx           			      | Toggle mark 'x' and display it in the leftmost column
-dmx          			| Remove mark 'x' where x is a-zA-Z
-m,           			| Place the next available mark
-m.           			| If no mark on line, place the next available mark. Otherwise, remove (first) existing mark.
-m-           			| Delete all marks from the current line
-m`<Space>`   			| Delete all marks from the current buffer
-]           			| Jump to next mark
-[\`          			| Jump to prev mark
-]'           			| Jump to start of next line containing a mark
-['           			| Jump to start of prev line containing a mark
-\`]           			| Jump by alphabetical order to next mark
-']           			| Jump by alphabetical order to start of next line having a mark
-'[           			| Jump by alphabetical order to start of prev line having a mark
-m/           			| Open location list and display marks from current buffer
-m[0-9]       			| Toggle the corresponding marker !@#$%^&*()
-m`<S-[0-9]>` 			| Remove all markers of the same type
-]-           			| Jump to next line having a marker of the same type
-[-           			| Jump to prev line having a marker of the same type
-]=           			| Jump to next line having a marker of any type
-[=           			| Jump to prev line having a marker of any type
-m?           			| Open location list and display markers from current buffer
-m`<BS>`      			| Remove all markers
