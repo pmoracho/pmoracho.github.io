@@ -23,8 +23,10 @@ tags:
 
 ### Linux/Mac
 
+``` bash
 cd ~                 #Your home directory
 ssh-keygen -t rsa    #Press enter for all values
+```
 
 ### For Windows
 
@@ -46,12 +48,20 @@ If your repository is administered by somebody else, give the administrator your
 If you have done the steps above and are still getting the password prompt, make sure your repo URL is in the form
 
 git+ssh://git@github.com/username/reponame.git
+
 as opposed to
 
 https://github.com/username/reponame.git
+
 To see your repo URL, run:
 
+
+``` bash
 git remote show origin
+```
+
 You can change the URL with:
 
+``` bash
 git remote set-url origin git@github.com/username/reponame.git
+```
