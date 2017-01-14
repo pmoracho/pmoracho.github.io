@@ -232,7 +232,7 @@ m.           			      | If no mark on line, place the next available mark. Other
 m-           			      | Delete all marks from the current line
 m`<Space>`   			      | Delete all marks from the current buffer
 ]           			      | Jump to next mark
-[\`          			      | Jump to prev mark
+[\'          			      | Jump to prev mark
 ]'           			      | Jump to start of next line containing a mark
 ['           			      | Jump to start of prev line containing a mark
 \']           		      | Jump by alphabetical order to next mark
