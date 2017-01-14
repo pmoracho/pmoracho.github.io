@@ -249,9 +249,9 @@ v		| `j,`, `j;`, `j `	| Join de líneas con separador
 
 ### Plugin: vim-signature
 
-Commands          		|Mode
+Commands          		  |Mode
 ------------------------|-----------
-mx           			| Toggle mark 'x' and display it in the leftmost column
+mx           			      | Toggle mark 'x' and display it in the leftmost column
 dmx          			| Remove mark 'x' where x is a-zA-Z
 m,           			| Place the next available mark
 m.           			| If no mark on line, place the next available mark. Otherwise, remove (first) existing mark.
