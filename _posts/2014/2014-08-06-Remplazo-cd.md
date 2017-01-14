@@ -8,10 +8,27 @@ tag:
   - terminal
 show_meta: true
 comments: true
----
-Cada vez estoy pasando más horas delante de una terminal *Nix, ya sea en para acceder remotamente a sistemas, como también por el uso cada vez mayor que hago del entorno Cygwin en windows. Por lo que ya estoy customizando y armando herramientas para mi uso diario. La idea, como siempre, es compartir. Esta vez le toca a un reemplazo del viejo y conocido comando cd o "change directory". La necesidad puntual era poder mantener un historial de carpetas visitadas, de modo de poder acceder de formá rápida a las mismas. es habitual acceder a directorios largos o profundos, digamos por ejemplo: "/cydrive/c/SVN/proyecto-trunk/resoyrce/test/input/test1", a veces también hay que moverse momentáneamente de una carpeta a otra, en fin, escribir esto cada vez es engorroso.
 
-Hay un par de comandos internos de Bash muy interesantes que explotan la posibilidad de mantener una "pila" de carpetas. Hablamos de popd, pushd y dirs, conviene investigarlas. Asimismo hay una función muy interesante desarrollada por Petar Marinov, que se suele incorporar al .bashrc y usarla como alias del cd. Sobre esta base hice una pocas modificaciones para adaptarla a mis propias necesidades.
+---
+
+Cada vez estoy pasando más horas delante de una terminal *Nix, ya sea en para
+acceder remotamente a sistemas, como también por el uso cada vez mayor que hago
+del entorno Cygwin en windows. Por lo que ya estoy customizando y armando
+herramientas para mi uso diario. La idea, como siempre, es compartir. Esta vez
+le toca a un reemplazo del viejo y conocido comando cd o "change directory". La
+necesidad puntual era poder mantener un historial de carpetas visitadas, de
+modo de poder acceder de formá rápida a las mismas. es habitual acceder a
+directorios largos o profundos, digamos por ejemplo:
+"/cydrive/c/SVN/proyecto-trunk/resoyrce/test/input/test1", a veces también hay
+que moverse momentáneamente de una carpeta a otra, en fin, escribir esto cada
+vez es engorroso.
+
+Hay un par de comandos internos de Bash muy interesantes que explotan la
+posibilidad de mantener una "pila" de carpetas. Hablamos de popd, pushd y dirs,
+conviene investigarlas. Asimismo hay una función muy interesante desarrollada
+por Petar Marinov, que se suele incorporar al .bashrc y usarla como alias del
+cd. Sobre esta base hice una pocas modificaciones para adaptarla a mis propias
+necesidades.
 
 ``` shell
 ##################################################################################
@@ -118,14 +135,18 @@ mycd ()
 }
 ```
 
-Fundamental incorporar este código al `.bashrc` y por último configurarlo como alias: `alias cd=mycd`
+Fundamental incorporar este código al `.bashrc` y por último configurarlo como
+alias: `alias cd=mycd`
 
 Que cosas podemos hacer:
 
 * (cd --): Lista los últimos directorios visitados con un índice para acceder al mismo
 * (cd -índice): Podremos ir directamente a esa carpeta
 
-El stack de directorios se salva, se ordena y se quitan los repetdios en un archivo de sesión, por lo que cuando abramos de nuevo la sesión se restaura la última lista. Podemos configurar editando la variable maxitems, la cantidad de carpetas a salvar.
+El stack de directorios se salva, se ordena y se quitan los repetdios en un
+archivo de sesión, por lo que cuando abramos de nuevo la sesión se restaura la
+última lista. Podemos configurar editando la variable maxitems, la cantidad de
+carpetas a salvar.
 
 Actualización del 18/09/2014: Nueva funcionalidad
 
