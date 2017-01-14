@@ -220,6 +220,13 @@ Ctrl-w Ctrl-f			| open file under cursor in new window
 :`<Ctr-f>`          	| Historia de comandos
 gqap         	 		| Reformatea parrafo actual
 
+
+### Plugin: vim-signature
+
+Commands          		  |Mode
+------------------------|-----------
+mx           			      | Toggle mark 'x' and display it in the leftmost column
+
 ### Mapeos particulares
 
 Modo 	|Commando			|Descripción
