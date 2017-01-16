@@ -127,16 +127,37 @@ sitemap:
 Jeckyll para "iluminar" código utiliza por defecto [rouge](https://github.com/jneen/rouge). La lista de lenguajes soportados se puede consultar [aquí](https://github.com/jneen/rouge/wiki/List-of-supported-languages-and-lexers). Configurar un bloque de código en un "post" es tan simple como esto:
 
 ```
-  ``` bash
-  export path=$path:/bin
-  ```
+	``` javascript
+	function getPostsFromXml(xml) {
+		var json = xmlToJson(xml);
+		// Atom 1.0 format
+		if (json.entry && json.entry instanceof Array) {
+			return json.entry;
+		}
+		// Atom 2.0 format
+		else {
+			return json.channel.item;
+		}
+	}
+	```
 ```
 
 esto terminará mostrandose así:
 
-``` bash
-export path=$path:/bin
+``` javascript
+function getPostsFromXml(xml) {
+	var json = xmlToJson(xml);
+	// Atom 1.0 format
+	if (json.entry && json.entry instanceof Array) {
+		return json.entry;
+	}
+	// Atom 2.0 format
+	else {
+		return json.channel.item;
+	}
+}
 ```
+
 
 Si hay que mostrar código "liquid", el problema que tenemos es que Jeckyll lo considerará código y lo interpretará por lo que la solución es incluir:
 
@@ -144,11 +165,11 @@ Si hay que mostrar código "liquid", el problema que tenemos es que Jeckyll lo c
 {% raw  %}
 {% raw  %}
 {% aca va el codigo que se quiere mostrar %}
-{% endraw %%}
+{% end raw %}
 {% endraw %}
 
 ```
-Nota: el {% endraw %%} tiene un % de más intencionalmente para poder "dibujarlo" quitárselo cuando se use
+Nota: el {% end raw %} se escribió con un un espacio entre end y raw intencionalmente para poder "dibujarlo" quitárselo cuando se use
 
 
 ## Enlaces interesantes
