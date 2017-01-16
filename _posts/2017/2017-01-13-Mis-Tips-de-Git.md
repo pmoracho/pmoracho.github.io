@@ -19,6 +19,8 @@ tags:
 
 # Configurar la seguridad
 
+[Fuente](http://stackoverflow.com/questions/8588768/git-push-username-password-how-to-avoid)
+
 ## 1. Generate an SSH key
 
 ### Linux/Mac
@@ -34,7 +36,7 @@ ssh-keygen -t rsa    #Press enter for all values
 
 Use Putty Gen to generate a key
 Export the key as an open SSH key
-Here is a walkthrough on putty gen for the above steps
+Here is a [walkthrough](http://ask-leo.com/how_do_i_create_and_use_public_keys_with_ssh.html) on putty gen for the above steps
 
 # 2. Associate the SSH key with the remote repository
 
