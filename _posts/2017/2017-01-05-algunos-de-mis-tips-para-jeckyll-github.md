@@ -145,6 +145,7 @@ Si hay que mostrar código "liquid", el problema que tenemos es que Jeckyll lo c
 {% raw  %}
 {% aca va el codigo que se quiere mostrar %}
 {% endraw %}
+&#123;% endraw %}
 
 ```
 
