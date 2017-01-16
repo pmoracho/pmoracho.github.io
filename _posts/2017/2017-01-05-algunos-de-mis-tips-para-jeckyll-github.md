@@ -140,9 +140,11 @@ export path=$path:/bin
 
 Si hay que mostrar código "liquid", el problema que tenemos es que Jeckyll lo considerará código y lo interpretará por lo que la solución es incluir:
 
-```
+``` liquid
+{% raw %}
 {% raw %}
 {% this is liquid code %}
+{% endraw %}
 {% endraw %}
 
 ```
