@@ -127,7 +127,7 @@ sitemap:
 Jeckyll para "iluminar" código utiliza por defecto [rouge](https://github.com/jneen/rouge). La lista de lenguajes soportados se puede consultar [aquí](https://github.com/jneen/rouge/wiki/List-of-supported-languages-and-lexers). Configurar un bloque de código en un "post" es tan simple como esto:
 
 ```
-	``` javascript
+	``` js
 	function getPostsFromXml(xml) {
 		var json = xmlToJson(xml);
 		// Atom 1.0 format
@@ -144,7 +144,7 @@ Jeckyll para "iluminar" código utiliza por defecto [rouge](https://github.com/j
 
 esto terminará mostrandose así:
 
-``` javascript
+``` js
 function getPostsFromXml(xml) {
 	var json = xmlToJson(xml);
 	// Atom 1.0 format
@@ -163,13 +163,11 @@ Si hay que mostrar código "liquid", el problema que tenemos es que Jeckyll lo c
 
 ``` liquid
 {% raw  %}
-{% raw  %}
 {% aca va el codigo que se quiere mostrar %}
-{% end raw %}
 {% endraw %}
 
 ```
-Nota: el {% end raw %} se escribió con un un espacio entre end y raw intencionalmente para poder "dibujarlo" quitárselo cuando se use
+Nota: el end raw se escribió con un un espacio entre end y raw intencionalmente para poder "dibujarlo" quitárselo cuando se use
 
 
 ## Enlaces interesantes
