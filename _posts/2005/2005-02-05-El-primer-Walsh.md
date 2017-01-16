@@ -6,8 +6,48 @@ tag:
   - literatura
   - walsh
 ---
-![Rodolfo Walsh][walsh]{: style="float:left;margin-right:30px;"}
-Buscando entender a Walsh encontré dos de sus primeros trabajos. Se trata de Variaciones en Rojo (Hachette 1953 y De la Flor 1985) y La máquina del bien y de Mal (Clarín, Aguilar, 1992). No es el mismo de Operación masacre, eso esta mas que claro, sin embargo, el estilo narrativo directo que alguien podría llamar periodístico, esta ahí, presente, aunque los relatos tengan mas que ver con la temática de un Poe, Chesterton o Doyle. Policiales clásicos, hay una crimen, una investigación y un culpable descubierto, pero, aún siendo relatos tradicionales, Walsh consigue darle una “vuelta de tuerca” que los hace completamente distintos y sumamemte entretenidos. “Variaciones..”, ganadora del premio municipal, presenta como protagonista, a Daniel Hernandez un corrector editorial, alter ego del autor, una especie de Padre Brown de Chesterton, una persona de una capacidad de analisis descollante, que con meticulosidad y el solo uso de su intelecto, resuelve los casos para envidia de su amigo el comisario Jimenez. De los tres cuentos, “Asesinato a distancia” sobresale, acá hay un material sensacional para algún guión cinematográfico. Un paisaje alejado de todo, una familia con una gran carga de conflictos y desgracias, y un crimen a resolver. “Las aventuras de la prueba de imprenta” no es la historia de la solución de un asesinato, sino que es la narración del proceso de deducción que que la consigue. “Variaciones en rojo” es un poco rebuscada como trama, pero es entretenida por los personajes, principalmente el del pintor Peruzzi. “La maquina..” que si bien es una recopilación de algunos cuentos que aparecieron en otras publicaciones tiene algunas joyas de la literatura del Rionegrino. El cuento que titula el libro, es una fantástica historia, de un humor muy negro, narrada en primera persona, con un estilo muy contundente y “orillero”, “Esa mujer” es la revelación de la incógnita acerca de lo que pasó con el cadáver de Eva Perón desde la narración de uno de los protagonistas, es muy interesante el manejo del suspenso en este relato. El resto, son cuentos que tienen como protagonista a uno de esos personajes que deberían haber trascendido mas en la literatura Argentina, se trata de el Comisario retirado Laurenzi, la estructuras de estos cuentos es simple, el viejo comisario se reúne con un periodista, café o billar de por medio, a quien le cuenta distintos casos en los que participó. Siempre hay un misterio, a veces sobrenatural y una solución bien terrena. Imperdibles los diálogos y las increíbles vueltas de tuerca que renuevan un genero o una tema, como es el caso de “Transposición de jugadas” donde Walsh explota un antiguo problema conocido desde la época de Carlomango, el problema de cruzar en bote a una cabra, una col y a un lobo pero incorporando una incógnita a este, lo que termina resultando en un final sorprendente. Concluyendo, ambos libros son mas que entretenidos, y además tienen un plus extra que es la fuerte pluma de Rodolfo Walsh.
+
+![Rodolfo Walsh][walsh]{: style="float:left;margin-right:30px;"} Buscando
+entender a Walsh encontré dos de sus primeros trabajos. Se trata de Variaciones
+en Rojo (Hachette 1953 y De la Flor 1985) y La máquina del bien y de Mal
+(Clarín, Aguilar, 1992). No es el mismo de Operación masacre, eso esta mas que
+claro, sin embargo, el estilo narrativo directo que alguien podría llamar
+periodístico, esta ahí, presente, aunque los relatos tengan mas que ver con la
+temática de un Poe, Chesterton o Doyle. Policiales clásicos, hay una crimen,
+una investigación y un culpable descubierto, pero, aún siendo relatos
+tradicionales, Walsh consigue darle una “vuelta de tuerca” que los hace
+completamente distintos y sumamemte entretenidos. “Variaciones..”, ganadora del
+premio municipal, presenta como protagonista, a Daniel Hernandez un corrector
+editorial, alter ego del autor, una especie de Padre Brown de Chesterton, una
+persona de una capacidad de analisis descollante, que con meticulosidad y el
+solo uso de su intelecto, resuelve los casos para envidia de su amigo el
+comisario Jimenez. De los tres cuentos, “Asesinato a distancia” sobresale, acá
+hay un material sensacional para algún guión cinematográfico. Un paisaje
+alejado de todo, una familia con una gran carga de conflictos y desgracias, y
+un crimen a resolver. “Las aventuras de la prueba de imprenta” no es la
+historia de la solución de un asesinato, sino que es la narración del proceso
+de deducción que que la consigue. “Variaciones en rojo” es un poco rebuscada
+como trama, pero es entretenida por los personajes, principalmente el del
+pintor Peruzzi. “La maquina..” que si bien es una recopilación de algunos
+cuentos que aparecieron en otras publicaciones tiene algunas joyas de la
+literatura del Rionegrino. El cuento que titula el libro, es una fantástica
+historia, de un humor muy negro, narrada en primera persona, con un estilo muy
+contundente y “orillero”, “Esa mujer” es la revelación de la incógnita acerca
+de lo que pasó con el cadáver de Eva Perón desde la narración de uno de los
+protagonistas, es muy interesante el manejo del suspenso en este relato. El
+resto, son cuentos que tienen como protagonista a uno de esos personajes que
+deberían haber trascendido mas en la literatura Argentina, se trata de el
+Comisario retirado Laurenzi, la estructuras de estos cuentos es simple, el
+viejo comisario se reúne con un periodista, café o billar de por medio, a quien
+le cuenta distintos casos en los que participó. Siempre hay un misterio, a
+veces sobrenatural y una solución bien terrena. Imperdibles los diálogos y las
+increíbles vueltas de tuerca que renuevan un genero o una tema, como es el caso
+de “Transposición de jugadas” donde Walsh explota un antiguo problema conocido
+desde la época de Carlomango, el problema de cruzar en bote a una cabra, una
+col y a un lobo pero incorporando una incógnita a este, lo que termina
+resultando en un final sorprendente. Concluyendo, ambos libros son mas que
+entretenidos, y además tienen un plus extra que es la fuerte pluma de Rodolfo
+Walsh.
 
 Bibliografía por el [historiador.com.ar](historiador.com.ar)
 
