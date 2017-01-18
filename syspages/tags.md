@@ -26,7 +26,25 @@ category: base
 <h2 id="{{ this_word }}">{{ this_word }}</h2>
 <ul class="post-list">
   {% for post in site.tags[this_word] %}{% if post.title != null %}
-  <li><a href="{{ site.url }}{{ post.url }}">{{ post.title }}<span class="entry-date"><time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%b %d, %Y" }}</time></span></a></li>
+  <li><a href="{{ site.url }}{{ post.url }}">{{ post.title }}<span class="entry-date"><time datetime="{{ post.date | date_to_xmlschema }}">
+	{% assign m = post.modified | date: "%-m" %}
+	{{ post.modified | date: "%-d" }}
+	{% case m %}
+		{% when '1' %}Ene
+		{% when '2' %}Feb
+		{% when '3' %}Mar
+		{% when '4' %}Abr
+		{% when '5' %}May
+		{% when '6' %}Jun
+		{% when '7' %}Jul
+		{% when '8' %}Ago
+		{% when '9' %}Sep
+		{% when '10' %}Oct
+		{% when '11' %}Nov
+		{% when '12' %}Dec
+	{% endcase %}
+	{{ post.modified | date: "%Y" }}
+  	</time></span></a></li>
   {% endif %}{% endfor %}
   </ul>
 {% endunless %}{% endfor %}
