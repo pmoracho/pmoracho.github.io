@@ -172,6 +172,34 @@ Si hay que mostrar código "liquid", el problema que tenemos es que Jeckyll lo c
 Nota: el end raw se escribió con un un espacio entre end y raw intencionalmente para poder "dibujarlo" quitárselo cuando se use
 
 
+## Matemática en los posts
+
+Escribir formulas y que estas se vean bien es bastante sencillo. Veamos el paso a paso:
+
+1. Github y Jeckyll usan por defecto
+   [Mathjax](http://docs.mathjax.org/en/latest/mathjax.html). 
+
+2. Lo siguiente es configurar el uso de _mathjax_ en el post. En la cabecera
+   del post incorporamos 
+
+```
+---
+...
+mathjax: true
+...
+
+---
+```
+
+3. Por último, escribir la fórmula, se comienza con `$$ ` y se finaliza con `
+   $$`. La sintaxis es **TeX**, la misma que se usa en la **Wikipedia**, por lo
+   que copiar formulas desde ahí es trivial.
+
+`$$ \mathrm{classify}(f_1,\dots,f_n) = \underset{c}{\operatorname{argmax}} \ p(C=c) \displaystyle\prod_{i=1}^n p(F_i=f_i\vert C=c). $$`
+
+$$ \mathrm{classify}(f_1,\dots,f_n) = \underset{c}{\operatorname{argmax}} \ p(C=c) \displaystyle\prod_{i=1}^n p(F_i=f_i\vert C=c). $$
+
+
 ## Enlaces interesantes
 
 * [Liquid text help](http://shopify.github.io/liquid/tags/iteration/)
