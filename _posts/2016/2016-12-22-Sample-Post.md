@@ -645,3 +645,13 @@ But next comes a paragraph with an inline math statement:
 \$$ 5 + 5 $$
 
 \$\$ 5 + 5 $$
+
+Otros ejemplos:
+
+`$$a^2 + b^2 = c^2$$`
+
+$$a^2 + b^2 = c^2$$
+
+`$$ \mathbf{X}\_{n,p} = \mathbf{A}\_{n,k} \mathbf{B}\_{k,p} $$`
+
+$$ \mathbf{X}\_{n,p} = \mathbf{A}\_{n,k} \mathbf{B}\_{k,p} $$
