@@ -645,3 +645,22 @@ But next comes a paragraph with an inline math statement:
 \$$ 5 + 5 $$
 
 \$\$ 5 + 5 $$
+
+Otros ejemplos:
+
+`$$a^2 + b^2 = c^2$$`
+
+$$a^2 + b^2 = c^2$$
+
+`$$ \mathbf{X}\_{n,p} = \mathbf{A}\_{n,k} \mathbf{B}\_{k,p} $$`
+
+$$ \mathbf{X}\_{n,p} = \mathbf{A}\_{n,k} \mathbf{B}\_{k,p} $$
+
+`$$ p(C \vert F_1,\dots,F_n) = \frac{1}{Z}  p(C) \prod_{i=1}^n p(F_i \vert C) $$`
+
+$$ p(C \vert F_1,\dots,F_n) = \frac{1}{Z}  p(C) \prod_{i=1}^n p(F_i \vert C) $$
+
+
+`$$ \mathrm{classify}(f_1,\dots,f_n) = \underset{c}{\operatorname{argmax}} \ p(C=c) \displaystyle\prod_{i=1}^n p(F_i=f_i\vert C=c). $$`
+
+$$ \mathrm{classify}(f_1,\dots,f_n) = \underset{c}{\operatorname{argmax}} \ p(C=c) \displaystyle\prod_{i=1}^n p(F_i=f_i\vert C=c). $$
