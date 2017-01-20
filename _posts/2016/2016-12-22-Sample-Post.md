@@ -632,3 +632,19 @@ With a reference later in the document defining the URL location:
 
     [id]: http://octodex.github.com/images/dojocat.jpg  "The Dojocat"
 
+
+## Formulas
+
+# nlp
+
+## Sample formula:
+
+The following is a math block:
+
+$$ 5 + 5 $$
+
+But next comes a paragraph with an inline math statement:
+
+\$$ 5 + 5 $$
+
+\$\$ 5 + 5 $$
