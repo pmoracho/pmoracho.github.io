@@ -635,10 +635,6 @@ With a reference later in the document defining the URL location:
 
 ## Formulas
 
-# nlp
-
-## Sample formula:
-
 The following is a math block:
 
 $$ 5 + 5 $$
