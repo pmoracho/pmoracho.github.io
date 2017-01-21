@@ -74,3 +74,7 @@ de cada síntoma con relación a cada enfermedad que participe en nuestro cálcu
 y llegar a un "score" final para cada enfermedad, y las que tengan el valor más
 alto son las que mayor probabilidad tienen de ser con respecto a los síntomas.
 
+Planteado de esta manera parece ser un "algorimo" sencillo, y en la realidad lo
+es. Implementarlo en cualquier lenguaje es algo bastante "trivial", lo notable
+es que a pesar de su "simplicidad" es tremendamente efectivo en muchas
+aplicaciones.
