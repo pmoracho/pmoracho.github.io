@@ -21,7 +21,9 @@ tags:
 ---
 ## Comprimir HTML
 
-Sin plugins ni cosas raras. Desde [aquí](http://jch.penibelst.de/) podremos bajar un "template", compress.html que deberemos incluir en la página default.html de la siguiente forma
+Sin plugins ni cosas raras. Desde [aquí](http://jch.penibelst.de/) podremos
+bajar un "template", compress.html que deberemos incluir en la página
+default.html de la siguiente forma
 
 ```
 ---
@@ -45,11 +47,17 @@ compress_html:
 
 Realmente funciona muy bien y comprime significativamente cada página.
 
-**Nota**: El "strip" de los comentarios puede generar distintos problemas en particular si el comienzo o el final del mismo no está correctamente escrito en cualquier página. Tener en cuenta el espacio final e inicial siempre. Por otro lado, si usan **disqus**, hay que editar de `disqus_comments.html` el código: `(function() { // DON'T EDIT BELOW THIS LINE` y quitar el comentario, sino es probable que deje de funcionar.
+**Nota**: El "strip" de los comentarios puede generar distintos problemas en
+particular si el comienzo o el final del mismo no está correctamente escrito en
+cualquier página. Tener en cuenta el espacio final e inicial siempre. Por otro
+lado, si usan **disqus**, hay que editar de `disqus_comments.html` el código:
+`(function() { // DON'T EDIT BELOW THIS LINE` y quitar el comentario, sino es
+probable que deje de funcionar.
 
 ## Sitemap.xml
 
-Primero que nada, limpiar páginas y "posts" que no queremos en el sitemap editando cada archivo y agregando el siguiente código en la cabecera:
+Primero que nada, limpiar páginas y "posts" que no queremos en el sitemap
+editando cada archivo y agregando el siguiente código en la cabecera:
 
 ``` yaml
 ---
@@ -58,7 +66,15 @@ sitemap:
 ---  
 ```
 
-Con esto se quita casi todo, pero por alguna razón extraña, a mi particularmente y entiendo que a otros usuarios, les suele incluir archivos de otra índole que no son efectivamente páginas. Esto es por que Jeckyll entiende todo archivo que nos es un "post" como una página. En el caso del alojamiento y generación dinámica en Github lo que me venía ocurriendo es que me incluía un archivo `..assets/style.css`, no era de los míos por lo que no lo podía excluir. Opté por lo más fácil que me pareció, verificar si la "página" finalizaba con el texto "css" y entonces no considerarla en el sitemap. Acá va el código:
+Con esto se quita casi todo, pero por alguna razón extraña, a mi
+particularmente y entiendo que a otros usuarios, les suele incluir archivos de
+otra índole que no son efectivamente páginas. Esto es por que Jeckyll entiende
+todo archivo que nos es un "post" como una página. En el caso del alojamiento y
+generación dinámica en Github lo que me venía ocurriendo es que me incluía un
+archivo `..assets/style.css`, no era de los míos por lo que no lo podía
+excluir. Opté por lo más fácil que me pareció, verificar si la "página"
+finalizaba con el texto "css" y entonces no considerarla en el sitemap. Acá va
+el código:
 
 ``` liquid
 ---
@@ -124,7 +140,11 @@ sitemap:
 
 ## Syntax highlighting 
 
-Jeckyll para "iluminar" código utiliza por defecto [rouge](https://github.com/jneen/rouge). La lista de lenguajes soportados se puede consultar [aquí](https://github.com/jneen/rouge/wiki/List-of-supported-languages-and-lexers). Configurar un bloque de código en un "post" es tan simple como esto:
+Jeckyll para "iluminar" código utiliza por defecto
+[rouge](https://github.com/jneen/rouge). La lista de lenguajes soportados se
+puede consultar
+[aquí](https://github.com/jneen/rouge/wiki/List-of-supported-languages-and-lexers).
+Configurar un bloque de código en un "post" es tan simple como esto:
 
 ```
 	``` js

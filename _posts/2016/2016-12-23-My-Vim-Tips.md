@@ -258,18 +258,18 @@ v		| `(,[,{,",<,'`		| Cierra la selección visual con los caracteres mencionados
 n, i	| `F2`				| Salvar buffer
 n, i	| `F5`				| Maximizar ventana
 n, i	| `F6`				| Arranca un explorer de windows en el directorio actual
-n, i	| `F8`				| Enciende o apaga el navegador de "Tags" a la izquierda 
-n, i	| `F10`				| Enciende o apaga el exporador NerdTree
+n, i	| `F8`				| Enciende o apaga el navegador de "Tags" a la izquierda (requiere pluggin)
+n, i	| `F10`				| Enciende o apaga el exporador NerdTree (requiere pluggin)
 n, i	| `F11`				| Enciende o apaga el modo "Full Screen" en Windows
 n, i	| `F12`				| Abre el .vimrc
 n, i	| `A-w`				| Selecciona la palabra
-n, i	| `A-<end>`			| Abre el Buffer exlorer
+n, i	| `A-<end>`			| Abre el Buffer exlorer (requiere pluggin)
 n, i	| `A-X` o `A-x`		| Salir de Vim
-n, i	| `A-<home>`		| Muestra las sesiones de edición disponibles
+n, i	| `A-<home>`		| Muestra las sesiones de edición disponibles (requiere pluggin)
 n, i	| `C-n`				| Abrir un nuevo buffer en blanco
 n, i	| `A-<Up>`			| Mueve la línea actual hacia arriba
 n, i	| `A-<Down>`		| Mueve la línea actual hacia abajo
 n, i, v	| `A-<Right>`		| Identado de la línea o selección a derecha
 n, i, v	| `A-<Left>`		| Identado de la línea o selección a izquierda
-v		| `j,`, `j;`, `j `	| Join de líneas con separador
+v		| `j,`, `j;`, `j `	| Join de líneas con separador `,`, `;` o ` `
 
