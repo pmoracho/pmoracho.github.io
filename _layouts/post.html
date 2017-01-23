@@ -63,16 +63,34 @@ layout: default
 <div class="page-break"></div>
 <div class="related">
   <h2>Posts relacionados</h2>
-  <ul>
-  {% for post in site.posts %}
-    {% if post.url != page.url %}
-      {% for tag in page.tags %}
-        {% if post.tags contains tag %}
-          <li><a href="{{ site.url }}{{ post.url }}">{{ post.title }}</a><br /></li>
-        {% endif %}
-      {% endfor %}
+	{% assign maxRelated = 4 %}
+	{% assign minCommonTags =  2 %}
+	{% assign maxRelatedCounter = 0 %}
+
+	{% for post in site.posts %}
+
+		{% assign sameTagCount = 0 %}
+		{% assign commonTags = '' %}
+
+		{% for tag in post.tags %}
+		{% if post.url != page.url %}
+			{% if page.tags contains tag %}
+			{% assign sameTagCount = sameTagCount | plus: 1 %}
+			{% capture tagmarkup %} <span class="label label-default">{{ tag }}</span> {% endcapture %}
+			{% assign commonTags = commonTags | append: tagmarkup %}
+			{% endif %}
+		{% endif %}
+		{% endfor %}
+	{% if sameTagCount >= minCommonTags %}
+      <div>
+      <h5><a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}{{ commonTags }}</a></h5>
+      </div>
+      {% assign maxRelatedCounter = maxRelatedCounter | plus: 1 %}
+      {% if maxRelatedCounter >= maxRelated %}
+        {% break %}
+      {% endif %}
     {% endif %}
-  {% endfor %}
+  <ul>
   </ul>
 </div>
 <div class="prevnext">
