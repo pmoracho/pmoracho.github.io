@@ -63,6 +63,7 @@ layout: default
 <div class="page-break"></div>
 <div class="related">
 	<h2>Contenido relacionado:</h2>
+	<ul>
 	{% assign maxRelated = 4 %}
 	{% assign minCommonTags =  2 %}
 	{% assign maxRelatedCounter = 0 %}
@@ -83,13 +84,14 @@ layout: default
 		{% endfor %}
 
 		{% if sameTagCount >= minCommonTags %}
-		<ul><a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></ul>
+		<li><a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></li>
 		{% assign maxRelatedCounter = maxRelatedCounter | plus: 1 %}
 		{% if maxRelatedCounter >= maxRelated %}
 			{% break %}
 		{% endif %}
 		{% endif %}
 	{% endfor %}
+	</ul>
 </div>
 <div class="prevnext">
   {% if page.previous.url %}
