@@ -62,7 +62,7 @@ layout: default
 {% endunless %}
 <div class="page-break"></div>
 <div class="related">
-	<h2>Posts relacionados</h2>
+	<h2>Contenido relacionado:</h2>
 	{% assign maxRelated = 4 %}
 	{% assign minCommonTags =  2 %}
 	{% assign maxRelatedCounter = 0 %}
@@ -83,7 +83,7 @@ layout: default
 		{% endfor %}
 
 		{% if sameTagCount >= minCommonTags %}
-		<div><h5><a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}{{ commonTags }}</a></h5></div>
+		<div><ul><a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></ul></div>
 		{% assign maxRelatedCounter = maxRelatedCounter | plus: 1 %}
 		{% if maxRelatedCounter >= maxRelated %}
 			{% break %}
