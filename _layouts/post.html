@@ -83,7 +83,7 @@ layout: default
 		{% endfor %}
 
 		{% if sameTagCount >= minCommonTags %}
-		<div><ul><a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></ul></div>
+		<ul><a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></ul>
 		{% assign maxRelatedCounter = maxRelatedCounter | plus: 1 %}
 		{% if maxRelatedCounter >= maxRelated %}
 			{% break %}
