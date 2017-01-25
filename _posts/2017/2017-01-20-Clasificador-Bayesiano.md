@@ -68,11 +68,11 @@ correspondería una serie de síntomas relevados en el paciente. De hecho esto e
 en definitiva algo bastante cercano a lo que hace un médico clínico todo el
 tiempo, "pesar" mentalmente cada síntoma y llegar al diagnóstico más probable.
 
-	**Nota**: Lo de "ingenuo", se debe a que este tipo de algoritmo considera
-	cada "síntoma" de manera independiente, no contemplando las relaciones que
-	pudieran existir entre ellos, esto es sin duda una debilidad para ciertas
-	aplicaciones aún así, este clasificador es sumamente óptimo para muchas
-	otras.
+> **Nota**: Lo de "ingenuo", se debe a que este tipo de algoritmo considera
+> cada "síntoma" de manera independiente, no contemplando las relaciones que
+> pudieran existir entre ellos, esto es sin duda una debilidad para ciertas
+> aplicaciones aún así, este clasificador es sumamente óptimo para muchas
+> otras.
 
 Un hecho importante y positivo de este tipo de clasificador, es que el "peso" o
 "probabilidad" de una variable	en la clasificación puede ser muy importante en
