@@ -54,7 +54,9 @@ siguiente forma:
 * **(C)** = 0.1
 
 
-P(enfermedad/síntoma) = P(sintoma/enfermedad)*P(enfermedad)/P(síntoma) = 0.9 * 0.05 / 0.1 = 0.45 
+$$ P(enfermedad/síntoma) = P(sintoma/enfermedad)*P(enfermedad)/P(síntoma) $$
+
+Es decir $$ P(enfermedad/síntoma) $$ = 0.9 * 0.05 / 0.1 = 0.45 
 
 Es decir la existencia de temperatura en un paciente nos da una probabilidad de
 un 45% que la misma se deba a una gripe.
