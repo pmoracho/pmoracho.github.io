@@ -54,7 +54,7 @@ siguiente forma:
 * **(C)** = 0.1
 
 
-$$ P(enfermedad/síntoma) = P(sintoma/enfermedad)*P(enfermedad)/P(síntoma) $$
+$$ P(enfermedad/síntoma) = P(síntoma/enfermedad)*P(enfermedad)/P(síntoma) $$
 
 Es decir $$ P(enfermedad/síntoma) $$ = 0.9 * 0.05 / 0.1 = 0.45 
 
@@ -83,7 +83,7 @@ final disminuye.  Pensemos este mismo ejemplo, pero suponiendo que el valor
 **C** en vez de ser 10% es de un 20% (un 20% del universo total tiene fiebre
 actualmente), la formula final quedaría así:
 
-$$ P(enfermedad/síntoma) = P(sintoma/enfermedad)*P(enfermedad)/P(síntoma) $$
+$$ P(enfermedad/síntoma) = P(síntoma/enfermedad)*P(enfermedad)/P(síntoma) $$
 
 Es decir $$ P(enfermedad/síntoma) $$ = 0.9 * 0.05 / **0.2** = 0.225
 
@@ -97,3 +97,7 @@ respecto a los síntomas.
 Planteado de esta manera parece ser un "algoritmo" sencillo, y en la realidad lo
 es. Implementarlo en cualquier lenguaje es algo bastante "trivial", lo notable
 es que a pesar de su "simplicidad" es tremendamente efectivo.
+
+
+
+
