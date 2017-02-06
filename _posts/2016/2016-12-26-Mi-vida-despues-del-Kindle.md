@@ -130,5 +130,3 @@ por la mañana cual diario de papel.
 * [Zbigz](https://www.zbigz.com/): Está página es muy útil para la descarga de
   torrents de manera online, útil para descargar del sitio mencionado en el
   punto anterior.
-
-La imagen de este post sería: {{page.imagefeature}}

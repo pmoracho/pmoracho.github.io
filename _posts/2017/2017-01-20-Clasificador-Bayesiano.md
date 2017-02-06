@@ -94,10 +94,84 @@ nuestro cálculo y llegar a un "score" final, y las "enfermedades" que
 tengan el valor más alto son las que mayor probabilidad tienen de ser con
 respecto a los síntomas.
 
-Planteado de esta manera parece ser un "algoritmo" sencillo, y en la realidad lo
-es. Implementarlo en cualquier lenguaje es algo bastante "trivial", lo notable
-es que a pesar de su "simplicidad" es tremendamente efectivo.
+Planteado de esta manera parece ser un "algoritmo" sencillo, y en la realidad
+lo es. Implementarlo en cualquier lenguaje es algo bastante "trivial", lo
+notable es que a pesar de su "simplicidad" es tremendamente efectivo en
+muchísimos escenarios. 
+
+## Implementando un "Bayesiano"
+
+No lo comenté antes, pero uno de los primeros y más extendidos usos de este
+clasificador fue en la construcción de filtros de detección de Spam, si bien
+estos filtros son cada vez más inteligentes es muy probable que cualquier
+herramienta de correo hoy en dís siga implementando en parte un "Bayesiano" para
+la detección de correo basura. Un problema similar a éste es el que voy a
+plantear para ir desarrollando paso a paso.
+
+Soy un rutinario lector de "feeds", y como muchos uso
+[feedly](https://feedly.com) en su versión gratuita, permite manejar hasta
+100 fuentes de noticias distintas. Uno de los "feeds" con más actividad y que
+actualmente suelo leer bastante, es el de noticias de
+[Python](https://www.reddit.com/r/Python/.rss). No todo me interesa,
+habitualmente lo que hago es tener una vista únicamente de títulos, y con la
+misma voy haciendo una selección de lo que me interesa. Este proceso mental, de
+discernir los temas que me resultan interesantes de los otros que no, es muy
+parecido al lo que se espera de un clasificador "Bayesiano".
+
+Es muy habitual que en cualquier algoritmo de IA y este clasificador entra de
+esta categoría, se requiera tres elementos iniciales:
+
+1. La implementación del algoritmo
+2. Un set de datos para "entrenar" al algoritmo
+3. Un set de datos para "probar" al algoritmo
+
+Como soy ordenado, voy a empezar por el punto 2 y 3. Nuestro conjunto de
+entrenamiento del algoritmo no va a ser más que un archivo tipo CSV dónde
+tendremos una primer columna con el titulo del feed y una segunda dónde
+indicaremos 1 = Me interesa, 0 = No me interesa. Algo así como esto:
+
+```
+What's everyone working on this week?,0
+YAPF: A formatter for Python files,0
+Python beginner courses,0
+Deep Learning for Chess using Theano,1
+
+``` 
+
+Como pueden apreciar, un feed cuyo titulo diga **"What's everyone working on
+this week?"** no me interesa, pero otro que diga **"Deep Learning for Chess using
+Theano"** si capta mi atención.
+
+¿Como armamos entonces el archivo de entrenamiento del clasificador? Lo primero
+es recuperar los últimos "N" feeds y tomarse el tedioso trabajo de
+clasificarlos (me interesa/no me interesa). Obtener los feeds es tan sencillo
+como escribir y ejecutar este script en **Python**:
 
 
+``` python
+import feedparser
 
+feed = feedparser.parse( "https://www.reddit.com/r/Python/.rss?limit=100" )
+for post in feed.entries:
+	print("{0},0".format(post.title.replace(',', ' ')))
+```
 
+Antes que nada, como verán estoy usando
+[feedparser](http://pythonhosted.org/feedparser/) para la lectura de un
+**rss**, la instalación es el habitual `pip install feedparser`, funciona bien
+en **Python 3x**. Noten además que:
+
+* Estoy recuperando los últimos 100 feeds mediante el parámetro de url
+  `?limit=100`.
+* Limpiamos el caractér `,` para que no nos traiga problemas de formato, ya
+  veremos que este y otros caracteres no tienen participación en la clasificación
+
+Ejecutamos y redirigimos la salida a un archivo de texto. Luego con la
+herramienta que más nos guste, editamos el archivo y colocamos un 1 cuando un
+titulo nos interese.
+
+Con este archivo tendremos nuestro set de entrenamiento, pero además, nada nos
+impide usarlo también como nuestro set de prueba, por lo cual ya hemos acabado
+con los puntos 2 y 3. Pasemos ahora a lo jugoso del tema:
+
+..en construcción
