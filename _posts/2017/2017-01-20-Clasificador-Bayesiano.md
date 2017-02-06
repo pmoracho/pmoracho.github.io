@@ -101,12 +101,19 @@ muchísimos escenarios.
 
 ## Implementando un "Bayesiano"
 
+> **Nota**: Antes de empezar, recomiendo leer este muy buen
+> [artículo](https://chatbotslife.com/text-classification-using-algorithms-e4d50dcba45#.ig9im3fie)
+> de **George Kassabgi**, aclaro que seguramente no voy a agregar mucho más a lo
+> que el expuso. 
+
 No lo comenté antes, pero uno de los primeros y más extendidos usos de este
 clasificador fue en la construcción de filtros de detección de Spam, si bien
 estos filtros son cada vez más inteligentes es muy probable que cualquier
 herramienta de correo hoy en dís siga implementando en parte un "Bayesiano" para
 la detección de correo basura. Un problema similar a éste es el que voy a
 plantear para ir desarrollando paso a paso.
+
+### El problema
 
 Soy un rutinario lector de "feeds", y como muchos uso
 [feedly](https://feedly.com) en su versión gratuita, permite manejar hasta
@@ -117,6 +124,8 @@ habitualmente lo que hago es tener una vista únicamente de títulos, y con la
 misma voy haciendo una selección de lo que me interesa. Este proceso mental, de
 discernir los temas que me resultan interesantes de los otros que no, es muy
 parecido al lo que se espera de un clasificador "Bayesiano".
+
+### Armando la solución
 
 Es muy habitual que en cualquier algoritmo de IA y este clasificador entra de
 esta categoría, se requiera tres elementos iniciales:
@@ -174,4 +183,6 @@ Con este archivo tendremos nuestro set de entrenamiento, pero además, nada nos
 impide usarlo también como nuestro set de prueba, por lo cual ya hemos acabado
 con los puntos 2 y 3. Pasemos ahora a lo jugoso del tema:
 
-..en construcción
+### Implementando el clasificador
+
+**..en construcción**
