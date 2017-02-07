@@ -187,11 +187,10 @@ con los puntos 2 y 3. Pasemos ahora a lo jugoso del tema:
 Paso a paso, que debe hacer nuestro clasificador:
 
 1. Leer el archivo de entrenamiento
-2. Entrenarse
-3. Leer el archivo de prueba
-4. Clasificar los datos de prueba
+2. Entrenamiento
+3. Probar el algoritmo de clasificación
 
-### Para leer un CSV, nada más sencillo que esto:
+###  Leer el archivo de entrenamiento
 
 ``` python
 import csv
@@ -224,8 +223,10 @@ pp.pprint([t["titulo"] for t in training_data if t["me_interesa"]])
 	me interesa / no me interesa y una lista en cada caso de las palabras relacionadas
 * Leemos el archivo de entrenamiento y construimos `training_data`
 
-``` python
 
+### Entrenamiento
+
+``` python
 # Entrenamiento del algoritmo
 for data in training_data:
 	# Convierto cada titulo en una lista de tokens, elimino algunos innecesarios
@@ -245,6 +246,43 @@ pp.pprint(classes)
 
 ```
 
+Lo que llamamos entrenamiento, no es más que armar una lista de frecuencias de
+cada palabra en el corpus y otro diccionario dónde establecemos las "palabras"
+relacionadas con las dos clases.
 
+### Probar el algoritmo de clasificación
+
+Lo primero es definir una función que retorne un puntaje de un texto de prueba
+en relación con una determinada clase
+
+``` python
+def puntaje(titulo, clase):
+	puntaje = 0
+	for word in [word for word in titulo.split() if word not in [',', ';', '+', '-', '=', ' ']]:
+
+		if word in classes[clase]:
+			puntaje += (1 / corpus_words[word])
+
+	return puntaje
+```
+
+Es bastante sencillo de entender, se evalua cada palabra del texto o titulo
+analizado y si la palabra se encuentra en la listas de palabras de la clase se
+suma 1 / la cantidad total de veces que aparece la palabra en el corpus.
+Palabras muy frecuentes en cualquier clase tendrán un puntaje bajo y por el
+contrario palabras más representativas de un clas tendrán mayor puntaje.
+
+Para probar este sencillo algoritmo:
+
+``` python
+# Probar el algoritmo
+titulos_prueba = ["Data Science in Python: Pandas Cheat Sheet",
+				  "Deep Learning for Chess using Theano",
+				  "Distributing a script on windows is surprisingly challenging."]
+
+for t in titulos_prueba:
+	print("El titulo {0} tiene un puntaje de {1} para la clase 'Me interesa'".format(t, puntaje(t, True)))
+	print("El titulo {0} tiene un puntaje de {1} para la clase 'No me interesa'".format(t, puntaje(t, False)))
+``` 
 
 **..en construcción**
