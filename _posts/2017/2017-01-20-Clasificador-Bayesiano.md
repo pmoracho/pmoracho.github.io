@@ -195,20 +195,55 @@ Paso a paso, que debe hacer nuestro clasificador:
 
 ``` python
 import csv
+import pprint
+
+pp = pprint.PrettyPrinter(width=132, compact=True)
 
 training_data = []
+corpus_words = {}
+classes = {True: [], False: []}
 
+# Lectura del CSV de entrenamiento
 with open("train.csv", encoding="utf-8") as csvfile:
-reader = csv.reader(csvfile, delimiter=",")
+	reader = csv.reader(csvfile, delimiter=",")
 	for row in reader:
-		training_data.append({"me_interesa": True if row[1] == 1 else False, "titulo": row[0]})	
+		training_data.append({"me_interesa": True if row[1] == "1" else False, "titulo": row[0]})
+
+# Vamos a imprimir los titulos que me interesan
+print("Estos son los titulos que me interesan ---------------------------")
+pp.pprint([t["titulo"] for t in training_data if t["me_interesa"]])
 ```
 
-Leemos el archivo de entrenamiento y construimos una lista con diccionarios
-para cada uno de los 100 títulos leídos, en un elemento tenemos el texto del
-título y en el otro un booleano que nos indica si el texto nos interesa o no.
+* Inicializamos un objeto PrettyPrinter para imprimir un poco más lindo
+* Inicializamos las variables globales
+	* `training_data`: una lista de todos los titulos del entrenamiento y el
+	atributo me interesa (Verdadero/Falso)
+	* `corpus_words`: Un diccionario que abarca el universo de palabras de todos 
+	los titulos y la cantidad de apariciones de cada una
+	* `classes`: Un diccionario con las dos clases que maneja este clasificador, 
+	me interesa / no me interesa y una lista en cada caso de las palabras relacionadas
+* Leemos el archivo de entrenamiento y construimos `training_data`
 
+``` python
 
+# Entrenamiento del algoritmo
+for data in training_data:
+	# Convierto cada titulo en una lista de tokens, elimino algunos innecesarios
+	for word in [word for word in data['titulo'].split() if word not in [',', ';', '+', '-', '=', ' ']]:
+		if word not in corpus_words:
+			corpus_words[word] = 1
+		else:
+			corpus_words[word] += 1
+
+		# agrego el word a la lista de classes
+		classes[data['me_interesa']].extend([word])
+
+print("Este es el corpus ------------------------------------------------")
+pp.pprint(corpus_words)
+print("Estas son las clases y la lista palabras asociadas ---------------")
+pp.pprint(classes)
+
+```
 
 
 
