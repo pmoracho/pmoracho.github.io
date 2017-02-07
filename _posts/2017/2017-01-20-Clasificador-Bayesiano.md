@@ -140,10 +140,9 @@ tendremos una primer columna con el titulo del feed y una segunda dónde
 indicaremos 1 = Me interesa, 0 = No me interesa. Algo así como esto:
 
 ```
-What's everyone working on this week?,0
-YAPF: A formatter for Python files,0
-Python beginner courses,0
-Deep Learning for Chess using Theano,1
+Data Science in Python: Pandas Cheat Sheet, 1
+Deep Learning for Chess using Theano, 1
+Distributing a script on windows is surprisingly challenging., 0
 ``` 
 
 Como pueden apreciar, un feed cuyo titulo diga **"What's everyone working on
@@ -253,7 +252,7 @@ relacionadas con las dos clases.
 ### Probar el algoritmo de clasificación
 
 Lo primero es definir una función que retorne un puntaje de un texto de prueba
-en relación con una determinada clase
+en relación a una determinada clase
 
 ``` python
 def puntaje(titulo, clase):
@@ -267,10 +266,10 @@ def puntaje(titulo, clase):
 ```
 
 Es bastante sencillo de entender, se evalua cada palabra del texto o titulo
-analizado y si la palabra se encuentra en la listas de palabras de la clase se
+y si la palabra se encuentra en la lista de palabras de la clase se
 suma 1 / la cantidad total de veces que aparece la palabra en el corpus.
 Palabras muy frecuentes en cualquier clase tendrán un puntaje bajo y por el
-contrario palabras más representativas de un clas tendrán mayor puntaje.
+contrario palabras más representativas de un clase tendrán mayor puntaje.
 
 Para probar este sencillo algoritmo:
 
@@ -284,5 +283,20 @@ for t in titulos_prueba:
 	print("El titulo {0} tiene un puntaje de {1} para la clase 'Me interesa'".format(t, puntaje(t, True)))
 	print("El titulo {0} tiene un puntaje de {1} para la clase 'No me interesa'".format(t, puntaje(t, False)))
 ``` 
+
+La salida:
+
+```
+El titulo Data Science in Python: Pandas Cheat Sheet tiene un puntaje de 4.816666666666666 para la clase 'Me interesa'
+El titulo Data Science in Python: Pandas Cheat Sheet tiene un puntaje de 0.31666666666666665 para la clase 'No me interesa'
+El titulo Deep Learning for Chess using Theano tiene un puntaje de 3.17989417989418 para la clase 'Me interesa'
+El titulo Deep Learning for Chess using Theano tiene un puntaje de 0.17989417989417988 para la clase 'No me interesa'
+El titulo Distributing a script on windows is surprisingly challenging. tiene un puntaje de 0.05263157894736842 para la clase 'Me interesa'
+El titulo Distributing a script on windows is surprisingly challenging. tiene un puntaje de 4.877631578947368 para la clase 'No me interesa'
+```
+
+Como pueden ver en los tres título de prueba, el calculo da un mayor "score"
+efectivamente para la clase que inicialmente lo habiamos clasificado en los
+datos de entrenamiento.
 
 **..en construcción**
