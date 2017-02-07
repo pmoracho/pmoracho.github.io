@@ -144,7 +144,6 @@ What's everyone working on this week?,0
 YAPF: A formatter for Python files,0
 Python beginner courses,0
 Deep Learning for Chess using Theano,1
-
 ``` 
 
 Como pueden apreciar, un feed cuyo titulo diga **"What's everyone working on
@@ -201,9 +200,8 @@ training_data = []
 
 with open("train.csv", encoding="utf-8") as csvfile:
 reader = csv.reader(csvfile, delimiter=",")
-for row in reader:
-	training_data.append({"me_interesa": True if row[2] == 1 else False, "titulo": row[1]})
-	
+	for row in reader:
+		training_data.append({"me_interesa": True if row[1] == 1 else False, "titulo": row[0]})	
 ```
 
 Leemos el archivo de entrenamiento y construimos una lista con diccionarios
