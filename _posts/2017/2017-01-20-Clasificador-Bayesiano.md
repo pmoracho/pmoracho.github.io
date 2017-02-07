@@ -127,8 +127,8 @@ parecido al lo que se espera de un clasificador "Bayesiano".
 
 ### Armando la solución
 
-Es muy habitual que en cualquier algoritmo de IA y este clasificador entra de
-esta categoría, se requiera tres elementos iniciales:
+Es muy habitual que en cualquier algoritmo de IA y este clasificador entra
+dentro de esta categoría, se requiera tres elementos iniciales:
 
 1. La implementación del algoritmo
 2. Un set de datos para "entrenar" al algoritmo
@@ -175,14 +175,43 @@ en **Python 3x**. Noten además que:
 * Limpiamos el caractér `,` para que no nos traiga problemas de formato, ya
   veremos que este y otros caracteres no tienen participación en la clasificación
 
-Ejecutamos y redirigimos la salida a un archivo de texto. Luego con la
-herramienta que más nos guste, editamos el archivo y colocamos un 1 cuando un
-titulo nos interese.
+Ejecutamos y redirigimos la salida a un archivo de texto, por ejemplo:
+**train.csv**. Luego con la herramienta que más nos guste, editamos el archivo y
+colocamos un 1 cuando un titulo nos interese.
 
 Con este archivo tendremos nuestro set de entrenamiento, pero además, nada nos
 impide usarlo también como nuestro set de prueba, por lo cual ya hemos acabado
 con los puntos 2 y 3. Pasemos ahora a lo jugoso del tema:
 
 ### Implementando el clasificador
+
+Paso a paso, que debe hacer nuestro clasificador:
+
+1. Leer el archivo de entrenamiento
+2. Entrenarse
+3. Leer el archivo de prueba
+4. Clasificar los datos de prueba
+
+### Para leer un CSV, nada más sencillo que esto:
+
+``` python
+import csv
+
+training_data = []
+
+with open("train.csv", encoding="utf-8") as csvfile:
+reader = csv.reader(csvfile, delimiter=",")
+for row in reader:
+	training_data.append({"me_interesa": True if row[2] == 1 else False, "titulo": row[1]})
+	
+```
+
+Leemos el archivo de entrenamiento y construimos una lista con diccionarios
+para cada uno de los 100 títulos leídos, en un elemento tenemos el texto del
+título y en el otro un booleano que nos indica si el texto nos interesa o no.
+
+
+
+
 
 **..en construcción**
