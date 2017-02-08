@@ -109,7 +109,7 @@ muchísimos escenarios.
 No lo comenté antes, pero uno de los primeros y más extendidos usos de este
 clasificador fue en la construcción de filtros de detección de Spam, si bien
 estos filtros son cada vez más inteligentes es muy probable que cualquier
-herramienta de correo hoy en dís siga implementando en parte un "Bayesiano" para
+herramienta de correo hoy en día siga implementando en parte un "Bayesiano" para
 la detección de correo basura. Un problema similar a éste es el que voy a
 plantear para ir desarrollando paso a paso.
 
@@ -126,6 +126,10 @@ discernir los temas que me resultan interesantes de los otros que no, es muy
 parecido al lo que se espera de un clasificador "Bayesiano".
 
 ### Armando la solución
+
+Vamos a elaborar particularmente un clasificador del tipo [Naive Bayes
+Multinomial](https://en.wikipedia.org/wiki/Naive_Bayes_classifier#Multinomial_naive_Bayes)
+qeu es seguramente uno de los más sencillos para empezar 
 
 Es muy habitual que en cualquier algoritmo de IA y este clasificador entra
 dentro de esta categoría, se requiera tres elementos iniciales:
@@ -265,11 +269,11 @@ def puntaje(titulo, clase):
 	return puntaje
 ```
 
-Es bastante sencillo de entender, se evalua cada palabra del texto o titulo
+Es bastante sencillo de entender, se evalúa cada palabra del texto o titulo
 y si la palabra se encuentra en la lista de palabras de la clase se
 suma 1 / la cantidad total de veces que aparece la palabra en el corpus.
-Palabras muy frecuentes en cualquier clase tendrán un puntaje bajo y por el
-contrario palabras más representativas de un clase tendrán mayor puntaje.
+Palabras muy frecuentes en todo el "corpus" tendrán un puntaje bajo y por el
+contrario palabras menos frecuentes tendrán mayor puntaje.
 
 Para probar este sencillo algoritmo:
 
@@ -296,7 +300,10 @@ El titulo Distributing a script on windows is surprisingly challenging. tiene un
 ```
 
 Como pueden ver en los tres título de prueba, el calculo da un mayor "score"
-efectivamente para la clase que inicialmente lo habiamos clasificado en los
+efectivamente para la clase en que inicialmente lo habiamos clasificado en los
 datos de entrenamiento.
 
-**..en construcción**
+Este algoritmo tiene un comportamiento óptimo si las frecuencia de aparición de
+las palabras es pareja entre ambas clases, pero claramente podría llegar a
+puntuar bajo una palabra que es muy común en el "corpus" pero además es más
+frecuente en alguna de las clases.
