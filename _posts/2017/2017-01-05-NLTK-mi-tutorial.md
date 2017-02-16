@@ -205,19 +205,19 @@ bastante más precisa.
 ### Alphabetical list of part-of-speech tags used in the Penn Treebank Project:
 
 Numero|Etiqueta|Descripción
-1.|CC|Coordinating conjunction -> Conjunciones coordinadas
-2.|CD|Cardinal number -> Número cardinal
-3.|DT|Determiner -> Determinante 
+1.|CC|Coordinating conjunction -> [Conjunciones coordinadas](https://es.wikipedia.org/wiki/Conjunci%C3%B3n_(gram%C3%A1tica))
+2.|CD|Cardinal number -> [Número cardinal](http://www.wikilengua.org/index.php/N%C3%BAmero_cardinal)
+3.|DT|Determiner -> [Determinante](https://es.wikipedia.org/wiki/Determinante_(ling%C3%BC%C3%ADstica))
 4.|EX|Existential there -> Clausula existencial
-5.|FW|Foreign word -> extranjerismo
-6.|IN|Preposition or subordinating conjunction -> Preposición o Conjunciones subordinantes
-7.|JJ|Adjective
-8.|JJR|Adjective, comparative
-9.|JJS|Adjective, superlative
+5.|FW|Foreign word -> [Extranjerismo](https://es.wikipedia.org/wiki/Extranjerismo)
+6.|IN|Preposition or subordinating conjunction -> [Preposición o Conjunciones subordinantes](https://es.wikipedia.org/wiki/Conjunci%C3%B3n_(gram%C3%A1tica))
+7.|JJ|Adjective -> [Adjetivo](https://es.wikipedia.org/wiki/Adjetivo)
+8.|JJR|Adjective, comparative -> [Adjetivo Comparativo](https://es.wikipedia.org/wiki/Adjetivo_comparativo)
+9.|JJS|Adjective, superlative -> [Superlativo](https://es.wikipedia.org/wiki/Superlativo)
 10.|LS|List item marker
 11.|MD|Modal
-12.|NN|Noun, singular or mass
-13.|NNS|Noun, plural
+12.|NN|Noun, singular or mass -> [Sustantivo, singular o incontable](https://es.wikipedia.org/wiki/Sustantivo)
+13.|NNS|Noun, plural -> [Sustantivo, plural](https://es.wikipedia.org/wiki/Sustantivo)
 14.|NNP|Proper noun, singular
 15.|NNPS|Proper noun, plural
 16.|PDT|Predeterminer
