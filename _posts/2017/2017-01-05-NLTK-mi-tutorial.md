@@ -197,19 +197,20 @@ Es muy útil en aplicaciones o funcionalidad de recuperación de información (l
 buscadores como el de Google usan este mecanismo), pensemos al buscar por el
 término "familia" usando una búsqueda exacta perderíamos documentos dónde
 aparecen los términos "familiar", "familias", etc. El "Stemming" reduce  los
-términos mencionados a la raíz "famili", por lo que la búsqueda
+términos mencionados a la raíz "famili", por lo que la búsqueda se hace
+bastante más precisa.
 
 ## Datos de interés
 
 ### Alphabetical list of part-of-speech tags used in the Penn Treebank Project:
 
-Number|Tag|Description
-1.|CC|Coordinating conjunction
-2.|CD|Cardinal number
-3.|DT|Determiner
-4.|EX|Existential there
-5.|FW|Foreign word
-6.|IN|Preposition or subordinating conjunction
+Numero|Etiqueta|Descripción
+1.|CC|Coordinating conjunction -> Conjunciones coordinadas
+2.|CD|Cardinal number -> Número cardinal
+3.|DT|Determiner -> Determinante 
+4.|EX|Existential there -> Clausula existencial
+5.|FW|Foreign word -> extranjerismo
+6.|IN|Preposition or subordinating conjunction -> Preposición o Conjunciones subordinantes
 7.|JJ|Adjective
 8.|JJR|Adjective, comparative
 9.|JJS|Adjective, superlative
