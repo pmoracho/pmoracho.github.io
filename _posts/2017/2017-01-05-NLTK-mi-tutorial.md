@@ -214,23 +214,23 @@ Numero|Etiqueta|Descripción
 7.|JJ|Adjective -> [Adjetivo](https://es.wikipedia.org/wiki/Adjetivo)
 8.|JJR|Adjective, comparative -> [Adjetivo Comparativo](https://es.wikipedia.org/wiki/Adjetivo_comparativo)
 9.|JJS|Adjective, superlative -> [Superlativo](https://es.wikipedia.org/wiki/Superlativo)
-10.|LS|List item marker
-11.|MD|Modal
+10.|LS|List item marker -> [Enumeración](http://www.wikilengua.org/index.php/Enumeraci%C3%B3n)
+11.|MD|Modal -> [Verbos modales](https://en.wikipedia.org/wiki/Modal_verb)
 12.|NN|Noun, singular or mass -> [Sustantivo, singular o incontable](https://es.wikipedia.org/wiki/Sustantivo)
 13.|NNS|Noun, plural -> [Sustantivo, plural](https://es.wikipedia.org/wiki/Sustantivo)
-14.|NNP|Proper noun, singular
-15.|NNPS|Proper noun, plural
-16.|PDT|Predeterminer
-17.|POS|Possessive ending
-18.|PRP|Personal pronoun
-19.|PR|$	Possessive pronoun
-20.|RB|Adverb
-21.|RBR|Adverb, comparative
-22.|RBS|Adverb, superlative
+14.|NNP|Proper noun, singular -> [Nombre propio, singular](https://es.wikipedia.org/wiki/Nombre_propio)
+15.|NNPS|Proper noun, plural -> [Nombre propio, plural](https://es.wikipedia.org/wiki/Nombre_propio)
+16.|PDT|Predeterminer -> [Predeterminante](https://es.wikipedia.org/wiki/Determinante_(ling%C3%BC%C3%ADstica))
+17.|POS|Possessive ending -> No hay similar en español, es el `´s` de `this is Peter´s car`
+18.|PRP|Personal pronoun -> [Pronombre personal](https://es.wikipedia.org/wiki/Pronombre_personal)
+19.|PR$|Possessive pronoun -> [Pronombre posesivo](http://www.wikilengua.org/index.php/Pronombre_posesivo)
+20.|RB|Adverb -> [Adverbio](https://es.wikipedia.org/wiki/Adverbio)
+21.|RBR|Adverb, comparative [Adverbio comparativo](http://www.gramaticas.net/2010/09/ejemplos-de-adverbios-comparativos.html)
+22.|RBS|Adverb, superlative [Adverbio superlativo](http://www.wikilengua.org/index.php/Grado_superlativo#El_grado_superlativo_en_adverbios)
 23.|RP|Particle
 24.|SYM|Symbol
 25.|TO|to
-26.|UH|Interjection
+26.|UH|Interjection ->[Interjección](https://es.wikipedia.org/wiki/Interjecci%C3%B3n)
 27.|VB|Verb, base form
 28.|VBD|Verb, past tense
 29.|VBG|Verb, gerund or present participle
