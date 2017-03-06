@@ -100,9 +100,8 @@ menos en mi época, en la secundaria, se trata de
 [Juvenilia](http://www.gutenberg.org/ebooks/41575.txt.utf-8).
 
 
-```#python 
+```python 
 from urllib import request
-from nltk import word_tokenize
 """
 Descarga de un texto
 """
@@ -133,6 +132,8 @@ Como primer paso hay que "tokenizar" el texto de la siguiente forma:
 """
 Tokenización del texto
 """
+from nltk import word_tokenize
+
 tokens = word_tokenize(raw)
 print(type(tokens))
 print(len(tokens))
@@ -167,6 +168,8 @@ La salida:
 ```	
 
 Ya conformada la variable `nltk.text` podemos empezar a hacer análisis interesantes:
+
+* Buscar 
 
 * Obtener las colocaciones. Las
   [colocaciones](https://es.wikipedia.org/wiki/Colocaci%C3%B3n) son una
