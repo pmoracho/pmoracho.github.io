@@ -1,7 +1,5 @@
 ---
 layout: post
----
-layout: post
 title: Distribución proporcional - el sistema d'Hondt en SQL 
 date: 2017-03-08
 tag:
