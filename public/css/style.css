@@ -1653,3 +1653,45 @@ i.iconside {
 .iconm-html5:before {
     content: "\eadf";
 }
+
+.image-wrap {
+    position: relative;
+    margin-bottom: 2em;
+}
+.image-wrap:after {
+    position: absolute;
+    bottom: -1px;
+    left: 8%;
+    display: block;
+    width: 0;
+    height: 0;
+    border: 20px solid transparent;
+    border-bottom-color: #fff;
+    content: " "}
+@media only screen and (min-width:37.5em) {
+    .image-wrap: after {
+    left: 25%}
+}@media only screen and (min-width:86.375em) {
+    .image-wrap: after {
+    left: 33.333333333%}
+}.image-wrap img {
+    width: 100%;
+    height: auto;
+    -ms-interpolation-mode: bicubic;
+}
+.image-wrap .headline-wrap {
+    position: absolute;
+    bottom: 25px;
+    margin-left: 8.333333333333334%}
+@media only screen and (min-width:37.5em) {
+    .image-wrap .headline-wrap {
+    left: 25%;
+    margin-left: 0;
+}
+}@media only screen and (min-width:86.375em) {
+    .image-wrap .headline-wrap {
+    margin-left: 8.333333333333334%}
+}.image-wrap .headline-wrap h1, .image-wrap .headline-wrap h2 {
+    color: #fff;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+}
