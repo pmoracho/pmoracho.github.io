@@ -14,23 +14,6 @@ Credits: {{ site.url }}/disclosure
 {% include css.html %}
 {% seo %}
 <body>
-	{% if page.image.feature %}
-	<div class="image-wrap">
-	<img src=
-		{% if page.image.feature contains 'http://' %}
-		"{{ page.image.feature }}"
-		{% elsif page.image.feature contains 'https://' %}
-		"{{ page.image.feature }}"
-		{% else %}
-		"{{ site.url }}/images/{{ page.image.feature }}"
-		{% endif %}
-	alt="{{ page.title }} feature image">
-	{% if page.image.credit %}
-		<span class="image-credit">Photo Credit: <a href="{{ page.image.creditlink }}">{{ page.image.credit }}</a></span>
-	{% endif %}
-	</div><!-- /.image-wrap -->
-	{% endif %}
-
 	{% include sidebar.html %}
     <!-- Wrap is the content to shift when toggling the sidebar. We wrap the
          content to avoid any CSS collisions with our real content. -->
@@ -54,6 +37,22 @@ Credits: {{ site.url }}/disclosure
 			<input type="text" placeholder="Ingrese el texto a buscar" class="super-search__input" id="js-super-search__input">
 			<ul class="super-search__results" id="js-super-search__results"></ul>
 		</div>
+		{% if page.image.feature %}
+		<div class="image-wrap">
+		<img src=
+			{% if page.image.feature contains 'http://' %}
+			"{{ page.image.feature }}"
+			{% elsif page.image.feature contains 'https://' %}
+			"{{ page.image.feature }}"
+			{% else %}
+			"{{ site.url }}/images/{{ page.image.feature }}"
+			{% endif %}
+		alt="{{ page.title }} feature image">
+		{% if page.image.credit %}
+			<span class="image-credit">Photo Credit: <a href="{{ page.image.creditlink }}">{{ page.image.credit }}</a></span>
+		{% endif %}
+		</div><!-- /.image-wrap -->
+		{% endif %}
         {{ content }}
         {% include footer.html %}
       </div>
