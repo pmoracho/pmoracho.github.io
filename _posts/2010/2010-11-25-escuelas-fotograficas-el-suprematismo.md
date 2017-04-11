@@ -16,7 +16,7 @@ sitemap: true
 summaryfeed: false
 ---
 
-![malevich][malevich]{: style="float:left;margin-right:30px;"}
+![malevich][malevich]{: style="float:left;margin-right:20px;margin-bottom:10px;"}
 Rusia a partir de la revolución comunista ha sido culturalmente una fuente de
 producción de todo tipo de vanguardias. El suprematismo esta indivisiblemente
 asociado a un pintor ruso, Kasimir Malevich. Esta escuela tuvo su momento de
@@ -41,24 +41,24 @@ que él hace entre esta evolución de las formas en la fotografía aérea en
 función de la distancia con los objetos con la evolución entre la pintura
 “figurativa” a la “abstracta”.  
 
-![malevich][malevich2]{: style="float:right;margin-left:30px;"} En cuanto a lo
-estrictamente fotográfico, repasemos, la aviación, al menos vista como el vuelo
-de maquinas mas pesadas que el aire, nace a comienzos del siglo XX, entre 1914
-y 1918, ocurre una explosión tecnológica incentivada por la primer guerra
-mundial.  Aviación, militarismo y fotografía. Lo concreto es que nuestro
-vanguardista Ruso supo ver en las fotografías de reconocimiento aéreo elementos
-propios de su búsqueda estilística en pintura. La fotografía aérea, en sus dos
-variantes, la del punto de vista humano o terrestre, que apunta al retrato de
-formaciones de aeroplanos en vuelo o la del punto de vista “celestial” que
-releva las formas topográficas del terreno aportan puntos de vista
-tremendamente innovadores para su época, esta fotografía abandona el sentido de
-la representación propio de este arte dando lugar al de la abstracción, los que
-se ve deja de ser reconocible todo se transforma en formas simples que nada
-tienen que ver con los objetos que deberían representar. Por otro lado el punto
-de vista fotográfico cambia radicalmente, dejando de lado la ortogonalidad
-natural del acto fotográfico.  
+![malevich][malevich2]{: style="float:right;margin-left:10px;margin-bottom:10px;"} 
+En cuanto a lo estrictamente fotográfico, repasemos, la aviación, al menos
+vista como el vuelo de maquinas mas pesadas que el aire, nace a comienzos del
+siglo XX, entre 1914 y 1918, ocurre una explosión tecnológica incentivada por
+la primer guerra mundial.  Aviación, militarismo y fotografía. Lo concreto es
+que nuestro vanguardista Ruso supo ver en las fotografías de reconocimiento
+aéreo elementos propios de su búsqueda estilística en pintura. La fotografía
+aérea, en sus dos variantes, la del punto de vista humano o terrestre, que
+apunta al retrato de formaciones de aeroplanos en vuelo o la del punto de vista
+“celestial” que releva las formas topográficas del terreno aportan puntos de
+vista tremendamente innovadores para su época, esta fotografía abandona el
+sentido de la representación propio de este arte dando lugar al de la
+abstracción, los que se ve deja de ser reconocible todo se transforma en formas
+simples que nada tienen que ver con los objetos que deberían representar. Por
+otro lado el punto de vista fotográfico cambia radicalmente, dejando de lado la
+ortogonalidad natural del acto fotográfico.  
 
-![malevich][malevich3]{: style="display: table; margin: 0 auto;"} Lo que a
+![malevich][malevich3]{: style="display: table; margin: 10px auto;"} Lo que a
 continuación convendría preguntarse: ¿Es toda la fotografía aérea una
 manifestación “suprematista”? Por definición deberíamos decir que no, resulta
 fundamental para catalogar una foto en este estilo, la imposibilidad del
