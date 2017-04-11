@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Las misteriosas cruces de Martín García
-date: 200-05-28
+date: 2007-05-28
 tag:
   - historia
   - viajes
