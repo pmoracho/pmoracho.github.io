@@ -58,10 +58,11 @@ tienen que ver con los objetos que deberían representar. Por otro lado el punto
 de vista fotográfico cambia radicalmente, dejando de lado la ortogonalidad
 natural del acto fotográfico.  
 
-![malevich][malevich3]{: style="float:center"} Lo que a continuación convendría
-preguntarse: ¿Es toda la fotografía aérea una manifestación “suprematista”? Por
-definición deberíamos decir que no, resulta fundamental para catalogar una foto
-en este estilo, la imposibilidad del identificar el referente.
+![malevich][malevich3]{: style="display: table; margin: 0 auto;"} Lo que a
+continuación convendría preguntarse: ¿Es toda la fotografía aérea una
+manifestación “suprematista”? Por definición deberíamos decir que no, resulta
+fundamental para catalogar una foto en este estilo, la imposibilidad del
+identificar el referente.
 
 Enlaces interesantes 
 
