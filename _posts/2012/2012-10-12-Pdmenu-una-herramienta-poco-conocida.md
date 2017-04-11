@@ -8,11 +8,21 @@ tag:
 show_meta: true
 comments: true  
 ---
-Pdmenu es una herramienta con poca "prensa", simple casi escasa en su funcionalidad: solo se encarga de presentar unos menúes clásicos solo texto en terminales mediante la librería ncurses, sin embargo combinada con otras herramientas se vuelve sumamente útil y cómoda para ciertas cosas que hacemos por línea de comando. Veamos algunos ejemplos:
+
+**Pdmenu** es una herramienta con poca "prensa", simple casi escasa en su
+funcionalidad: solo se encarga de presentar unos menúes clásicos solo texto en
+terminales mediante la librería ncurses, sin embargo combinada con otras
+herramientas se vuelve sumamente útil y cómoda para ciertas cosas que hacemos
+por línea de comando. Veamos algunos ejemplos:
 
 ## History
 
-Una de las cosas que más me gustaban del viejo y querido **4DOS** era la lista de últimos comandos ingresados. En bash tenemos el comando "history" que nos mostrará la lista de los últimos (la cantidad puede variar en función de cada entorno), bien, presentar esta lista mediante bash + pdmenu es simple
+![pdmenu1][pdmenu]{: style="display: table; margin: 10px auto;"}
+
+Una de las cosas que más me gustaban del viejo y querido **4DOS** era la lista
+de últimos comandos ingresados. En bash tenemos el comando "history" que nos
+mostrará la lista de los últimos (la cantidad puede variar en función de cada
+entorno), bien, presentar esta lista mediante bash + pdmenu es simple
 
 ### `h` el Script (chmod +x).
 
@@ -67,7 +77,10 @@ rm $menufile
 
 ## Less pero en una ventana
 
-El comando `less` es muy habitual usarlo para mostrar una salida paginada por ejemplo de otro comando usando la clásica función de tubería `|`. Por ejemplo, supongamos que queremos listar el contenido de un paquete instalado en el sistema:
+El comando `less` es muy habitual usarlo para mostrar una salida paginada por
+ejemplo de otro comando usando la clásica función de tubería `|`. Por ejemplo,
+supongamos que queremos listar el contenido de un paquete instalado en el
+sistema:
 
 Lo habitual sería: `dpkg -L pdmenu | less`
 
@@ -111,4 +124,13 @@ echo "exit:_Exit" >>$menufile
 cat $menufile | pdmenu -rc -
 ```
 
-Y ejecutando el mismo comando pero así: `dpkg -L pdmenu | lw`  obtendremos una salida tipo menú de terminal, con la ventaja que asociado al tenemos asociado el comando Cat que nos permitirá visualizar el archivo (siempre obviamente que el ítem sea un path válido)
+Y ejecutando el mismo comando pero así: `dpkg -L pdmenu | lw`  obtendremos una
+salida tipo menú de terminal, con la ventaja que asociado al tenemos asociado
+el comando Cat que nos permitirá visualizar el archivo (siempre obviamente que
+el ítem sea un path válido)
+
+![pdmenu2][pdmenu]{: style="display: table; margin: 10px auto;"}
+
+[pdmenu1]: {{site.baseurl}}/images/2012/pdmenu1.jpg
+[pdmenu2]: {{site.baseurl}}/images/2012/pdmenu2.jpg
+
