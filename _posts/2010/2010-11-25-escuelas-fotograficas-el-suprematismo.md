@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Escuelas fotográficas: El suprematismo
+title: Escuelas fotográficas / El suprematismo
 date: 2010-11-25
 description: El suprematismo ruso y su relación con la fotografía
 tag:
