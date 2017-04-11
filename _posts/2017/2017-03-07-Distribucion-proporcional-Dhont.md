@@ -86,6 +86,8 @@ DECLARE @PartidosBancas TABLE (
 	Orden		INT
 )
 
+SET NOCOUNT ON
+
 -- Crear un registro por Banca (7 bancas)
 INSERT INTO @Bancas (BancaId)
 VALUES	(1),(2),(3),(4),(5),(6),(7)
@@ -102,11 +104,11 @@ INSERT INTO @PartidosBancas (BancaId, PartidoId, Votos, Orden)
 SELECT 	B.BancaId, 
 	P.PartidoId, 
 	P.Votos / B.BancaId, 
-	ROW_NUMBER() OVER (ORDER BY P.Votos / B.BancaId DESC)
+	ROW_NUMBER() OVER (ORDER BY P.Votos / B.BancaId DESC) AS [Orden]
 	FROM @Partidos P
 	INNER JOIN @Bancas B
 		ON 1 = 1
-	ORDER BY P.Votos / B.BancaId DESC
+	ORDER BY [Orden] DESC
 		
 -- Cuantas bancas a cada partido
 SELECT 	PartidoId, COUNT(1) AS 'Bancas' 
