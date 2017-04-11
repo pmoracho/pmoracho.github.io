@@ -15,7 +15,10 @@ noindex: false
 hide_printmsg: false
 sitemap: true
 summaryfeed: false
-featured-img: front-page.jpg
+image:
+  feature: texture-feature-05.jpg
+  credit: Virginie Moerenhout
+  creditlink: http://www.flickr.com/photos/yndra
 ---
 
 La distribución proporcional conlleva un problema no menor en cuanto a la
