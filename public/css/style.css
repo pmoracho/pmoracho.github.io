@@ -1661,7 +1661,7 @@ i.iconside {
 .image-wrap:after {
     position: absolute;
     bottom: -1px;
-    left: 8%;
+    left: 33%;
     display: block;
     width: 0;
     height: 0;
@@ -1700,9 +1700,9 @@ i.iconside {
     display: block;
     float: right;
     width: 83.33333333333334%;
-    margin-right: 0;
+    margin-right: 10px;
     margin-left: 0;
-    margin-top: -15px;
+    margin-top: -10px;
     font-size: 12px;
     font-size: .75rem;
     font-style: italic;
