@@ -16,7 +16,7 @@ hide_printmsg: false
 sitemap: true
 summaryfeed: false
 image:
-  feature: texture-feature-05.jpg
+  feature: http://arg0s.in/images/texture-feature-02.jpg
   credit: Virginie Moerenhout
   creditlink: http://www.flickr.com/photos/yndra
 ---
