@@ -17,7 +17,7 @@ por línea de comando. Veamos algunos ejemplos:
 
 ## History
 
-![pdmenu1][pdmenu]{: style="display: table; margin: 10px auto;"}
+![pdmenu][pdmenu1]{: style="display: table; margin: 10px auto;"}
 
 Una de las cosas que más me gustaban del viejo y querido **4DOS** era la lista
 de últimos comandos ingresados. En bash tenemos el comando "history" que nos
