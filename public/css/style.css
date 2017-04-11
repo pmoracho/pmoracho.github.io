@@ -1698,10 +1698,11 @@ i.iconside {
 .image-credit {
     display: inline;
     display: block;
-    float: left;
+    float: right;
     width: 83.33333333333334%;
-    margin-right: 8.333333333333334%;
-    margin-left: 8.333333333333334%;
+    margin-right: 0;
+    margin-left: 0;
+    margin-top: -15px;
     font-size: 12px;
     font-size: .75rem;
     font-style: italic;
@@ -1713,7 +1714,7 @@ i.iconside {
 @media only screen and (min-width:37.5em) {
     .image-credit {
     display: inline;
-    float: left;
+    float: right;
     width: 75%;
     margin-right: 0;
     margin-left: 0;
@@ -1721,7 +1722,7 @@ i.iconside {
 }@media only screen and (min-width:86.375em) {
     .image-credit {
     display: inline;
-    float: left;
+    float: right;
     width: 70.83333333333334%}
 }.image-credit a {
     color: #80807e;
