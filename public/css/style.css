@@ -1653,4 +1653,7 @@ i.iconside {
 .iconm-html5:before {
     content: "\eadf";
 }
-
+.FeaturedImgBanner {
+  background-size: cover;
+  background-position: center;
+}
