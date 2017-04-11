@@ -129,8 +129,8 @@ salida tipo menú de terminal, con la ventaja que asociado al tenemos asociado
 el comando Cat que nos permitirá visualizar el archivo (siempre obviamente que
 el ítem sea un path válido)
 
-![pdmenu2][pdmenu]{: style="display: table; margin: 10px auto;"}
+![pdmenu][pdmenu2]{: style="display: table; margin: 10px auto;"}
 
-[pdmenu1]: {{site.baseurl}}/images/2012/pdmenu1.jpg
-[pdmenu2]: {{site.baseurl}}/images/2012/pdmenu2.jpg
+[pdmenu1]: {{site.baseurl}}/images/2012/pdmenu1.png
+[pdmenu2]: {{site.baseurl}}/images/2012/pdmenu2.png
 
