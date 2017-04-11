@@ -41,7 +41,7 @@ que él hace entre esta evolución de las formas en la fotografía aérea en
 función de la distancia con los objetos con la evolución entre la pintura
 “figurativa” a la “abstracta”.  
 
-![malevich][malevich]{: style="float:right;margin-left:30px;"} En cuanto a lo
+![malevich][malevich2]{: style="float:right;margin-left:30px;"} En cuanto a lo
 estrictamente fotográfico, repasemos, la aviación, al menos vista como el vuelo
 de maquinas mas pesadas que el aire, nace a comienzos del siglo XX, entre 1914
 y 1918, ocurre una explosión tecnológica incentivada por la primer guerra
@@ -58,7 +58,7 @@ tienen que ver con los objetos que deberían representar. Por otro lado el punto
 de vista fotográfico cambia radicalmente, dejando de lado la ortogonalidad
 natural del acto fotográfico.  
 
-![malevich][malevich]{: style="float:center"} Lo que a continuación convendría
+![malevich][malevich3]{: style="float:center"} Lo que a continuación convendría
 preguntarse: ¿Es toda la fotografía aérea una manifestación “suprematista”? Por
 definición deberíamos decir que no, resulta fundamental para catalogar una foto
 en este estilo, la imposibilidad del identificar el referente.
