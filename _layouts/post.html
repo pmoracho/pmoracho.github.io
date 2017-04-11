@@ -2,6 +2,9 @@
 layout: default
 ---
 <div class="post">
+	<div class="FeaturedImgBanner" {% if page.featured-img %} style="background-image: url('{{ page.featured-img }}');" {% endif %}>
+	<!-- Include your post title, byline, date, and other info inside the header here. -->
+	</div>
   <h1 itemprop="name" class="post-title">{{ page.title }}</h1>
   <span class="post-date" itemprop="datePublished" content="{{ page.date | date: "%Y-%m-%d" }}"><i class="fa fa-calendar" title="Date published"> 
     <a class="permalink" href="{{ site.url }}{{ page.url }}" itemprop="url" title="Permanent link to this post">
