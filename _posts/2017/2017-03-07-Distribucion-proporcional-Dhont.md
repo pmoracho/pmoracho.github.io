@@ -15,7 +15,7 @@ noindex: false
 hide_printmsg: false
 sitemap: true
 summaryfeed: false
-featured-img: images/front-page.jpg
+featured-img: front-page.jpg
 ---
 
 La distribución proporcional conlleva un problema no menor en cuanto a la
