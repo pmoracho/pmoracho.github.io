@@ -18,6 +18,9 @@ noindex: false
 hide_printmsg: false
 sitemap: true
 summaryfeed: false
+image:
+  feature: 2017/img-feature-003.jpeg
+  credit: Patricio Moracho
 ---
 
 Hay muchos tutoriales y ejemplos del uso de esta fantástica librería,
