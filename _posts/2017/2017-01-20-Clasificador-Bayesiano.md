@@ -18,6 +18,9 @@ noindex: false
 hide_printmsg: false
 sitemap: true
 summaryfeed: false
+image:
+  feature: 2017/img-feature-002.jpeg
+  credit: Patricio Moracho
 ---
 
 ### $$ \mathrm{classify}(f_1,\dots,f_n) = \underset{c}{\operatorname{argmax}} \ p(C=c) \displaystyle\prod_{i=1}^n p(F_i=f_i\vert C=c). $$
