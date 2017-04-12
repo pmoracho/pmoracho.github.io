@@ -16,9 +16,8 @@ hide_printmsg: false
 sitemap: true
 summaryfeed: false
 image:
-  feature: http://arg0s.in/images/texture-feature-02.jpg
-  credit: Virginie Moerenhout
-  creditlink: http://www.flickr.com/photos/yndra
+  feature: 2017/img-feature-001.jpeg
+  credit: Patricio Moracho
 ---
 
 La distribución proporcional conlleva un problema no menor en cuanto a la
