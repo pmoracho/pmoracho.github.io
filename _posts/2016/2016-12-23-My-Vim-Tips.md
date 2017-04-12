@@ -1,5 +1,4 @@
 ---
-
 layout: post
 title: Mis tips de Vim
 description: Los atajos de teclado de Vim que no quiero olvidar
@@ -8,7 +7,15 @@ tag:
   - vim
 show_meta: true
 comments: true
-
+published: true
+gistembed: false
+noindex: false
+hide_printmsg: false
+sitemap: true
+summaryfeed: false
+image:
+  feature: 2017/img-feature-004.jpeg
+  credit: Patricio Moracho
 ---
 
 Mi particular lista de comandos de Vim. Los que en particular me resultan

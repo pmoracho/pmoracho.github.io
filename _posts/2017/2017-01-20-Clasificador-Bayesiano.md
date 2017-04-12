@@ -7,7 +7,7 @@ tag:
   - nltk
   - desarrollo
   - python
-  - ia
+  - ml
 show_meta: true
 comments: true
 published: true
