@@ -102,13 +102,13 @@ universo de 75 (n) es:
 
 $$ n! / r!*(n-r)! $$
 
-Esto se lee: el factorial de n, dividido el factorial de r menos el factorial
-de n menos r. Viene muy bien
+Esto se lee: el factorial de $$ n $$, dividido el factorial de $$ r $$ por el factorial
+de $$ n $$ menos $$ r $$. Viene muy bien
 [este](http://www.disfrutalasmatematicas.com/combinatoria/combinaciones-permutaciones-calculadora.html)
 enlace para el calculo. Con los número que manejamos en el ejemplo nos daría
 algo así:
 
-## 5.25885471411489e+19
+$$ 5.25885471411489e+19 $$
 
 En "criollo" y si no me equivoco, sería: 52.588.547.141.148.900.000, ni
 siquiera sé como se lee un número de semejante magnitud. Pensar solo en generar
@@ -121,7 +121,7 @@ gustaría al menos ver 24, y si esta cantidad no fuera posible ver 23, y así...
 O sea que agotado una cantidad de casos se debería volver a intentar la misma
 fórmula, pero con 24 (r) elementos sobre el mismo universo de 75 (n), o se
 
-## 2.57786995789946e+19
+$$ 2.57786995789946e+19 $$
 
 
 Y así seguimos hasta encontrar la solución, no continuo con los ejemplos por
