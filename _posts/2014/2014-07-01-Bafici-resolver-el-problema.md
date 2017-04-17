@@ -1,7 +1,7 @@
 ---
 layout: post
-title: Bafici Resolver. Los métodos.
-date: 2014-07-07
+title: Bafici Resolver. El problema.
+date: 2014-07-01
 description: Como resolver el problema de combinar peliculas
 tag:
   - desarrollo
@@ -10,7 +10,7 @@ tag:
 show_meta: true
 comments: true
 published: true
-mathjax: true
+mathjax: false
 gistembed: false
 noindex: false
 hide_printmsg: false
@@ -22,55 +22,56 @@ image:
 ---
 
 ![bafici][bafici]{: style="float:left;margin-right:20px;margin-bottom:10px;"}
+Algunos hacen sudokus, otros crucigramas, a mí me gusta pensar en soluciones a
+problemas. Seguramente una (de?)formación profesional. Uno de esos problemas
+que no me deja dormir hace rato, metafóricamente hablando ya que dudo que
+exista algo que me complique el sueño, es como resolver la cuestión **"BAFICI"**.
+Vamos para atrás con un breve introducción.
 
-Ya hemos estado viendo en entradas anteriores el uso de la fuerza bruta para
-resolver las combinaciones de películas que queremos ver durante el BAFICI. Lo
-llamo fuerza bruta, simplemente por que la idea inicial era generar todas las
-combinaciones y luego verificar todas para ver si cada proyección puede ser
-combinable con el resto (en términos de horarios y distancias entre las salas),
-de esta manera obtendríamos todas las combinaciones realmente posibles.
+Me gusta el cine, yo diría me gusta mucho, para colmo mi mujer comparte conmigo
+este gusto (no sé si incluso no es más fanática). Todos los años, desde hace
+unos dieciséis se realiza en Buenos Aires un conocido y bastante importante
+festival de cine independiente **BAFICI**. Esas cosas buenas que de vez en cuando
+transcienden los gobiernos. Una maravilla en todo sentido que alguna vez me
+permitió ver a Tom Waits, por ejemplo.
 
-Esta aproximación es elegante en el sentido que es simple y tiene la ventaja que
-si o si llegaríamos a la mejor combinación (la que nos permita ver la mayor
-cantidad de películas seleccionadas posibles), sin embargo es inviable por el
-volumen de datos, que se traduce sobre todo en tiempo de proceso. Podría ser
-aplicable a no más de 6 o 7 películas, pero más allá lo descartaría.
+Volviendo al punto, Tanto mi mujer como el que escribe somos "habitúes" del
+festival, incluso mucho antes de conocernos, por lo que todos los años se nos
+presentan dos grande problemas, que nos insumen mucho tiempo.
 
-Con lo cual lo único que nos queda es generar combinaciones de alguna manera y
-verificar si cumplen la condición que todas las proyecciones sean combinables
-entre si.
+El primero, es elegir que películas ver, tarea complicada si las hay, estamos
+hablando, tomando como ejemplo la edición 2014, de unas casi 350 producciones
+entre cortos, medios y largometrajes, producciones variadas de todas las
+latitudes del planeta. Este problema se resuelve con paciencia, tiempo, un poco
+de investigación, un poco de criterio y algo de suerte.
 
-## ¿Que alternativas se me ocurren?
+Una vez resuelto que cosas ver, surge el segundo problema (el que me quita el
+sueño) es como ver las películas elegidas. Acá ya entramos en el "meollo" de la
+cuestión, veamos el escenario primero:
 
-1. Al Azar: Es una idea válida, hay que armar un procedimiento que genere una
-   combinación cualquiera de $$ N $$ elementos y verificar si es posibles dicha
-   combinación. Se repite esto $$ N $$ veces (las que que nos den tiempos de
-   proceso razonables). Podríamos perfeccionar esto, para que en cada
-   combinación generada, si no es exitosa, se quite alguno de los elementos y
-   se vuelva a probar. Al finalizar los $$ N $$ intentos que definimos
-   podríamos ver cual o cuales combinaciones resultan las mejores (las que nos
-   ofrecen la mayor cantidad de películas).
-2. La combinación secuencial por hito: Se arman tantas combinaciones como
-   proyecciones de la primer película de la selección, luego se recorre las
-   siguientes películas y se trata de combinar las siguientes proyecciones.
-   Este método arrojará distintos resultados en función del orden de las
-   películas seleccionadas, por lo que una mejora sería agregarle N intentos y
-   "randomizando" el orden de los temas seleccionados.
-3. El método cronológico: Se arma una lista de todas las proyecciones ordenadas
-   cronológicamente. Se selecciona la primer proyección y se intenta combinar
-   con la siguiente, si se puede se suma la proyección a la combinación, se
-   continua este procedimiento hasta el final. En realidad es una variante de
-   la opción 2.
-4. El método estadístico: Me resulto  bastante bueno en cuanto a los
-   resultados. La idea es armar una lista con parejas de proyecciones que son
-   combinables, es decir una lista más manejable de combinaciones de 2
-   elementos de un universo de $$ Cantidad_de_películas_deseadas *
-   Cantidad_total_de_proyecciones $$. Con esta lista elaboramos una segunda que
-   contendrá todas las proyecciones y la cantidad de combinaciones en las que
-   aparece. Luego se ordena esta lista para tener primero las proyecciones más
-   "combinables".  Utilizando la misma procedemos a recorrerla y a intentar
-   combinar. Este método prioriza las proyecciones más "combinables", lo cual
-   parece algo más óptimo que el resto de lo métodos.
+* El **BAFICI** presenta todos los años unas x cantidad de películas, digamos unas
+  350 por tomar un ejemplo del 2014
+* Del total de las películas, generalmente mi universo de films seleccionados 
+  es de unos 25
+* Cada película puede tener de 1 a n proyecciones, normalmente 3.
+* Cada proyección se realiza en distintas salas y por lo general en días y
+  horarios también distintos Las salas pueden en algunos casos ubicarse en un 
+  mismo complejo (por ej, Village Recoleta) pero también se ubican en lugares 
+  variados de la capital (Belgrano, Recoleta, Centro, Caballito, etc) 
+* El trasladarse de una sala a otra insume un tiempo que puede ir desde unos 
+  pocos minutos hasta más de una hora 
+* Si bien solemos tomarnos vacaciones para al menos una de las semanas del 
+  festival, hay horarios que descartamos definitivamente, los de la mañana 
+  sobre todo.  
+* La gente del festival publica una grilla con todas las proyecciones.
 
+Ahora está más claro el problema. Se necesita poder combinar las proyecciones
+de los films seleccionados de tal modo que nos permita poder verlos todos (o la
+mayor cantidad de estos) de una manera "humanamente" posible. Esto es un
+trabajo que hasta ahora venimos haciendo con lápiz y papel, la idea es poder
+automatizar este proceso con alguna herramienta informática.
 
-[bafici]: {{site.baseurl}}/images/2014/bafici_02.jpg
+Así planteado, parece un problema "de facultad", esos que te plantean en las
+carreras de sistemas, invito a usarlo como tal.  
+
+[bafici]: {{site.baseurl}}/images/2014/bafici_03.jpg
