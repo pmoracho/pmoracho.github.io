@@ -12,6 +12,9 @@ sitemap:
     priority: 0.5
     changefreq: 'monthly'
     lastmod: 2016-02-13
+sitemap:
+  exclude: 'yes'
+noindex: true
 ---
 
 | <i class="fa fa-twitter"></i> | [@{{ site.owner.twitter }}](https://twitter.com/{{ site.owner.twitter }})  | 

@@ -6,6 +6,7 @@ description: "README for setting up lanyon-plus jekyll theme on github pages or 
 published: false
 sitemap:
   exclude: 'yes'
+noindex: true
 ---
 
 ---

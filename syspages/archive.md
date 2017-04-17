@@ -4,6 +4,9 @@ title: Archivo
 description: "Archivo"
 permalink: /archive/
 category: base
+sitemap:
+  exclude: 'yes'
+noindex: true
 ---
 
 <section id="archive">

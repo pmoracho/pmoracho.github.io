@@ -3,9 +3,11 @@ layout: page
 title: Posts destacados
 description: "Posts destacados"
 permalink: /featured/
-sitemap: false
 noindex: true
 category: base
+sitemap:
+  exclude: 'yes'
+noindex: true
 ---
 <hr class="gh">
 <div class="posts">

@@ -4,7 +4,9 @@ title: "Nube de etiquetas"
 permalink: "/tags/"
 description: "Navegar este sitio por sus etiquetas"
 comments: false
-sitemap: false
+sitemap:
+  exclude: 'yes'
+noindex: true
 category: base
 ---
 {:.text-center}

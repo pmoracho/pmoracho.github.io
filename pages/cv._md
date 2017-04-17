@@ -12,9 +12,8 @@ comments: false
 imagesummary: foo.png
 modified: "2016-02-13"
 sitemap:
-    priority: 0.7
-    changefreq: 'monthly'
-    lastmod: 2016-02-13
+  exclude: 'yes'
+noindex: true
 style: |
   .container {
         max-width: 48rem;
