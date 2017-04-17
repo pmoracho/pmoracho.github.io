@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Bafici Resolver. Pensar el problema.
+title: Bafici Resolver. Los métodos.
 date: 2014-07-07
 description: Como resolver el problema de combinar peliculas
 tag:
@@ -64,8 +64,8 @@ entre si.
 4. El método estadístico: Me resulto  bastante bueno en cuanto a los
    resultados. La idea es armar una lista con parejas de proyecciones que son
    combinables, es decir una lista más manejable de combinaciones de 2
-   elementos de un universo de $$ Cantidad de películas deseadas * Cantidad
-   total de proyecciones $$. Con esta lista elaboramos una segunda que
+   elementos de un universo de $$ Cantidad_de_películas_deseadas *
+   Cantidad_total_de_proyecciones $$. Con esta lista elaboramos una segunda que
    contendrá todas las proyecciones y la cantidad de combinaciones en las que
    aparece. Luego se ordena esta lista para tener primero las proyecciones más
    "combinables".  Utilizando la misma procedemos a recorrerla y a intentar
@@ -73,4 +73,4 @@ entre si.
    parece algo más óptimo que el resto de lo métodos.
 
 
-[bafici]: {{site.baseurl}}/images/2014/bafici_01.jpg
+[bafici]: {{site.baseurl}}/images/2014/bafici_02.jpg

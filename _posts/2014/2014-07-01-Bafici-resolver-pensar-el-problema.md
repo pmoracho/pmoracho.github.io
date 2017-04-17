@@ -74,5 +74,5 @@ automatizar este proceso con alguna herramienta informática.
 Así planteado, parece un problema "de facultad", esos que te plantean en las
 carreras de sistemas, invito a usarlo como tal.  
 
-[bafici]: {{site.baseurl}}/images/2014/bafici.jpg
+[bafici]: {{site.baseurl}}/images/2014/bafici_03.jpg
 
