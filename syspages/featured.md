@@ -3,7 +3,6 @@ layout: page
 title: Posts destacados
 description: "Posts destacados"
 permalink: /featured/
-noindex: true
 category: base
 sitemap:
   exclude: 'yes'
