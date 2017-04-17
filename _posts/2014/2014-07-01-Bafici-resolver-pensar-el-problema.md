@@ -100,7 +100,7 @@ términos matemáticos y con un ejemplo puntual:
 La formula para calcular las combinaciones de 25 (r) elementos  sobre un
 universo de 75 (n) es: 
 
-$ \frac{n!}{r!*(n-r)!}$
+$$ \frac{n!}{r!*(n-r)!} $$
 
 Esto se lee: el factorial de $$ n $$, dividido el factorial de $$ r $$ por el factorial
 de $$ n $$ menos $$ r $$. Viene muy bien
