@@ -4,9 +4,8 @@ title: Exif en imágenes no digitales.
 date: 2017-01-01
 description: Incorporar datos exif a imagenes escaneadas
 tag:
-  - desarrollo
-  - python
-  - cine
+  - bash
+  - foto
 show_meta: true
 comments: true
 published: true
@@ -20,7 +19,7 @@ image:
   credit: Patricio Moracho
 ---
 
-## Exif en imágenes no digitales 
+## Exif en imágenes no digitales
 
 A raiz de una consulta acerca de si la información Exif era "editable", me
 surgió la idea de buscar una solución a algo que me molesta hace tiempo. Todos
@@ -39,7 +38,7 @@ datos Exif. La que me pareció más interesante es [Exiv2](http://www.exiv2.org/
 que tiene versiones para Linux y Windows, se trata de una librería para
 programación y de una herramienta por línea de comandos que permite realizar
 todo tipo de manipulación sobre los metadatos, agregar, editar, borrar listar,
-etc.  
+etc.
 
 Básicamente armando un archivo con la configuración de los datos exif, que
 queremos incorporar a uno o más archivos de imágenes podemos correr este
