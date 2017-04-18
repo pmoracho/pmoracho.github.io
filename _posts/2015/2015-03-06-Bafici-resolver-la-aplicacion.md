@@ -20,7 +20,7 @@ image:
   credit: Patricio Moracho
 ---
 
-![bafici1][bafici]{: style="float:left;margin-right:20px;margin-bottom:10px;"}
+![bafici1][bafici1]{: style="float:left;margin-right:20px;margin-bottom:10px;"}
 
 **Bafici resolver** es un programa desarrollado para facilitar la selección de las
 películas del festival de cine independiente de Buenos Aires (BAFICI) y armar a
@@ -43,8 +43,9 @@ Notas:
 
 * Los datos de ejemplo son del festival del 2014, pero entiendo que no debiera ser difícil cargar los nuevos años
 
-![bafici2][bafici]{: style="float:left;margin-right:20px;margin-bottom:10px;"}
+![bafici2][bafici2]{: style="float:left;margin-right:20px;margin-bottom:10px;"}
 
 [bafici1]: {{site.baseurl}}/images/2015/bafici.resolver.01.png
 [bafici2]: {{site.baseurl}}/images/2015/bafici.resolver.02.png
+[bafici]: {{site.baseurl}}/images/2014/bafici_03.jpg
 
