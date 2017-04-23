@@ -93,6 +93,13 @@ difference_join(df1, df2, by = "distancias", max_dist = Inf)
 
 ```
 
+# Obtener el nombre de cualquier objeto
+
+``` R
+prueba <-0
+substitute(prueba) ## Retorna "prueba"
+```
+
 
 
 [merge]:https://stat.ethz.ch/R-manual/R-devel/library/base/html/merge.html
