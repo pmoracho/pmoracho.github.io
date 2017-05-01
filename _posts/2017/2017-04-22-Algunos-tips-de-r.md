@@ -100,6 +100,20 @@ prueba <-0
 substitute(prueba) ## Retorna "prueba"
 ```
 
+# Un split inteligente
+
+Por ejemplo, tenemos esta cadena `'Marca: Avon Marca: Imusa Marca: Falabella'`
+y queremos quedarnos solo con los nombres de las marcas, en ese caso podemos
+hacer lo siguiente:
+
+``` R
+s <- 'Marca: Avon Marca: Imusa Marca: Falabella'
+result<-sapply(strsplit(s, 'Marca: '), function(e) {trimws(e[e!=""])})  
+result
+[1,] "Avon"     
+[2,] "Imusa"    
+[3,] "Falabella"
+```
 
 # Separar un columna en varias según un caracter en particular
 

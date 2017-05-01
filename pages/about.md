@@ -16,7 +16,7 @@ sitemap:
     changefreq: 'monthly'
     lastmod: 2016-02-13
 ---
-<div class="post-author text-center">                       
+<div class="post-author text-center">
             <img src="{{ site.urlimg }}{{ site.owner.avatar }}" alt="la foto del autor de {{ site.owner.name }}" itemprop="image" class="post-avatar img-circle img-responsive"/> 
 <span class="social-icons" style="padding-top: 10px; padding-bottom: 1px;">
 <a href="{{ site.url }}/cv" title="Curriculum Vitae" class="social-icons"><i class="iconm iconm-profile" style="vertical-align: top;"></i></a>
