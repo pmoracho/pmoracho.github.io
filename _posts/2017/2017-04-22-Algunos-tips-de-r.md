@@ -101,6 +101,25 @@ substitute(prueba) ## Retorna "prueba"
 ```
 
 
+# Separar un columna en varias según un caracter en particular
+
+``` R
+list <- "id datos
+        1 Juan:29384:Madrid
+        2 Alba:394839:Alicante
+        3 Elena:102948:Segovia"
+
+df = read.table(textConnection(list), header=TRUE) 
+df2 <- within(df, datos<-data.frame(do.call('rbind', strsplit(as.character(datos), ':', fixed=TRUE))))
+df2
+
+#   id datos.X1 datos.X2 datos.X3
+# 1  1     Juan    29384   Madrid
+# 2  2     Alba   394839 Alicante
+# 3  3    Elena   102948  Segovia
+```
+
+
 
 [merge]:https://stat.ethz.ch/R-manual/R-devel/library/base/html/merge.html
 [dataframes]:https://stat.ethz.ch/R-manual/R-devel/library/base/html/data.frame.html
