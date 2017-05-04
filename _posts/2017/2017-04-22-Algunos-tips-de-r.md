@@ -133,10 +133,7 @@ df2
 # 3  3    Elena   102948  Segovia
 ```
 
-
-
 [merge]:https://stat.ethz.ch/R-manual/R-devel/library/base/html/merge.html
 [dataframes]:https://stat.ethz.ch/R-manual/R-devel/library/base/html/data.frame.html
 [fuzzyjoin]:https://cran.r-project.org/web/packages/fuzzyjoin/fuzzyjoin.pdf
-[stackoverflow]:https://es.stackoverflow.com/questions/64480/combinar-dos-data-frames-con-merge-permitiendo-un-peque%C3%B1o-error/64509#64509,
-
+[stackoverflow]:https://es.stackoverflow.com/questions/64480/combinar-dos-data-frames-con-merge-permitiendo-un-peque%C3%B1o-error/64509#64509
