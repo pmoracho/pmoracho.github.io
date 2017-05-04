@@ -70,6 +70,5 @@ git remote set-url origin git@github.com/username/reponame.git
 
 ## Recursos escenciales
 
-* [Pro Git, el libro oficial de Git][https://git-scm.com/book/es/v2]
-* [Pro Git, el libro oficial de Git (esta traducción me gusta un poco más)][http://librosweb.es/libro/pro_git/]
-
+* [Pro Git, el libro oficial de Git](https://git-scm.com/book/es/v2)
+* [Pro Git, el libro oficial de Git (esta traducción me gusta un poco más)](http://librosweb.es/libro/pro_git/)
