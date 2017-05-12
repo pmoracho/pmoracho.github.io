@@ -105,7 +105,63 @@ argentina <- readOGR(dsn = tmp, layer = "ARG_adm1", use_iconv=TRUE, encoding='UT
 
 Básicamente descargamos el archivo a una carpeta temporal y lo descomprimimos.
 Hay que analizar el contenido para ubicar el "layer", que no es más que un
-clásico archivo **DBF**, analizandolo pude detectar que se trataba de
+clásico archivo **DBF**, analizándolo pude detectar que se trataba de
 "ARG_adm1" el que contenía las definiciones de los 24 estados del país. Lo
 siguiente es usar `readOGR` una función del paquete `rgdal` que simplemente
 transforma el archivo **DBF** en un vector de datos geo-espaciales.
+
+## Combinando datos y geografía
+
+En esta instancia tenemos datos estadísticos en nuestro `data.farme`
+`femicidios` y tenemos la información geográfica en un vector del tipo
+`SpatialPolygonsDataFrame` llamado  `argentina`. Ambos vectores comparten una
+dato común que es el nombre de la provincia, que aprovecharemos entonces para
+combinar los mismos.
+
+Para combinar las dos fuentes de información primero debemos normalizar el
+nombre del campo de provincia, para que luego un "merge" nos funcione
+fácilmente, para esto simplemente a `femcidios` modificamos la columna
+"lugar_hecho" por "NAME_1", con este simple cambio ya podemos combinar la
+información. Importante: el merge común de **R** no me funciono del todo bien
+ya que el resultado final modificaba el orden de los datos, lo que producía que
+al graficar las provincias salieran mal identificadas. Por lo que optamos por
+la función `join` de `plyr` que es bastante más poderosa.
+
+
+``` R
+
+# Renombrara columnas para hacer merge
+colnames(femicidios_x_provincia) <- c("NAME_1", "Femicidios")
+
+# Merge de los datos
+argentina@data <- join(argentina@data,poblacion)
+
+> head(argentina@data[c(1,2,3,4,5,11)])
+  ID_0 ISO    NAME_0 ID_1                 NAME_1 Femicidios
+1   12 ARG Argentina    1           Buenos Aires        268
+2   12 ARG Argentina    2                Córdoba         89
+3   12 ARG Argentina    3              Catamarca          7
+4   12 ARG Argentina    4                  Chaco         37
+5   12 ARG Argentina    5                 Chubut         16
+6   12 ARG Argentina    6 Ciudad de Buenos Aires         31
+```
+
+Por último, la parte linda y divertida de todo esto:
+
+``` R
+
+pal <- colorQuantile("YlGn", NULL, n = 5)
+state_popup <- paste0("<strong>Estado: </strong>", 
+                      argentina$NAME_1, 
+                      "<br><strong>Femicidios: </strong>", 
+                      argentina$Femicidios)
+
+leaflet(data = argentina) %>%
+    addProviderTiles("CartoDB.Positron") %>%
+    addPolygons(fillColor = ~pal(Femicidios), 
+                fillOpacity = 0.8, 
+                color = "#BDBDC3", 
+                weight = 1, 
+                popup = state_popup)
+
+```
