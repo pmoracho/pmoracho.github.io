@@ -28,9 +28,13 @@ estadística y hacer un "mapa de calor" sobre un mapa geográfico. Decidí
 arrancar con una muy triste y lamentablemente  instalada en los medios y en la
 realidad que es la de los femicidios. 
 
+## Los datos a graficar
+
 En [datos.jus.gob.ar](http://datos.jus.gob.ar/dataset/registro-sistematizacion-y-seguimiento-de-femicidios-y-homicidios-agravados-por-el-genero) publican una muy completa lista de casos por lo que lo primero que vamos a ser es importarla a nuestro entorno **R**.
 
 ``` R
+tmp <- tempdir()
+
 # Descarga del registro de femicidio
 url <- "http://datos.jus.gob.ar/dataset/27bb9b2c-521b-406c-bdf9-98110ef73f34/resource/9a06c428-8552-42fe-86e1-487bca9b712c/download/registro-de-femicidios.csv"
 file <- basename(url)
@@ -49,4 +53,59 @@ femicidios <- read.table(file = file, header = TRUE, sep = ',')
 6    827   26            MUJER    PRINCIPAL Buenos Aires                   GOLPES -  2016/03/21
 ```
 
+Lo que me interesa hacer es "mapear" estos datos con la provincia/estado en
+dónde ocurrió el crimen, para esto lo primer qu hay que hacer es normalizar los
+nombres de las provincias ya que pareciera ser que no son muy rigurosos con
+estos datos, a veces cargan como `Santa Fé` y otras como `Santa Fe` por dar un
+ejemplo. Bueno esta "normalización" la haremos así:
 
+``` R
+# Estandarización de los nombres de provincias
+femicidios$lugar_hecho <- gsub('CABA', 'Ciudad de Buenos Aires', femicidios$lugar_hecho)
+femicidios$lugar_hecho <- gsub('Entre Rios', 'Entre Ríos', femicidios$lugar_hecho)
+femicidios$lugar_hecho <- gsub('Santa Fé', 'Santa Fe', femicidios$lugar_hecho)
+femicidios$lugar_hecho <- gsub('Tucuman', 'Tucumán', femicidios$lugar_hecho)
+femicidios_x_provincia <- as.data.frame(table(femicidios$lugar_hecho))
+```
+
+Nota: Esta normalización, ya veremos, tiene también que ver con unificar los
+nombres de provincia con los que figuran en la información geográfica.
+
+## El mapa geográfico
+
+Como ya comenté vamos a usar [Leaflet](http://leafletjs.com/) para armar el
+mapa y colorearlo luego. Para poder usar esta librería, si no la tenemos
+instalada, simplemente con un `install.packages("leaflet")` alcanza. Además
+necesitaremos algún que otro paquete, detallando:
+
+* [leaflet](http://leafletjs.com/): Es la librería que generara el mapa para incorporar en una vista HTM.  `install.packages("leaflet")`
+* [rgdal](https://cran.r-project.org/web/packages/rgdal/index.html/): Unos "bindings" a la librería de abstracción de datos geográficos de Frank Warmerdam. `install.packages("leaflet")`
+* [plyr](https://cran.r-project.org/web/packages/plyr/index.html): La usaremos para manipular. `install.packages("plyr")`
+
+Bien, para empezar necesitamos obtener un "Shapefile" esto es básicamente
+(entre otras cosas) una definición de polígonos que nos va permitir establecer
+las áreas de un mapa que corresponden a cada estado/provincia. Esta información
+la podemos obtener por ejemplo de
+[biogeo](http://biogeo.ucdavis.edu/projects.html), vamos a usar los "Global
+Administrative Boundaries (GADM)", que justamente definen los contornos de los
+estados en cada país. Vamos a buscar puntualmente el de **Argentina**.
+
+
+``` R
+tmp <- tempdir()
+
+# Descarga del Shapefile de Argentina
+url <- "http://biogeo.ucdavis.edu/data/diva/adm/ARG_adm.zip"
+file <- basename(url)
+download.file(url, file)
+unzip(file, exdir = tmp)
+argentina <- readOGR(dsn = tmp, layer = "ARG_adm1", use_iconv=TRUE, encoding='UTF-8')
+
+```
+
+Básicamente descargamos el archivo a una carpeta temporal y lo descomprimimos.
+Hay que analizar el contenido para ubicar el "layer", que no es más que un
+clásico archivo **DBF**, analizandolo pude detectar que se trataba de
+"ARG_adm1" el que contenía las definiciones de los 24 estados del país. Lo
+siguiente es usar `readOGR` una función del paquete `rgdal` que simplemente
+transforma el archivo **DBF** en un vector de datos geo-espaciales.
