@@ -170,4 +170,4 @@ Y obtenemos esto:
 ![ejemplo][ejemplo]
 
 
-[ejemplo]: {{site.baseurl}}/_posts/2017/images/rplot-01.jpg
+[ejemplo]: {{site.baseurl}}images/2017/rplot-01.jpg
