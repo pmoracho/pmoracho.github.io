@@ -11,7 +11,6 @@ show_meta: true
 comments: true
 published: true
 modified: '2017-01-05 14:31 -0300'
-imagefeature: sitelogo.png
 mathjax: false
 gistembed: false
 noindex: false

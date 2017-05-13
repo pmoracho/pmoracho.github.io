@@ -165,3 +165,7 @@ leaflet(data = argentina) %>%
                 popup = state_popup)
 
 ```
+
+Y obtenemos esto:
+
+![ejemplo](images/2017/img-feature-002.jpeg)
