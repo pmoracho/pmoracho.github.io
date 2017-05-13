@@ -168,4 +168,4 @@ leaflet(data = argentina) %>%
 
 Y obtenemos esto:
 
-![ejemplo](/_posts/2017/images/img-feature-002.jpeg)
+![ejemplo](/_posts/2017/images/img-feature-002.jpg)
