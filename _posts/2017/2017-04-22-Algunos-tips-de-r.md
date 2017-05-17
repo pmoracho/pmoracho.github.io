@@ -133,6 +133,39 @@ df2
 # 3  3    Elena   102948  Segovia
 ```
 
+# Configurar un Timeout para funciones
+
+Si se requiere dar un tiempo máximo a la ejecución de una función el truco pasa por hacer uso de [`withTimeout`](https://www.rdocumentation.org/packages/R.utils/versions/2.5.0/topics/withTimeout)
+
+```
+require(R.utils)
+
+mi.funcion <- function(x)
+{
+	Sys.sleep(1*x) 
+	return(x^x)
+}
+
+mi.funcion.with.tiemout <- function(x, timeout=1)
+{
+	# En caso de timeout, no genero error y devuelvo -1
+	ret <- withTimeout(mi.funcion(x), timeout = timeout, onTimeout = "silent")
+	if (is.null(ret)) {ret = -1}
+	return(ret)
+}
+
+sapply(c(1,2,3,4), mi.funcion.with.tiemout, timeout=4)
+```
+
+El retorno:
+
+```
+    [1]  1  4 27 -1
+```
+
+Como se vé, al llegar al valor 4 se supera el timeout y se aplica en este caso
+un valor genérico -1 que devuelve la función propia `mi.funcion.with.tiemout`
+
 # Actualizar R en Linux Mint
 
 1. Agregar origen: `sudo gedit /etc/apt/sources.list`, hay que agregar el siguiente repositorio: `deb http://cran.cnr.berkeley.edu/bin/linux/ubuntu/ version/` reemplazar `version` por lo que corresponda, por ejemplo: `deb http://cran.cnr.berkeley.edu/bin/linux/ubuntu/ xenial/`
@@ -149,6 +182,9 @@ sudo apt-get update
 sudo apt-get upgrade
 sudo apt-get install r-base
 ```
+
+4. Instalar RStudio. Simplemente descaragar el instalador correspondiente desde
+   [este](http://www.rstudio.com/ide/download/) enlace, luego simplemete: `sudo gdebi <paquete.deb>`
 
 [merge]:https://stat.ethz.ch/R-manual/R-devel/library/base/html/merge.html
 [dataframes]:https://stat.ethz.ch/R-manual/R-devel/library/base/html/data.frame.html
