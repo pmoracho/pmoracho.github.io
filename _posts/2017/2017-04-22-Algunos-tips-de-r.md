@@ -133,6 +133,23 @@ df2
 # 3  3    Elena   102948  Segovia
 ```
 
+# Actualizar R en Linux Mint
+
+1. Agregar origen: `sudo gedit /etc/apt/sources.list`, hay que agregar el siguiente repositorio: `deb http://cran.cnr.berkeley.edu/bin/linux/ubuntu/ version/` reemplazar `version` por lo que corresponda, por ejemplo: `deb http://cran.cnr.berkeley.edu/bin/linux/ubuntu/ xenial/`
+
+2. Agregar claves:
+```
+gpg --keyserver keyserver.ubuntu.com --recv-key E084DAB9 
+gpg -a --export E084DAB9 | sudo apt-key add -
+```
+
+3. Update/Upgrade/Install
+```
+sudo apt-get update
+sudo apt-get upgrade
+sudo apt-get install r-base
+```
+
 [merge]:https://stat.ethz.ch/R-manual/R-devel/library/base/html/merge.html
 [dataframes]:https://stat.ethz.ch/R-manual/R-devel/library/base/html/data.frame.html
 [fuzzyjoin]:https://cran.r-project.org/web/packages/fuzzyjoin/fuzzyjoin.pdf
