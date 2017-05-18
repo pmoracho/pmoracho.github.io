@@ -68,6 +68,27 @@ You can change the URL with:
 git remote set-url origin git@github.com/username/reponame.git
 ```
 
+## 4. Configuración básica de un repositorio en [github.com](github.com)
+
+1. Crear repositorio nuevo en [github.com](github.com)
+2. Usar `https:`, seguramente es mejor `ssh:` pero me resulto más simple y cómodo por ahora el primero
+3. Clonar el directorio remoto, por ejemplo: `git clone https://github.com/pmoracho/code.snippets.git`
+4. Configurar datos básicos por repositorio:
+	```
+	git config user.email "zandanga@gmail.com"
+	git config user.name "Patricio Moracho"
+	```
+5. Configurar la url del remoto
+	```	
+	git remote add origin https://github.com/pmoracho/code.snippets.git
+	git push --set-upstream origin master
+	```	
+6. Configurar el guardado temporal de las credenciales
+	```
+	git config --global credential.helper cache
+	git config --global credential.helper "cache --timeout=3600"
+	```
+
 ## Recursos escenciales
 
 * [Pro Git, el libro oficial de Git](https://git-scm.com/book/es/v2)
