@@ -257,7 +257,7 @@ Con esto, habremos genereado un data.frame como el siguiente:
 5         5       552863             Corrientes
 6         6       591359                  Chaco
 ```
-Ahora, teniendo la proyección de mujeres del año 2017, lo que hacemos es agregar todos los datos al **Shapefile** original
+Ahora, teniendo la proyección de mujeres del año 2017, lo que hacemos es agregar todos los datos al **[Shapefile[shapefile]** original
 
 
 ```
@@ -292,3 +292,4 @@ Y aquí el resultado final:
 [ejemplo1]:{{site.baseurl}}/images/2017/rplot-01.jpg
 [ejemplo2]:{{site.baseurl}}/images/2017/rplot-02.jpg
 [dataframe]:https://stat.ethz.ch/R-manual/R-devel/library/base/html/data.frame.html
+[shapefile]:http://en.wikipedia.org/wiki/Shapefile
