@@ -257,10 +257,10 @@ Con esto, habremos genereado un **[data.frame][dataframe]* como el siguiente:
 5         5       552863             Corrientes
 6         6       591359                  Chaco
 ```
-Ahora, teniendo la proyección de mujeres del año 2017, lo que hacemos es agregar todos los datos al **[Shapefile[shapefile]** original
+Ahora, teniendo la proyección de mujeres del año 2017, lo que hacemos es agregar todos los datos al **[shapefile][shapefile]** original
 
 
-```
+``` R
 # Merge de los datos
 argentina@data <- join(argentina@data,femicidios_x_provincia, by="NAME_1")
 argentina@data <- join(argentina@data,mujeres, by="NAME_1")
