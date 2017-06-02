@@ -25,12 +25,15 @@ A raíz de
 pregunta en **StackOverflow** se me dió por investigar las posibilidades que
 brinda [Leaflet](http://leafletjs.com/) en **R**. La idea es jugar con alguna
 estadística y hacer un "mapa de calor" sobre un mapa geográfico. Decidí
-arrancar con una muy triste y lamentablemente  instalada en los medios y en la
-realidad que es la de los femicidios. 
+arrancar con una muy triste y lamentablemente instalada en los medios y en la
+realidad que es, la estadística de los femicidios. 
 
 ## Los datos a graficar
 
-En [datos.jus.gob.ar](http://datos.jus.gob.ar/dataset/registro-sistematizacion-y-seguimiento-de-femicidios-y-homicidios-agravados-por-el-genero) publican una muy completa lista de casos por lo que lo primero que vamos a ser es importarla a nuestro entorno **R**.
+En
+[datos.jus.gob.ar](http://datos.jus.gob.ar/dataset/registro-sistematizacion-y-seguimiento-de-femicidios-y-homicidios-agravados-por-el-genero)
+publican una muy completa lista de casos por lo que lo primero que vamos a ser
+es importarla a nuestro entorno **R**.
 
 ``` R
 # Descarga del registro de femicidio
@@ -80,10 +83,10 @@ necesitaremos algún que otro paquete, detallando:
 * [rgdal](https://cran.r-project.org/web/packages/rgdal/index.html/): Unos "bindings" a la librería de abstracción de datos geográficos de Frank Warmerdam. `install.packages("leaflet")`
 * [plyr](https://cran.r-project.org/web/packages/plyr/index.html): La usaremos para manipular. `install.packages("plyr")`
 
-Bien, para empezar necesitamos obtener un "Shapefile" esto es básicamente
-(entre otras cosas) una definición de polígonos que nos va permitir establecer
-las áreas de un mapa que corresponden a cada estado/provincia. Esta información
-la podemos obtener por ejemplo de
+Bien, para empezar necesitamos obtener un **[shapefile][shapefile]** esto es
+básicamente (entre otras cosas) una definición de polígonos que nos va permitir
+establecer las áreas de un mapa que corresponden a cada estado/provincia. Esta
+información la podemos obtener por ejemplo de
 [biogeo](http://biogeo.ucdavis.edu/projects.html), vamos a usar los "Global
 Administrative Boundaries (GADM)", que justamente definen los contornos de los
 estados en cada país. Vamos a buscar puntualmente el de **Argentina**.
@@ -168,7 +171,7 @@ Y obtenemos esto:
 ![ejemplo1][ejemplo1]
 
 Este gráfico tien un problema que puede inducir al error, si bien no es
-mentiroso lo que ocurre que nos puede hacer suponer, que las provincias más
+mentiroso, lo que ocurre que nos puede hacer suponer, que las provincias más
 complicadas en cuanto al nivel de femicidios son Buenos Aires, Santa Fe,
 Córdoba, Entre Ríos, Mendoza y Salta (son las del tono verde más oscuro), pero
 lo cierto es que tambien los niveles de población son distintos en cada una.
@@ -177,7 +180,7 @@ femicidios habría que ponderarlo en función de esto. La idea ahora sería
 simplemente tomar el número duro de femicidios y dividirlo por algún indicador
 con respecto al nivel de población. 
 
-Vamos a ir a buscar los datos del último censo de poblkación del año 2010, el
+Vamos a ir a buscar los datos del último censo de población del año 2010, el
 [Indec](http://www.indec.gov.ar) maneja unas proyecciones de población por
 género y provincia que nos van a ser muy útiles, las vamos a descargar de
 [este](http://www.indec.gov.ar/bajarCuadroEstadistico.asp?idc=3E17DD2F9318063AAD3E51B564F230E791554FEA85602E9F50376F709AD5B8BFC4CE2FBEFAFA354A)
@@ -186,7 +189,7 @@ enlace. en realidad vamos a armar una función en **R** para hacer lo siguiente
 + Descarga el archivo si no existe
 + Leer cada una de las solapas (son datos de cada provincia)
 + Recuperar la proyección de una año de  la columna de mujeres
-+ Devolver un **[data.frame][dataframe]**
++ Devolver un **[data.frame][dataframe]** con cada provincia y el número de mujeres proyectadas para el año
 
 Esto sería más o menos así:
 
@@ -267,7 +270,9 @@ argentina@data <- join(argentina@data,mujeres, by="NAME_1")
 argentina@data$femPob <- as.integer(argentina@data$TotalMujeres/argentina@data$Femicidios)
 ```
 
-Cambiamos un poco el estilo de gráfico
+Cambiamos un poco el estilo de gráfico y gráficamos en función de:
+`argentina$femPob`, es decir los femicidios en función de la cantidad de
+mujeres
 
 ``` R
 pal <- colorQuantile(palette = "Blues", domain = NULL, n = 5, reverse = TRUE)
@@ -287,8 +292,10 @@ leaflet(data = argentina) %>%
 ```
 
 Y aquí el resultado final:
+
 ![ejemplo2][ejemplo2]
-Ahora si podemos ver realmente en que provincias es más peligroso para las mujeres vivir..
+
+Ahora si podemos ver realmente en que provincias los femicidios son más significativos..
 
 La descarga fina de los scripts puede hacerse desde [aquí](https://github.com/pmoracho/R.git)
 
