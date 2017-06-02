@@ -257,7 +257,38 @@ Con esto, habremos genereado un data.frame como el siguiente:
 5         5       552863             Corrientes
 6         6       591359                  Chaco
 ```
+Ahora, teniendo la proyección de mujeres del año 2017, lo que hacemos es agregar todos los datos al **Shapefile** original
 
+
+```
+# Merge de los datos
+argentina@data <- join(argentina@data,femicidios_x_provincia, by="NAME_1")
+argentina@data <- join(argentina@data,mujeres, by="NAME_1")
+argentina@data$femPob <- as.integer(argentina@data$TotalMujeres/argentina@data$Femicidios)
+```
+
+Cambiamos un poco el estilo de gráfico
+
+```
+pal <- colorQuantile(palette = "Blues", domain = NULL, n = 5, reverse = TRUE)
+state_popup <- paste0("<strong>Provincia: </strong>", 
+                      argentina$NAME_1, 
+                      "<br><strong>Femicidio cada </strong>", 
+                      argentina$femPob,
+                      " <strong>personas</strong>")
+
+leaflet(data = argentina) %>%
+  addProviderTiles("CartoDB.Positron") %>%
+  addPolygons(fillColor = ~pal(femPob), 
+              fillOpacity = 0.8, 
+              color = "#BDBDC3", 
+              weight = 1, 
+              popup = state_popup)
+```
+
+Y aquí el resultado final:
+![ejemplo2][ejemplo2]
 
 [ejemplo1]:{{site.baseurl}}/images/2017/rplot-01.jpg
+[ejemplo2]:{{site.baseurl}}/images/2017/rplot-02.jpg
 [dataframe]:https://stat.ethz.ch/R-manual/R-devel/library/base/html/data.frame.html
