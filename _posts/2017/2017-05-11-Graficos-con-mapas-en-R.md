@@ -33,8 +33,6 @@ realidad que es la de los femicidios.
 En [datos.jus.gob.ar](http://datos.jus.gob.ar/dataset/registro-sistematizacion-y-seguimiento-de-femicidios-y-homicidios-agravados-por-el-genero) publican una muy completa lista de casos por lo que lo primero que vamos a ser es importarla a nuestro entorno **R**.
 
 ``` R
-tmp <- tempdir()
-
 # Descarga del registro de femicidio
 url <- "http://datos.jus.gob.ar/dataset/27bb9b2c-521b-406c-bdf9-98110ef73f34/resource/9a06c428-8552-42fe-86e1-487bca9b712c/download/registro-de-femicidios.csv"
 file <- basename(url)
@@ -246,7 +244,7 @@ Tierra del Fuego, 24"
 }
 ```
 
-Con esto, habremos genereado un **[data.frame][dataframe]* como el siguiente:
+Con esto, habremos genereado un **[data.frame][dataframe]** como el siguiente:
 
 ```
   Provincia TotalMujeres                 NAME_1
@@ -289,6 +287,8 @@ leaflet(data = argentina) %>%
 Y aquí el resultado final:
 ![ejemplo2][ejemplo2]
 Ahora si podemos ver realmente en que provincias es más peligroso para las mujeres vivir..
+
+Repositorio: https://github.com/pmoracho/R.git
 
 [ejemplo1]:{{site.baseurl}}/images/2017/rplot-01.jpg
 [ejemplo2]:{{site.baseurl}}/images/2017/rplot-02.jpg
