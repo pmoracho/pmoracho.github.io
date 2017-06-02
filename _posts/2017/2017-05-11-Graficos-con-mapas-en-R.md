@@ -170,7 +170,7 @@ Y obtenemos esto:
 Este gráfico tien un problema que puede inducir al error, si bien no es
 mentiroso lo que ocurre que nos puede hacer suponer, que las provincias más
 complicadas en cuanto al nivel de femicidios son Buenos Aires, Santa Fe,
-Córdoba, Entre Ríos, Mendoza y salta (son las del tono verde más oscuro), pero
+Córdoba, Entre Ríos, Mendoza y Salta (son las del tono verde más oscuro), pero
 lo cierto es que tambien los niveles de población son distintos en cada una.
 Por lejos Buenos Aires es la de mayor población, por lo que el número de
 femicidios habría que ponderarlo en función de esto. La idea ahora sería
@@ -255,7 +255,9 @@ Con esto, habremos genereado un **[data.frame][dataframe]** como el siguiente:
 5         5       552863             Corrientes
 6         6       591359                  Chaco
 ```
-Ahora, teniendo la proyección de mujeres del año 2017, lo que hacemos es agregar todos los datos al **[shapefile][shapefile]** original
+
+Ahora, teniendo la proyección de mujeres del año 2017, lo que hacemos es
+agregar todos los datos al **[shapefile][shapefile]** original
 
 
 ``` R
