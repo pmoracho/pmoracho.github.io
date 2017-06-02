@@ -167,7 +167,97 @@ leaflet(data = argentina) %>%
 ```
 
 Y obtenemos esto:
-![ejemplo][ejemplo]
+![ejemplo1][ejemplo1]
+
+Este gráfico tien un problema que puede inducir al error, si bien no es
+mentiroso lo que ocurre que nos puede hacer suponer, que las provincias más
+complicadas en cuanto al nivel de femicidios son Buenos Aires, Santa Fe,
+Córdoba, Entre Ríos, Mendoza y salta (son las del tono verde más oscuro), pero
+lo cierto es que tambien los niveles de población son distintos en cada una.
+Por lejos Buenos Aires es la de mayor población, por lo que el número de
+femicidios habría que ponderarlo en función de esto. La idea ahora sería
+simplemente tomar el número duro de femicidios y dividirlo por algún indicador
+con respecto al nivel de población. 
+
+Vamos a ir a buscar los datos del último censo de poblkación del año 2010, el
+[Indec](http://www.indec.gov.ar) maneja unas proyecciones de población por
+género y provincia que nos van a ser muy útiles, las vamos a descargar de
+[este](http://www.indec.gov.ar/bajarCuadroEstadistico.asp?idc=3E17DD2F9318063AAD3E51B564F230E791554FEA85602E9F50376F709AD5B8BFC4CE2FBEFAFA354A)
+enlace. en realidad vamos a armar una función en **R** para hacer lo siguiente
+
++ Descarga el archivo si no existe
++ Leer cada una de las solapas (son datos de cada provincia)
++ Recuperar la proyección de una año de  la columna de mujeres
++ Devolver un **[data.frame][dataframe]**
+
+Esto sería más o menos así:
+
+``` R
+library(readxl)
+
+loadProyeccionMujeresFromUrl <- function(url, path, year) {
+
+    list <-"NAME_1, Provincia
+Ciudad de Buenos Aires,	1
+Buenos Aires, 2
+Catamarca, 3
+Córdoba, 4
+Corrientes, 5
+Chaco,6
+Chubut,	7
+Entre Ríos, 8
+Formosa, 9
+Jujuy, 10
+La Pampa, 11
+La Rioja, 12
+Mendoza, 13
+Misiones, 14
+Neuquén, 15
+Río Negro, 16
+Salta, 17
+San Juan, 18
+San Luis, 19
+Santa Cruz, 20
+Santa Fe, 21
+Santiago del Estero, 22
+Tucumán, 23
+Tierra del Fuego, 24"
+
+    provincias = as.data.frame(read.table(textConnection(list), header=TRUE, sep=','))
+    
+    #############################################################9#####################################
+    # Proyección de la Población de Argentina
+    ##################################################################################################
+    file <- file.path(path,'proyeccion.poblacion.argentina.xls')
+    if (!file.exists(file)) {
+        download.file(url, file)
+    }
+    df <- data.frame(Provincia=integer(), TotalMujeres=integer())
+    
+    # Hay una solapa oculta
+    for (i in 3:26) {
+        dt <- read_excel(file,sheet = i)
+        m <- as.numeric(dt[which(dt[1]==year),4])
+        df[nrow(df)+1,] <- c(i-2,m)
+    }
+	# Termino de conformar el Dataframe, el nombre de provincia lo voy a necesitar
+    df <- join(df,provincias,by="Provincia")
+    return(df)
+}
+```
+
+Con esto, habremos genereado un data.frame como el siguiente:
+
+```
+  Provincia TotalMujeres                 NAME_1
+1         1      1629405 Ciudad de Buenos Aires
+2         2      8678079           Buenos Aires
+3         3       202099              Catamarca
+4         4      1864416                Córdoba
+5         5       552863             Corrientes
+6         6       591359                  Chaco
+```
 
 
-[ejemplo]: {{site.baseurl}}/images/2017/rplot-01.jpg
+[ejemplo1]:{{site.baseurl}}/images/2017/rplot-01.jpg
+[dataframe]:https://stat.ethz.ch/R-manual/R-devel/library/base/html/data.frame.html
