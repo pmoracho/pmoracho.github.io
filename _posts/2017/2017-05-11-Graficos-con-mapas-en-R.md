@@ -246,7 +246,7 @@ Tierra del Fuego, 24"
 }
 ```
 
-Con esto, habremos genereado un data.frame como el siguiente:
+Con esto, habremos genereado un **[data.frame][dataframe]* como el siguiente:
 
 ```
   Provincia TotalMujeres                 NAME_1
@@ -269,7 +269,7 @@ argentina@data$femPob <- as.integer(argentina@data$TotalMujeres/argentina@data$F
 
 Cambiamos un poco el estilo de gráfico
 
-```
+``` R
 pal <- colorQuantile(palette = "Blues", domain = NULL, n = 5, reverse = TRUE)
 state_popup <- paste0("<strong>Provincia: </strong>", 
                       argentina$NAME_1, 
@@ -288,6 +288,7 @@ leaflet(data = argentina) %>%
 
 Y aquí el resultado final:
 ![ejemplo2][ejemplo2]
+Ahora si podemos ver realmente en que provincias es más peligroso para las mujeres vivir..
 
 [ejemplo1]:{{site.baseurl}}/images/2017/rplot-01.jpg
 [ejemplo2]:{{site.baseurl}}/images/2017/rplot-02.jpg
