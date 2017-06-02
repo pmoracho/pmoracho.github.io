@@ -288,7 +288,7 @@ Y aquí el resultado final:
 ![ejemplo2][ejemplo2]
 Ahora si podemos ver realmente en que provincias es más peligroso para las mujeres vivir..
 
-Repositorio: https://github.com/pmoracho/R.git
+La descarga fina de los scripts puede hacerse desde [aquí](https://github.com/pmoracho/R.git)
 
 [ejemplo1]:{{site.baseurl}}/images/2017/rplot-01.jpg
 [ejemplo2]:{{site.baseurl}}/images/2017/rplot-02.jpg
