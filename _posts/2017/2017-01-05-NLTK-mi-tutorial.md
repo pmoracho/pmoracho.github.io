@@ -171,7 +171,71 @@ La salida:
 
 Ya conformada la variable `nltk.text` podemos empezar a hacer análisis interesantes:
 
-* Buscar 
+* Buscar con contexto. Un análisis muy interesante que podemos hacer sobre un
+  texto, es medainte el uso de `concordance`, esta función nos permite buscar
+  una determinada palabra y analizar su contexto. Por ejemplo:
+
+```python
+text.concordance("Sarmiento")
+```
+```text
+Displaying 25 of 78 matches:
+zación nacional . Contemporáneo de Sarmiento , Vicente F. López y Alberdi , per
+o de nuestros escritores de nota . Sarmiento era demasiado impetuoso para mante
+en la escena política de su país . Sarmiento en París Salgo del taller de Rodin
+del taller de Rodin ; la figura de Sarmiento va tomando vida y forma . El sober
+asado el síncope [ 20 ] y de nuevo Sarmiento surge en mi memoria , como si su p
+z tomos publicados de las obras de Sarmiento [ 21 ] , haced un esfuerzo sobre v
+as comparables a algunas de las de Sarmiento en sus _Viajes_ , al retrato de do
+ágina que no haya sido escrita por Sarmiento ; hay muy poco inédito , porque pa
+hay muy poco inédito , porque para Sarmiento , escribir era obrar . Así , en es
+ón dolorosa de una profanación . I Sarmiento se embarca , pues , sobre la _Enri
+n , a don Bernardino Rivadavia ... Sarmiento descubre , al pasar , la isla de R
+ltimos años de vigor intelectual . Sarmiento pasa rápidamente por Montevideo , 
+llo de nobleza de ese abolengo ... Sarmiento venía de Chile , a donde los últim
+o de Janeiro , en rumbo a Europa , Sarmiento debió sacudir su poderosa cabeza ,
+is , conocéis el estilo general de Sarmiento , ese ímpetu un tanto desordenado 
+l» las pruebas de los artículos de Sarmiento . Allí se topa también con el _par
+, pero que él se había resistido . Sarmiento le toma el pelo en el acto y deplo
+ero confortable ... II Al fin pisa Sarmiento tierra de Europa , remonta el Sena
+ tuve el honor de ser compañero de Sarmiento en el Consejo General de Educación
+ La primera impresión de París que Sarmiento comunica a Aberastain es caracterí
+Romeo y Julieta , la generación de Sarmiento sólo veía a París a través de los 
+trio la fuente de su inspiración : Sarmiento , por ímpetu interno y porque viví
+elace y Clarisse Harlowe . Por eso Sarmiento , frescamente desembarcado en Parí
+able ! Siento daros ese mal rato : Sarmiento se quedaba `` con un palmo de boca
+, esa reminiscencia ? Para ellos , Sarmiento no figura , acaso , entre esas _co
+```  
+
+  Podremos variar el tamaño del contexto en el ancho y en la cantidada de 
+  ocurrencias.
+
+```python
+text.concordance("Sarmiento", width=132, lines=20)
+```
+```text
+Displaying 20 of 78 matches:
+, en vísperas de la organización nacional . Contemporáneo de Sarmiento , Vicente F. López y Alberdi , perteneció a la generación de
+eputo el más puro y castizo de nuestros escritores de nota . Sarmiento era demasiado impetuoso para mantener una corrección inalter
+e había cesado de figurar en la escena política de su país . Sarmiento en París Salgo del taller de Rodin ; la figura de Sarmiento 
+ Sarmiento en París Salgo del taller de Rodin ; la figura de Sarmiento va tomando vida y forma . El soberbio viejo , que fué uno de
+entra a su vida normal , pasado el síncope [ 20 ] y de nuevo Sarmiento surge en mi memoria , como si su personalidad absorbente sal
+ sin vida , los ocho o diez tomos publicados de las obras de Sarmiento [ 21 ] , haced un esfuerzo sobre vuestro horror de la letra 
+modelos del género , páginas comparables a algunas de las de Sarmiento en sus _Viajes_ , al retrato de don Domingo de Oro , en sus 
+ ) 51 y no contienen una página que no haya sido escrita por Sarmiento ; hay muy poco inédito , porque para Sarmiento , escribir er
+o escrita por Sarmiento ; hay muy poco inédito , porque para Sarmiento , escribir era obrar . Así , en esa publicación , en la que 
+ea que produzca la impresión dolorosa de una profanación . I Sarmiento se embarca , pues , sobre la _Enriqueta_ , uno de esos barco
+or si los pescados le miran , a don Bernardino Rivadavia ... Sarmiento descubre , al pasar , la isla de Robinson , que describe en 
+ca a que ha dedicado sus últimos años de vigor intelectual . Sarmiento pasa rápidamente por Montevideo , pero su sensación es tan f
+ni de nuestro nombre el sello de nobleza de ese abolengo ... Sarmiento venía de Chile , a donde los últimos rebotes de la ola de ba
+ barco que le llevaba a Río de Janeiro , en rumbo a Europa , Sarmiento debió sacudir su poderosa cabeza , como para disipar el mal 
+ que en nuestra tierra leéis , conocéis el estilo general de Sarmiento , ese ímpetu un tanto desordenado , aquel atropellarse de la
+corregíamos en el «Nacional» las pruebas de los artículos de Sarmiento . Allí se topa también con el _pardejón_ Rivera , el tenient
+hija doña María da Gloria , pero que él se había resistido . Sarmiento le toma el pelo en el acto y deplora que haya desdeñado de e
+no de Europa , pequeño , pero confortable ... II Al fin pisa Sarmiento tierra de Europa , remonta el Sena y por Rouen , gana París 
+ra entre nosotros . Cuando tuve el honor de ser compañero de Sarmiento en el Consejo General de Educación de la provincia de Buenos
+del bastón de su vejez ... La primera impresión de París que Sarmiento comunica a Aberastain es característica ; como el joven que 
+```
 
 * Obtener las colocaciones. Las
   [colocaciones](https://es.wikipedia.org/wiki/Colocaci%C3%B3n) son una
