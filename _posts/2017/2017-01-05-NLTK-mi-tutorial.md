@@ -267,23 +267,25 @@ hombres; día siguiente
 * Similitud distribucional, es decir hallar palabras que aparecen en los mismos
   contexto de una palabra específica:
 
-  ```python
-  text.similar("estilo")
-  colegio espíritu libro estudio día gobierno arte punto sueño silencio
-  ideal cuerpo éxito abeille suelo cansancio cielo alma patio objetivo
-  ```
+	```python
+	text.similar("estilo")
+	```
+	```text
+	colegio espíritu libro estudio día gobierno arte punto sueño silencio
+	ideal cuerpo éxito abeille suelo cansancio cielo alma patio objetivo
+	```
  
 * Obtener los [hapaxes](https://es.wikipedia.org/wiki/H%C3%A1pax) que no son
   más que una palabra que sólo aparece una vez dentro de un contexto, ya sea en
   el registro escrito de un idioma entero, en las obras de un autor o dentro de
   un solo texto. 
 
-```python 
-# Obtener 20 hapaxes
-from nltk import FreqDist
-fdist1 = FreqDist(text)
-fdist1.hapaxes()[:20]
-``` 
+	```python 
+	# Obtener 20 hapaxes
+	from nltk import FreqDist
+	fdist1 = FreqDist(text)
+	fdist1.hapaxes()[:20]
+	``` 
 
 
 
