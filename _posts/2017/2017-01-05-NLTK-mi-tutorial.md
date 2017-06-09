@@ -181,7 +181,7 @@ problema
 
 ### Buscar con contexto. 
 
-Un análisis muy interesante que podemos hacer sobre un texto, es medainte el
+Un análisis muy interesante que podemos hacer sobre un texto, es mediante el
 uso de `concordance`, esta función nos permite buscar una determinada palabra y
 analizar su contexto. Por ejemplo:
 
@@ -294,7 +294,21 @@ fdist1 = FreqDist(text)
 fdist1.hapaxes()[:20]
 ``` 
 
+### Dispersión lexica
 
+Si además de `nltk` hemos instalado `matplotlib` hay un análisis gráfico muy
+interesante que es la dispersión de determinadas palabras en todo el corpus.
+Por ejemplo, en la obra de Miguel Cané que estamos usando como ejemplo,
+podríamos analizar como se organizan los nombres de ciertos próceres en el
+texto, dónde y cuanto aparecen, por ejemplo:
+
+```
+text.dispersion_plot(["Sarmiento", "Belgrano", "San Martín", "Mitre", "Avellaneda", "Aldina", "Rosas"])
+```
+
+Y esto nos generaráun gráfico como el siguiente:
+
+![ejemplo1][ejemplo1]
 
 
 ### Que es el "Stemming" y para que es útil?
@@ -352,4 +366,6 @@ Numero|Etiqueta|Descripción
 
 ----
 ## ..Continuara
+
+[ejemplo1]:{{site.baseurl}}/images/2017/nlp-tuto-01.png
 
