@@ -169,9 +169,9 @@ La salida:
 ['\ufeffThe', 'Project', 'Gutenberg', 'EBook', 'of', 'Juvenilla', ';', 'Prosa', 'ligera', ',']
 ```	
 
-Ya conformada la variable `nltk.text` podemos empezar a hacer análisis interesantes:
+Ya conformada la variable `nltk.text` podemos empezar a hacer varios análisis interesantes
 
-* Búsqueda de patrones.
+### Búsqueda de patrones.
 
 ```python
 text.findall("<un>(<.*>)<especial>")
@@ -179,13 +179,16 @@ sabor; subjetivismo; aparato; momento; sentimiento; orden; acento;
 problema
 ```
 
-* Buscar con contexto. Un análisis muy interesante que podemos hacer sobre un
-  texto, es medainte el uso de `concordance`, esta función nos permite buscar
-  una determinada palabra y analizar su contexto. Por ejemplo:
+### Buscar con contexto. 
+
+Un análisis muy interesante que podemos hacer sobre un texto, es medainte el
+uso de `concordance`, esta función nos permite buscar una determinada palabra y
+analizar su contexto. Por ejemplo:
 
 ```python
 text.concordance("Sarmiento")
 ```
+
 ```text
 Displaying 25 of 78 matches:
 zación nacional . Contemporáneo de Sarmiento , Vicente F. López y Alberdi , per
@@ -215,8 +218,8 @@ able ! Siento daros ese mal rato : Sarmiento se quedaba `` con un palmo de boca
 , esa reminiscencia ? Para ellos , Sarmiento no figura , acaso , entre esas _co
 ```  
 
-  Podremos variar el tamaño del contexto en el ancho y en la cantidad de 
-  ocurrencias.
+Podremos variar el tamaño del contexto en el ancho y en la cantidad de
+ocurrencias.
 
 ```python
 text.concordance("Sarmiento", width=132, lines=20)
@@ -245,11 +248,12 @@ ra entre nosotros . Cuando tuve el honor de ser compañero de Sarmiento en el Co
 del bastón de su vejez ... La primera impresión de París que Sarmiento comunica a Aberastain es característica ; como el joven que 
 ```
 
-* Obtener las colocaciones. Las
-  [colocaciones](https://es.wikipedia.org/wiki/Colocaci%C3%B3n) son una
-  unidades fraseológicas de dos o más palabras que se usan muy habitualmente
-  combinadas, más de lo que probabilísticamente se daría, por ejemplo "alto
-  riesgo", "renta fija", "tomar en cuenta", "sin duda", etc. 
+### Obtener las colocaciones. 
+
+Las [colocaciones](https://es.wikipedia.org/wiki/Colocaci%C3%B3n) son una
+unidades fraseológicas de dos o más palabras que se usan muy habitualmente
+combinadas, más de lo que probabilísticamente se daría, por ejemplo "alto
+riesgo", "renta fija", "tomar en cuenta", "sin duda", etc. 
 
 ```python	
 text.collocations()
@@ -262,30 +266,33 @@ Foundation; sin duda; United States; los ojos; primera vez; los
 hombres; día siguiente
 ```
 
-  Podemos asimismo variar la cantidad a mostrar `text.collocations(num=50)`
+Podemos asimismo variar la cantidad a mostrar `text.collocations(num=50)`
 
-* Similitud distribucional, es decir hallar palabras que aparecen en los mismos
-  contexto de una palabra específica:
+### Similitud distribucional 
 
-	```python
-	text.similar("estilo")
-	```
-	```text
-	colegio espíritu libro estudio día gobierno arte punto sueño silencio
-	ideal cuerpo éxito abeille suelo cansancio cielo alma patio objetivo
-	```
- 
-* Obtener los [hapaxes](https://es.wikipedia.org/wiki/H%C3%A1pax) que no son
-  más que una palabra que sólo aparece una vez dentro de un contexto, ya sea en
-  el registro escrito de un idioma entero, en las obras de un autor o dentro de
-  un solo texto. 
+Es decir hallar palabras que aparecen en los mismos contexto de una palabra
+específica:
 
-	```python 
-	# Obtener 20 hapaxes
-	from nltk import FreqDist
-	fdist1 = FreqDist(text)
-	fdist1.hapaxes()[:20]
-	``` 
+```python
+text.similar("estilo")
+```
+```text
+colegio espíritu libro estudio día gobierno arte punto sueño silencio
+ideal cuerpo éxito abeille suelo cansancio cielo alma patio objetivo
+```
+
+### Obtener los [hapaxes](https://es.wikipedia.org/wiki/H%C3%A1pax) 
+
+Que no son más que una palabra que sólo aparece una vez dentro de un contexto,
+ya sea en el registro escrito de un idioma entero, en las obras de un autor o
+dentro de un solo texto. 
+
+```python 
+# Obtener 20 hapaxes
+from nltk import FreqDist
+fdist1 = FreqDist(text)
+fdist1.hapaxes()[:20]
+``` 
 
 
 
