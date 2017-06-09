@@ -171,6 +171,14 @@ La salida:
 
 Ya conformada la variable `nltk.text` podemos empezar a hacer análisis interesantes:
 
+* Búsqueda de patrones.
+
+```python
+text.findall("<un>(<.*>)<especial>")
+sabor; subjetivismo; aparato; momento; sentimiento; orden; acento;
+problema
+```
+
 * Buscar con contexto. Un análisis muy interesante que podemos hacer sobre un
   texto, es medainte el uso de `concordance`, esta función nos permite buscar
   una determinada palabra y analizar su contexto. Por ejemplo:
@@ -207,7 +215,7 @@ able ! Siento daros ese mal rato : Sarmiento se quedaba `` con un palmo de boca
 , esa reminiscencia ? Para ellos , Sarmiento no figura , acaso , entre esas _co
 ```  
 
-  Podremos variar el tamaño del contexto en el ancho y en la cantidada de 
+  Podremos variar el tamaño del contexto en el ancho y en la cantidad de 
   ocurrencias.
 
 ```python
@@ -246,6 +254,24 @@ del bastón de su vejez ... La primera impresión de París que Sarmiento comuni
 ```python	
 text.collocations()
 ```	
+```text
+Project Gutenberg-tm; Buenos Aires; todos los; Project Gutenberg; más
+tarde; todas las; Sr. Abeille; Literary Archive; tal vez; Gutenberg-tm
+electronic; electronic works; Gutenberg Literary; San Martín; Archive
+Foundation; sin duda; United States; los ojos; primera vez; los
+hombres; día siguiente
+```
+
+  Podemos asimismo variar la cantidad a mostrar `text.collocations(num=50)`
+
+* Similitud distribucional, es decir hallar palabras que aparecen en los mismos
+  contexto de una palabra específica:
+
+  ```python
+  text.similar("estilo")
+  colegio espíritu libro estudio día gobierno arte punto sueño silencio
+  ideal cuerpo éxito abeille suelo cansancio cielo alma patio objetivo
+  ```
  
 * Obtener los [hapaxes](https://es.wikipedia.org/wiki/H%C3%A1pax) que no son
   más que una palabra que sólo aparece una vez dentro de un contexto, ya sea en
@@ -258,6 +284,9 @@ from nltk import FreqDist
 fdist1 = FreqDist(text)
 fdist1.hapaxes()[:20]
 ``` 
+
+
+
 
 ### Que es el "Stemming" y para que es útil?
 
