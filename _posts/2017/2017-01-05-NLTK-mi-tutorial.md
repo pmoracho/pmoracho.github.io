@@ -310,6 +310,36 @@ Y esto nos generaráun gráfico como el siguiente:
 
 ![ejemplo1][ejemplo1]
 
+### Riqueza léxica
+
+Este es un dato muy lindo que podemos calcular muy fácilmente sobre cualquier
+texto. La riqueza léxica representa la variedad de términos usados en un texto
+con relación a la cantidad total, la fórmula:
+
+```python
+def riqueza_lexica(text):
+    return len(set(text)) / len(text)
+```
+
+Comparemos un poco por ejemplo el texto "Juvenilla" con los "Hermanos
+Karamazov"
+
+```python
+riqueza_lexica(juvenilla)
+0.15420297308791675
+len(juvenilla)
+101107
+
+riqueza_lexica(karamazov)
+0.0716456435144911
+len(karamazov)
+349456
+```
+
+El primer texto tiene una riqueza de 0.15 con algo más de 100.000 palabras, el
+clasico de Fedor Dostovieski sin embargo tiene un número menor de 0.07 casi la
+mitad menos pero con el triple de palabras.
+
 
 ### Que es el "Stemming" y para que es útil?
 
