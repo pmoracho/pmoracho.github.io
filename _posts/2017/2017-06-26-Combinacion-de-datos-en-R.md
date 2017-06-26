@@ -24,11 +24,11 @@ teniendo clara algunas pautas vamos a ver que no es tan así. Hoy vamos a
 estudiar los mecanismos de combinación de datos, esto en SQL es el ABC, estamos
 hablando de la familia de sentencias `JOIN`. En `R` contrariamente a lo que uno
 naturalmente pensaría, estas operaciones suelen ser mucho más simples de
-realizar. En principio, vamos a asumir que un `data.frame` en `R` equivale a
+realizar. En principio, vamos a asumir que un `[data.frame][dataframe]` en `R` equivale a
 una tabla o recordset de datos en SQL, no es tan así pero para este ejemplo nos
 alcanza.
 
-Vamos a "jugar" entonces con dos dataframes o tablas: `clientes` y `ventas`, el
+Vamos a "jugar" entonces con dos `[data.frame][dataframe]` o tablas: `clientes` y `ventas`, el
 primero obviamente representa un conjunto de clientes y el segundo las
 eventuales ventas acumuladas de los mismos, los creamos así:
 
@@ -64,11 +64,13 @@ Hay que notar que:
 - A modo de ejemplo también tenemos `ventas` que no pertenecen a ningún cliente,
   por ejemplo el registro # 4 que pertenecería a un Cliente 5 inexistente
 
-Veamos ahora las opciones de combinación de datos:
+Veamos ahora las opciones de combinación de datos, en este ejemplo, vamos a
+trabajar con una rutina estándar de `R` se trata de
+[`merge`](https://stat.ethz.ch/R-manual/R-devel/library/base/html/merge.html)
 
 ## inner join
 
-Todos los registros coincidentes entre ambos dataframes por `by="ClienteId"`
+Todos los registros coincidentes entre ambos `[data.frame][dataframe]` por `by="ClienteId"`
 
 ``` R
 merge(x = clientes, y = ventas, by = "ClienteId")
@@ -84,7 +86,7 @@ del cliente inexistente 5 tampoco aparecerán
 
 ## Left Join
 
-Un clásico `left join` dónde se muestra todos los registros del dataframe
+Un clásico `left join` dónde se muestra todos los registros del `[data.frame][dataframe]`
 izquierdo (`x`) y solo los coincidentes por `ClienteId` de la tabla derecha
 (`y`)
 
@@ -99,7 +101,7 @@ df
 4         4   Cliente 4    NA 
 ```
 
-Vemos que el Cliente 4 que no tiene registros en el dataframe `ventas` muestra
+Vemos que el Cliente 4 que no tiene registros en el `[data.frame][dataframe]` `ventas` muestra
 la columna de `Monto` como `NA`, en SQL se nos mostraría el valor `NULL`.
 Algunas veces nos puede servir así, pero en este ejemplo lo correcto sería
 indicar esta columna en 0 de la siguiente forma:
@@ -116,7 +118,7 @@ df
 
 ## Right join
 
-En este caso mostraremos todos los registros del dataframe derecho (`y =
+En este caso mostraremos todos los registros del `[data.frame][dataframe]` derecho (`y =
 ventas`) y solo los coincidentes del izquierdo (`x = clientes`) y también
 reeplazamos los valores `NA` de las columnas que correspondan.
 
@@ -170,7 +172,7 @@ inexistente. Vemos que las columnas no coincidentes se completan con el valor
 
 ## Cross Join
 
-O producto cartesiano, cada fila de un dataframe se combina con la fila del otro
+O producto cartesiano, cada fila de un `[data.frame][dataframe]` se combina con la fila del otro
 
 ``` R
 merge(x = clientes, y = ventas, by = NULL)
@@ -192,3 +194,6 @@ merge(x = clientes, y = ventas, by = NULL)
 15           3   Cliente 3           5    90
 16           4   Cliente 4           5    90
 ```
+
+[dataframe]:https://stat.ethz.ch/R-manual/R-devel/library/base/html/data.frame.html
+
