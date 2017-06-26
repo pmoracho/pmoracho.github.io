@@ -294,6 +294,32 @@ fdist1 = FreqDist(text)
 fdist1.hapaxes()[:20]
 ``` 
 
+### Palabras más comunes
+
+Como hemos visto el objeto `FreqDist` representa la distribución de los
+**tokens** en nuestro **Corpus**, y podemos usarlo para obtener los términos
+más comunes, que normalmente son los articulos y preposiciones, sin embargo
+podemos jugar con la longitud de los tokens a listar para obtener el ranking de
+otros tipos de palabras
+
+```python 
+from nltk import FreqDist
+fdist1 = FreqDist(text)
+print([i for i in fdist1.most_common(1000) if len(i[0]) > 5])
+``` 
+
+** Otras opciones interesantes de `FreqDist` **
+
+- fdist.samples(): Genera una lista con el vocabulario 
+- fdist.values(): Devuelve el no de veces que aparece cada palabra 
+- fdist.N(): No total de palabras en el texto 
+- fdist.freq(word): Devuelve la frecuencia de aparación de word 
+- fdist.inc(palabra): Incrementa la cuenta para una palabra 
+- fdist.max(): Palabra con máxima frecuencia 
+- fdist.tabulate(): Tabula la distribución de frecuencia 
+- fdist.plot(): Representación gráfica
+
+
 ### Dispersión lexica
 
 Si además de `nltk` hemos instalado `matplotlib` hay un análisis gráfico muy
