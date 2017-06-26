@@ -66,7 +66,7 @@ Hay que notar que:
 
 Veamos ahora las opciones de combinación de datos, en este ejemplo, vamos a
 trabajar con una rutina estándar de `R` se trata de
-[`merge`](https://stat.ethz.ch/R-manual/R-devel/library/base/html/merge.html)
+[merge](https://stat.ethz.ch/R-manual/R-devel/library/base/html/merge.html)
 
 ## inner join
 
