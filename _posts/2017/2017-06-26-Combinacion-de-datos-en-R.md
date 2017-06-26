@@ -20,13 +20,13 @@ image:
 ---
 
 La transición entre `SQL` y `R` puede resultar complicada al principio, pero
-teniendo clara algunas pautas vamos a ver que no es tan complicado. Hoy vamos a
+teniendo clara algunas pautas vamos a ver que no es tan así. Hoy vamos a
 estudiar los mecanismos de combinación de datos, esto en SQL es el ABC, estamos
-hablando de la familia de sentencias `JOIN`, en `R` contrariamente a lo que uno
+hablando de la familia de sentencias `JOIN`. En `R` contrariamente a lo que uno
 naturalmente pensaría, estas operaciones suelen ser mucho más simples de
 realizar. En principio, vamos a asumir que un `data.frame` en `R` equivale a
 una tabla o recordset de datos en SQL, no es tan así pero para este ejemplo nos
-alacanza.
+alcanza.
 
 Vamos a "jugar" entonces con dos dataframes o tablas: `clientes` y `ventas`, el
 primero obviamente representa un conjunto de clientes y el segundo las
@@ -43,19 +43,19 @@ ventas = data.frame(ClienteId = c(1, 2, 3, 5),
 En definitiva así son ambos:
 
 ``` R
-	> clientes
-	  ClienteId RazonSocial
-	1         1   Cliente 1
-	2         2   Cliente 2
-	3         3   Cliente 3
-	4         4   Cliente 4
+> clientes
+	ClienteId RazonSocial
+1         1   Cliente 1
+2         2   Cliente 2
+3         3   Cliente 3
+4         4   Cliente 4
 
-	> ventas
-	  ClienteId Monto
-	1         1   110
-	2         2    50
-	3         3    60
-	4         5    90
+> ventas
+	ClienteId Monto
+1         1   110
+2         2    50
+3         3    60
+4         5    90
 ```
 
 Hay que notar que:
@@ -71,12 +71,12 @@ Veamos ahora las opciones de combinación de datos:
 Todos los registros coincidentes entre ambos dataframes por `by="ClienteId"`
 
 ``` R
-	merge(x = clientes, y = ventas, by = "ClienteId")
+merge(x = clientes, y = ventas, by = "ClienteId")
 
-	  ClienteId RazonSocial Monto
-	1         1   Cliente 1   110
-	2         2   Cliente 2    50
-	3         3   Cliente 3    60
+	ClienteId RazonSocial Monto
+1         1   Cliente 1   110
+2         2   Cliente 2    50
+3         3   Cliente 3    60
 ```
 
 Notar que Cliente 4 no tiene ventas por eso no aparece, y obviamente las ventas
@@ -84,7 +84,9 @@ del cliente inexistente 5 tampoco aparecerán
 
 ## Left Join
 
-Un clásico `left join` dónde se muestra todos los registros del dataframe izquierda (`x`) y solo los coincidente por `ClienteId` de la tabla derecha (`y`)
+Un clásico `left join` dónde se muestra todos los registros del dataframe
+izquierdo (`x`) y solo los coincidentes por `ClienteId` de la tabla derecha
+(`y`)
 
 ``` R
 df <-merge(x = clientes, y = ventas, by = "ClienteId", all.x = TRUE)
@@ -98,8 +100,9 @@ df
 ```
 
 Vemos que el Cliente 4 que no tiene registros en el dataframe `ventas` muestra
-la columna de `Monto` como `NA`, algunas veces nos puede servir así, pero en
-este ejemplo lo correcto sería indicar esta columna en 0 de la siguiente forma:
+la columna de `Monto` como `NA`, en SQL se nos mostraría el valor `NULL`.
+Algunas veces nos puede servir así, pero en este ejemplo lo correcto sería
+indicar esta columna en 0 de la siguiente forma:
 
 ``` R
 df$Monto[is.na(df$Monto)] <- 0
