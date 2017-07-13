@@ -186,6 +186,20 @@ sudo apt-get install r-base
 4. Instalar RStudio. Simplemente descaragar el instalador correspondiente desde
    [este](http://www.rstudio.com/ide/download/) enlace, luego simplemete: `sudo gdebi <paquete.deb>`
 
+# Comentarios multilínea
+
+Lamentablemente R no maneja comentarios multilinea, hay un truco que no se si
+es muy bueno que digamos y que pasa por escribir una cadena común multilinea,
+que R evaluará como tal
+
+``` R
+" Esta es una prueba
+  de un string multilinea que hace las veces
+  de un comentario
+"
+```
+
+
 [merge]:https://stat.ethz.ch/R-manual/R-devel/library/base/html/merge.html
 [dataframes]:https://stat.ethz.ch/R-manual/R-devel/library/base/html/data.frame.html
 [fuzzyjoin]:https://cran.r-project.org/web/packages/fuzzyjoin/fuzzyjoin.pdf

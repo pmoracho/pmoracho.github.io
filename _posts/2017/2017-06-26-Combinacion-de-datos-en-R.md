@@ -92,7 +92,6 @@ izquierdo (`x`) y solo los coincidentes por `ClienteId` de la tabla derecha
 
 ``` R
 df <-merge(x = clientes, y = ventas, by = "ClienteId", all.x = TRUE)
-df$Monto[is.na(df$Monto)] <- 0
 df
 	ClienteId RazonSocial Monto
 1         1   Cliente 1   110
@@ -124,7 +123,6 @@ reeplazamos los valores `NA` de las columnas que correspondan.
 
 ``` R
 df <-merge(x = clientes, y = ventas, by = "ClienteId", all.y = TRUE)
-df$RazonSocial[is.na(df$RazonSocial)] <- "Sin Cliente"
 
 	ClienteId RazonSocial Monto
 1         1   Cliente 1   110
