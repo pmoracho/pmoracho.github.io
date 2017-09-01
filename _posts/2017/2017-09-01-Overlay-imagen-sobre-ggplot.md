@@ -39,6 +39,6 @@ a sobreimponer (`AREA`). Haciendo una especie de "sandwich" así: `PLOT + MASK +
 AREA` obtenemos la imágen final, la imagen `MASK` dependiendo si un pixel es
 banco o negro, determina si el pixel final será el de `PLOT` o el de `AREA`
 
-[pregunta](https://es.stackoverflow.com/questions/95753/composici%C3%B3n-de-imagen-y-gr%C3%A1fico-en-r)
-[ggplot](http://ggplot2.org/)
+[pregunta]:ttps://es.stackoverflow.com/questions/95753/composici%C3%B3n-de-imagen-y-gr%C3%A1fico-en-r
+[ggplot]:http://ggplot2.org
 
