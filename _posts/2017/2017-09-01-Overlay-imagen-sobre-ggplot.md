@@ -51,11 +51,55 @@ tareas. En **R** hay un paquete que encapsula las principales funcionalidades
 de [ImageMagick][im], se trata de [magick][magick], no tuve tiempo de
 profundizar mucho en él, en principio encontré algunas limitaciones, así que
 opté por trabajar directamente con la línea de comandos haciendo llamadas a
-[system()][system], veamos como:
+[system][system], veamos como:
 
 Imaginemos que tenemos un gráfico de área como este:
 
 ![img1][img1]
+
+Y tenemos otra imágen para el área que es esta:
+
+![img2][img2]
+
+### Generar la máscara
+
+Lo más complejo es generar la máscara. La forma de hacerlo de forma automática
+es terriblemene simple. Si tenemos un pixel de un determinado color y los
+"sumamos" con otro pixel que tiene el valor exacto pero en "negativo", por
+ejemplo obtendremos el negro máximo. Pensando en una paleta simple de 256
+colores, si un pixel vale 37 la versión "negativa" valdrá 256-37 es dedcir 219
+y si sumamos ambos el valor final sería 256. Por el contrario si un pixel lo
+sumamos con otro cuyo valor no es exactamente el negativo, obtendremos un color
+determinado. Entonces, si generamos dos versiones del `plot` cuya única
+diferencia sea el color del área y sumamos ambas imágenes nos quedaremos
+únicamente con el área, la cual con algún tratamiento más convertiremos en
+nuestra máscara. Tal vez parezca un poco confuso, pero gráficamente va a ser
+más clara la idea.
+
+Veamos, primero generamos un gráfico:
+
+``` R
+set.seed(1234)
+df <- data.frame(
+    sex=factor(rep(c("F", "M"), each=200)),
+    weight=round(c(rnorm(200, mean=55, sd=5),
+                   rnorm(200, mean=65, sd=5)))
+)
+
+plot1 <- ggplot(df, aes(x=weight)) +
+    geom_area(stat = "bin", fill = "lightblue", color="darkblue", bins=30)+
+    geom_vline(aes(xintercept=mean(weight)),
+               color="blue", linetype="dashed", size=1)
+```
+
+Salvamos el `plot` que es la imagen que vemos más arriba, si la "negativizamos"
+obtendremos algo como esto:
+
+![img3][img3]
+
+Y si combinamos ambas y volvemos a pasarla a negativo, tenemos esto:
+
+![img4][img4]
 
 
 
@@ -64,5 +108,8 @@ Imaginemos que tenemos un gráfico de área como este:
 [gimp]:https://www.gimp.org
 [im]:https://www.imagemagick.org
 [magick]:https://cran.r-project.org/web/packages/magick/vignettes/intro.html
-[system()]:https://stat.ethz.ch/R-manual/R-devel/library/base/html/system.html
+[system]:https://stat.ethz.ch/R-manual/R-devel/library/base/html/system.html
 [img1]:{{site.baseurl}}/images/2017/plot_11345999580f.png
+[img2]:{{site.baseurl}}/images/2017/area_11344e74a54.png
+[img3]:{{site.baseurl}}/images/2017/plot_negate_11346db71bfd.png
+[img4]:{{site.baseurl}}/images/2017/mask_11345c282402.png
