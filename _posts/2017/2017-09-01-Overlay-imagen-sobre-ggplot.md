@@ -61,7 +61,7 @@ Y tenemos otra imágen para el área que es esta:
 
 ![img2][img2]
 
-### Generar la máscara
+## Generar la máscara
 
 Lo más complejo es generar la máscara. La forma de hacerlo de forma automática
 es terriblemene simple. Si tenemos un pixel de un determinado color y los
@@ -102,8 +102,12 @@ Y si combinamos ambas y volvemos a pasarla a negativo, tenemos esto:
 ![img4][img4]
 
 
+## Combinando las capas
 
-[pregunta]:ttps://es.stackoverflow.com/questions/95753/composici%C3%B3n-de-imagen-y-gr%C3%A1fico-en-r
+Ahora, teniendo
+
+
+[pregunta]:https://es.stackoverflow.com/questions/95753/composici%C3%B3n-de-imagen-y-gr%C3%A1fico-en-r
 [ggplot]:http://ggplot2.org
 [gimp]:https://www.gimp.org
 [im]:https://www.imagemagick.org
