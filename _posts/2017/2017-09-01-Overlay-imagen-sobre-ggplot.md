@@ -48,10 +48,15 @@ a sobreimponer.
 
 Claro que se puede, por empezar vamos a usar [ImageMagick][im] para todas las
 tareas. En **R** hay un paquete que encapsula las principales funcionalidades
-de [ImageMagick][im] se trata de [magick][[magick], no tuve tiempo de
+de [ImageMagick][im], se trata de [magick][magick], no tuve tiempo de
 profundizar mucho en él, en principio encontré algunas limitaciones, así que
 opté por trabajar directamente con la línea de comandos haciendo llamadas a
-[system()][system]
+[system()][system], veamos como:
+
+Imaginemos que tenemos un gráfico de área como este:
+
+![img1][img1]
+
 
 
 [pregunta]:ttps://es.stackoverflow.com/questions/95753/composici%C3%B3n-de-imagen-y-gr%C3%A1fico-en-r
@@ -60,4 +65,4 @@ opté por trabajar directamente con la línea de comandos haciendo llamadas a
 [im]:https://www.imagemagick.org
 [magick]:https://cran.r-project.org/web/packages/magick/vignettes/intro.html
 [system()]:https://stat.ethz.ch/R-manual/R-devel/library/base/html/system.html
-
+[img1]:{{site.baseurl}}/images/2017/plot_11345999580f.png
