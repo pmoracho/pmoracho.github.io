@@ -19,6 +19,7 @@ tags:
 image:
   feature: 2017/img-feature-002.jpeg
 ---
+## _¿Cómo aplicar una imágen a ciertas áreas de un `plot`?_
 
 A raíz de [esta pregunta][pregunta] estuve varios días pensando que solución
 encontrarle. Hasta dónde pude investigar [ggplot][ggplot] no ofrece ningún
@@ -65,18 +66,18 @@ Y tenemos otra imágen para el área que es esta:
 
 Lo más complejo es generar la máscara. La forma de hacerlo de forma automática
 es terriblemene simple. Si tenemos un pixel de un determinado color y los
-"sumamos" con otro pixel que tiene el valor exacto pero en "negativo", por
-ejemplo obtendremos el negro máximo. Pensando en una paleta simple de 256
-colores, si un pixel vale 37 la versión "negativa" valdrá 256-37 es dedcir 219
-y si sumamos ambos el valor final sería 256. Por el contrario si un pixel lo
-sumamos con otro cuyo valor no es exactamente el negativo, obtendremos un color
-determinado. Entonces, si generamos dos versiones del `plot` cuya única
-diferencia sea el color del área y sumamos ambas imágenes nos quedaremos
-únicamente con el área, la cual con algún tratamiento más convertiremos en
-nuestra máscara. Tal vez parezca un poco confuso, pero gráficamente va a ser
-más clara la idea.
+"sumamos" con otro pixel que tiene el valor exacto pero en "negativo",
+obtendremos el negro máximo. Pensando en una paleta simple de 256 colores, si
+un pixel vale 37 la versión "negativa" valdrá (256-37) es decir 219 y si
+sumamos ambos el valor final sería 256. Por el contrario si un pixel lo sumamos
+con otro cuyo valor no es exactamente el negativo, obtendremos un color
+determinado distinto al negro. Entonces, si generamos dos versiones del `plot`
+cuya única diferencia sea el color del área y sumamos ambas imágenes nos
+quedaremos únicamente con el área, la cual con algún tratamiento más, lograremos
+convertirla en nuestra máscara. Tal vez parezca un poco confuso, pero
+gráficamente es más clara la idea.
 
-Veamos, primero generamos un gráfico:
+Veamos, primero generamos un gráfico (la imágen anterior):
 
 ``` R
 set.seed(1234)
@@ -92,20 +93,38 @@ plot1 <- ggplot(df, aes(x=weight)) +
                color="blue", linetype="dashed", size=1)
 ```
 
-Salvamos el `plot` que es la imagen que vemos más arriba, si la "negativizamos"
-obtendremos algo como esto:
+y generamos una segunda versión, con un color de área distinto
+
+``` R
+plot2 <- ggplot(df, aes(x=weight)) +
+    geom_area(stat = "bin", fill = "red", color="darkblue")+
+    geom_vline(aes(xintercept=mean(weight)),
+               color="blue", linetype="dashed", size=1)
+```
+
+![img5][img5]
+
+A esta úmtima, la pasamos a "negativo:
 
 ![img3][img3]
 
-Y si combinamos ambas y volvemos a pasarla a negativo, tenemos esto:
+Y si combinamos ambas imágenes, y con algo de magia de [ImageMagick][im],
+convertimos el resultado a blanco y negro y nuevamente a "negativo" para que
+nos quede algo así:
 
 ![img4][img4]
 
-
 ## Combinando las capas
 
-Ahora, teniendo
+Ahora, sí, tenemos las tres partes que mencionamos antes, el `plot` original,
+la máscara y la imagen para el área. La combinación es una operación trivial
+para [ImageMagick][im], y el resultado final es bastante satisfactorio:
 
+![img6][img6]
+
+Por supuesto este método tiene una limitación aparente, que es que trabajamos
+sobre las versiones "bitmap" de los `plots`y no sobre la versión real o
+vectorial. Pero si 
 
 [pregunta]:https://es.stackoverflow.com/questions/95753/composici%C3%B3n-de-imagen-y-gr%C3%A1fico-en-r
 [ggplot]:http://ggplot2.org
@@ -117,3 +136,6 @@ Ahora, teniendo
 [img2]:{{site.baseurl}}/images/2017/area_11344e74a54.png
 [img3]:{{site.baseurl}}/images/2017/plot_negate_11346db71bfd.png
 [img4]:{{site.baseurl}}/images/2017/mask_11345c282402.png
+[img5]:{{site.baseurl}}/images/2017/plot_2_113416ed5574.png
+[img6]:{{site.baseurl}}/images/2017/final_11344e74a54.png
+
