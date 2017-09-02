@@ -10,7 +10,7 @@ noindex: false
 hide_printmsg: false
 sitemap: true
 summaryfeed: false
-title: Overlay de imagenes sobre areas en ggplot (R)
+title: Overlay de imagenes sobre areas en ggplot
 description: Un posible forma de sobreimponer una imágen sobre áreas de un gráfico ggplot en R
 tags:
   - desarrollo
@@ -23,19 +23,19 @@ image:
 
 A raíz de [esta pregunta][pregunta] estuve varios días pensando que solución
 encontrarle. Hasta dónde pude investigar [ggplot][ggplot] no ofrece ningún
-mecanismo para superponer imagenes sobre areas de un gráfico cualquiera. Existe
-sí, la posibilidad de incorporar una imágen como fondo general de un gráfico,
-podríamos hacer coincidir una imágen que tenga solo  "dibujo" sobre el área del
+mecanismo para superponer imágenes sobre areas de un gráfico cualquiera. Existe
+sí, la posibilidad de incorporar una imagen como fondo general de un gráfico,
+podríamos hacer coincidir una imagen que tenga solo  "dibujo" sobre el área del
 `plot` y el resto sea un fondo en blanco, pero esto es muy complejo ya que este
-fondo solo aplica a el sector de los ejes y no a todo el "canvas". Tampoco
-encontré algún paquete que ofrezca algúna solución al respecto, así que en
+fondo solo aplica al sector de los ejes y no a todo el "canvas". Tampoco
+encontré algún paquete que ofrezca alguna solución al respecto, así que en
 definitiva tuve que pensar alguna idea para resolverlo.
 
 Tanto tiempo invertido en tratamiento de imagenes (como hobby) dieron sus
 frutos: recordé las opciones de "enmascaramiento" para componer distintas
-imagenes en capas. El concepto para resolver este tema es sencillo: tenemos una
-imágen principal (`PLOT`), una "máscara" (`MASK`) que es otra imágen
-de igual dimensión que tiene un area blanca y otra negra y por último la imágen
+imágenes en capas. El concepto para resolver este tema es sencillo: tenemos una
+imagen principal (`PLOT`), una "máscara" (`MASK`) que es otra imagen
+de igual dimensión que tiene un area blanca y otra negra y por último la imagen
 a sobreimponer (`AREA`). Haciendo una especie de "sandwich": `PLOT + MASK +
 AREA` obtenemos la imágen final, la imagen `MASK`, dependiendo si un pixel es
 banco o negro, determina si el pixel final será el de `PLOT` o el de `AREA`.
@@ -132,6 +132,64 @@ de forma rápida generar gráficas como estás:
 ![img7][img7]
 
 ![img8][img8]
+
+La rutina completa:
+``` R
+
+add_image_to_color <- function(imgmagick_path = NA, 
+                               area_img_file, 
+                               out_file, 
+                               plot1, 
+                               plot2, 
+                               width=20, 
+                               height=10, 
+                               units=c("cm"),
+                               dpi=300){
+    
+    plot_file <- tempfile(pattern="plot_", fileext=".png")
+    plot_file_negate <- tempfile(pattern="plot_negate_", fileext=".png")
+    mask_file <- tempfile(pattern="mask_", fileext=".png")
+    area_file <- tempfile(pattern="area_", fileext=".png")
+    
+    convert <- ifelse(!is.na(imgmagick_path),file.path(imgmagick_path, "convert"), "convert")
+
+    # Salvamos las dos versiones de los plots    
+    ggsave(plot_file, plot = plot1, scale = 1, width = width, height = height, units = units, dpi = dpi)
+    ggsave(plot_file_negate, plot = plot2, scale = 1, width = width, height = height, units = units, dpi = dpi)
+    
+    # Negar imagen
+    cmd <- paste(convert , plot_file_negate, "-negate", plot_file_negate)
+    system(cmd)
+
+    # Flat: me quedo solo con el area
+    cmd <- paste(convert, plot_file, plot_file_negate, "-compose LinearBurn -composite -colorspace gray -auto-level -negate", mask_file)
+    system(cmd)
+    
+    # Largo y ancho del plot
+    cmd <- paste0(convert, " ", plot_file, ' -format "%wx%h" info: ')
+    pplot_dim <- unlist(lapply(strsplit(system(cmd, intern = TRUE), "x"), as.integer))
+    
+    # Redimensiono la imagen del area
+    cmd <- paste(convert, area_img_file, "-resize", paste0(pplot_dim[1],"x",pplot_dim[2], "!"), area_file )
+    system(cmd)
+    
+    # Combinar capas para armar el area con la imagen y el fondo transparente
+    if (Sys.info()[['sysname']] == "Linux") {
+        cmd <- paste(convert, "-composite", area_file, plot_file, "\\( -blur 1x65000 \\)", mask_file, out_file)
+    } else {
+        cmd <- paste(convert, "-composite", area_file, plot_file, "( -blur 1x65000 )", mask_file, out_file)
+    }       
+    system(cmd)
+    
+}
+
+# Para ejecutar necesitamos dos versiones del mismo plot
+imgmagick_path <- NA # Si lo tenemos en el path no es necesario
+area_img_file <- "dolar.jpg"
+out_file <- "final.jpg"
+
+add_image_to_color(imgmagick_path, area_img_file, out_file, plot1, plot2, width = 15, height = 7)
+```
 
 [pregunta]:https://es.stackoverflow.com/questions/95753/composici%C3%B3n-de-imagen-y-gr%C3%A1fico-en-r
 [ggplot]:http://ggplot2.org
