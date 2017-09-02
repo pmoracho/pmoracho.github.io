@@ -129,6 +129,9 @@ general terminamos publicando imágenes. Lo interesante es que esta técnica no
 sirve para aplicar a cualquier área en la que podamos controlar el color, y así
 de forma rápida generar gráficas como estás:
 
+![img7][img7]
+
+![img8][img8]
 
 [pregunta]:https://es.stackoverflow.com/questions/95753/composici%C3%B3n-de-imagen-y-gr%C3%A1fico-en-r
 [ggplot]:http://ggplot2.org
@@ -142,4 +145,5 @@ de forma rápida generar gráficas como estás:
 [img4]:{{site.baseurl}}/images/2017/mask_11345c282402.png
 [img5]:{{site.baseurl}}/images/2017/plot_2_113416ed5574.png
 [img6]:{{site.baseurl}}/images/2017/final_11344e74a54.png
-
+[img7]:{{site.baseurl}}/images/2017/final_a1dfg1kl.png
+[img8]:{{site.baseurl}}/images/2017/final_x4cfg1kl.png
