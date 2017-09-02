@@ -122,9 +122,13 @@ para [ImageMagick][im], y el resultado final es bastante satisfactorio:
 
 ![img6][img6]
 
-Por supuesto este método tiene una limitación aparente, que es que trabajamos
-sobre las versiones "bitmap" de los `plots`y no sobre la versión real o
-vectorial. Pero si 
+Por supuesto este método tiene una cierta limitación, que es que terminamos
+trabajamos sobre las versiones "bitmap" de los `plots` y no sobre la versión
+real o vectorial, pero tampoco es algo tan terrible, en definitiva por lo
+general terminamos publicando imágenes. Lo interesante es que esta técnica no
+sirve para aplicar a cualquier área en la que podamos controlar el color, y así
+de forma rápida generar gráficas como estás:
+
 
 [pregunta]:https://es.stackoverflow.com/questions/95753/composici%C3%B3n-de-imagen-y-gr%C3%A1fico-en-r
 [ggplot]:http://ggplot2.org
