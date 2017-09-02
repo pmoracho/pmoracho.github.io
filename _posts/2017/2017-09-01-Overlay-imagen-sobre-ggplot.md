@@ -40,7 +40,7 @@ a sobreimponer (`AREA`). Haciendo una especie de "sandwich": `PLOT + MASK +
 AREA` obtenemos la imágen final, la imagen `MASK`, dependiendo si un pixel es
 banco o negro, determina si el pixel final será el de `PLOT` o el de `AREA`.
 
-El problema es siempre: como construir nuestra `MASK`, hacerlo con una
+El problema es simple: como construir nuestra `MASK`, hacerlo con una
 herramienta tipo [gimp][gimp] es relativamente sencillo, pero trabajoso, ya que
 debemos ir seleccionado con alguna de las opciones, el area del gráfico orginal
 a sobreimponer. 
@@ -52,7 +52,7 @@ tareas. En **R** hay un paquete que encapsula las principales funcionalidades
 de [ImageMagick][im], se trata de [magick][magick], no tuve tiempo de
 profundizar mucho en él, en principio encontré algunas limitaciones, así que
 opté por trabajar directamente con la línea de comandos haciendo llamadas a
-[system][system], veamos como:
+[system][system].
 
 Imaginemos que tenemos un gráfico de área como este:
 
@@ -125,7 +125,7 @@ para [ImageMagick][im], y el resultado final es bastante satisfactorio:
 Por supuesto este método tiene una cierta limitación, que es que terminamos
 trabajamos sobre las versiones "bitmap" de los `plots` y no sobre la versión
 real o vectorial, pero tampoco es algo tan terrible, en definitiva por lo
-general terminamos publicando imágenes. Lo interesante es que esta técnica no
+general terminamos publicando imágenes. Lo interesante es que esta técnica nos
 sirve para aplicar a cualquier área en la que podamos controlar el color, y así
 de forma rápida generar gráficas como estás:
 
