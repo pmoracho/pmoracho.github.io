@@ -80,7 +80,7 @@ instalada, simplemente con un `install.packages("leaflet")` alcanza. Además
 necesitaremos algún que otro paquete, detallando:
 
 * [leaflet](http://leafletjs.com/): Es la librería que generara el mapa para incorporar en una vista HTM.  `install.packages("leaflet")`
-* [rgdal](https://cran.r-project.org/web/packages/rgdal/index.html/): Unos "bindings" a la librería de abstracción de datos geográficos de Frank Warmerdam. `install.packages("leaflet")`
+* [rgdal](https://cran.r-project.org/web/packages/rgdal/index.html/): Unos "bindings" a la librería de abstracción de datos geográficos de Frank Warmerdam. `install.packages("rgdal")`
 * [plyr](https://cran.r-project.org/web/packages/plyr/index.html): La usaremos para manipular. `install.packages("plyr")`
 
 Bien, para empezar necesitamos obtener un **[shapefile][shapefile]** esto es
@@ -297,7 +297,7 @@ Y aquí el resultado final:
 
 Ahora si podemos ver realmente en que provincias los femicidios son más significativos..
 
-La descarga fina de los scripts puede hacerse desde [aquí](https://github.com/pmoracho/R.git)
+La descarga final de los scripts puede hacerse desde [aquí](https://github.com/pmoracho/R.git)
 
 [ejemplo1]:{{site.baseurl}}/images/2017/rplot-01.jpg
 [ejemplo2]:{{site.baseurl}}/images/2017/rplot-02.jpg
