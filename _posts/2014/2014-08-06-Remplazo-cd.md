@@ -8,7 +8,6 @@ tag:
   - terminal
 show_meta: true
 comments: true
-
 ---
 
 Cada vez estoy pasando más horas delante de una terminal *Nix, ya sea en para
@@ -37,101 +36,90 @@ necesidades.
 ## Improvements:
 ## + Could set maxitems for dir stack (set to 20)
 ## + Save dir stack between sessions
-## + Grep for saved paths for better search
+## + Grep for saved paths for better search cd :text
 ##################################################################################
 mycd ()
 {
- local x2 the_new_dir adir index maxitems histdirfile
- local -i cnt
-
- histdirfile="$HOME/.histdirfile"  # Set history dir file
- maxitems=20        # Items to save in dirstack
- 
- #############################################################################
- # The first time if not exist dir stack and exist $histdirfile (load it)
- #############################################################################
- lines=`dirs -v|wc -l`
- if [ $lines -lt 2 ] && [ -f $histdirfile ]; then
-  while read directory ; do
-   pushd "$directory" 2>/dev/null 1>/dev/null
-  done < $histdirfile
-  popd 2>/dev/null 1>/dev/null
- fi 
- 
- #############################################################################
- # List paths (cd --) for compatibility with Petar Marinov func, replace
- # with (cd :)
- #############################################################################
- if [[ $1 ==  "--" ]]; then
-  dirs -v -l
-  return 0
- fi
-
- #############################################################################
- # List paths (cd :)
- # List paths with grep for string (cd :tmp)
- #############################################################################
- if [[ ${1:0:1} ==  ":" ]]; then
-  search=${1:1}
-  if [[ $search == "" ]]; then
-   dirs -v -l
-  else
-   dirs -v -l | grep $search
-  fi
-  return 0
- fi
-
- the_new_dir=$1
- [[ -z $1 ]] && the_new_dir=$HOME
-
- #############################################################################
- # Dir in -number way
- #############################################################################
- if [[ ${the_new_dir:0:1} == '-' ]]; then
-  # Extract dir N from dirs
-  index=${the_new_dir:1}
-  [[ -z $index ]] && index=1
-  adir=$(dirs +$index)
-  [[ -z $adir ]] && return 1
-  the_new_dir=$adir
- fi
- 
- #############################################################################
- # '~' has to be substituted by ${HOME}
- #############################################################################
- [[ ${the_new_dir:0:1} == '~' ]] && the_new_dir="${HOME}${the_new_dir:1}"
-
- #############################################################################
- # Now change to the new dir and add to the top of the stack
- #############################################################################
- pushd "${the_new_dir}" > /dev/null
- [[ $? -ne 0 ]] && return 1
- the_new_dir=$(pwd)
-
- #############################################################################
- # Trim down everything beyond maxitems + 1 entry and save in $histdirfile
- #############################################################################
- popd -n +$((maxitems + 1)) 2>/dev/null 1>/dev/null
- #echo "popd -n +$((maxitems + 1)) 2>/dev/null 1>/dev/null"
- 
- #############################################################################
- # Save to $histdirfile
- #############################################################################
- dirs -l -p|sort|uniq>$histdirfile
-
- #############################################################################
- # Remove any other occurence of this dir, skipping the top of the stack
- #############################################################################
- for ((cnt=1; cnt <= $maxitems; cnt++)); do
-  x2=$(dirs +${cnt} 2>/dev/null)
-  [[ $? -ne 0 ]] && return 0
-  [[ ${x2:0:1} == '~' ]] && x2="${HOME}${x2:1}"
-  if [[ "${x2}" == "${the_new_dir}" ]]; then
-   popd -n +$cnt 2>/dev/null 1>/dev/null
-   cnt=cnt-1
-  fi
- done
- return 0
+	local x2 the_new_dir adir index maxitems histdirfile
+	local -i cnt
+	histdirfile="$HOME/.histdirfile"		# Set history dir file
+	maxitems=20								# Items to save in dirstack
+	#############################################################################
+	# The first time if not exist dir stack and exist $histdirfile (load it)
+	#############################################################################
+	lines=`dirs -v|wc -l`
+	if [ $lines -lt 2 ] && [ -f $histdirfile ]; then
+		while read directory ; do
+			pushd "$directory" 2>/dev/null 1>/dev/null
+		done < $histdirfile
+		# popd 2>/dev/null 1>/dev/null
+	fi
+	#############################################################################
+	# List paths (cd --) for compatibility with Petar Marinov func, replace
+	# with (cd :)
+	#############################################################################
+	if [[ $1 ==  "--" ]]; then
+		dirs -v -l | gawk '{printf("\033[1;33m%2d\033[0m %s\n",$1,$2)}'
+		return 0
+	fi
+	#############################################################################
+	# List paths (cd :)
+	# List paths with grep for string (cd :tmp)
+	#############################################################################
+	if [[ ${1:0:1} ==  ":" ]]; then
+		search=${1:1}
+		if [[ $search == "" ]]; then
+			dirs -v -l | gawk '{printf("\033[1;33m%2d\033[0m %s\n",$1,$2)}'
+		else
+			dirs -v -l | grep -i -e $search | gawk '{printf("\033[1;33m%2d\033[0m %s\n",$1,$2)}'
+		fi
+		return 0
+	fi
+	the_new_dir=$1
+	[[ -z $1 ]] && the_new_dir=$HOME
+	#############################################################################
+	# Dir in -number way
+	#############################################################################
+	if [[ ${the_new_dir:0:1} == '-' ]]; then
+		# Extract dir N from dirs
+		index=${the_new_dir:1}
+		[[ -z $index ]] && index=1
+		adir=$(dirs +$index)
+		[[ -z $adir ]] && return 1
+		the_new_dir=$adir
+	fi
+	#############################################################################
+	# '~' has to be substituted by ${HOME}
+	#############################################################################
+	[[ ${the_new_dir:0:1} == '~' ]] && the_new_dir="${HOME}${the_new_dir:1}"
+	#############################################################################
+	# Now change to the new dir and add to the top of the stack
+	#############################################################################
+	pushd "${the_new_dir}" > /dev/null
+	[[ $? -ne 0 ]] && return 1
+	the_new_dir=$(pwd)
+	#############################################################################
+	# Trim down everything beyond maxitems + 1 entry and save in $histdirfile
+	#############################################################################
+	popd -n +$((maxitems + 1)) 2>/dev/null 1>/dev/null
+	#echo "popd -n +$((maxitems + 1)) 2>/dev/null 1>/dev/null"
+	#############################################################################
+	# Save to $histdirfile
+	#############################################################################
+	dirs -l -p|cat -n| sort -uk2 | sort -nk1 | cut -f2->$histdirfile
+	#############################################################################
+	# Remove any other occurence of this dir, skipping the top of the stack
+	#############################################################################
+	for ((cnt=1; cnt <= $maxitems; cnt++)); do
+		x2=$(dirs +${cnt} 2>/dev/null)
+		[[ $? -ne 0 ]] && return 0
+		[[ ${x2:0:1} == '~' ]] && x2="${HOME}${x2:1}"
+		if [[ "${x2}" == "${the_new_dir}" ]]; then
+			popd -n +$cnt 2>/dev/null 1>/dev/null
+			cnt=cnt-1
+		fi
+	done
+	return 0
 }
 ```
 

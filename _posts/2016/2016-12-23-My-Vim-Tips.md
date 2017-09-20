@@ -58,6 +58,8 @@ b        | Moverse de a palabras con el cursor a izquierda
 `n`f`c`  | Moverse a la primer `n` ocurrencias del caracter `c` a la izquierda, por ej, 5fx i a la quinta ocurrencia de 'x'
 `n`t`c`  | idem f, se posiciona un caracter antes
 C-o      | Undo de movimientos
+`(` o `)`| Moverse entre frases (adelante/atrás). El punto determina una frase.
+`{` o `}`| Moverse entre parrafos (adelante/atrás). Una linea en blanco determina el parrafo
 
 ### Borrar
 
@@ -75,6 +77,10 @@ D        | Borra hasta el final de la linea
 `<C-h>`  | En modo insert: borra un carácter hacia atrás (backspace)
 `<C-w>`  | En modo insert: borra una palabra hacia atrás
 `<C-u>`  | En modo insert: borra la línea entera hacia atrás
+`d(`     | Borrar hasta el fin de la frase
+`d)`     | Borrar hasta el comienzo de la frase
+`d{`     | Borrar hasta el fin del parráfo
+`d}`     | Borrar hasta el comienzo del parráfo
 
 
 ### Edición
