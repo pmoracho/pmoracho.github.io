@@ -12,22 +12,22 @@ comments: true
 
 Cada vez estoy pasando más horas delante de una terminal *Nix, ya sea en para
 acceder remotamente a sistemas, como también por el uso cada vez mayor que hago
-del entorno Cygwin en windows. Por lo que ya estoy customizando y armando
+del entorno **Cygwin** en Windows. Por lo que ya estoy customizando y armando
 herramientas para mi uso diario. La idea, como siempre, es compartir. Esta vez
-le toca a un reemplazo del viejo y conocido comando cd o "change directory". La
-necesidad puntual era poder mantener un historial de carpetas visitadas, de
-modo de poder acceder de formá rápida a las mismas. es habitual acceder a
+le toca a un reemplazo del viejo y conocido comando `cd` o "change directory".
+La necesidad puntual era poder mantener un historial de carpetas visitadas, de
+modo de poder acceder de forma rápida a las mismas. Es habitual acceder a
 directorios largos o profundos, digamos por ejemplo:
-"/cydrive/c/SVN/proyecto-trunk/resoyrce/test/input/test1", a veces también hay
+`/cydrive/c/SVN/proyecto-trunk/resource/test/input/test1`, a veces también hay
 que moverse momentáneamente de una carpeta a otra, en fin, escribir esto cada
 vez es engorroso.
 
-Hay un par de comandos internos de Bash muy interesantes que explotan la
-posibilidad de mantener una "pila" de carpetas. Hablamos de popd, pushd y dirs,
-conviene investigarlas. Asimismo hay una función muy interesante desarrollada
-por Petar Marinov, que se suele incorporar al .bashrc y usarla como alias del
-cd. Sobre esta base hice una pocas modificaciones para adaptarla a mis propias
-necesidades.
+Hay un par de comandos internos de **Bash** muy interesantes que explotan la
+posibilidad de mantener una "pila" de carpetas. Hablamos de `popd`, `pushd` y
+`dirs`, conviene investigarlas. Asimismo hay una función muy interesante
+desarrollada por Petar Marinov, que se suele incorporar al `.bashrc` y usarla
+como alias del `cd`. Sobre esta base hice una pocas modificaciones para
+adaptarla a mis propias necesidades.
 
 ``` shell
 ##################################################################################
@@ -40,7 +40,7 @@ necesidades.
 ##################################################################################
 mycd ()
 {
-	local x2 the_new_dir adir index maxitems histdirfile
+	local x2 the_new_dir adir index maxitems histdirfile actual
 	local -i cnt
 	histdirfile="$HOME/.histdirfile"		# Set history dir file
 	maxitems=20								# Items to save in dirstack
@@ -49,11 +49,12 @@ mycd ()
 	#############################################################################
 	lines=`dirs -v|wc -l`
 	if [ $lines -lt 2 ] && [ -f $histdirfile ]; then
+	  actual=`pwd`
 		while read directory ; do
 			pushd "$directory" 2>/dev/null 1>/dev/null
 		done < $histdirfile
-		# popd 2>/dev/null 1>/dev/null
-	fi
+		cd "$actual"
+	fi 
 	#############################################################################
 	# List paths (cd --) for compatibility with Petar Marinov func, replace
 	# with (cd :)
@@ -106,7 +107,7 @@ mycd ()
 	#############################################################################
 	# Save to $histdirfile
 	#############################################################################
-	dirs -l -p|cat -n| sort -uk2 | sort -nk1 | cut -f2->$histdirfile
+	dirs -l -p|sort|uniq>$histdirfile
 	#############################################################################
 	# Remove any other occurence of this dir, skipping the top of the stack
 	#############################################################################
@@ -128,15 +129,15 @@ alias: `alias cd=mycd`
 
 Que cosas podemos hacer:
 
-* (cd --): Lista los últimos directorios visitados con un índice para acceder al mismo
-* (cd -índice): Podremos ir directamente a esa carpeta
+* `cd --`: Lista los últimos directorios visitados con un índice para acceder al mismo
+* `cd -índice`: Podremos ir directamente a esa carpeta
 
-El stack de directorios se salva, se ordena y se quitan los repetdios en un
+El stack de directorios se salva, se ordena y se quitan los repetidos en un
 archivo de sesión, por lo que cuando abramos de nuevo la sesión se restaura la
-última lista. Podemos configurar editando la variable maxitems, la cantidad de
+última lista. Podemos configurar editando la variable `maxitems`, la cantidad de
 carpetas a salvar.
 
 Actualización del 18/09/2014: Nueva funcionalidad
 
-* (cd : ): Ídem (cd --)
-* (cd :searchstring ): Lista los últimos directorios que contengan <searchstring>
+* `cd : `: Ídem `cd --`
+* `cd : <searchstring>`: Lista los últimos directorios que contengan `<searchstring>`
