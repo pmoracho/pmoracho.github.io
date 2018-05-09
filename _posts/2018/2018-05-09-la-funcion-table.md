@@ -124,6 +124,62 @@ frecuencias de cada valor de cada una de las columnas de la matriz original.
 Por último lo que hemos hecho es recuperar los nombres de las columnas de
 aquellos valores que se repitieran más de una vez.
 
+Esta solución solo tiene un eventual problema, que es: cuando no nos interesa
+contar las repeticiones dentro de una misma columna, es decir solo queremos ver
+casos dónde los valores se repiten pero en columnas distintas. Un pequeño truco
+para resolver esto sería hacer lo siguiente:
+
+
+```r
+# En primer lugar creamos un nuevo ejemplo
+# Pueden observar que "Mckinze" se repite en una misma columna
+dat <- read.table(text='N1, N2
+                        "jara",   "moreno" 
+                        "moreno",  "lopez"  
+                        "diaz",    "Swanson"
+                        "powell",  "jara"   
+                        "Mckinze", "jenner" 
+                        "Peter",  "jara"   
+                        "jenner",  "londra" 
+                        "londra",  "kennedy"
+                        "Mckinze",  "londra"', 
+                  header=T, sep=',', 
+                  stringsAsFactors = F, 
+                  quote = '"', 
+                  strip.white = T)
+
+
+dat <- as.matrix(dat)
+colnames(dat) <- NULL
+
+# Si aplicamos la solución anterior, nos aparecerá "Mckinze" 
+# que es lo que no queremos
+tbl <- table(dat)
+names(tbl[tbl > 1])
+
+[1] "jara"    "jenner"  "londra"  "Mckinze" "moreno"
+
+# Pero podemos eliminar duplicados
+apply(dat, 2, function(x) {ifelse(duplicated(x), NA, x)})
+
+      [,1]      [,2]     
+ [1,] "jara"    "moreno" 
+ [2,] "moreno"  "lopez"  
+ [3,] "diaz"    "Swanson"
+ [4,] "powell"  "jara"   
+ [5,] "Mckinze" "jenner" 
+ [6,] "Peter"   NA       
+ [7,] "jenner"  "londra" 
+ [8,] "londra"  "kennedy"
+ [9,] NA        NA       
+
+# Podemos ver que hemos eliminado la repetición de "Mckinze" y de "jara"
+# dentro de una misma columna, aplicando todo:
+tbl <- table(apply(dat, 2, function(x) {ifelse(duplicated(x), NA, x)}))
+names(tbl[tbl > 1])
+[1] "jara"   "jenner" "londra" "moreno"
+```
+
 
 [table]: http://stat.ethz.ch/R-manual/R-devel/library/base/html/table.html
 [fuente]: https://es.stackoverflow.com/a/162665/31764
