@@ -130,11 +130,10 @@ pre code {
     -moz-box-shadow: 3px 3px rgba(0, 0, 0, .1);
     -webkit-box-shadow: 3px 3px rgba(0, 0, 0, .1);
     box-shadow: 3px 3px rgba(0, 0, 0, .1);
-    margin: 20px 0;
     overflow: auto;
 }
 .highlight pre, blockquote p:last-child {
-    margin-bottom: 0;
+    margin-bottom: 15px;
 }
 .gist .gist-file {
     font-family: Menlo, Monaco, "Courier New", monospace!important;

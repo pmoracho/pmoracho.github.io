@@ -65,8 +65,8 @@ variables/columnas que tengamos. Impracticable.
 
 Esta función es muy interesante, según la documentación
 
-	> table() utiliza los factores de clasificación cruzada para construir una tabla de
-	> contingencia de los conteos en cada combinación de niveles de factores.
+> table() utiliza los factores de clasificación cruzada para construir una tabla de
+> contingencia de los conteos en cada combinación de niveles de factores.
 
 El primer parámetro es el objeto sobre el cual se armará la tabla de
 contingencia, el cual puede uno o más objetos que eventualmente puedan ser
