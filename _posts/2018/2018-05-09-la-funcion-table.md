@@ -100,6 +100,30 @@ leer el resultado, es que la combinación `A,A` se repite dos veces que `A,B` y
 más difícil de leer, pero siempre el objeto retornado seguirá siendo de la
 clase `table`.
 
+En nuestro problema, la aplicación es bien sencilla:
+
+
+```r
+tbl <- table(dat)
+tbl 
+
+dat
+   diaz    jara  jenner kennedy  londra   lopez Mckinze  moreno  powell Swanson 
+      1       2       2       1       2       1       1       2       1       1 
+
+names(tbl[tbl > 1])
+
+[1] "jara"   "jenner" "londra" "moreno"
+```
+
+La representación en consola del objeto `table` nos da una información muy
+útil, lo primero que nos dice es el nombre del objeto sobre el cual estamos
+aplicando la tabla de consistencia, en este caso `dat` y luego nos da las
+frecuencias de cada valor de cada una de las columnas de la matriz original. 
+
+Por último lo que hemos hecho es recuperar los nombres de las columnas de
+aquellos valores que se repitieran más de una vez.
+
 
 [table]: http://stat.ethz.ch/R-manual/R-devel/library/base/html/table.html
 [fuente]: https://es.stackoverflow.com/a/162665/31764
