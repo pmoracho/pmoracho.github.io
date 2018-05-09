@@ -10,7 +10,7 @@ noindex: false
 hide_printmsg: false
 sitemap: true
 summaryfeed: false
-title: La función `table()`
+title: La función table
 tags:
   - desarrollo
   - R
@@ -19,9 +19,9 @@ image:
 ---
 
 La funcionalidad básica de **R** es enorme, muchas veces la olvidamos por
-herramientas más avanzadas (léase dplyr), sin embargo hay un conjunto enorme de
-problemas dónde no es necesario buscar ayuda de otros paquetes. Un ejemplo muy
-claro es este problema:
+herramientas más avanzadas (léase [dplyr][dplyr]), sin embargo hay un conjunto
+enorme de problemas dónde no es necesario buscar ayuda de otros paquetes. Un
+ejemplo muy claro es este problema:
 
 Tenemos una matriz como la siguiente:
 
@@ -34,7 +34,10 @@ dat <- read.table(text='N1, N2
                         "Mckinze", "jenner" 
                         "jenner",  "londra" 
                         "londra",  "kennedy"', 
-                  header=T, sep=',', stringsAsFactors = F, quote = '"', strip.white = T)
+                  header=T, sep=',', 
+				  stringsAsFactors = F, 
+				  quote = '"', 
+				  strip.white = T)
 
 dat <- as.matrix(dat)
 colnames(dat) <- NULL
@@ -58,19 +61,46 @@ columna 1 que se repiten en la 2, debiéramos hacer el control inverso, los
 valores de la columna 2 que se repiten en la 1 y así con cada una de las `n`
 variables/columnas que tengamos. Impracticable.
 
-### [`table()`][table] al rescate
+## [`table()`][table] al rescate
 
 Esta función es muy interesante, según la documentación
 
-	table() utiliza los factores de clasificación cruzada para construir una tabla de
-	contingencia de los conteos en cada combinación de niveles de factores.
+	> table() utiliza los factores de clasificación cruzada para construir una tabla de
+	> contingencia de los conteos en cada combinación de niveles de factores.
 
 El primer parámetro es el objeto sobre el cual se armará la tabla de
 contingencia, el cual puede uno o más objetos que eventualmente puedan ser
 convertidos a u `factor`. Esto implica que casi cualquier cosa puede pasar por
 `table()`, desde vectores, matrices o dataframes, solo por nombrar algunos.
+Pero otra cosa importante que dice la ayuda, es que acepta múltiples objetos,
+por ejemplo, para hacer la tabla de contingencia de un vector:
+
+```r
+table(c("A","B","A"))
+
+A B 
+2 1 
+```
+
+Esto no ofrece mucha dificultad para entender, tenemos dos ocurrencias del
+valor `A` y uno del `B`. ¿Y si agregamos una nueva dimensión?
+
+```r
+table(c("A","B","A"), c("A","B","A"))
+
+    A B
+  A 2 0
+  B 0 1
+```
+
+Interesante, nos retornó una matriz, en este caso lo que nos dice si sabemos
+leer el resultado, es que la combinación `A,A` se repite dos veces que `A,B` y
+`B,A` ninguna y que `B,B` apareció una vez. Podemos seguir agregando
+"dimensiones" sin problemas, la representación en la consola se hará un poco
+más difícil de leer, pero siempre el objeto retornado seguirá siendo de la
+clase `table`.
 
 
 [table]: http://stat.ethz.ch/R-manual/R-devel/library/base/html/table.html
 [fuente]: https://es.stackoverflow.com/a/162665/31764
-
+[dplyr]: https://dplyr.tidyverse.org/

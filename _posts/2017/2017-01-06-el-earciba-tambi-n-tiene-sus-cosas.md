@@ -16,16 +16,29 @@ title: El eARCIBA también tiene sus cosas
 tags:
   - eArciba
 description: El eARCIBA también tiene sus cosas
+
 ---
 ## Notas de crédito aplicadas a comprobantes de otros períodos
 
-Resulta interesante que nunca hayan dejado importar notas de crédito (que
-generan percepciones o retenciones) si aplican a comprobantes de un período
-distinto al informado. Esto virtualmente imposibilita emitir un crédito con
-percepción a una factura del mes pasado, o recibir una nota de crédito en esta
-misma situación de parte de un proveedor, o al menos si no queremos "perder" la
-parte del impuesto. No sé bien en que se sustenta este criterio, cuando con el
-IVA estos es absolutamente posibles de hacer.
+Después de muchisíma idas y vueltas e investigación, puedo confirmar lo siguiente:
+
+* Si se informan los créditos del período que aplican a facturas del mismo,
+  tendremos problemas para ingresar los de otros períodos si el día
+  del crédito entre ambos es el mismo. Es muy loco, pero e más o menos así:
+    * Estamos en el período 9/17
+	* informamos un crédito del 13/9/17
+	* Podremos agregar un crédito del 12/7/17 del 14/2/17 pero jámas uno del día 13 de cualquier otro período
+
+* Al final llegamos a un procedimiento más o menos como esto:
+  * Créditos parciales ya sabemos que no pasan (no van)
+  * Créditos totales de facturas aplicadas del mismo período, las neteamos o sea no informamos ni créditos ni facturas (conversado con personal del Agip)
+  * Créditos aplicados a facturas de otros períodos ahora sí los informamos todos
+
+Tipo        Aplicado a facturas	 Detalle
+----------- -------------------- -------------------------------
+Parcial		Cualquiera           No se informan 
+Total       Del mismo período    Se netean con las facturas, no informamos ni débitos ni créditos (conversado con personal del Agip)
+Total       De otros períodos    Se informan sin problemas, 
 
 ## No más créditos parciales
 
