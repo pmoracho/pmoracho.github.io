@@ -1,7 +1,7 @@
 ---
 layout: post
 published: true
-date: '2018-09-05'
+date: '2017-05-11'
 show_meta: true
 comments: true
 mathjax: false
@@ -10,14 +10,15 @@ noindex: false
 hide_printmsg: false
 sitemap: true
 summaryfeed: false
-title: La función table
+title: Mi colección R
+description: Una coleccion de enlaces para R
 tags:
   - desarrollo
   - R
-
-- Documentación 
 image:
+  feature: 2017/img-feature-002.jpeg
 ---
+
 
 Este es mi compendio de enlaces y documentos de R
 
