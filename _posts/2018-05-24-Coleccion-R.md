@@ -20,10 +20,11 @@ image:
 ---
 
 
-Este es mi compendio de enlaces y documentos de R
+Este es mi compendio de enlaces y documentos de **R**
 
 ### Tutoriales y Cursos
-+ [https://swcarpentry.github.io/r-novice-gapminder-es/](https://swcarpentry.github.io/r-novice-gapminder-es/):
+
++ [R para Análisis Científicos Reproducibles](https://swcarpentry.github.io/r-novice-gapminder-es/):
 El objetivo de esta lección es enseñar a las programadoras principiantes a
 escribir códigos modulares y buenas prácticas en el uso de R para el análisis de
 datos. R nos provee un conjunto de paquetes desarrollados por terceros, éstos se
