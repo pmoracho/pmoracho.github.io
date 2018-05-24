@@ -24,13 +24,17 @@ Este es mi compendio de enlaces a el material bibliográfico de **R** publicado 
 
 ### En Inglés
 
-+ [R in a Nutshell](https://visualization.sites.clemson.edu/reu/resources/RText.pdf): El libro de Joseph Adler en PDF, un clásico del 2010. Gran profundidad en el lenguaje y una parte bastante completa de estadística aplicada.
++ [R in a Nutshell](https://visualization.sites.clemson.edu/reu/resources/RText.pdf): El libro de Joseph Adler, (2010, 636 páginas). Gran profundidad en el lenguaje y una parte bastante completa de estadística aplicada.
 + [Advanced R](http://adv-r.had.co.nz/): De Hadley Wickham, Advanced R presenta herramientas y técnicas útiles para atacar muchos tipos de problemas de programación de R, ayudándole a evitar errores y callejones sin salida. Con más de diez años de experiencia programando en R, el autor ilustra la elegancia, belleza y flexibilidad en el corazón de R. Del 2014, en versión Knitr.
 + [Introductory Statistics with R](http://www.academia.dk/BiologiskAntropologi/Epidemiologi/PDF/Introductory_Statistics_with_R__2nd_ed.pdf): De Peter Daalgard, este libro proporciona una introducción a la R a nivel elemental, dirigida tanto a científicos no estadísticos en varios campos como a estudiantes de estadística. El modo principal de presentación es a través de ejemplos de código con comentarios liberales del código y la salida, tanto desde el punto de vista computacional como estadístico. Se puede descargar un paquete R suplementario que contiene los conjuntos de datos. Del 2008.
 
 ### En español
 
 + [El arte de programar en R](https://cran.r-project.org/doc/contrib/Santana_El_arte_de_programar_en_R.pdf): De Julio Sergio Santana Sepúlveda (198 páginas), uno de los poco libros de calidad en Español, del año 2014. Orientado únicamente al lenguaje.
++ [R para Principiantes](https://cran.r-project.org/doc/contrib/rdebuts_es.pdf): Emmanuel Paradis, Institut des Sciences de l’Evolution Universit Montpellier II. (2003, 61 páginas) El objetivo de este documento es proporcionar un punto de partida para personas interesadas en comenzar a utilzar R. 
++ [Introducción a R](https://cran.r-project.org/doc/contrib/R-intro-1.1.0-espanol.1.pdf): R Development Core Team (2000, 106 páginas) Estas notas sobre R están escritas a partir de un conjunto de notas que describían los entornos S y S-Plus escritas por Bill Venables y Dave Smith. Hemos realizado un pequeño núumero de cambios para reflejar las diferencias entre R y S.	
++ [Cartas sobre Estadística](https://cran.r-project.org/doc/contrib/Risk-Cartas-sobre-Estadistica.pdf): Dr. Ing. Marcelo R. Risk, Facultad Regional Buenos Aires, Universidad Tecnológica Nacional, Argentina (2003, 57 páginas)
++ [Introducción a la programación estadística con R para profesores](http://www.ugr.es/~batanero/pages/ARTICULOS/libroR.pdf): José Miguel, Contreras García, Elena Molina Portillo, Pedro Arteaga Cezón (2010, 161 páginas)
 
 
 ## Cheat Sheets
@@ -76,6 +80,7 @@ Los clásicos "machetes".
 ## Tutoriales y Cursos
 
 ### En español
+
 
 + [R para Análisis Científicos Reproducibles](https://swcarpentry.github.io/r-novice-gapminder-es/):
 El objetivo de esta lección es enseñar a las programadoras principiantes a
