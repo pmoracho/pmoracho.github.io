@@ -18,7 +18,7 @@ tags:
 image:
   feature: 2017/img-feature-002.jpeg
 ---
-Este es mi compendio de enlaces y documentos de **R**
+Este es mi compendio de enlaces a el material bibliográfico de **R** publicado en distintos sitios.
 
 ## Libros y otros documentos
 
@@ -27,6 +27,51 @@ Este es mi compendio de enlaces y documentos de **R**
 + [R in a Nutshell](https://visualization.sites.clemson.edu/reu/resources/RText.pdf): El libro de Joseph Adler en PDF, un clásico del 2010. Gran profundidad en el lenguaje y una parte bastante completa de estadística aplicada.
 + [Advanced R](http://adv-r.had.co.nz/): De Hadley Wickham, Advanced R presenta herramientas y técnicas útiles para atacar muchos tipos de problemas de programación de R, ayudándole a evitar errores y callejones sin salida. Con más de diez años de experiencia programando en R, el autor ilustra la elegancia, belleza y flexibilidad en el corazón de R. Del 2014, en versión Knitr.
 + [Introductory Statistics with R](http://www.academia.dk/BiologiskAntropologi/Epidemiologi/PDF/Introductory_Statistics_with_R__2nd_ed.pdf): De Peter Daalgard, este libro proporciona una introducción a la R a nivel elemental, dirigida tanto a científicos no estadísticos en varios campos como a estudiantes de estadística. El modo principal de presentación es a través de ejemplos de código con comentarios liberales del código y la salida, tanto desde el punto de vista computacional como estadístico. Se puede descargar un paquete R suplementario que contiene los conjuntos de datos. Del 2008.
+
+### En español
+
++ [El arte de programar en R](https://cran.r-project.org/doc/contrib/Santana_El_arte_de_programar_en_R.pdf): De Julio Sergio Santana Sepúlveda (198 páginas), uno de los poco libros de calidad en Español, del año 2014. Orientado únicamente al lenguaje.
+
+
+## Cheat Sheets
+
+Los clásicos "machetes".
+
+### En ingles
+
++ [RStudio IDE](https://github.com/rstudio/cheatsheets/raw/master/rstudio-ide.pdf)
++ [Base R](http://github.com/rstudio/cheatsheets/raw/master/base-r.pdf)
++ [Advanced R](https://www.rstudio.com/wp-content/uploads/2016/02/advancedR.pdf)
++ [Basics of regular expressions and pattern matching in R ](https://www.rstudio.com/wp-content/uploads/2016/09/RegExCheatsheet.pdf)
++ [The leaflet package](https://github.com/rstudio/cheatsheets/raw/master/leaflet.pdf)
++ [How big is your graph?](https://github.com/rstudio/cheatsheets/raw/master/how-big-is-your-graph.pdf)
++ [R tools to access the eurostat database](https://github.com/rstudio/cheatsheets/raw/master/eurostat.pdf)
++ [Elegant survival plots](https://github.com/rstudio/cheatsheets/raw/master/eurostat.pdf)
++ [dplyr friendly Data and Variable Transformation](http://github.com/rstudio/cheatsheets/raw/master/sjmisc.pdf)
++ [Quantitative Analysis of Textual Data in R](https://github.com/rstudio/cheatsheets/raw/master/quanteda.pdf)
++ [LaTeX cheat sheet](https://wch.github.io/latexsheet/latexsheet-a4.pdf)
++ [Intro stats One quantitative variable with mosaic](https://github.com/rstudio/cheatsheets/raw/master/mosaic.pdf)
++ [R Syntax Comparison](https://github.com/rstudio/cheatsheets/raw/master/syntax.pdf)
++ [Machine learning with R](https://github.com/rstudio/cheatsheets/raw/master/mlr.pdf)
++ [Machine Learning Modelling in R](https://github.com/rstudio/cheatsheets/raw/master/Machine%20Learning%20Modelling%20in%20R.pdf)
++ [h2o](https://github.com/rstudio/cheatsheets/raw/master/h2o.pdf)
++ [xplain](https://github.com/rstudio/cheatsheets/raw/master/xplain.pdf)
+
+### En español
+
++ [Domar Datos con dplyr and tidyr ](https://github.com/rstudio/cheatsheets/raw/master/translations/spanish/data-wrangling-cheatsheet_Spanish.pdf)
++ [Transformación de Datos con dplyr](https://github.com/rstudio/cheatsheets/raw/master/translations/spanish/data-transformation_Spanish.pdf)
++ [R Markdown](https://github.com/rstudio/cheatsheets/raw/master/translations/spanish/rmarkdown_Spanish.pdf)
++ [Shiny](https://github.com/rstudio/cheatsheets/raw/master/translations/spanish/shiny_Spanish.pdf)
++ [Desarrollo de Paquetes](https://github.com/rstudio/cheatsheets/raw/master/translations/spanish/devtools-cheatsheet_Spanish.pdf)
++ [Visualización de Datos usando ggplot2](https://github.com/rstudio/cheatsheets/raw/master/translations/spanish/ggplot2.pdf)
++ [Ciencia de Datos en Spark](https://github.com/rstudio/cheatsheets/raw/master/translations/spanish/sparklyrSpanish.pdf)
++ [Importar Datos con readr, tibble, and tidy](https://github.com/rstudio/cheatsheets/raw/master/translations/spanish/data-import-cheatsheet_Spanish.pdf)
++ [Paquete caret](https://github.com/rstudio/cheatsheets/raw/master/translations/spanish/caret-cheatsheet_Spanish.pdf)
++ [Aplicar funciones con purrr](https://github.com/rstudio/cheatsheets/raw/master/translations/spanish/purrr_COrtega_Spanish.pdf)
++ [Trabajar con cadenas con stringr](https://github.com/rstudio/cheatsheets/raw/master/translations/spanish/strings_Spanish.pdf)
++ [Fechas y tiempos con lubridate](https://github.com/rstudio/cheatsheets/raw/master/translations/spanish/lubridate_Spanish.pdf)
++ [Aprendizaje Profundo con Keras](https://github.com/rstudio/cheatsheets/raw/master/translations/spanish/keras_Spanish.pdf)
 
 ## Tutoriales y Cursos
 
