@@ -26,7 +26,8 @@ Este es mi compendio de enlaces y documentos de **R**
 
 ### En Inglés
 
-+ [R in a Nutshell](https://visualization.sites.clemson.edu/reu/resources/RText.pdf)
++ [R in a Nutshell](https://visualization.sites.clemson.edu/reu/resources/RText.pdf): El libro de Joseph Adler en PDF, un clásico del 2010. Gran profundidad en el lenguaje y una parte bastante completa de estadística aplicada.
++ [Advanced R](http://adv-r.had.co.nz/): De Hadley Wickham, Advanced R presenta herramientas y técnicas útiles para atacar muchos tipos de problemas de programación de R, ayudándole a evitar errores y callejones sin salida. Con más de diez años de experiencia programando en R, el autor ilustra la elegancia, belleza y flexibilidad en el corazón de R. Del 2014, en versión Knitr.
 
 ## Tutoriales y Cursos
 
