@@ -22,7 +22,16 @@ image:
 
 Este es mi compendio de enlaces y documentos de **R**
 
-### Tutoriales y Cursos
+## Libros y otros documentos
+
+### En Inglés
+
++ [R in a Nutshell](https://visualization.sites.clemson.edu/reu/resources/RText.pdf)
+
+## Tutoriales y Cursos
+
+
+### En español
 
 + [R para Análisis Científicos Reproducibles](https://swcarpentry.github.io/r-novice-gapminder-es/):
 El objetivo de esta lección es enseñar a las programadoras principiantes a
