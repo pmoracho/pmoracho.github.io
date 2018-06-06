@@ -10,8 +10,8 @@ noindex: false
 hide_printmsg: false
 sitemap: true
 summaryfeed: false
-title: Mi colección R
-description: ¿Cómo funciona el control de flujo en un lenguaje que es enteramente vectorial?
+title: ¿Cómo funciona el control de flujo en un lenguaje que es enteramente vectorial?
+description: 
 tags:
   - desarrollo
   - R
