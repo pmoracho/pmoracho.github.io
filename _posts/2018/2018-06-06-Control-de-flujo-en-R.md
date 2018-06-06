@@ -11,13 +11,11 @@ hide_printmsg: false
 sitemap: true
 summaryfeed: false
 title: Mi colección R
-description: Una coleccion de enlaces para R
+description: ¿Cómo funciona el control de flujo en un lenguaje que es enteramente vectorial?
 tags:
   - desarrollo
   - R
 ---
-### ¿Cómo funciona el control de flujo en un lenguaje que es enteramente vectorial?
-
 En todo lenguaje existen clausulas para controlar el flujo de ejecución, en
 **R** en particular hablo del `if/else`, el `while` y el `repeat`. Estas, no son
 muy distintas a las que podemos encontrar en cualquier otro lenguaje, evalúan
@@ -36,8 +34,6 @@ booleano, sin embargo el control de flujo es netamente "atómico", un solo
 `TRUE/FALSE` determinará el flujo a seguir. Entonces: **¿Como se compatibiliza
 en el lenguaje está situación de necesitar un dato atómico para la evaluación,
 cuando en realidad el lenguaje no lo tiene?**
-
-
 
 Vamos a usar el `if` como ejemplo, pero el funcionamiento es el mismo en
 cualquiera de las demás clausulas. En primer lugar, nunca esta de más consultar
