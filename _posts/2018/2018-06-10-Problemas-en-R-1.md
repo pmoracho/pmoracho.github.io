@@ -22,7 +22,8 @@ tags:
 Suponiendo que tengamos un `data.frame` o similar como el siguiente:
 
 ```r
-df <- data.frame(year=c(2010, 2010, 2011, 2012, 2012, 2010, 2010, 2011, 2010, 2011, 2011, 2012), 
+df <- data.frame(year=c(2010, 2010, 2011, 2012, 2012, 2010, 2010, 
+						2011, 2010, 2011, 2011, 2012), 
                  colegio=c(rep("A",5),rep("B",3),rep("C",4)),
                  alumno=c(1,2,1,1,2,1,2,1,1,2,2,1))
 df
@@ -55,8 +56,14 @@ colegio
 2       B    2
 3       C    3
 ```
-Y ahora simplemente nos quedamos con los colegios cuya cantidad en `year` sea
-igual al valor maximo de esta columna:
+
+El uso de `aggregate()` no ofrece mucha dificultad, lo unico particular es la
+función de agregación que hemos definido, nos quedamos con los valores únicos de
+cada año mediante `unique()` y luego sencillamente conatmos cuanto son mediante
+`length()`
+
+Ahora simplemente nos quedamos con las filas cuyos colegios tengan una cantidad
+en `year` igual al valor maximo de esta columna:
 
 ```r
 df[df$colegio %in% as.character(colegio[colegio$year == max(colegio$year),1]),]
@@ -71,6 +78,19 @@ df[df$colegio %in% as.character(colegio[colegio$year == max(colegio$year),1]),]
 10 2011       C      2
 11 2011       C      2
 12 2012       C      1
+```
+
+En caso de usar `dplyr`, la mecanica es similar, aunque notablemente más clara:
+
+library(dplyr)
+
+```r
+df %>% 
+    inner_join(df %>%
+                   group_by(colegio) %>%
+                   summarize(cant = n_distinct(year)) %>%
+                   filter(cant == max(cant))
+    )
 ```
 
 fuente: [Eliminar observaciones que no aparecen en múltiples años en R](https://es.stackoverflow.com/questions/170891/eliminar-observaciones-que-no-aparecen-en-m%C3%BAltiples-a%C3%B1os-en-r)
