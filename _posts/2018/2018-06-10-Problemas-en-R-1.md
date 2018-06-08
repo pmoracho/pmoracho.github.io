@@ -82,9 +82,9 @@ df[df$colegio %in% as.character(colegio[colegio$year == max(colegio$year),1]),]
 
 En caso de usar `dplyr`, la mecanica es similar, aunque notablemente más clara:
 
-library(dplyr)
 
 ```r
+library(dplyr)
 df %>% 
     inner_join(df %>%
                    group_by(colegio) %>%
