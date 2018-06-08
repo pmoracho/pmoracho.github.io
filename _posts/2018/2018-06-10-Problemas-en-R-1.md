@@ -95,4 +95,43 @@ df %>%
 
 fuente: [Eliminar observaciones que no aparecen en múltiples años en R](https://es.stackoverflow.com/questions/170891/eliminar-observaciones-que-no-aparecen-en-m%C3%BAltiples-a%C3%B1os-en-r)
 
+## Resolver un sistema de ecuaciones con matrices no cuadradas
 
+En tu caso estás tratando de resolver el siguiente sistema:
+
+    -a + b/2             = 0
+     a - b   + c/2       = 0
+         b/2 + -c  + d   = 0
+             + c/2 - d   = 0
+     a + b   +  c  + d   = 1
+
+Si lo llevamos a una matriz:
+
+    > a1 <- rbind(c(-1,0.5,0,0),c(1,-1,0.5,0),c(0,0.5,-1,1),c(0,0,0.5,-1),c(1,1,1,1))
+    > a1
+         [,1] [,2] [,3] [,4]
+    [1,]   -1  0.5  0.0    0
+    [2,]    1 -1.0  0.5    0
+    [3,]    0  0.5 -1.0    1
+    [4,]    0  0.0  0.5   -1
+    [5,]    1  1.0  1.0    1
+
+Y el vector de igualación es:
+
+    > b1 <- c(0,0,0,0,1)
+    > b1
+    [1] 0 0 0 0 1
+
+Para resolver este sistema, ya has confirmado que `solve()` no sirve ya que su funcionamiento esta restringido a matrices cuadradas. Lo que puedes usar es [`qr.solve()`][1] de la siguiente manera:
+
+    > qr.solve(a1,b1)
+    [1] 0.1666667 0.3333333 0.3333333 0.1666667
+
+O si prefieres ver el resultado como fracciones, puedes usar `as.fractions()` del paquete `MASS`:
+
+    > library(MASS) 
+    > as.fractions(qr.solve(a1,b1))
+    [1] 1/6 1/3 1/3 1/6
+
+
+  [1]: http://stat.ethz.ch/R-manual/R-devel/library/base/html/qr.html
