@@ -16,7 +16,7 @@ tags:
   - desarrollo
   - R
 image:
-  feature: 2017/img-feature-002.jpeg
+  feature: 2018/img-feature-001.jpeg
 ---
 Este es mi compendio de enlaces y documentos de **R**
 
