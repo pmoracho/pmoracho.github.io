@@ -17,6 +17,7 @@ tags:
   - R
 image:
   feature: 2017/img-feature-002.jpeg
+  credit: Patricio Moracho
 ---
 
 

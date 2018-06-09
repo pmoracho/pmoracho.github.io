@@ -17,6 +17,7 @@ tags:
   - R
 image:
   feature: 2018/img-feature-001.jpeg
+  credit: Patricio Moracho
 ---
 Este es mi compendio de enlaces a el material bibliográfico de **R** publicado en distintos sitios.
 
