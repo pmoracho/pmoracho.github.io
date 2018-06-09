@@ -15,6 +15,8 @@ description: Algunos problemas y como resolverlos mediante R
 tags:
   - desarrollo
   - R
+image:
+  feature: 2018/img-feature-002.jpeg
 ---
 
 ## Seleccionar filas segun resultados de una agregación
