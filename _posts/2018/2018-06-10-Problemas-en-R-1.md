@@ -206,9 +206,13 @@ La salida:
 
 Los `rowname` y la columna `id` son datos colaterales que genera la función.
 
+fuente: [¿Cómo convertir un data.frame en un formato horizontal a uno
+vertical?][5]
+
 
   [1]: http://stat.ethz.ch/R-manual/R-devel/library/base/html/qr.html
   [2]: https://es.stackoverflow.com/questions/170891/eliminar-observaciones-que-no-aparecen-en-m%C3%BAltiples-a%C3%B1os-en-r
   [3]: https://es.stackoverflow.com/questions/165852/c%C3%B3mo-resolver-un-sistema-de-ecuaciones-lineales-en-r-con-matriz-no-cuadrada
   [4]: http://stat.ethz.ch/R-manual/R-patched/library/stats/html/reshape.html
+  [5]: https://es.stackoverflow.com/questions/170847/c%C3%B3mo-convertir-un-data-frame-en-un-formato-horizontal-a-uno-vertical
 
