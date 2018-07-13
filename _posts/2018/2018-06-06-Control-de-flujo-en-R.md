@@ -15,6 +15,9 @@ description:
 tags:
   - desarrollo
   - R
+image:
+  feature: 2018/img-feature-003.jpeg
+  credit: Patricio Moracho
 ---
 En todo lenguaje existen clausulas para controlar el flujo de ejecución, en
 **R** en particular hablo del `if/else`, el `while` y el `repeat`. Estas, no son

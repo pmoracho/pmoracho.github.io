@@ -18,6 +18,7 @@ tags:
   - ggplot
 image:
   feature: 2017/img-feature-002.jpeg
+  credit: Patricio Moracho
 ---
 ## _¿Cómo aplicar una imágen a ciertas áreas de un `plot`?_
 
