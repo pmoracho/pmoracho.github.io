@@ -26,7 +26,7 @@ por que entender como R evalúa las expresiones y la forma en que podemos, como
 programadores, "intervenir" en este proceso, es darse cuenta que es posible (en
 R) modificar directamente la forma "estándar" y "natural" de evaluación. Esto
 es algo único, al menos para mí y mi limitado conocimiento en lenguajes. Como
-programador, darse cuenta de esto, es como un "cross a la mandíbula (Arlt
+programador, darse cuenta de esto, es como un "cross a la mandíbula" (Arlt
 dixit), un golpe inmediato al sentido común, formado por años de trabajo en
 tantos otros lenguajes: C, C++, Java, Basic, Python, SQL, etc. 
 
@@ -84,7 +84,7 @@ Error in print(mi_variable) : object 'mi_variable' not found
 
 ```
 
-Ningún programador, ni los menos avispados, no debería tener dificultad en
+Ningún programador, ni los menos avispados, debería tener dificultad en
 explicar lo que está ocurriendo, no importa de que lenguaje venga, es
 absolutamente claro.  En la primer expresión, lo que se intenta es mostrar por
 consola o pantalla, una cadena fija ("hardcoded" le diríamos). R (y cualquier
@@ -120,7 +120,7 @@ Un pequeño adelanto de lo que sigue:
 ``` 
 
 Notesé que `tidyverse` lo hemos indicado sin comillas como parámetro de entrada
-de la función `library()`, la cual  que realiza la carga de un determinado
+de la función `library()`, la cual  realiza la carga de un determinado
 paquete o librería. Con la siguiente sentencia verificamos que no existe ningún
 objeto llamado `tidyverse` y a pesar de esto, la función `library()`, de foma
 "mágica", logró entender que lo que queríamos era cargar el paquete
