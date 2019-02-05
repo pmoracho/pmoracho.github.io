@@ -350,10 +350,10 @@ body, html {
     overflow-x: hidden;
 }
 html {
-    font-family: "PT Serif", Georgia, "Times New Roman", serif;
+    font-family: 'Raleway', "PT Serif", Georgia, "Times New Roman", serif;
 }
 .sidebar, h1, h2, h3, h4, h5, h6 {
-    font-family: "PT Sans", Helvetica, Arial, sans-serif;
+    font-family: 'Raleway', "PT Sans", Helvetica, Arial, sans-serif;
 }
 h1, h2, h3, h4, h5, h6 {
     font-weight: 400;
@@ -518,7 +518,7 @@ a.pagination-item:hover, a.prevnext-item:hover {
 }
 .post-date, .post-tags {
     margin-bottom: .5rem;
-    font-family: "PT Sans", Helvetica, Arial, sans-serif;
+    font-family: 'Raleway', "PT Sans", Helvetica, Arial, sans-serif;
 }
 .page-title, .post-title, .post-title a {
     color: #303030;
@@ -566,7 +566,7 @@ span.post-date.indexpg {
     color: inherit;
 }
 .pagination, .prevnext {
-    font-family: "PT Sans", Helvetica, Arial, sans-serif;
+    font-family: 'Raleway', "PT Sans", Helvetica, Arial, sans-serif;
     color: #ccc;
     text-align: center;
     overflow: hidden;
@@ -1394,11 +1394,11 @@ ul#markdown-toc {
 	right: 10px;
 	top: 15px;
 	z-index: 1;
-	font-family: "PT Sans",Georgia,"Times New Roman",serif;
+	font-family: 'Raleway', "PT Sans",Georgia,"Times New Roman",serif;
 }
 .super-search__input {
 	border: 0;
-	font-family: "PT Sans",Georgia,"Times New Roman",serif;
+	font-family: 'Raleway', "PT Sans",Georgia,"Times New Roman",serif;
 	font-size: 50px;
 	border-left: none;
 	border-right: none;
@@ -1415,7 +1415,7 @@ ul#markdown-toc {
 .super-search__results {
 	text-align: center;
 	list-style: none;
-	font-family: "PT Sans",Georgia,"Times New Roman",serif;
+	font-family: 'Raleway', "PT Sans",Georgia,"Times New Roman",serif;
 	padding: 0;
 	overflow-x: hidden;
 	height: calc(100% - 110px);
