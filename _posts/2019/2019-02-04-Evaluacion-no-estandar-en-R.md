@@ -105,30 +105,69 @@ no existe. Claro, si hasta ahora no lo hemos definido. Lo podemos hacer:
 
 [1] "Este es el valor al que apunta el objeto llamado mi_variable" 
 
-``` 
+```
 
 Y ahora sí, tenemos una sentencia que el interprete puede evaluar sin ningún
 error aparente. Estos son rasgos del lo que llamaríamos Evaluación estándar
 (**ES**). 
 
-Un pequeño adelanto de lo que sigue: 
+Un pequeño adelanto de lo que se trata todo esto: 
 
 ```r
 > library(tidyverse)
 > any(ls() == "tidyverse")
 [1] FALSE
-``` 
+```
 
-Notesé que `tidyverse` lo hemos indicado sin comillas como parámetro de entrada
-de la función `library()`, la cual  realiza la carga de un determinado
-paquete o librería. Con la siguiente sentencia verificamos que no existe ningún
-objeto llamado `tidyverse` y a pesar de esto, la función `library()`, de foma
-"mágica", logró entender que lo que queríamos era cargar el paquete
-`tidyverse`. Está "magia" se llama evaluación No estándar (**ENE**). La forma
-estándar hubiera sido `library("tidyverse")`.
+Notesé que la cadena `tidyverse` lo hemos indicado sin comillas como parámetro
+de entrada de la función `library()`, la cual  realiza la carga de un
+determinado paquete o librería. Con la siguiente sentencia `any(ls() ==
+"tidyverse")`, verificamos que no existe ningún objeto llamado `tidyverse` y a
+pesar de esto, la función `library()`, de foma "mágica", logró entender que lo
+que queríamos era cargar el paquete `tidyverse`. Está "magia" se llama
+Evaluación No estándar (**ENE**), `library()` la implementa para evaluar los
+parámetros de entrada, pero también es capaz de evaluar de la forma estándar,
+es decir: `library("tidyverse")`.
 
+Así como lo cuento, parece un tema casi trivial y no demasiado útil, limitado a
+la utilidad de usar o no comillas, pero es mucho más que esto y lo iremos
+viendo paso a paso. El problema es que para entender completamente la
+Evaluación No estándar (**ENE**), es necesario entender otros conceptos dónde
+se apoya toda la idea de la **ENE** y que sin duda pueden resultar muy
+originales para el que venga de otros lenguajes. 
 
 ## Evaluación perezosa
+
+Seguramente has escuchado el término "lazy evaluation", que hace referencia a
+una evaluación diferida, una estrategia que se usa en varios lenguajes de
+programación para retrasar el calculo o ejecución de una expresión hasta el
+momento en que sea realmente necesario. Digamos, sin profundizar demasiado, que
+este tipo de estrategia tiene múltiples beneficios. En la gran
+mayoría de estos lenguajes, este tipo de evaluación debe codificarse
+especialmente, normalmente, creando objetos que implementan este tipo de
+evaluación, es decir este tipo de evaluación es un excepción.
+
+En R la evaluación perezosa es la norma, todo es evaluado de manera "lazy", esto
+nos permite ver situaciones impensadas en otros lenguajes. En Python por ejemplo
+tenemos este caso:
+
+```python
+
+def mi_funcion(a, b):
+	print("hola")
+
+mi_funcion()
+
+> Traceback (most recent call last):
+>   File "main.py", line 4, in <module>
+>     mi_funcion()
+> TypeError: mi_funcion() takes exactly 2 arguments (0 given)
+```
+
+
+## Entornos
+
+## Quotation y Quasicuotation
 
 TO DO
 
