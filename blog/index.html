@@ -27,7 +27,7 @@ description: "Blogging on ...."
   {% if paginator.next_page %}
     <a class="pagination-item older" href="{{ site.url }}/blog/page{{paginator.next_page}}">Older</a>
   {% else %}
-    <span class="pagination-item older">Older</span>
+    <span class="pagination-item older">Anteriores</span>
   {% endif %}
   {% if paginator.previous_page %}
     {% if paginator.page == 2 %}
@@ -36,6 +36,6 @@ description: "Blogging on ...."
       <a class="pagination-item newer" href="{{ site.url }}/blog/page{{paginator.previous_page}}">Newer</a>
     {% endif %}
   {% else %}
-    <span class="pagination-item newer">Newer</span>
+    <span class="pagination-item newer">Nuevos</span>
   {% endif %}
 </div>
