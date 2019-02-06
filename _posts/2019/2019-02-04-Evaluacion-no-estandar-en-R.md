@@ -136,7 +136,7 @@ Evaluación No estándar (**ENE**), es necesario entender otros conceptos dónde
 se apoya toda la idea de la **ENE** y que sin duda pueden resultar muy
 originales para el que venga de otros lenguajes. 
 
-## Evaluación perezosa
+## Evaluación perezosa de los parámetros de una función
 
 Seguramente has escuchado el término "lazy evaluation", que hace referencia a
 una evaluación diferida, una estrategia que se usa en varios lenguajes de
@@ -147,9 +147,13 @@ mayoría de estos lenguajes, este tipo de evaluación debe codificarse
 especialmente, normalmente, creando objetos que implementan este tipo de
 evaluación, es decir este tipo de evaluación es un excepción.
 
-En R la evaluación perezosa es la norma, todo es evaluado de manera "lazy", esto
-nos permite ver situaciones impensadas en otros lenguajes. En Python por ejemplo
-tenemos este caso:
+Sin embargo, en R la evaluación perezosa es la norma, todo es evaluado de manera
+"lazy", y particularmente en esta sección, hablaremos en realidad de la
+evaluación perezosa de los parámetros de cualquier función, algo que ninguno de los
+lenguajes mencionados anteriormente lo permite.
+
+En casi cualquier lenguaje, digamos Python por ejemplo, algo como esto, es
+normalmente aceptado:
 
 ```python
 
@@ -164,6 +168,59 @@ mi_funcion()
 > TypeError: mi_funcion() takes exactly 2 arguments (0 given)
 ```
 
+Al intentar ejecutar `mi_funcion()` el interprete evalúa la misma y los
+parámetros definidos en su firma, como la llamada no los tiene, se nos entrega
+un mensaje de error muy claro `mi_funcion()` espera 2 parámetros y no le estamos
+indicando ninguno.
+
+En R las cosas son un poco distintas (hay que acostumbrarse)
+
+```r
+mi_funcion <- function(a, b) {
+    print("hola")
+}
+
+mi_funcion()
+
+[1] "hola"
+```
+
+¿Qué magia del demonio esta ocurriendo aquí? Tenemos una función que espera dos
+parámetros, la llamamos sin pasarle ninguno, lo parámetros ni siquiera tienen
+valores por defecto y no tenemos ningún error y encima la función hace lo que
+esperaríamos. Acá es donde vemos la evaluación perezosa de los parámetros de una
+función. En R, no sé si no lo dijimos ya, todo se evalúa recién cuando lo
+usamos, en este caso, los parámetros no se usan para nada, entonces no se
+evalúan. Veamos el siguiente caso:
+
+```r
+mi_funcion <- function(a, b) {
+    print(paste("hola", a))
+}
+
+mi_funcion()
+
+> Error in paste("hola", a) : argument "a" is missing, with no default 
+
+mi_funcion("amigo")
+[1] "hola amigo"
+
+mi_funcion("amigo", "del alma")
+[1] "hola amigo"
+```
+
+Ahora hemos modificado la función para que use el parámetro `a`, si invocamos
+sin pasar éste, obtendremos un error, muy claro también: _falta el parámetro `a`
+o el mismo no tiene un valor por defecto_. También podemos constatar, que si
+llamamos con este parámetro como lo espera la función, no tendremos ningún
+error, incluso si agregamos (aunque no se use) el parámetro `b`.
+
+Aquí quiero señalar un concepto fundacional para entender la **ENE**:
+
+> Hay un "gap" o intervalo entre la ejecución de la función y el momento en que
+> cualquiera de sus parámetros es usado (evaluado) realmente. En este intervalo,
+> nosotros como programadores, podremos intervenir y trabajar sobre los parámetros
+> aún sin necesidad de evaluarlos efectivamente
 
 ## Entornos
 
