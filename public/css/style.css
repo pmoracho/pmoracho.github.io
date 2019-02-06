@@ -1,5 +1,5 @@
 h2, h4, h5, h6 {
-    margin-top: 1rem;
+    margin-top: 3rem;
 }
 dd, h1, h2, h3, h4, h5, h6 {
     margin-bottom: .5rem;
@@ -356,8 +356,8 @@ html {
     font-family: 'Raleway', "PT Sans", Helvetica, Arial, sans-serif;
 }
 h1, h2, h3, h4, h5, h6 {
-    font-weight: 400;
-    color: #313131;
+    font-weight: 700;
+    color: #6d0101;
     letter-spacing: -.025rem;
 }
 .wrap {

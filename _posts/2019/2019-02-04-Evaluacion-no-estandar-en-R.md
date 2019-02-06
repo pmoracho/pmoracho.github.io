@@ -131,10 +131,30 @@ es decir: `library("tidyverse")`.
 
 Así como lo cuento, parece un tema casi trivial y no demasiado útil, limitado a
 la utilidad de usar o no comillas, pero es mucho más que esto y lo iremos
-viendo paso a paso. El problema es que para entender completamente la
-Evaluación No estándar (**ENE**), es necesario entender otros conceptos dónde
-se apoya toda la idea de la **ENE** y que sin duda pueden resultar muy
-originales para el que venga de otros lenguajes. 
+viendo paso a paso. A modo de adelanto, comparemos dos formas de hacer
+exactamente lo mismo:
+
+```r
+mtcars[mtcars$cyl>=6 & mtcars$disp > 160 & mtcars$mpg > 15 & 
+	   mtcars$hp > 120 & mtcars$gear == 3, ]
+subset(mtcars, cyl >=6 & disp > 160 & mpg > 15 & hp > 120 & gear == 3)
+```
+
+Un simple filtro complejo de datos, si usamos la función `[` debemos ser muy
+específicos a la hora de escribir las condiciones, podemos ver que escribimos en
+todos los casos el nombre del `data.frame` más `$` y el nombre de la columna.
+Usando `subset()` que implementa **ENS**, la escritura es algo más compacta,
+solo debemos especificar los nombres de columna. Menos caracteres, mejor
+performance de escritura, y sobre todo menores posibilidades de equivocación.
+
+Lo que termina ocurriendo con `subset()` y que veremos más adelante es que:
+
+> Las condiciones especificadas, se evalúan en el entorno del `data.frame`
+> indicado como primer parámetro.
+
+Para llegar a entender esta idea completamente, es necesario entender otros
+conceptos dónde se apoya toda la teoría de la **ENE** y que sin duda pueden
+resultar muy originales para el que venga de otros lenguajes. 
 
 ## Evaluación perezosa de los parámetros de una función
 
@@ -152,8 +172,8 @@ Sin embargo, en R la evaluación perezosa es la norma, todo es evaluado de maner
 evaluación perezosa de los parámetros de cualquier función, algo que ninguno de los
 lenguajes mencionados anteriormente lo permite.
 
-En casi cualquier lenguaje, digamos Python por ejemplo, algo como esto, es
-normalmente aceptado:
+En Python por ejemplo, algo como esto, es normalmente aceptado y lo entendemos
+naturalmente como un erro de nuestra parte:
 
 ```python
 
@@ -169,7 +189,7 @@ mi_funcion()
 ```
 
 Al intentar ejecutar `mi_funcion()` el interprete evalúa la misma y los
-parámetros definidos en su firma, como la llamada no los tiene, se nos entrega
+parámetros definidos en su firma, como en la llamada no los tiene, se nos entrega
 un mensaje de error muy claro `mi_funcion()` espera 2 parámetros y no le estamos
 indicando ninguno.
 
@@ -185,13 +205,13 @@ mi_funcion()
 [1] "hola"
 ```
 
-¿Qué magia del demonio esta ocurriendo aquí? Tenemos una función que espera dos
-parámetros, la llamamos sin pasarle ninguno, lo parámetros ni siquiera tienen
-valores por defecto y no tenemos ningún error y encima la función hace lo que
-esperaríamos. Acá es donde vemos la evaluación perezosa de los parámetros de una
-función. En R, no sé si no lo dijimos ya, todo se evalúa recién cuando lo
-usamos, en este caso, los parámetros no se usan para nada, entonces no se
-evalúan. Veamos el siguiente caso:
+**¿Qué magia del demonio esta ocurriendo aquí?** Tenemos una función que espera
+dos parámetros, la llamamos sin pasarle ninguno, lo parámetros ni siquiera
+tienen valores por defecto y no tenemos ningún error y encima la función hace lo
+que esperaríamos. Acá es donde vemos la evaluación perezosa de los parámetros de
+una función. En R, no sé si no lo dijimos ya, todo se evalúa recién cuando
+realmente lo necesitamos, en este caso, los parámetros no se usan para nada,
+entonces no se evalúan. Veamos el siguiente caso:
 
 ```r
 mi_funcion <- function(a, b) {
@@ -209,11 +229,23 @@ mi_funcion("amigo", "del alma")
 [1] "hola amigo"
 ```
 
-Ahora hemos modificado la función para que use el parámetro `a`, si invocamos
-sin pasar éste, obtendremos un error, muy claro también: _falta el parámetro `a`
-o el mismo no tiene un valor por defecto_. También podemos constatar, que si
-llamamos con este parámetro como lo espera la función, no tendremos ningún
-error, incluso si agregamos (aunque no se use) el parámetro `b`.
+Ahora hemos modificado la función para que use el parámetro `a`, se usa al
+llegar a  este código `print(paste("hola", a))`, si invocamos sin pasar este
+parámetro, obtendremos un error, muy claro también: _falta el parámetro `a` o el
+mismo no tiene un valor por defecto_. También podemos constatar, que si llamamos
+con este parámetro como lo espera la función, no tendremos ningún error, incluso
+indicando o no el parámetro `b`, que vale decir, no se usa en ningún momento.
+
+¿Esto quiere decir que nada de la firma de la función es evaluado previamente?
+No, algunas cosas si se evalúan, por ejemplo, si indicamos más parámetros de los
+esperados
+
+```r
+mi_funcion("amigo", "del alma", "como te quiero")
+
+> Error in mi_funcion("amigo", "del alma", "como te quiero") : 
+>  unused argument ("como te quiero")
+```
 
 Aquí quiero señalar un concepto fundacional para entender la **ENE**:
 
@@ -221,6 +253,7 @@ Aquí quiero señalar un concepto fundacional para entender la **ENE**:
 > cualquiera de sus parámetros es usado (evaluado) realmente. En este intervalo,
 > nosotros como programadores, podremos intervenir y trabajar sobre los parámetros
 > aún sin necesidad de evaluarlos efectivamente
+
 
 ## Entornos
 
