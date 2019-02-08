@@ -173,7 +173,7 @@ evaluación perezosa de los parámetros de cualquier función, algo que ninguno 
 lenguajes mencionados anteriormente lo permite.
 
 En Python por ejemplo, algo como esto, es normalmente aceptado y lo entendemos
-naturalmente como un erro de nuestra parte:
+naturalmente como un error de nuestra parte:
 
 ```python
 
@@ -189,11 +189,11 @@ mi_funcion()
 ```
 
 Al intentar ejecutar `mi_funcion()` el interprete evalúa la misma y los
-parámetros definidos en su firma, como en la llamada no los tiene, se nos entrega
+parámetros definidos en su firma, como en la llamada no los hemos definido, se nos entrega
 un mensaje de error muy claro `mi_funcion()` espera 2 parámetros y no le estamos
 indicando ninguno.
 
-En R las cosas son un poco distintas (hay que acostumbrarse)
+En R las cosas son un poco distintas (hay que ir acostumbrándose)
 
 ```r
 mi_funcion <- function(a, b) {
@@ -205,11 +205,11 @@ mi_funcion()
 [1] "hola"
 ```
 
-**¿Qué magia del demonio esta ocurriendo aquí?** Tenemos una función que espera
+**¿Qué absurda magia esta ocurriendo aquí?** Tenemos una función que espera
 dos parámetros, la llamamos sin pasarle ninguno, lo parámetros ni siquiera
 tienen valores por defecto y no tenemos ningún error y encima la función hace lo
-que esperaríamos. Acá es donde vemos la evaluación perezosa de los parámetros de
-una función. En R, no sé si no lo dijimos ya, todo se evalúa recién cuando
+que esperaríamos. _Aquí es donde vemos la evaluación perezosa de los parámetros de
+una función_. En R, no sé si no lo dijimos ya, todo se evalúa recién cuando
 realmente lo necesitamos, en este caso, los parámetros no se usan para nada,
 entonces no se evalúan. Veamos el siguiente caso:
 
@@ -230,15 +230,15 @@ mi_funcion("amigo", "del alma")
 ```
 
 Ahora hemos modificado la función para que use el parámetro `a`, se usa al
-llegar a  este código `print(paste("hola", a))`, si invocamos sin pasar este
+llegar a este código `print(paste("hola", a))`, si invocamos sin pasar este
 parámetro, obtendremos un error, muy claro también: _falta el parámetro `a` o el
 mismo no tiene un valor por defecto_. También podemos constatar, que si llamamos
 con este parámetro como lo espera la función, no tendremos ningún error, incluso
 indicando o no el parámetro `b`, que vale decir, no se usa en ningún momento.
 
-¿Esto quiere decir que nada de la firma de la función es evaluado previamente?
+_¿Esto quiere decir que nada de la firma de la función es evaluado previamente?_
 No, algunas cosas si se evalúan, por ejemplo, si indicamos más parámetros de los
-esperados
+esperados:
 
 ```r
 mi_funcion("amigo", "del alma", "como te quiero")
@@ -250,16 +250,79 @@ mi_funcion("amigo", "del alma", "como te quiero")
 Aquí quiero señalar un concepto fundacional para entender la **ENE**:
 
 > Hay un "gap" o intervalo entre la ejecución de la función y el momento en que
-> cualquiera de sus parámetros es usado (evaluado) realmente. En este intervalo,
+> cualquiera de sus parámetros es evaluado realmente. En este intervalo,
 > nosotros como programadores, podremos intervenir y trabajar sobre los parámetros
 > aún sin necesidad de evaluarlos efectivamente
+
+## Call stack
 
 
 ## Entornos
 
+Ya has escrito algo de código en R, pero, puede que aún no te hayas cruzado con
+el concepto, de _environment_,  pero aunque no lo sepas, apenas iniciada una
+sesión de R ya los estas usando. 
+
+El _entorno_ es un un objeto (como cualquier otro), una estructura de datos muy
+particular, muy parecida a una lista, que administra:
+
+* Un conjunto de _simbolos_ o si quieres _nombres de variables_ asociados a un
+  determinado contexto de evaluación
+* Los objetos o contenido asociado a dichos _simbolos_
+* Y un puntero a un _entorno_ anterior o _padre_
+
+Cuando incias una sessión "limpia", R ya te ofrece un entrono conocido como el
+_entorno global_, es decir `.GlobalEnv`, pero no es más que un "hijo" de varios
+_entornos anteriores_
+
+```r
+x <- .GlobalEnv
+
+while (environmentName(x) != environmentName(emptyenv())) {
+    print(environmentName(parent.env(x))); 
+     x <- parent.env(x)
+}
+
+[1] "tools:rstudio"
+[1] "package:stats"
+[1] "package:graphics"
+[1] "package:grDevices"
+[1] "package:utils"
+[1] "package:datasets"
+[1] "package:methods"
+[1] "Autoloads"
+[1] "base"
+[1] "R_EmptyEnv"
+```
+
+Cuando se evalua cualquier sentencia, siempre se lo hace en relación a un
+determinado contexto, y ese contexto esta vinculado directamente a un
+_entorno_. Imaginemos nuevamente una sesión inical de R con el siguiente
+código:
+
+```r
+mi_suma <- function(a,b) {a + b}
+
+x <- 3
+y <- 5
+z <- mi_suma(x, y)
+z
+```
+
+Si usas **RStudio** muy probablemente ya conzcas el explorador de entornos, y
+ejecutando paso a paso el código anterior, también habrás notado, que por cada
+asignación a una variable, se agrega la misma a la herramienta mencionada, con
+una particularidad, que viene bien hacer notar: la función, que es también un
+_simbolo_ como cualquier otra variable, no se incorpora al explorador de
+entornos, en la definición, sino recién cuando efectivamente es usada: `z <-
+mi_suma(x, y)`, es la _evaluación diferida_ en acción.
+
+![Explorador de entornos]({{site.baseurl}}/images/2019/image_001.jpg)
+
 ## Quotation y Quasicuotation
 
-TO DO
+IN progres...
+
 
 
 

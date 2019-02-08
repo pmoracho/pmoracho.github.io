@@ -35,4 +35,8 @@ y que poco a poco los va encerrando literalmente en una jaula, un viejo que
 carga con la vergüenza de todos en el pueblo a cambio de oro, un cura que
 elabora rebuscados espectáculos y muchos otros personajes delirantes. 
 
-Mucho menos cómica y más oscura. 
+Mucho menos cómica y más oscura.
+ 
+
+ 
+
