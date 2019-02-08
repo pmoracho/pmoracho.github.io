@@ -269,7 +269,7 @@ particular, muy parecida a una lista, que administra:
 * Los objetos o contenido asociado a dichos _símbolos_
 * Y un puntero a un _entorno_ anterior o _padre_
 
-Cuando inicias una sesión "limpia", R ya te ofrece un entrono conocido como el
+Cuando inicias una sesión "limpia", R ya te ofrece un _entorno_ conocido como el
 _entorno global_, es decir `.GlobalEnv`, pero no es más que un "hijo" de varios
 _entornos anteriores_
 
