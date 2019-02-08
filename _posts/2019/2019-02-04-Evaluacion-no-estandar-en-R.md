@@ -254,8 +254,6 @@ Aquí quiero señalar un concepto fundacional para entender la **ENE**:
 > nosotros como programadores, podremos intervenir y trabajar sobre los parámetros
 > aún sin necesidad de evaluarlos efectivamente
 
-## Call stack
-
 
 ## Entornos
 
@@ -266,12 +264,12 @@ sesión de R ya los estas usando.
 El _entorno_ es un un objeto (como cualquier otro), una estructura de datos muy
 particular, muy parecida a una lista, que administra:
 
-* Un conjunto de _simbolos_ o si quieres _nombres de variables_ asociados a un
+* Un conjunto de _símbolos_ o si quieres _nombres de variables_ asociados a un
   determinado contexto de evaluación
-* Los objetos o contenido asociado a dichos _simbolos_
+* Los objetos o contenido asociado a dichos _símbolos_
 * Y un puntero a un _entorno_ anterior o _padre_
 
-Cuando incias una sessión "limpia", R ya te ofrece un entrono conocido como el
+Cuando inicias una sesión "limpia", R ya te ofrece un entrono conocido como el
 _entorno global_, es decir `.GlobalEnv`, pero no es más que un "hijo" de varios
 _entornos anteriores_
 
@@ -295,9 +293,9 @@ while (environmentName(x) != environmentName(emptyenv())) {
 [1] "R_EmptyEnv"
 ```
 
-Cuando se evalua cualquier sentencia, siempre se lo hace en relación a un
+Cuando se evalúa cualquier sentencia, siempre se lo hace en relación a un
 determinado contexto, y ese contexto esta vinculado directamente a un
-_entorno_. Imaginemos nuevamente una sesión inical de R con el siguiente
+_entorno_. Imaginemos nuevamente una sesión inicial de R con el siguiente
 código:
 
 ```r
@@ -309,15 +307,43 @@ z <- mi_suma(x, y)
 z
 ```
 
-Si usas **RStudio** muy probablemente ya conzcas el explorador de entornos, y
+Si usas **RStudio** muy probablemente ya conozcas el explorador de entornos, y
 ejecutando paso a paso el código anterior, también habrás notado, que por cada
 asignación a una variable, se agrega la misma a la herramienta mencionada, con
 una particularidad, que viene bien hacer notar: la función, que es también un
-_simbolo_ como cualquier otra variable, no se incorpora al explorador de
+_símbolo_ como cualquier otra variable, no se incorpora al explorador de
 entornos, en la definición, sino recién cuando efectivamente es usada: `z <-
 mi_suma(x, y)`, es la _evaluación diferida_ en acción.
 
 ![Explorador de entornos]({{site.baseurl}}/images/2019/img_001.jpg)
+
+Los _entornos_ tienen una fuerte relación con el _scope_ o _contexto_. Un
+patrón común en la mayoría de los lenguajes, es que el código de una función se
+ejecuta en un _contexto_ distinto al del código desde dónde se la invoca. De
+ahí que se hable de variables _locales_, por aquellas que se definen dentro de
+una función y _globales_ a las que se encuentra definidas fuera de la función.
+Las variables _locales_ solo son "visibles" dentro de la función y a menos que
+las retornemos, no pueden accederse fuera de la misma, por otro lado, en muchos
+lenguajes, que una función acceda a una variable _global_ requiere algún tipo
+de indicación especial.
+
+En R, ocurre lo mismo, pero con la particularidad, que al ejecutarse una
+función, de forma transparente para el usuario, se crea automáticamente un
+_entorno_,  en principio, digamos que vacío de contenido y efímero, durará lo
+que duré la ejecución de la función.
+
+Ya comentamos que el _entorno_ es un objeto más, por lo que podremos acceder en
+todo momento a ellos, es decir podemos ver y modificar el _contexto_ de
+evaluación de cualquier código, y muy importante, podremos hacerlo antes de la
+evaluación en sí.
+
+> En R, el contexto de evaluación de cualquier código es totalmente configurable
+> a través de la manipulación del _entorno_ actual de evaluación, o mediante la
+> creación y configuración de un _entorno_ totalmente nuevo.
+
+
+## Call stack
+
 
 ## Quotation y Quasicuotation
 
