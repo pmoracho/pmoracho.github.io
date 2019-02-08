@@ -317,7 +317,7 @@ _simbolo_ como cualquier otra variable, no se incorpora al explorador de
 entornos, en la definición, sino recién cuando efectivamente es usada: `z <-
 mi_suma(x, y)`, es la _evaluación diferida_ en acción.
 
-![Explorador de entornos]({{site.baseurl}}/images/2019/image_001.jpg)
+![Explorador de entornos]({{site.baseurl}}/images/2019/img_001.jpg)
 
 ## Quotation y Quasicuotation
 
