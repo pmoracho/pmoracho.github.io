@@ -27,7 +27,9 @@ Box plot
 
 El Boxplot es probablemente uno de los tipos de gráficos más comunes. Da un buen resumen de una o varias variables numéricas. La línea que divide la caja en 2 partes representa la mediana de los datos. El final de la caja muestra los cuartiles superior e inferior. Las líneas extremas muestran el valor más alto y el más bajo excluyendo los valores atípicos. Tenga en cuenta que Boxplot oculta el número de valores detrás de la variable. Por lo tanto, es muy recomendable imprimir el número de observaciones, añadir una observación única con fluctuaciones o usar un Violinplot si tiene muchas observaciones.
 
-![]({{site.baseurl}}/images/2019/ggplot_samples_files/figure-markdown_github/unnamed-chunk-1-1.png)![]({{site.baseurl}}/images/2019/ggplot_samples_files/figure-markdown_github/unnamed-chunk-1-2.png)
+![]({{site.baseurl}}/images/2017/plot_negate_11346db71bfd.png)
+![]({{site.baseurl}}/images/2019/ggplot_samples_files/figure-markdown_github/unnamed-chunk-1-1.png)
+![]({{site.baseurl}}/images/2019/ggplot_samples_files/figure-markdown_github/unnamed-chunk-1-2.png)
 
 Violin plot
 -----------
