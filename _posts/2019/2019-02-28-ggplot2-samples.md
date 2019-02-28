@@ -17,15 +17,10 @@ tags:
   - R
 ---
 
-Gráfico Ggplot + theme\_elegante.R()
+Ejemplo de graficas ggplot2 combinadas con theme\_elegante()
 ================
 Patricio Moracho
-2019-02-27
-
-Ejemplos de gráficos con Ggplot2
---------------------------------
-
-### Cómo se ven con theme\_elegante()
+2019-02-28
 
 Hace un tiempo que estoy robando ideas de todos lados como para armar un tema de **ggplot2** que sea elegante, simple y visualmente atractivo. Lo llame `theme_elegante()`, muy original lo mio. El código es el siguiente:
 
@@ -129,7 +124,7 @@ ggplot(ToothGrowth, aes(x=factor(dose), y=len, fill=factor(dose))) +
     theme_elegante()
 ```
 
-![]({{site.baseurl}}/images/2019/ggplot_samples_files/figure-markdown_github/unnamed-chunk-1-1.png)
+![]({{site.baseurl}}/images/2019/ggplot_samples_files/figure-markdown_github/box_plots-1.png)
 
 ``` r
 ggplot(mpg, aes(x=class, y=hwy)) + 
@@ -159,7 +154,7 @@ ggplot(mpg, aes(x=class, y=hwy)) +
     theme_elegante()
 ```
 
-![]({{site.baseurl}}/images/2019/ggplot_samples_files/figure-markdown_github/unnamed-chunk-1-2.png)
+![]({{site.baseurl}}/images/2019/ggplot_samples_files/figure-markdown_github/box_plots-2.png)
 
 Violin plot
 -----------
@@ -204,43 +199,147 @@ Scatter plot
 
 Una gráfica de dispersión (scatterplot) muestra el valor de 2 conjuntos de datos en 2 dimensiones. Cada punto representa una observación. La posición en los ejes X (horizontal) e Y (vertical) representa los valores del valor de 2 variables. Es realmente útil estudiar la relación entre ambas variables. Es común proporcionar aún más información usando colores o formas (para mostrar grupos, o una tercera variable). También es posible mapear otra variable al tamaño de cada punto, lo que hace un gráfico de burbujas. Si tiene muchos puntos y lucha con el sobretrazado, considere la posibilidad de usar un gráfico de densidad en 2D.
 
-![]({{site.baseurl}}/images/2019/ggplot_samples_files/figure-markdown_github/unnamed-chunk-2-1.png)![]({{site.baseurl}}/images/2019/ggplot_samples_files/figure-markdown_github/unnamed-chunk-2-2.png)![]({{site.baseurl}}/images/2019/ggplot_samples_files/figure-markdown_github/unnamed-chunk-2-3.png)![]({{site.baseurl}}/images/2019/ggplot_samples_files/figure-markdown_github/unnamed-chunk-2-4.png)
+``` r
+options(scipen=999)  # turn-off scientific notation like 1e+48
+data("midwest", package = "ggplot2")
+
+# Scatterplot
+ggplot(midwest, aes(x=area, y=poptotal)) + 
+    geom_point(aes(col=state, size=popdensity)) + 
+    geom_smooth(method="loess", se=F) + 
+    xlim(c(0, 0.1)) + 
+    ylim(c(0, 500000)) + 
+    labs(subtitle="Area Vs Población", 
+         y="Poblacíon", 
+         x="Area", 
+         title="Ejemplo de un Scatterplot", 
+         caption = "Fuente: midwest") +
+    theme_elegante()
+```
+
+![]({{site.baseurl}}/images/2019/ggplot_samples_files/figure-markdown_github/scatter_plot-1.png)
+
+``` r
+ggplot(mpg, aes(cty, hwy)) +
+    geom_point() + 
+    geom_smooth(method="lm", se=F) +
+    labs(subtitle="Consumo en la ciudad versus autopista", 
+         y="Autopista", 
+         x="Ciudad", 
+         title="Millas por galón", 
+         caption="Fuente: midwest") +
+    theme_elegante()
+```
+
+![]({{site.baseurl}}/images/2019/ggplot_samples_files/figure-markdown_github/scatter_plot-2.png)
+
+``` r
+data("diamonds")
+levels(diamonds$cut) <- c("Pobre", "Bueno", "Muy bueno", "Premium", "Ideal")
+ggplot(data=diamonds, aes(x = carat, y = price, color = cut)) + 
+    geom_point(alpha = 1, size = .01, aes(color = cut)) + 
+    labs(title = "Precio vs. Quilates", 
+       subtitle = "¿Cual es la corelación entre el precio y los quilates?",
+       x = "Quilates", 
+       y = "Precio",
+       caption = "pmoracho.github.io" ) + 
+    scale_color_manual(values=c('#25AAE2','#F2B53A', '#8BC540', '#DC5D42', '#666666', '9FAFBE')) +
+    guides(colour = guide_legend(override.aes = list(size=10))) +
+    theme(legend.key = element_rect(colour = "transparent", fill = "white")) +
+    scale_y_continuous(labels=dollar_format(prefix="$")) +
+    theme_elegante()
+```
+
+![]({{site.baseurl}}/images/2019/ggplot_samples_files/figure-markdown_github/scatter_plot-3.png)
+
+Y también veamos como se ve un "facetado""
+
+``` r
+ggplot(mpg, aes(displ, cty)) + 
+    geom_point() +
+    # Use vars() to supply variables from the dataset:
+    facet_grid(vars(drv), vars(cyl)) +
+    theme_elegante() +
+    theme(panel.border= element_rect(fill = NA, colour = "grey70", size = rel(1)))
+```
+
+![]({{site.baseurl}}/images/2019/ggplot_samples_files/figure-markdown_github/scatter_plot_facet-1.png)
 
 Connected scatter plot
 ----------------------
 
-Una gráfica de dispersión conectada está realmente cerca de una gráfica de línea, excepto que cada una de las rupturas en las líneas se muestran usando un punto. También está bastante cerca de la gráfica de dispersión, pero tiene una especificidad: su eje X debe ser ordenado para hacer este tipo de representación. Por lo tanto, las gráficas de dispersión conectadas se utilizan a menudo para series temporales en las que el eje X representa el tiempo. Si desea rellenar el área debajo de la línea, obtendrá un gráfico de área
+Una gráfica de dispersión conectada está realmente cerca de una gráfica de línea, excepto que cada una de las rupturas en las líneas se muestran usando un punto. También está bastante cerca de la gráfica de dispersión, pero tiene una especificidad: su eje X debe ser ordenado para hacer este tipo de representación. Por lo tanto, las gráficas de dispersión conectadas se utilizan a menudo para series temporales en las que el eje X representa el tiempo. Si desea rellenar el área debajo de la línea, obtendrá un gráfico de área.
 
-![]({{site.baseurl}}/images/2019/ggplot_samples_files/figure-markdown_github/unnamed-chunk-3-1.png)![]({{site.baseurl}}/images/2019/ggplot_samples_files/figure-markdown_github/unnamed-chunk-3-2.png)
+``` r
+library(tidyverse)
+ 
+# Build a Time serie data set for last year
+day=as.Date("2017-06-14") - 0:364
+value=runif(365) + seq(-140, 224)^2 / 10000
+data=data.frame(day, value)
+ 
+# Calculate mean value per month
+data %>% mutate(month = as.Date(cut(day, breaks = "month"))) %>%
+    group_by(month) %>% 
+    summarise(average = mean(value)) -> don
+ 
+# And make the plot
+ggplot(don, aes(x=month, y=average)) +
+    geom_line() + 
+    geom_point() +
+    scale_x_date(date_labels = "%b-%Y", date_breaks="1 month") +
+    theme_elegante() +
+    theme(axis.text.x=element_text(angle=60, hjust=1))
+```
+
+![]({{site.baseurl}}/images/2019/ggplot_samples_files/figure-markdown_github/con_scatter-1.png)
+
+``` r
+# Calculate agregated data per week
+don=data %>% mutate(week = as.Date(cut(day, breaks = "week"))) %>%
+    group_by(week) %>% 
+    summarise(average = mean(value)) 
+ 
+# And make the plot
+ggplot(don, aes(x=week, y=average)) +
+    geom_line() + 
+    geom_point() +
+    geom_area(fill=alpha('slateblue',0.2)) +
+    scale_x_date(date_labels = "%W-%b", date_breaks="1 week") +
+    theme_elegante() +
+    theme(axis.text.x=element_text(angle=60, hjust=1))
+```
+
+![]({{site.baseurl}}/images/2019/ggplot_samples_files/figure-markdown_github/con_scatter-2.png)
 
 Density plot
 ------------
 
 Un gráfico de densidad muestra la distribución de una variable numérica. Sólo toma como entrada un conjunto de valores numéricos. Está muy cerca de un histograma. Tenga en cuenta que es muy recomendable jugar con el argumento de ancho de banda para no perder un patrón específico en los datos. Tenga en cuenta que puede comparar la distribución de varias variables graficándolas en el mismo eje, usando facetas o a través de un gráfico de gozo.
 
-![]({{site.baseurl}}/images/2019/ggplot_samples_files/figure-markdown_github/unnamed-chunk-4-1.png)![]({{site.baseurl}}/images/2019/ggplot_samples_files/figure-markdown_github/unnamed-chunk-4-2.png)![]({{site.baseurl}}/images/2019/ggplot_samples_files/figure-markdown_github/unnamed-chunk-4-3.png)![]({{site.baseurl}}/images/2019/ggplot_samples_files/figure-markdown_github/unnamed-chunk-4-4.png)
+![]({{site.baseurl}}/images/2019/ggplot_samples_files/figure-markdown_github/unnamed-chunk-1-1.png)![]({{site.baseurl}}/images/2019/ggplot_samples_files/figure-markdown_github/unnamed-chunk-1-2.png)![]({{site.baseurl}}/images/2019/ggplot_samples_files/figure-markdown_github/unnamed-chunk-1-3.png)![]({{site.baseurl}}/images/2019/ggplot_samples_files/figure-markdown_github/unnamed-chunk-1-4.png)
 
 Stacked area chart
 ------------------
 
-![]({{site.baseurl}}/images/2019/ggplot_samples_files/figure-markdown_github/unnamed-chunk-5-1.png)![]({{site.baseurl}}/images/2019/ggplot_samples_files/figure-markdown_github/unnamed-chunk-5-2.png)![]({{site.baseurl}}/images/2019/ggplot_samples_files/figure-markdown_github/unnamed-chunk-5-3.png)
+![]({{site.baseurl}}/images/2019/ggplot_samples_files/figure-markdown_github/unnamed-chunk-2-1.png)![]({{site.baseurl}}/images/2019/ggplot_samples_files/figure-markdown_github/unnamed-chunk-2-2.png)![]({{site.baseurl}}/images/2019/ggplot_samples_files/figure-markdown_github/unnamed-chunk-2-3.png)
 
-Sreamgraphs
------------
+Streamgraphs
+------------
 
 Un gráfico Stream está muy cerca de un gráfico de área apilada. Muestra la evolución de un valor numérico (eje Y) en función de otro valor numérico (eje X). Esta evolución está representada por varios grupos, todos con un color distinto. A diferencia de un área apilada, no hay ninguna esquina: los bordes son redondeados, lo que da esta agradable impresión de flujo. Los gráficos de streaming son muy útiles cuando se muestran en modo interactivo: resaltar un grupo le da directamente una idea de su evolución. R permite crear fácilmente gráficos streaming gracias a la biblioteca de gráficos streaming.
 
-![]({{site.baseurl}}/images/2019/ggplot_samples_files/figure-markdown_github/unnamed-chunk-6-1.png)
+![]({{site.baseurl}}/images/2019/ggplot_samples_files/figure-markdown_github/unnamed-chunk-3-1.png)
 
 2D density plot
 ---------------
 
-![]({{site.baseurl}}/images/2019/ggplot_samples_files/figure-markdown_github/unnamed-chunk-7-1.png)![]({{site.baseurl}}/images/2019/ggplot_samples_files/figure-markdown_github/unnamed-chunk-7-2.png)![]({{site.baseurl}}/images/2019/ggplot_samples_files/figure-markdown_github/unnamed-chunk-7-3.png)![]({{site.baseurl}}/images/2019/ggplot_samples_files/figure-markdown_github/unnamed-chunk-7-4.png)![]({{site.baseurl}}/images/2019/ggplot_samples_files/figure-markdown_github/unnamed-chunk-7-5.png)
+![]({{site.baseurl}}/images/2019/ggplot_samples_files/figure-markdown_github/unnamed-chunk-4-1.png)![]({{site.baseurl}}/images/2019/ggplot_samples_files/figure-markdown_github/unnamed-chunk-4-2.png)![]({{site.baseurl}}/images/2019/ggplot_samples_files/figure-markdown_github/unnamed-chunk-4-3.png)![]({{site.baseurl}}/images/2019/ggplot_samples_files/figure-markdown_github/unnamed-chunk-4-4.png)![]({{site.baseurl}}/images/2019/ggplot_samples_files/figure-markdown_github/unnamed-chunk-4-5.png)
 
 Bubble plot
 -----------
 
-![]({{site.baseurl}}/images/2019/ggplot_samples_files/figure-markdown_github/unnamed-chunk-8-1.png)![]({{site.baseurl}}/images/2019/ggplot_samples_files/figure-markdown_github/unnamed-chunk-8-2.png)
+![]({{site.baseurl}}/images/2019/ggplot_samples_files/figure-markdown_github/unnamed-chunk-5-1.png)![]({{site.baseurl}}/images/2019/ggplot_samples_files/figure-markdown_github/unnamed-chunk-5-2.png)
 
 Ridgeline plot
 --------------
@@ -249,49 +348,75 @@ Un gráfico Ridgeline o Joyplot muestra la distribución de un valor numérico p
 
 source: <https://www.r-graph-gallery.com/ridgeline-plot/>
 
-![]({{site.baseurl}}/images/2019/ggplot_samples_files/figure-markdown_github/unnamed-chunk-9-1.png)
+![]({{site.baseurl}}/images/2019/ggplot_samples_files/figure-markdown_github/unnamed-chunk-6-1.png)
 
 Correlograma
 ------------
 
 Un correlograma o matriz de correlación permite analizar la relación entre cada par de variables numéricas de una matriz. La correlación entre cada par de variables se visualiza a través de una gráfica de dispersión, o un símbolo que representa la correlación (burbuja, línea, número...). La diagonal representa la distribución de cada variable, utilizando un histograma o un gráfico de densidad. Esta técnica es ampliamente utilizada para el análisis exploratorio ya que evita hacer cientos de gráficos para observar una matriz.
 
-![]({{site.baseurl}}/images/2019/ggplot_samples_files/figure-markdown_github/unnamed-chunk-10-1.png)
+![]({{site.baseurl}}/images/2019/ggplot_samples_files/figure-markdown_github/unnamed-chunk-7-1.png)
 
 Line plot
 ---------
 
-![]({{site.baseurl}}/images/2019/ggplot_samples_files/figure-markdown_github/unnamed-chunk-11-1.png)![]({{site.baseurl}}/images/2019/ggplot_samples_files/figure-markdown_github/unnamed-chunk-11-2.png)![]({{site.baseurl}}/images/2019/ggplot_samples_files/figure-markdown_github/unnamed-chunk-11-3.png)
+![]({{site.baseurl}}/images/2019/ggplot_samples_files/figure-markdown_github/unnamed-chunk-8-1.png)![]({{site.baseurl}}/images/2019/ggplot_samples_files/figure-markdown_github/unnamed-chunk-8-2.png)![]({{site.baseurl}}/images/2019/ggplot_samples_files/figure-markdown_github/unnamed-chunk-8-3.png)
 
 Dendograma
 ----------
 
-![]({{site.baseurl}}/images/2019/ggplot_samples_files/figure-markdown_github/unnamed-chunk-12-1.png)
+Un dendrograma es un tipo de representación gráfica o diagrama de datos en forma de árbol que organiza los datos en subcategorías que se van dividiendo en otros hasta llegar al nivel de detalle deseado (asemejándose a las ramas de un árbol que se van dividiendo en otras sucesivamente). Este tipo de representación permite apreciar claramente las relaciones de agrupación entre los datos e incluso entre grupos de ellos aunque no las relaciones de similitud o cercanía entre categorías. Observando las sucesivas subdivisiones podemos hacernos una idea sobre los criterios de agrupación de los mismos, la distancia entre los datos según las relaciones establecidas, etc. También podríamos referirnos al dendrograma como la ilustración de las agrupaciones derivadas de la aplicación de un algoritmo de clustering jerárquico.
+
+``` r
+library(ggplot2)
+library(ggdendro)
+df       <- USArrests                         # really bad idea to muck up internal datasets
+hc       <- hclust(dist(df), "ave")           # heirarchal clustering
+dendr    <- dendro_data(hc, type="rectangle") # convert for ggplot
+clust    <- cutree(hc,k=2)                    # find 2 clusters
+clust.df <- data.frame(label=names(clust), cluster=factor(clust))
+# dendr[["labels"]] has the labels, merge with clust.df based on label column
+dendr[["labels"]] <- merge(dendr[["labels"]],clust.df, by="label")
+# plot the dendrogram; note use of color=cluster in geom_text(...)
+ggplot() + 
+  geom_segment(data=segment(dendr), aes(x=x, y=y, xend=xend, yend=yend)) + 
+  geom_text(data=label(dendr), aes(x, y, label=label, hjust=0, color=cluster), 
+           size=3) +
+  coord_flip() + scale_y_reverse(expand=c(0.2, 0)) + 
+  theme(axis.line.y=element_blank(),
+        axis.ticks.y=element_blank(),
+        axis.text.y=element_blank(),
+        axis.title.y=element_blank(),
+        panel.background=element_rect(fill="white"),
+        panel.grid=element_blank()) +
+    theme_elegante()
+```
+
+![]({{site.baseurl}}/images/2019/ggplot_samples_files/figure-markdown_github/dendogram-1.png)
 
 Line plot
 ---------
 
-![]({{site.baseurl}}/images/2019/ggplot_samples_files/figure-markdown_github/unnamed-chunk-13-1.png)
+![]({{site.baseurl}}/images/2019/ggplot_samples_files/figure-markdown_github/unnamed-chunk-9-1.png)
 
 Circular bar plot
 -----------------
 
-![]({{site.baseurl}}/images/2019/ggplot_samples_files/figure-markdown_github/unnamed-chunk-14-1.png)
+![]({{site.baseurl}}/images/2019/ggplot_samples_files/figure-markdown_github/unnamed-chunk-10-1.png)
 
 Mosaic Plot
 -----------
 
 Para instalarlo: `devtools::install_github("haleyjeppson/ggmosaic")`
 
-![]({{site.baseurl}}/images/2019/ggplot_samples_files/figure-markdown_github/unnamed-chunk-15-1.png) ![]({{site.baseurl}}/images/2019/ggplot_samples_files/figure-markdown_github/unnamed-chunk-16-1.png)![]({{site.baseurl}}/images/2019/ggplot_samples_files/figure-markdown_github/unnamed-chunk-16-2.png)
+![]({{site.baseurl}}/images/2019/ggplot_samples_files/figure-markdown_github/unnamed-chunk-11-1.png) ![]({{site.baseurl}}/images/2019/ggplot_samples_files/figure-markdown_github/unnamed-chunk-12-1.png)![]({{site.baseurl}}/images/2019/ggplot_samples_files/figure-markdown_github/unnamed-chunk-12-2.png)
 
 ggTimeSeries
 ------------
 
-![]({{site.baseurl}}/images/2019/ggplot_samples_files/figure-markdown_github/unnamed-chunk-17-1.png)![]({{site.baseurl}}/images/2019/ggplot_samples_files/figure-markdown_github/unnamed-chunk-17-2.png)
+![]({{site.baseurl}}/images/2019/ggplot_samples_files/figure-markdown_github/unnamed-chunk-13-1.png)![]({{site.baseurl}}/images/2019/ggplot_samples_files/figure-markdown_github/unnamed-chunk-13-2.png)
 
 fuentes:
 
 -   <https://www.r-graph-gallery.com>
-
 
