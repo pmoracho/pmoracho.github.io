@@ -5,7 +5,12 @@ post_date: 2019-03-09
 layout: post
 permalink: /prueba-r-markdown/
 categories: cat
-output: jekyllthat::jekylldown
+output: 
+  github_page:    
+    jekyllthat::jekylldown
+  pdf_document: default
+  html_document:
+    df_print: paged
 excerpt_separator: <!--more-->
 published: true
 show_meta: true
@@ -24,6 +29,16 @@ tags:
 
 R Markdown
 ----------
+
+¿R, gráficos, markdown y `githup-pages`? ¿Se puede? ¿Desde `rstudio`?
+
+Bueno, generarar blogs con markdown es sumamente sencillo y está [super documentado](https://bookdown.org/yihui/blogdown/), sin embargo, cuando tienes unas necesidades algo más simples y limitadas, la anterior solución es un poco mucho. El escenario: poder a partir de un código R markdown, generar el contenido markdown especifico para subir a un sitio `github` ya existente, junto con las imagenes relacionadas. No parece mucho, pero tiene su complejidad.
+
+### 1. Instalar `jeckyllthat`
+
+    install.packages("devtools")
+    library(devtools)
+    install_github("ColinFay/jekyllthat")
 
 This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
 
