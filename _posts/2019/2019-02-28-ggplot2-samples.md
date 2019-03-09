@@ -188,7 +188,7 @@ ggplot(mtcars, aes(factor(cyl), mpg)) +
     theme_elegante()
 ```
 
-![]({{site.baseurl}}/images/2019/ggplot_samples_files/figure-markdown_github/violin_plot-2.png)
+![]({{site.baseurl}}/images/{{ post.url }}/figure-markdown_github/violin_plot-2.png)
 
 Scatter plot
 ------------
