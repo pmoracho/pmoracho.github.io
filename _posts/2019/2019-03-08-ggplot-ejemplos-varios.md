@@ -16,7 +16,6 @@ noindex: false
 hide_printmsg: false
 sitemap: true
 summaryfeed: false
-baseurl: /ggplot-ejemplos-vario
 description: Ejemplos de gráficos con Ggplot2 y el theme_elegante()
 tags:
   - desarrollo
