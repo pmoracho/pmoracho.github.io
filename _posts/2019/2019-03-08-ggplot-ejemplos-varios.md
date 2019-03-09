@@ -152,4 +152,4 @@ ggplot(mpg, aes(x=class, y=hwy)) +
     theme_elegante()
 ```
 
-![]({{ site.baseurl }}{{ post.url }}//2019-03-08-ggplot-ejemplos-varios_files/figure-markdown_github/box_plots-2.png)
+![]({{ site.baseurl }}{{ post.url }}/2019-03-08-ggplot-ejemplos-varios_files/figure-markdown_github/box_plots-2.png)
