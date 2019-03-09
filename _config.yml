@@ -42,6 +42,7 @@ gems:
   - rouge
   - jekyll-mentions
   - jekyll-seo-tag
+  - jekyll-postfiles
   
 jekyll-mentions:
   base_url: https://twitter.com
