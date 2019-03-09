@@ -14,5 +14,5 @@ gem 'jekyll-compose', '>= 0.4.1'
 gem 'font-awesome-sass', '>= 4.6.2'
 gem 'travis', '>= 1.8.2'
 gem 'jekyll-mentions', '>= 1.1.3'
-gem 'jekyll-relative-links'
+gem 'jekyll-postfiles'
 end
