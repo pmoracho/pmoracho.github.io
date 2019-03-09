@@ -42,7 +42,7 @@ gems:
   - rouge
   - jekyll-mentions
   - jekyll-seo-tag
-  - jekyll-postfiles
+  - jekyll-relative-links
   
 jekyll-mentions:
   base_url: https://twitter.com
@@ -122,4 +122,8 @@ compress_html:
   profile: false
   startings: [html, head, body]
   
-  ## END ##
+relative_links:
+  enabled:     true
+  collections: false  
+
+## END ##
