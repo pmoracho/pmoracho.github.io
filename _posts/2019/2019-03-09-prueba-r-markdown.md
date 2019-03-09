@@ -91,3 +91,5 @@ Y ahora sí, ¿podemos incluir un plot?
 ``` r
 plot(pressure)
 ```
+
+<img src="/images/2019/2019-03-09-prueba-r-markdown_files/figure-markdown_github/unnamed-chunk-1-1.png" width="50%" style="background-color: #9ecff7; padding:10px; display: inline-block;" />
