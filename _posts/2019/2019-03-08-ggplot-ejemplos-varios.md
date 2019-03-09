@@ -1,12 +1,25 @@
 ---
+layout: post
+published: true
 title: "Ejemplos varios Ggplot2"
 author: Patricio Moracho
 post_date: 2019-03-08
-layout: single
 permalink: /ggplot-ejemplos-varios/
 categories: cat
 output: jekyllthat::jekylldown
 excerpt_separator: <!--more-->
+show_meta: true
+comments: true
+mathjax: false
+gistembed: false
+noindex: false
+hide_printmsg: false
+sitemap: true
+summaryfeed: false
+description: Ejemplos de gráficos con Ggplot2 y el theme_elegante()
+tags:
+  - desarrollo
+  - R
 ---
 
 Hace un tiempo que estoy robando ideas de todos lados como para armar un tema de **ggplot2** que sea elegante, simple y visualmente atractivo. Lo llame `theme_elegante()`, muy original lo mio. El código es el siguiente:
