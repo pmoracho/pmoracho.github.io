@@ -107,6 +107,7 @@ theme_elegante <- function(base_size = 10,
 
 Y a continuación algunos ejemplos de gráficas tradicionales de **ggplot2**.
 
+
 Box plot
 --------
 
