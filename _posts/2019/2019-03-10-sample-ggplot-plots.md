@@ -536,4 +536,4 @@ ggplot(data, aes(x=carat, y=price, size=depth, color=carat)) +
     theme_elegante()
 ```
 
-![](/images/2019/2019-03-10-sample-ggplot-plots_files/figure-markdown_github/bubble_plots-1.png)
+<img src="/images/2019/2019-03-10-sample-ggplot-plots_files/figure-markdown_github/bubble_plots-1.png" style="display: block; margin-left: auto; margin-right: auto" />
