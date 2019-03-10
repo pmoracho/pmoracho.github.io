@@ -128,7 +128,7 @@ ggplot(ToothGrowth, aes(x=factor(dose), y=len, fill=factor(dose))) +
     theme_elegante()
 ```
 
-<img src="/images/2019/2019-03-10-sample-ggplot-plots_files/figure-markdown_github/box_plots-1.png" style="display: block; margin-left: auto; margin-right: auto; width: 80%;" />
+<img src="/images/2019/2019-03-10-sample-ggplot-plots_files/figure-markdown_github/box_plots-1.png" style="display: block; margin-left: auto; margin-right: auto; width: 50%;" />
 
 ``` r
 ggplot(mpg, aes(x=class, y=hwy)) + 
@@ -154,4 +154,42 @@ ggplot(mpg, aes(x=class, y=hwy)) +
     theme_elegante()
 ```
 
-<img src="/images/2019/2019-03-10-sample-ggplot-plots_files/figure-markdown_github/box_plots-2.png" style="display: block; margin-left: auto; margin-right: auto; width: 80%;" />
+<img src="/images/2019/2019-03-10-sample-ggplot-plots_files/figure-markdown_github/box_plots-2.png" style="display: block; margin-left: auto; margin-right: auto; width: 50%;" />
+
+Violin plot
+-----------
+
+Las gráficas de violín permiten visualizar la distribución de una variable numérica para uno o varios grupos. Está muy cerca de una boxplot, pero permite una comprensión más profunda de la densidad. Los violines se adaptan especialmente cuando la cantidad de datos es enorme y resulta imposible mostrar observaciones individuales. Los gráficos de violín son una forma muy conveniente de mostrar los datos y probablemente merezcan más atención en comparación con los gráficos de caja que a veces pueden ocultar características de los datos.
+
+``` r
+# reorder is close to order, but is made to change the order of the factor levels.
+iris$Species = with(iris, reorder(Species, Sepal.Width, mean))
+ 
+# Now you can plot
+ggplot(iris, aes(x=Species, y=Sepal.Width, fill=Species)) +
+    geom_violin(alpha=0.6) +
+    labs(title="Iris", 
+         subtitle="Distribución del ancho del sépalo por especie", 
+         caption="Fuente: Edgar Anderson's Iris Data", 
+         y="Ancho del sépalo", 
+         x="Especie",
+         color=NULL) +
+    theme_elegante()
+```
+
+<img src="/images/2019/2019-03-10-sample-ggplot-plots_files/figure-markdown_github/violin_plot-1.png" style="display: block; margin-left: auto; margin-right: auto; width: 50%;" />
+
+``` r
+# Second type
+ggplot(mtcars, aes(factor(cyl), mpg)) +
+    geom_violin(aes(fill = factor(cyl))) +
+    labs(title="Motor Trend Car Road Tests", 
+         subtitle="Distribución de las millas por galón según # de cilindros", 
+         caption="fuente: Motor Trend US magazine", 
+         y="millas por galon", 
+         x="# de cilindros",
+         color=NULL) +
+    theme_elegante()
+```
+
+<img src="/images/2019/2019-03-10-sample-ggplot-plots_files/figure-markdown_github/violin_plot-2.png" style="display: block; margin-left: auto; margin-right: auto; width: 50%;" />
