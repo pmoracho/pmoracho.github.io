@@ -117,6 +117,8 @@ Box plot
 El Boxplot es probablemente uno de los tipos de gráficos más comunes. Da un buen resumen de una o varias variables numéricas. La línea que divide la caja en 2 partes representa la mediana de los datos. El final de la caja muestra los cuartiles superior e inferior. Las líneas extremas muestran el valor más alto y el más bajo excluyendo los valores atípicos. Tenga en cuenta que Boxplot oculta el número de valores detrás de la variable. Por lo tanto, es muy recomendable imprimir el número de observaciones, añadir una observación única con fluctuaciones o usar un Violinplot si tiene muchas observaciones.
 
 ``` r
+library(ggplot2)
+
 ggplot(ToothGrowth, aes(x=factor(dose), y=len, fill=factor(dose))) + 
     geom_boxplot() +
     labs(title="El efecto de la vitamina C", 
@@ -162,6 +164,8 @@ Violin plot
 Las gráficas de violín permiten visualizar la distribución de una variable numérica para uno o varios grupos. Está muy cerca de una boxplot, pero permite una comprensión más profunda de la densidad. Los violines se adaptan especialmente cuando la cantidad de datos es enorme y resulta imposible mostrar observaciones individuales. Los gráficos de violín son una forma muy conveniente de mostrar los datos y probablemente merezcan más atención en comparación con los gráficos de caja que a veces pueden ocultar características de los datos.
 
 ``` r
+library(ggplot2)
+
 # reorder is close to order, but is made to change the order of the factor levels.
 iris$Species = with(iris, reorder(Species, Sepal.Width, mean))
  
@@ -200,6 +204,8 @@ Scatter plot
 Una gráfica de dispersión (scatterplot) muestra el valor de 2 conjuntos de datos en 2 dimensiones. Cada punto representa una observación. La posición en los ejes X (horizontal) e Y (vertical) representa los valores del valor de 2 variables. Es realmente útil estudiar la relación entre ambas variables. Es común proporcionar aún más información usando colores o formas (para mostrar grupos, o una tercera variable). También es posible mapear otra variable al tamaño de cada punto, lo que hace un gráfico de burbujas. Si tiene muchos puntos y lucha con el sobretrazado, considere la posibilidad de usar un gráfico de densidad en 2D.
 
 ``` r
+library(ggplot2)
+
 options(scipen=999)  # turn-off scientific notation like 1e+48
 data("midwest", package = "ggplot2")
 
@@ -251,3 +257,96 @@ ggplot(data=diamonds, aes(x = carat, y = price, color = cut)) +
 ```
 
 <img src="/images/2019/2019-03-10-sample-ggplot-plots_files/figure-markdown_github/scatter_plot-3.png" style="display: block; margin-left: auto; margin-right: auto" />
+
+Y también veamos como se ve un "facetado""
+
+``` r
+library(ggplot2)
+
+ggplot(mpg, aes(displ, cty)) + 
+    geom_point() +
+    # Use vars() to supply variables from the dataset:
+    facet_grid(vars(drv), vars(cyl)) +
+    theme_elegante() +
+    theme(panel.border= element_rect(fill = NA, colour = "grey70", size = rel(1))) +
+    labs(title = "Cilindrda vs consumo en ciudad", 
+       subtitle = "¿Cual es la relación entre la cilindarada y el consumo por cilindros/transmisión?",
+       x = "Cilindrada", 
+       y = "Consumo",
+       caption = "pmoracho.github.io" ) + 
+    scale_color_manual(values=c('#25AAE2','#F2B53A', '#8BC540', '#DC5D42', '#666666', '9FAFBE')) 
+```
+
+<img src="/images/2019/2019-03-10-sample-ggplot-plots_files/figure-markdown_github/scatter_plot_facet-1.png" style="display: block; margin-left: auto; margin-right: auto" />
+
+Density plot
+------------
+
+Un gráfico de densidad muestra la distribución de una variable numérica. Sólo toma como entrada un conjunto de valores numéricos. Está muy cerca de un histograma. Tenga en cuenta que es muy recomendable jugar con el argumento de ancho de banda para no perder un patrón específico en los datos. Tenga en cuenta que puede comparar la distribución de varias variables graficándolas en el mismo eje, usando facetas o a través de un gráfico de gozo.
+
+``` r
+library(ggplot2)
+
+data("diamonds")
+levels(diamonds$cut) <- c("Pobre", "Bueno", "Muy bueno", "Premium", "Ideal")
+
+# plot 1: Density of price for each type of cut of the diamond:
+ggplot(data=diamonds,aes(x=price, group=cut, fill=cut)) + 
+    geom_density(adjust=1.5) +
+    labs(title = "Precio vs. Densidad", 
+       subtitle = "Distribución del precio en relación a la densidad",
+       x = "Precio", 
+       y = "Densidad",
+       caption = "Fuente: pmoracho.github.io" ) +
+    theme_elegante()
+```
+
+<img src="/images/2019/2019-03-10-sample-ggplot-plots_files/figure-markdown_github/density-1.png" style="display: block; margin-left: auto; margin-right: auto" />
+
+``` r
+# plot 2: Density plot with transparency (using the alpha argument):
+ggplot(data=diamonds,aes(x=price, group=cut, fill=cut)) + 
+    geom_density(adjust=1.5 , alpha=0.2) +
+    labs(title = "Precio vs. Densidad", 
+       subtitle = "Distribución del precio en relación a la densidad",
+       x = "Precio", 
+       y = "Densidad",
+       caption = "Fuente: pmoracho.github.io" ) +
+    theme_elegante()
+```
+
+<img src="/images/2019/2019-03-10-sample-ggplot-plots_files/figure-markdown_github/density-2.png" style="display: block; margin-left: auto; margin-right: auto" />
+
+``` r
+# plot 3: Stacked density plot:
+ggplot(data=diamonds,aes(x=price, group=cut, fill=cut)) + 
+    geom_density(adjust=1.5, position="fill") +
+    labs(title = "Precio vs. Densidad", 
+       subtitle = "Distribución del precio en relación a la densidad",
+       x = "Precio", 
+       y = "Densidad",
+       caption = "Fuente: pmoracho.github.io" ) +
+    theme_elegante()
+```
+
+<img src="/images/2019/2019-03-10-sample-ggplot-plots_files/figure-markdown_github/density-3.png" style="display: block; margin-left: auto; margin-right: auto" />
+
+``` r
+# plot 4
+ggplot(diamonds, aes(x=depth, y=..density..)) + 
+    geom_density(aes(fill=cut), position="stack") +
+    xlim(50,75) + 
+    labs(title = "Precio vs. Densidad", 
+       subtitle = "Distribución del precio en relación a la densidad",
+       x = "Precio", 
+       y = "Densidad",
+       caption = "Fuente: pmoracho.github.io" ) +
+    theme(legend.position="none") +
+    theme_elegante()
+```
+
+<img src="/images/2019/2019-03-10-sample-ggplot-plots_files/figure-markdown_github/density-4.png" style="display: block; margin-left: auto; margin-right: auto" /> \#\# Stacked area chart
+
+Un gráfico de área apilada es la extensión de un gráfico de área básico para mostrar la evolución del valor de varios grupos en el mismo gráfico. Los valores de cada grupo se muestran uno encima del otro. Permite comprobar en una misma figura, la evolución tanto del total de una variable numérica, como de la importancia de cada grupo. Si sólo le interesa la importancia relativa de cada grupo, probablemente debería dibujar un gráfico de área apilada en porcentaje. Tenga en cuenta que esta tabla se vuelve difícil de leer si se muestran demasiados grupos y si los patrones son realmente diferentes entre grupos. En este caso, piense en utilizar facetas en su lugar.
+
+<img src="/images/2019/2019-03-10-sample-ggplot-plots_files/figure-markdown_github/stacked_areas-1.png" style="display: block; margin-left: auto; margin-right: auto" /><img src="/images/2019/2019-03-10-sample-ggplot-plots_files/figure-markdown_github/stacked_areas-2.png" style="display: block; margin-left: auto; margin-right: auto" /><img src="/images/2019/2019-03-10-sample-ggplot-plots_files/figure-markdown_github/stacked_areas-3.png" style="display: block; margin-left: auto; margin-right: auto" />
