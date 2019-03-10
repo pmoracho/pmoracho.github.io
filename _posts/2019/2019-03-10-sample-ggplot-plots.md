@@ -128,7 +128,7 @@ ggplot(ToothGrowth, aes(x=factor(dose), y=len, fill=factor(dose))) +
     theme_elegante()
 ```
 
-<img src="/images/2019/2019-03-10-sample-ggplot-plots_files/figure-markdown_github/box_plots-1.png" style="display: block; margin-left: auto; margin-right: auto; width: 50%;" />
+<img src="/images/2019/2019-03-10-sample-ggplot-plots_files/figure-markdown_github/box_plots-1.png" style="display: block; margin-left: auto; margin-right: auto" />
 
 ``` r
 ggplot(mpg, aes(x=class, y=hwy)) + 
@@ -154,7 +154,7 @@ ggplot(mpg, aes(x=class, y=hwy)) +
     theme_elegante()
 ```
 
-<img src="/images/2019/2019-03-10-sample-ggplot-plots_files/figure-markdown_github/box_plots-2.png" style="display: block; margin-left: auto; margin-right: auto; width: 50%;" />
+<img src="/images/2019/2019-03-10-sample-ggplot-plots_files/figure-markdown_github/box_plots-2.png" style="display: block; margin-left: auto; margin-right: auto" />
 
 Violin plot
 -----------
@@ -177,7 +177,7 @@ ggplot(iris, aes(x=Species, y=Sepal.Width, fill=Species)) +
     theme_elegante()
 ```
 
-<img src="/images/2019/2019-03-10-sample-ggplot-plots_files/figure-markdown_github/violin_plot-1.png" style="display: block; margin-left: auto; margin-right: auto; width: 50%;" />
+<img src="/images/2019/2019-03-10-sample-ggplot-plots_files/figure-markdown_github/violin_plot-1.png" style="display: block; margin-left: auto; margin-right: auto;" />
 
 ``` r
 # Second type
@@ -192,4 +192,4 @@ ggplot(mtcars, aes(factor(cyl), mpg)) +
     theme_elegante()
 ```
 
-<img src="/images/2019/2019-03-10-sample-ggplot-plots_files/figure-markdown_github/violin_plot-2.png" style="display: block; margin-left: auto; margin-right: auto; width: 50%;" />
+<img src="/images/2019/2019-03-10-sample-ggplot-plots_files/figure-markdown_github/violin_plot-2.png" style="display: block; margin-left: auto; margin-right: auto;" />
