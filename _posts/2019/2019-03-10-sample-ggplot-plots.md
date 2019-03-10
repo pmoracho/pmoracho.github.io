@@ -514,3 +514,26 @@ ggplot(data, aes(x=x, y=y) ) +
 ```
 
 <img src="/images/2019/2019-03-10-sample-ggplot-plots_files/figure-markdown_github/2D_density-4.png" style="display: block; margin-left: auto; margin-right: auto" />
+
+Bubble plot
+-----------
+
+Un gráfico de burbujas es un gráfico multivariable que es un cruce entre un gráfico de dispersión y un gráfico de área proporcional. Al igual que una gráfica de dispersión, los gráficos de burbujas utilizan un sistema de coordenadas cartesianas para trazar puntos a lo largo de una cuadrícula donde los ejes X e Y son variables separadas. Sin embargo, a diferencia de una gráfica de dispersión, a cada punto se le asigna una etiqueta o categoría (ya sea que se muestre al lado o en una leyenda). Cada punto trazado representa entonces una tercera variable por el área de su círculo. Los colores también pueden utilizarse para distinguir entre categorías o para representar una variable de datos adicional. El tiempo puede ser mostrado ya sea teniendo una variable en uno de los ejes o animando las variables de datos que cambian con el tiempo. Los gráficos de burbujas se utilizan normalmente para comparar y mostrar las relaciones entre los círculos categorizados, mediante el uso de la posición y las proporciones. La imagen general de los gráficos de burbujas se puede utilizar para analizar patrones/correlaciones. Demasiadas burbujas pueden hacer que el gráfico sea difícil de leer, por lo que los gráficos de burbujas tienen una capacidad limitada de tamaño de datos. Esto se puede remediar de alguna manera con la interactividad: haciendo clic o pasando el ratón por encima de las burbujas para mostrar información oculta, teniendo la opción de reorganizar o filtrar las categorías agrupadas. Al igual que con las Tablas de Área Proporcional, los tamaños de los círculos necesitan ser dibujados basados en el área del círculo, no en su radio o diámetro. No sólo el tamaño de los círculos cambiará exponencialmente, sino que esto llevará a interpretaciones erróneas por parte del sistema visual humano.
+
+``` r
+# Let's use the diamonds data set (available in base R)
+data = diamonds %>% sample_n(200)
+ 
+ggplot(data, aes(x=carat, y=price, size=depth, color=carat)) + 
+    geom_point(alpha=0.4) +
+    scale_size_continuous( trans="exp", range=c(1, 25)) +
+    scale_colour_continuous(guide = FALSE) +
+        labs(title="Relación precio / quilates", 
+         subtitle="Tamaño de las burbujas por profundidad", 
+         caption="Fuente: pmoracho.github.io", 
+         y="precio", 
+         x="Quilates") +
+    theme_elegante()
+```
+
+![](/images/2019/2019-03-10-sample-ggplot-plots_files/figure-markdown_github/bubble_plots-1.png)
