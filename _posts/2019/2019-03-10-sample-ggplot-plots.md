@@ -288,6 +288,7 @@ Un gráfico de densidad muestra la distribución de una variable numérica. Sól
 library(ggplot2)
 
 data("diamonds")
+options(scipen=999)
 levels(diamonds$cut) <- c("Pobre", "Bueno", "Muy bueno", "Premium", "Ideal")
 
 # plot 1: Density of price for each type of cut of the diamond:
@@ -345,8 +346,104 @@ ggplot(diamonds, aes(x=depth, y=..density..)) +
     theme_elegante()
 ```
 
-<img src="/images/2019/2019-03-10-sample-ggplot-plots_files/figure-markdown_github/density-4.png" style="display: block; margin-left: auto; margin-right: auto" /> \#\# Stacked area chart
+<img src="/images/2019/2019-03-10-sample-ggplot-plots_files/figure-markdown_github/density-4.png" style="display: block; margin-left: auto; margin-right: auto" />
+
+Stacked area chart
+------------------
 
 Un gráfico de área apilada es la extensión de un gráfico de área básico para mostrar la evolución del valor de varios grupos en el mismo gráfico. Los valores de cada grupo se muestran uno encima del otro. Permite comprobar en una misma figura, la evolución tanto del total de una variable numérica, como de la importancia de cada grupo. Si sólo le interesa la importancia relativa de cada grupo, probablemente debería dibujar un gráfico de área apilada en porcentaje. Tenga en cuenta que esta tabla se vuelve difícil de leer si se muestran demasiados grupos y si los patrones son realmente diferentes entre grupos. En este caso, piense en utilizar facetas en su lugar.
 
-<img src="/images/2019/2019-03-10-sample-ggplot-plots_files/figure-markdown_github/stacked_areas-1.png" style="display: block; margin-left: auto; margin-right: auto" /><img src="/images/2019/2019-03-10-sample-ggplot-plots_files/figure-markdown_github/stacked_areas-2.png" style="display: block; margin-left: auto; margin-right: auto" /><img src="/images/2019/2019-03-10-sample-ggplot-plots_files/figure-markdown_github/stacked_areas-3.png" style="display: block; margin-left: auto; margin-right: auto" />
+``` r
+# DATA
+library(ggplot2)
+
+set.seed(345)
+Sector <- rep(c("S01","S02","S03","S04","S05","S06","S07"),times=7)
+Year <- as.numeric(rep(c("1950","1960","1970","1980","1990","2000","2010"),each=7))
+Value <- runif(49, 10, 100)
+data <- data.frame(Sector,Year,Value)
+
+ggplot(data, aes(x=Year, y=Value, fill=Sector)) + 
+    geom_area() +
+    labs(title="Titulo del gráfico", 
+         subtitle="Subtitulo del gráfico", 
+         caption="Fuente: pmoracho.github.io", 
+         y="Valor", 
+         x="Año") +
+    theme_elegante()
+```
+
+<img src="/images/2019/2019-03-10-sample-ggplot-plots_files/figure-markdown_github/stacked_areas-1.png" style="display: block; margin-left: auto; margin-right: auto" />
+
+``` r
+ggplot(data, aes(x=Year, y=Value, fill=Sector)) +
+    geom_area(colour="black", size=.2, alpha=.4) +
+    scale_fill_brewer(palette="Greens", breaks=rev(levels(data$Sector))) +
+    labs(title="Titulo del gráfico", 
+         subtitle="Subtitulo del gráfico", 
+         caption="Fuente: pmoracho.github.io", 
+         y="Valor", 
+         x="Año") +
+    theme_elegante()
+```
+
+<img src="/images/2019/2019-03-10-sample-ggplot-plots_files/figure-markdown_github/stacked_areas-2.png" style="display: block; margin-left: auto; margin-right: auto" />
+
+``` r
+my_fun=function(vec){ as.numeric(vec[3]) / sum(data$Value[data$Year==vec[2]]) *100 }
+data$prop=apply(data , 1 , my_fun)
+ 
+ggplot(data, aes(x=Year, y=prop, fill=Sector)) + 
+    geom_area(alpha=0.6 , size=1, colour="black") +
+    labs(title="Titulo del gráfico", 
+         subtitle="Subtitulo del gráfico", 
+         caption="Fuente: pmoracho.github.io", 
+         y="Valor", 
+         x="Año") +
+        theme_elegante()
+```
+
+<img src="/images/2019/2019-03-10-sample-ggplot-plots_files/figure-markdown_github/stacked_areas-3.png" style="display: block; margin-left: auto; margin-right: auto" />
+
+Streamgraphs
+------------
+
+Un gráfico Stream está muy cerca de un gráfico de área apilada. Muestra la evolución de un valor numérico (eje Y) en función de otro valor numérico (eje X). Esta evolución está representada por varios grupos, todos con un color distinto. A diferencia de un área apilada, no hay ninguna esquina: los bordes son redondeados, lo que da esta agradable impresión de flujo. Los gráficos de streaming son muy útiles cuando se muestran en modo interactivo: resaltar un grupo le da directamente una idea de su evolución. R permite crear fácilmente gráficos streaming gracias a la biblioteca de gráficos streaming.
+
+``` r
+library(ggTimeSeries)
+library(ggplot2)
+
+set.seed(10)
+dfData = data.frame(
+   Time = 1:1000,
+   Signal = abs(
+      c(
+         cumsum(rnorm(1000, 0, 3)), 
+         cumsum(rnorm(1000, 0, 4)), 
+         cumsum(rnorm(1000, 0, 1)),
+         cumsum(rnorm(1000, 0, 2))
+      )
+   ),
+   VariableLabel = c(rep('Class A', 1000),
+                     rep('Class B', 1000),
+                     rep('Class C', 1000),
+                     rep('Class D', 1000))
+)
+
+# base plot
+ggplot(dfData,
+       aes(x = Time,
+           y = Signal,
+           group = VariableLabel,
+           fill = VariableLabel)) +
+    stat_steamgraph() +
+    labs(title="Titulo del gráfico", 
+         subtitle="Subtitulo del gráfico", 
+         caption="Fuente: pmoracho.github.io", 
+         y="Señal", 
+         x="Tiempo") +
+    theme_elegante()
+```
+
+<img src="/images/2019/2019-03-10-sample-ggplot-plots_files/figure-markdown_github/streamgraphs-1.png" style="display: block; margin-left: auto; margin-right: auto" />
