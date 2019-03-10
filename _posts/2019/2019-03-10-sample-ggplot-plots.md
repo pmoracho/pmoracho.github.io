@@ -447,3 +447,70 @@ ggplot(dfData,
 ```
 
 <img src="/images/2019/2019-03-10-sample-ggplot-plots_files/figure-markdown_github/streamgraphs-1.png" style="display: block; margin-left: auto; margin-right: auto" />
+
+2D density plot
+---------------
+
+Un gráfico de densidad 2d es útil para estudiar la relación entre dos variables numéricas si tiene un gran número de puntos. Para evitar la superposición (como en la gráfica de dispersión al lado), divide el área de la gráfica en una multitud de pequeños fragmentos y representa el número de puntos en este fragmento.
+
+``` r
+library(ggplot2)
+
+a <- data.frame( x=rnorm(20000, 10, 1.9), y=rnorm(20000, 10, 1.2) )
+b <- data.frame( x=rnorm(20000, 14.5, 1.9), y=rnorm(20000, 14.5, 1.9) )
+c <- data.frame( x=rnorm(20000, 9.5, 1.9), y=rnorm(20000, 15.5, 1.9) )
+data <- rbind(a,b,c)
+
+# Basic scatterplot
+ggplot(data, aes(x=x, y=y) ) + 
+    geom_point() + 
+    labs(title="Titulo del gráfico", 
+         subtitle="Subtitulo del gráfico", 
+         caption="Fuente: pmoracho.github.io", 
+         y="x", 
+         x="y") +
+    theme_elegante()
+```
+
+<img src="/images/2019/2019-03-10-sample-ggplot-plots_files/figure-markdown_github/2D_density-1.png" style="display: block; margin-left: auto; margin-right: auto" />
+
+``` r
+ggplot(data, aes(x=x, y=y) ) +
+    geom_hex() +
+    labs(title="Titulo del gráfico", 
+         subtitle="Subtitulo del gráfico", 
+         caption="Fuente: pmoracho.github.io", 
+         y="x", 
+         x="y") +
+  theme_elegante()
+```
+
+<img src="/images/2019/2019-03-10-sample-ggplot-plots_files/figure-markdown_github/2D_density-2.png" style="display: block; margin-left: auto; margin-right: auto" />
+
+``` r
+# Show the contour only
+ggplot(data, aes(x=x, y=y) ) +
+    geom_density_2d() +
+    labs(title="Titulo del gráfico", 
+         subtitle="Subtitulo del gráfico", 
+         caption="Fuente: pmoracho.github.io", 
+         y="x", 
+         x="y") +
+    theme_elegante()
+```
+
+<img src="/images/2019/2019-03-10-sample-ggplot-plots_files/figure-markdown_github/2D_density-3.png" style="display: block; margin-left: auto; margin-right: auto" />
+
+``` r
+# Show the area only
+ggplot(data, aes(x=x, y=y) ) +
+    stat_density_2d(aes(fill = ..level..), geom = "polygon") +
+    labs(title="Titulo del gráfico", 
+         subtitle="Subtitulo del gráfico", 
+         caption="Fuente: pmoracho.github.io", 
+         y="x", 
+         x="y") +
+    theme_elegante()
+```
+
+<img src="/images/2019/2019-03-10-sample-ggplot-plots_files/figure-markdown_github/2D_density-4.png" style="display: block; margin-left: auto; margin-right: auto" />
