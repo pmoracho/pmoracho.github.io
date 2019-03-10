@@ -193,3 +193,61 @@ ggplot(mtcars, aes(factor(cyl), mpg)) +
 ```
 
 <img src="/images/2019/2019-03-10-sample-ggplot-plots_files/figure-markdown_github/violin_plot-2.png" style="display: block; margin-left: auto; margin-right: auto;" />
+
+Scatter plot
+------------
+
+Una gráfica de dispersión (scatterplot) muestra el valor de 2 conjuntos de datos en 2 dimensiones. Cada punto representa una observación. La posición en los ejes X (horizontal) e Y (vertical) representa los valores del valor de 2 variables. Es realmente útil estudiar la relación entre ambas variables. Es común proporcionar aún más información usando colores o formas (para mostrar grupos, o una tercera variable). También es posible mapear otra variable al tamaño de cada punto, lo que hace un gráfico de burbujas. Si tiene muchos puntos y lucha con el sobretrazado, considere la posibilidad de usar un gráfico de densidad en 2D.
+
+``` r
+options(scipen=999)  # turn-off scientific notation like 1e+48
+data("midwest", package = "ggplot2")
+
+# Scatterplot
+ggplot(midwest, aes(x=area, y=poptotal)) + 
+    geom_point(aes(col=state, size=popdensity)) + 
+    geom_smooth(method="loess", se=F) + 
+    xlim(c(0, 0.1)) + 
+    ylim(c(0, 500000)) + 
+    labs(subtitle="Area Vs Población", 
+         y="Poblacíon", 
+         x="Area", 
+         title="Ejemplo de un Scatterplot", 
+         caption = "Fuente: midwest") +
+    theme_elegante()
+```
+
+<img src="/images/2019/2019-03-10-sample-ggplot-plots_files/figure-markdown_github/scatter_plot-1.png" style="display: block; margin-left: auto; margin-right: auto" />
+
+``` r
+ggplot(mpg, aes(cty, hwy)) +
+    geom_point() + 
+    geom_smooth(method="lm", se=F) +
+    labs(subtitle="Consumo en la ciudad versus autopista", 
+         y="Autopista", 
+         x="Ciudad", 
+         title="Millas por galón", 
+         caption="Fuente: midwest") +
+    theme_elegante()
+```
+
+<img src="/images/2019/2019-03-10-sample-ggplot-plots_files/figure-markdown_github/scatter_plot-2.png" style="display: block; margin-left: auto; margin-right: auto" />
+
+``` r
+data("diamonds")
+levels(diamonds$cut) <- c("Pobre", "Bueno", "Muy bueno", "Premium", "Ideal")
+ggplot(data=diamonds, aes(x = carat, y = price, color = cut)) + 
+    geom_point(alpha = 1, size = .01, aes(color = cut)) + 
+    labs(title = "Precio vs. Quilates", 
+       subtitle = "¿Cual es la corelación entre el precio y los quilates?",
+       x = "Quilates", 
+       y = "Precio",
+       caption = "pmoracho.github.io" ) + 
+    scale_color_manual(values=c('#25AAE2','#F2B53A', '#8BC540', '#DC5D42', '#666666', '9FAFBE')) +
+    guides(colour = guide_legend(override.aes = list(size=10))) +
+    theme(legend.key = element_rect(colour = "transparent", fill = "white")) +
+    scale_y_continuous(labels=dollar_format(prefix="$")) +
+    theme_elegante()
+```
+
+<img src="/images/2019/2019-03-10-sample-ggplot-plots_files/figure-markdown_github/scatter_plot-3.png" style="display: block; margin-left: auto; margin-right: auto" />
