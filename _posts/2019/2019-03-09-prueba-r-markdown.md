@@ -92,4 +92,4 @@ Y ahora sí, ¿podemos incluir un plot?
 plot(pressure)
 ```
 
-<img src="/images/2019/2019-03-09-prueba-r-markdown_files/figure-markdown_github/pressure-1.png" width="50%" style="background-color: #9ecff7; padding:10px; display: inline-block;" />
+<img src="/images/2019/2019-03-09-prueba-r-markdown_files/figure-markdown_github/pressure-1.png" width="50%" style=display: block; margin-left: auto; margin-right: auto; width: 50%;" />
