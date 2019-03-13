@@ -279,6 +279,78 @@ ggplot(mpg, aes(displ, cty)) +
 
 <img src="/images/2019/2019-03-10-sample-ggplot-plots_files/figure-markdown_github/scatter_plot_facet-1.png" style="display: block; margin-left: auto; margin-right: auto" />
 
+Connected scatter plot
+----------------------
+
+Una gráfica de dispersión conectada está realmente cerca de una gráfica de línea, excepto que cada una de las rupturas en las líneas se muestran usando un punto. También está bastante cerca de la gráfica de dispersión, pero tiene una especificidad: su eje X debe ser ordenado para hacer este tipo de representación. Por lo tanto, las gráficas de dispersión conectadas se utilizan a menudo para series temporales en las que el eje X representa el tiempo. Si desea rellenar el área debajo de la línea, obtendrá un gráfico de área.
+
+``` r
+tu <- expand.grid(Land       = gl(2, 1, labels = c("DE", "BB")),
+                  Altersgr   = gl(5, 1, labels = letters[1:5]),
+                  Geschlecht = gl(2, 1, labels = c('m', 'w')),
+                  Jahr       = 2000:2009)
+
+set.seed(42)
+tu$Wert <- unclass(tu$Altersgr) * 200 + rnorm(200, 0, 10)
+
+ggplot(tu, aes(x = Jahr, y = Wert, color = Altersgr, group = Altersgr)) + 
+    geom_point() + 
+    geom_line() + 
+    facet_grid(Geschlecht ~ Land) +
+    theme_elegante()
+```
+
+![](/images/2019/2019-03-10-sample-ggplot-plots_files/figure-markdown_github/con_scatter-1.png)
+
+Line plot
+---------
+
+``` r
+library(ggplot2)
+library(lubridate)
+
+ggplot(data = diamonds, aes(x = carat, y = price, color = cut)) + 
+    labs(title = "Precio vs. Quilatest", 
+       subtitle = "What is the correlation between the price of a diamond its carat? ",
+       x = "Carat", 
+       y = "Price",
+       caption = "www.datatoinsight.io" ) + 
+    scale_color_manual(values=c('#25AAE2','#F2B53A', '#8BC540', '#DC5D42', '#666666', '9FAFBE')) +
+    guides(colour = guide_legend(override.aes = list(size=10))) +
+    geom_smooth(alpha = 0.2, size = 1.5, span = 4, se=FALSE) + 
+    theme(legend.key = element_rect(fill = "white")) +
+    scale_y_continuous(labels=dollar_format(prefix="$")) +
+    theme_elegante()
+```
+
+![](/images/2019/2019-03-10-sample-ggplot-plots_files/figure-markdown_github/line_plot-1.png)
+
+``` r
+df <- economics_long[economics_long$variable %in% c("psavert", "uempmed"), ]
+df <- df[lubridate::year(df$date) %in% c(1967:1981), ]
+
+# labels and breaks for X axis text
+brks <- df$date[seq(1, length(df$date), 12)]
+lbls <- lubridate::year(brks)
+
+# plot
+ggplot(df, aes(x=date)) + 
+    geom_line(aes(y=value, col=variable)) + 
+    theme_elegante() +
+    labs(title="Time Series of Returns Percentage", 
+       subtitle="Drawn from Long Data format", 
+       caption="Source: Economics", 
+       y="Returns %", 
+       color=NULL) +  # title and caption
+    scale_x_date(labels = lbls, breaks = brks) +  # change to monthly ticks and labels
+    scale_color_manual(labels = c("psavert", "uempmed"), 
+                     values = c("psavert"="#00ba38", "uempmed"="#f8766d")) +  # line color
+    theme(axis.text.x = element_text(angle = 90, vjust=0.5, size = 8),  # rotate x axis text 
+          panel.grid.minor = element_blank())  # turn off minor grid
+```
+
+![](/images/2019/2019-03-10-sample-ggplot-plots_files/figure-markdown_github/line_plot-2.png)
+
 Density plot
 ------------
 
@@ -537,3 +609,99 @@ ggplot(data, aes(x=carat, y=price, size=depth, color=carat)) +
 ```
 
 <img src="/images/2019/2019-03-10-sample-ggplot-plots_files/figure-markdown_github/bubble_plots-1.png" style="display: block; margin-left: auto; margin-right: auto" />
+
+Ridgeline plot
+--------------
+
+Un gráfico Ridgeline o Joyplot muestra la distribución de un valor numérico para varios grupos. Pueden ser muy útiles para visualizar los cambios en las distribuciones a lo largo del tiempo o del espacio. La distribución puede representarse mediante histogramas o gráficos de densidad, todos alineados a la misma escala horizontal y presentados con un ligero solapamiento. Las gráficas son especialmente interesantes cuando el número de grupos a representar es alto y, por lo tanto, una separación clásica de ventanas requeriría de mucho más espacio. Sin embargo, hay que tener cuidado, ya que está gráfica suele ocultar una parte de los datos, donde se produce el solapamiento. En R, los gráficos de Ridgeline se pueden hacer fácilmente gracias a la librería [ggridges](https://github.com/clauswilke/ggridges) de [Claus Wilke](http://wilkelab.org/), que es una extensión de ggplot2.
+
+source: <https://www.r-graph-gallery.com/ridgeline-plot/>
+
+``` r
+library(ggridges)
+library(ggplot2)
+ 
+data("diamonds")
+levels(diamonds$cut) <- c("Pobre", "Bueno", "Muy bueno", "Premium", "Ideal")
+ 
+# basic example
+ggplot(diamonds, aes(x = price, y = cut, fill = cut)) +
+  geom_density_ridges() +
+    labs(title = "Precio vs. Corte", 
+       subtitle = "¿Cual es la distribución del precio con relación al corte?",
+       x = "Precio", 
+       y = "Corte",
+       caption = "source: pmoracho.github.io" ) + 
+    scale_x_continuous(labels=dollar_format(prefix="$")) +
+    scale_color_manual(values=c('#25AAE2','#F2B53A', '#8BC540', '#DC5D42', '#666666',
+                                '9FAFBE')) +
+  theme_elegante()
+```
+
+![](/images/2019/2019-03-10-sample-ggplot-plots_files/figure-markdown_github/ridgeline_plot-1.png)
+
+Correlograma
+------------
+
+Un correlograma o matriz de correlación permite analizar la relación entre cada par de variables numéricas de una matriz. La correlación entre cada par de variables se visualiza a través de una gráfica de dispersión, o un símbolo que representa la correlación (burbuja, línea, número...). La diagonal representa la distribución de cada variable, utilizando un histograma o un gráfico de densidad. Esta técnica es ampliamente utilizada para el análisis exploratorio ya que evita hacer cientos de gráficos para observar una matriz.
+
+``` r
+library(ggplot2)
+library(ggcorrplot)
+
+# Correlation matrix
+data(mtcars)
+corr <- round(cor(mtcars), 1)
+
+ggcorrplot(corr, hc.order = TRUE, type = "lower",
+   outline.col = "white",
+   ggtheme = theme_elegante,
+   colors = c("#6D9EC1", "white", "#E46726")) +
+    labs(title="Motor Trend Car Road Tests", 
+         subtitle="Correlación de las variables", 
+         caption="fuente: Motor Trend US magazine", 
+         color=NULL) +
+    theme(legend.position="right")
+```
+
+![](/images/2019/2019-03-10-sample-ggplot-plots_files/figure-markdown_github/correlogram-1.png)
+
+Dendograma
+----------
+
+Un dendrograma es un tipo de representación gráfica o diagrama de datos en forma de árbol que organiza los datos en subcategorías que se van dividiendo en otros hasta llegar al nivel de detalle deseado (asemejándose a las ramas de un árbol que se van dividiendo en otras sucesivamente). Este tipo de representación permite apreciar claramente las relaciones de agrupación entre los datos e incluso entre grupos de ellos aunque no las relaciones de similitud o cercanía entre categorías. Observando las sucesivas subdivisiones podemos hacernos una idea sobre los criterios de agrupación de los mismos, la distancia entre los datos según las relaciones establecidas, etc. También podríamos referirnos al dendrograma como la ilustración de las agrupaciones derivadas de la aplicación de un algoritmo de clustering jerárquico.
+
+jerárquico.
+
+``` r
+library(ggplot2)
+library(ggdendro)
+
+df       <- USArrests                         # really bad idea to muck up internal datasets
+hc       <- hclust(dist(df), "ave")           # heirarchal clustering
+dendr    <- dendro_data(hc, type="rectangle") # convert for ggplot
+clust    <- cutree(hc,k=2)                    # find 2 clusters
+clust.df <- data.frame(label=names(clust), cluster=factor(clust))
+# dendr[["labels"]] has the labels, merge with clust.df based on label column
+dendr[["labels"]] <- merge(dendr[["labels"]],clust.df, by="label")
+# plot the dendrogram; note use of color=cluster in geom_text(...)
+ggplot() + 
+  geom_segment(data=segment(dendr), aes(x=x, y=y, xend=xend, yend=yend)) + 
+  geom_text(data=label(dendr), aes(x, y, label=label, hjust=0, color=cluster), 
+           size=3) +
+  coord_flip() + scale_y_reverse(expand=c(0.2, 0)) + 
+  theme(axis.line.y=element_blank(),
+        axis.ticks.y=element_blank(),
+        axis.text.y=element_blank(),
+        axis.title.y=element_blank(),
+        panel.background=element_rect(fill="white"),
+        panel.grid=element_blank()) +
+     labs(title = "USArrests", 
+       subtitle = "Dendograma",
+       x = "", 
+       y = "",
+       caption = "www.datatoinsight.io" ) + 
+    theme_elegante()
+```
+
+![](/images/2019/2019-03-10-sample-ggplot-plots_files/figure-markdown_github/dendogram-1.png)
