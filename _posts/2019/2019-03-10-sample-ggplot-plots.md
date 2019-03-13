@@ -300,10 +300,14 @@ ggplot(tu, aes(x = Jahr, y = Wert, color = Altersgr, group = Altersgr)) +
     theme_elegante()
 ```
 
-![](/images/2019/2019-03-10-sample-ggplot-plots_files/figure-markdown_github/con_scatter-1.png)
+<img src="/images/2019/2019-03-10-sample-ggplot-plots_files/figure-markdown_github/con_scatter-1.png" style="display: block; margin-left: auto; margin-right: auto" />
 
-Line plot
----------
+Line graphs / plots
+-------------------
+
+Los gráficos de líneas se utilizan para visualizar valores cuantitativos a lo largo de un intervalo o período de tiempo continuo. Un gráfico de líneas se utiliza con mayor frecuencia para mostrar tendencias y analizar cómo han cambiado los datos con el paso del tiempo. Los gráficos de líneas se dibujan primero trazando puntos de datos en una cuadrícula de coordenadas cartesianas y luego conectando una línea entre todos estos puntos. Típicamente, el eje y tiene un valor cuantitativo, mientras que el eje x es una escala de tiempo o una secuencia de intervalos. Los valores negativos se pueden mostrar debajo del eje x. La dirección de las líneas en el gráfico funciona como una buena metáfora de los datos: una pendiente ascendente indica dónde han aumentado los valores y una pendiente descendente indica dónde han disminuido los valores. El viaje de la línea a través del gráfico puede crear patrones que revelan tendencias en un conjunto de datos. Cuando se agrupan con otras líneas (otras series de datos), las líneas individuales pueden compararse entre sí. Sin embargo, evite usar más de 3-4 líneas por gráfico, ya que esto hace que el gráfico esté más desordenado y sea más difícil de leer. Una solución a esto es dividir el gráfico en múltiplos más pequeños (tener un gráfico de líneas pequeño para cada serie de datos).
+
+fuente: [The Data Visualisation Catalogue](https://datavizcatalogue.com/methods/line_graph.html)
 
 ``` r
 library(ggplot2)
@@ -323,7 +327,7 @@ ggplot(data = diamonds, aes(x = carat, y = price, color = cut)) +
     theme_elegante()
 ```
 
-![](/images/2019/2019-03-10-sample-ggplot-plots_files/figure-markdown_github/line_plot-1.png)
+<img src="/images/2019/2019-03-10-sample-ggplot-plots_files/figure-markdown_github/line_plot-1.png" style="display: block; margin-left: auto; margin-right: auto" />
 
 ``` r
 df <- economics_long[economics_long$variable %in% c("psavert", "uempmed"), ]
@@ -349,7 +353,7 @@ ggplot(df, aes(x=date)) +
           panel.grid.minor = element_blank())  # turn off minor grid
 ```
 
-![](/images/2019/2019-03-10-sample-ggplot-plots_files/figure-markdown_github/line_plot-2.png)
+<img src="/images/2019/2019-03-10-sample-ggplot-plots_files/figure-markdown_github/line_plot-2.png" style="display: block; margin-left: auto; margin-right: auto" />
 
 Density plot
 ------------
@@ -638,7 +642,7 @@ ggplot(diamonds, aes(x = price, y = cut, fill = cut)) +
   theme_elegante()
 ```
 
-![](/images/2019/2019-03-10-sample-ggplot-plots_files/figure-markdown_github/ridgeline_plot-1.png)
+<img src="/images/2019/2019-03-10-sample-ggplot-plots_files/figure-markdown_github/ridgeline_plot-1.png" style="display: block; margin-left: auto; margin-right: auto" />
 
 Correlograma
 ------------
@@ -664,7 +668,7 @@ ggcorrplot(corr, hc.order = TRUE, type = "lower",
     theme(legend.position="right")
 ```
 
-![](/images/2019/2019-03-10-sample-ggplot-plots_files/figure-markdown_github/correlogram-1.png)
+<img src="/images/2019/2019-03-10-sample-ggplot-plots_files/figure-markdown_github/correlogram-1.png" style="display: block; margin-left: auto; margin-right: auto" />
 
 Dendograma
 ----------
@@ -704,4 +708,75 @@ ggplot() +
     theme_elegante()
 ```
 
-![](/images/2019/2019-03-10-sample-ggplot-plots_files/figure-markdown_github/dendogram-1.png)
+<img src="/images/2019/2019-03-10-sample-ggplot-plots_files/figure-markdown_github/dendogram-1.png" style="display: block; margin-left: auto; margin-right: auto" />
+
+Population piramid
+------------------
+
+Conocida como una pirámide de edad y sexo. Una pirámide de población es un par de histogramas consecutivos (para cada sexo) que muestran la distribución de una población en todos los grupos de edad y en ambos sexos. El eje X se utiliza para trazar los números de población y el eje Y enumera todos los grupos de edad. Las pirámides de población son ideales para detectar cambios o diferencias en los patrones de población. Las pirámides de poblaciones múltiples pueden utilizarse para comparar patrones entre naciones o grupos de población seleccionados. La forma de una pirámide de población puede ser usada para interpretar una población. Por ejemplo, una pirámide con una base muy ancha y una sección superior estrecha sugiere una población con altas tasas de fertilidad y mortalidad. Mientras que una pirámide con una mitad superior más ancha y una base más estrecha sugeriría una población envejecida con bajas tasas de fertilidad. Las pirámides de población también pueden utilizarse para especular sobre el desarrollo futuro de una población. Una población que envejece y que no se está reproduciendo se encontraría con problemas como tener suficiente descendencia para cuidar a los ancianos. Otras teorías, como la de "Youth Bulge", afirman que cuando hay un amplio bulto en el rango de edad de 16 a 30 años, particularmente en los hombres, esto conduce a disturbios sociales, guerra y terrorismo. Esto hace que las pirámides de población sean útiles para campos como la ecología, la sociología y la economía.
+
+fuente: [The Data Visualisation Catalogue](https://datavizcatalogue.com/methods/population_pyramid.html)
+
+``` r
+library(tidyverse)
+
+# Your data
+xy.pop<-c(3.2,3.5,3.6,3.6,3.5,3.5,3.9,3.7,3.9,3.5,3.2,2.8,2.2,1.8,1.5,1.3,0.7,0.4)
+xx.pop<-c(3.2,3.4,3.5,3.5,3.5,3.7,4,3.8,3.9,3.6,3.2,2.5,2,1.7,1.5,1.3,1,0.8)
+agelabels<-c("0-4","5-9","10-14","15-19","20-24","25-29","30-34",
+            "35-39","40-44","45-49","50-54","55-59","60-64","65-69","70-74",
+            "75-79","80-44","85+")
+
+# Collect data in dataframe
+df <- rbind.data.frame(
+    cbind.data.frame(Percentage = -xy.pop, Group = agelabels, Gender = "male"),
+    cbind.data.frame(Percentage = +xx.pop, Group = agelabels, Gender = "female")
+);
+
+# Make sure agelabels have the right order
+df$Group <- factor(df$Group, levels = agelabels);
+
+# (gg)plot
+ggplot(data = df, aes(x = Group, y = Percentage, fill = Gender, group = Gender)) +
+           geom_bar(data = subset(df, Gender == "female"), stat = "identity") +
+           geom_bar(data = subset(df, Gender == "male"), stat = "identity") + 
+           coord_flip() + 
+           geom_smooth(colour = "black", method = "loess", se = FALSE, show.legend = FALSE, size = 0.5) +
+    scale_fill_manual(values=c('#25AAE2','#8BC540')) +
+           labs(
+               x = "Age", 
+               y = "Percentage", 
+               title = "Australian population pyramid 2012",
+               caption="fuente: https://stackoverflow.com/a/46955109/6836377") +
+           scale_y_continuous(
+               breaks = seq(-4, 4, by = 2), 
+               labels = c(rev(seq(0, 4, by = 2)), seq(2, 4, by = 2))) +
+           theme_elegante()
+```
+
+<img src="/images/2019/2019-03-10-sample-ggplot-plots_files/figure-markdown_github/piramid-1.png" style="display: block; margin-left: auto; margin-right: auto" />
+
+Timeline plot
+-------------
+
+Una línea de tiempo es una forma gráfica de mostrar una lista de eventos en orden cronológico. Algunas líneas de tiempo funcionan en una escala, mientras que otras simplemente muestran los eventos en secuencia. La función principal de Timelines es comunicar información relacionada con el tiempo, ya sea para el análisis o para presentar visualmente una historia o una visión de la historia. Si se basa en una escala, una línea de tiempo le permite ver cuándo ocurren o van a ocurrir las cosas, permitiendo al espectador evaluar los intervalos de tiempo entre los eventos. Esto permite al espectador ver cualquier patrón que aparezca en cualquier período de tiempo seleccionado o cómo se distribuyen los eventos en ese período de tiempo.
+
+fuente: [The Data Visualisation Catalogue](https://datavizcatalogue.com/methods/timeline.html)
+
+``` r
+cambodia = data.frame(Period = c("Funan", "Chenla/Zhenla","Khmer Empire","Dark Ages of Cambodia"),StartDate = c(-500,550,802,1431), EndDate = c(550,802,1431,1863), Color = c("lightblue","lightgreen","lightyellow","pink"))
+
+ggplot(data=cambodia) +
+  geom_segment(aes(x=StartDate, xend=EndDate, y=0., yend=0., color=Period) , linetype=1, size=4) +
+  scale_colour_brewer(palette = "Pastel1")+
+  scale_y_continuous(limits=c(0,0.5))+
+  scale_x_continuous(limits=c(-500,2000),  breaks= c(seq(0,2000,by=1000), cambodia$StartDate, cambodia$EndDate[4]))+
+  xlab("Time")+
+  ylab("Periods of History")+
+  theme_bw() + theme(panel.grid.minor = element_blank(), panel.grid.major =   element_blank(), axis.title.y=element_blank(),axis.text.y=element_blank(),  axis.ticks.y=element_blank()) +
+  theme(aspect.ratio = .2)+
+  theme(legend.position="none") + 
+  geom_text(aes(x=StartDate-100 + (EndDate- StartDate)/2,y=0.05,label=Period,angle=25,hjust=0)) + theme_elegante()
+```
+
+<img src="/images/2019/2019-03-10-sample-ggplot-plots_files/figure-markdown_github/timeplot-1.png" style="display: block; margin-left: auto; margin-right: auto" />
