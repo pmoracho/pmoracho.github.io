@@ -362,7 +362,7 @@ Todavía no encontré una traducción agradable a estos términos. Hablar de
 Quotation en R es un mecanismo por el cual podemos "capturar" una expresión sin
 evaluarla. La forma más básica de hacerlo es mediante la función `quote()`:
 
-```
+```r
 x + y
 Error: objeto 'x' no encontrado
 
@@ -370,9 +370,9 @@ quote(x + y)
 x + y
 ```
 
-¿Qué podemos deducir de esto? Hay una expresión `x + y`, en la primer sentacia,
+¿Qué podemos deducir de esto? Hay una expresión `x + y`, en la primer sentencia,
 el error claramente nos confirma que estamos evaluando la expresión y que aún
-no temos definidas las variables `x` e `y`. La segunda expresión `quote(x + y)`
+no hemos definidas las variables `x` e `y`. La segunda expresión `quote(x + y)`
 funciona correctamente, aún siendo que las variables siguen sin existir, por
 que en realidad `quote()` es capaz de capturar la expresión `x + y` sin
 evaluarla, producto de la **ENE**, ni más ni menos
