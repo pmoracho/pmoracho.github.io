@@ -370,12 +370,38 @@ quote(x + y)
 x + y
 ```
 
-¿Qué podemos deducir de esto? Hay una expresión `x + y`, en la primer sentencia,
-el error claramente nos confirma que estamos evaluando la expresión y que aún
-no hemos definidas las variables `x` e `y`. La segunda expresión `quote(x + y)`
-funciona correctamente, aún siendo que las variables siguen sin existir, por
-que en realidad `quote()` es capaz de capturar la expresión `x + y` sin
-evaluarla, producto de la **ENE**, ni más ni menos
+¿Qué podemos deducir de esto? Hay una expresión `x + y`, en la primer
+sentencia, el error claramente nos confirma que estamos evaluando la expresión
+y que aún no hemos definidas las variables `x` e `y`. La segunda expresión
+`quote(x + y)` funciona correctamente, aún siendo que las variables siguen sin
+existir, por que en realidad `quote()` es capaz de capturar la expresión `x +
+y` sin evaluarla, producto de la **ENE**, ni más ni menos. Capturar una
+expresión, nos permite manejar la evaluación y fundamentalmente dos cosas
+importantes: el _Cuando_ y el _Como_.
+
+El _Cuando_ nos permite salvar la expresión sin evaluar, en una variable, en un
+archivo, en una base de datos (¿por que no?), y usarla luego cuando realmente
+la necesitemos. El _Como_ nos permite manejar el contexto en que se evaluará la
+expresión pudiendo manipular completamente las variables y el entorno de la
+propia expresión.
+
+Un ejemplo práctico:
+
+```r
+exp <- quote(x + y)
+
+x <- 1
+y <- 2
+eval(exp)
+
+[1] 3
 
 
-IN progres...
+x <- 5
+y <- 2
+eval(exp)
+
+[1] 7
+```
+
+IN progress...
