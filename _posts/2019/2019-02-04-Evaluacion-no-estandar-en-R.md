@@ -31,13 +31,13 @@ dixit), un golpe inmediato al sentido común, formado por años de trabajo en
 tantos otros lenguajes: C, C++, Java, Basic, Python, SQL, etc. 
 
 
-> En la mayoría de los lenguajes de programación, sólo se puede acceder a los
+> _En la mayoría de los lenguajes de programación, sólo se puede acceder a los
 > valores de los parámetros de una función. En R, también se puede acceder al
 > código utilizado para calcularlos. Esto hace posible evaluar el código en
 > formasno estándar: usar lo que se conoce como evaluación no estándar, o ENE
 > para abreviar. ENE es particularmente útil para las funciones de análisis
 > interactivo de datos porque puede reducir drásticamente la cantidad de
-> escritura.
+> escritura._
 >
 > Hadley Wickham - Advance R
 
