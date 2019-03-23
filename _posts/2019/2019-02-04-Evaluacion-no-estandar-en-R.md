@@ -38,8 +38,8 @@ tantos otros lenguajes: C, C++, Java, Basic, Python, SQL, etc.
 > para abreviar. ENE es particularmente útil para las funciones de análisis
 > interactivo de datos porque puede reducir drásticamente la cantidad de
 > escritura.
-
->                                                  Hadley Wickham - Advance R
+>
+> Hadley Wickham - Advance R
 
 
 Para empezar, digamos que todos estos lenguajes (también R) evalúan lo que
