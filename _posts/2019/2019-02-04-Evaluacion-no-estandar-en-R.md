@@ -30,6 +30,18 @@ programador, darse cuenta de esto, es como un "cross a la mandíbula" (Arlt
 dixit), un golpe inmediato al sentido común, formado por años de trabajo en
 tantos otros lenguajes: C, C++, Java, Basic, Python, SQL, etc. 
 
+
+	En la mayoría de los lenguajes de programación, sólo se puede acceder a los
+	valores de los parámetros de una función. En R, también se puede acceder al
+	código utilizado para calcularlos. Esto hace posible evaluar el código en
+	formasno estándar: usar lo que se conoce como evaluación no estándar, o ENE
+	para abreviar. ENE es particularmente útil para las funciones de análisis
+	interactivo de datos porque puede reducir drásticamente la cantidad de
+	escritura.
+
+	Hadley Wickham - Advance R
+
+
 Para empezar, digamos que todos estos lenguajes (también R) evalúan lo que
 ingresamos por teclado de una forma prácticamente idéntica, la llamaremos
 evaluación estándar, pero en R en particular se puede llegar a modificar esto,
@@ -53,7 +65,7 @@ ggplot(df, aes(x=Y2003, y=Y2016)) + geom_point()
 
 Son cuatro expresiones bastante ordinarias, sin embargo todas tiene la
 particularidad que están haciendo uso de la evaluación No estándar, a partir de
-ahora la llamaremos **ENS** en contraste con la estándar que llamaremos **ES**.
+ahora la llamaremos **ENE** en contraste con la estándar que llamaremos **ES**.
 
 ## ¿Qué es una evaluación?
 
@@ -66,8 +78,8 @@ ingresadas por el usuario. No importa si el lenguaje es "interpretado" como R o
 escrito en dicho lenguaje. Este proceso de evaluación se compone de múltiples
 subprocesos, cada compilador o interprete se encargará a su manera de hacerlo,
 pero a los efectos de este artículo, nos basta con tener claro que la
-evaluación es la interpretación de un código ingresado y escrito en un
-lenguaje en particular.
+evaluación es la interpretación de un código ingresado y escrito en un lenguaje
+en particular.
 
 ## ¿Y la evaluación estándar?
 
@@ -92,12 +104,13 @@ otro lenguaje) "ve" las comillas dobles y evalúa que lo que sigue es una cadena
 literal. 
 
 El segundo caso, vemos que `mi_variable` no tiene comillas, ¿que hace el
-interprete de R (y nuevamente de cualquier lenguaje")?  Evalúa que lo que se
-estaría indicando es un identificador, un nombre, o más precisamente el nombre
-de un objeto. En este caso `mi_variable` sin las comillas, es una referencia y
-no una cadena literal. El mensaje de error luego de `print(mi_variable)` nos
-está claramente confirmando esto, no está diciendo que el objeto `mi_variable`
-no existe. Claro, si hasta ahora no lo hemos definido. Lo podemos hacer:
+interprete de R (y nuevamente el de cualquier otro lenguaje")?  Evalúa que lo
+que se estaría indicando es un identificador, un nombre, o más precisamente el
+nombre de un objeto. En este caso `mi_variable` sin las comillas, es una
+referencia y no una cadena literal. El mensaje de error luego de
+`print(mi_variable)` nos está claramente confirmando esto, no está diciendo que
+el objeto `mi_variable` no existe. Claro, si hasta ahora no lo hemos definido.
+Lo podemos hacer:
 
 ```r
 > mi_variable <- "Este es el valor al que apunta el objeto llamado mi_variable"
@@ -127,7 +140,7 @@ pesar de esto, la función `library()`, de foma "mágica", logró entender que l
 que queríamos era cargar el paquete `tidyverse`. Está "magia" se llama
 Evaluación No estándar (**ENE**), `library()` la implementa para evaluar los
 parámetros de entrada, pero también es capaz de evaluar de la forma estándar,
-es decir: `library("tidyverse")`.
+es decir: `library("tidyverse")` es totalmente válido.
 
 Así como lo cuento, parece un tema casi trivial y no demasiado útil, limitado a
 la utilidad de usar o no comillas, pero es mucho más que esto y lo iremos
@@ -137,15 +150,16 @@ exactamente lo mismo:
 ```r
 mtcars[mtcars$cyl>=6 & mtcars$disp > 160 & mtcars$mpg > 15 & 
 	   mtcars$hp > 120 & mtcars$gear == 3, ]
+
 subset(mtcars, cyl >=6 & disp > 160 & mpg > 15 & hp > 120 & gear == 3)
 ```
 
 Un simple filtro complejo de datos, si usamos la función `[` debemos ser muy
 específicos a la hora de escribir las condiciones, podemos ver que escribimos en
 todos los casos el nombre del `data.frame` más `$` y el nombre de la columna.
-Usando `subset()` que implementa **ENS**, la escritura es algo más compacta,
+Usando `subset()` que implementa **ENE**, la escritura es algo más compacta,
 solo debemos especificar los nombres de columna. Menos caracteres, mejor
-performance de escritura, y sobre todo menores posibilidades de equivocación.
+performance de escritura, y sobre todo menores posibilidades de error.
 
 Lo que termina ocurriendo con `subset()` y que veremos más adelante es que:
 
@@ -162,15 +176,15 @@ Seguramente has escuchado el término "lazy evaluation", que hace referencia a
 una evaluación diferida, una estrategia que se usa en varios lenguajes de
 programación para retrasar el calculo o ejecución de una expresión hasta el
 momento en que sea realmente necesario. Digamos, sin profundizar demasiado, que
-este tipo de estrategia tiene múltiples beneficios. En la gran
-mayoría de estos lenguajes, este tipo de evaluación debe codificarse
-especialmente, normalmente, creando objetos que implementan este tipo de
-evaluación, es decir este tipo de evaluación es un excepción.
+este tipo de estrategia tiene múltiples beneficios. En la gran mayoría de estos
+lenguajes, este tipo de evaluación debe codificarse especialmente, normalmente,
+creando objetos que implementan este tipo de evaluación, es decir este tipo de
+evaluación es un excepción.
 
-Sin embargo, en R la evaluación perezosa es la norma, todo es evaluado de manera
-"lazy", y particularmente en esta sección, hablaremos en realidad de la
-evaluación perezosa de los parámetros de cualquier función, algo que ninguno de los
-lenguajes mencionados anteriormente lo permite.
+Sin embargo, en R la evaluación perezosa es la norma, todo es evaluado de
+manera "lazy", y particularmente en esta sección, hablaremos en realidad de la
+evaluación perezosa de los parámetros de cualquier función, algo que ninguno de
+los lenguajes mencionados anteriormente lo permite.
 
 En Python por ejemplo, algo como esto, es normalmente aceptado y lo entendemos
 naturalmente como un error de nuestra parte:
@@ -188,10 +202,10 @@ mi_funcion()
 > TypeError: mi_funcion() takes exactly 2 arguments (0 given)
 ```
 
-Al intentar ejecutar `mi_funcion()` el interprete evalúa la misma y los
-parámetros definidos en su firma, como en la llamada no los hemos definido, se nos entrega
-un mensaje de error muy claro `mi_funcion()` espera 2 parámetros y no le estamos
-indicando ninguno.
+Al intentar ejecutar `mi_funcion()` el interprete evalúa esta, y los
+parámetros definidos en su firma, como en la llamada no los hemos definido, se
+nos entrega un mensaje de error muy claro `mi_funcion()` espera 2 parámetros y
+no le estamos indicando ninguno.
 
 En R las cosas son un poco distintas (hay que ir acostumbrándose)
 
@@ -251,7 +265,7 @@ Aquí quiero señalar un concepto fundacional para entender la **ENE**:
 
 > Hay un "gap" o intervalo entre la ejecución de la función y el momento en que
 > cualquiera de sus parámetros es evaluado realmente. En este intervalo,
-> nosotros como programadores, podremos intervenir y trabajar sobre los parámetros
+> nosotros como programadores, podremos intervenir y trabajar sobre estos
 > aún sin necesidad de evaluarlos efectivamente
 
 
@@ -342,14 +356,5 @@ evaluación en sí.
 > creación y configuración de un _entorno_ totalmente nuevo.
 
 
-## Call stack
-
-
-## Quotation y Quasicuotation
 
 IN progres...
-
-
-
-
-
