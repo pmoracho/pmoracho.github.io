@@ -376,7 +376,8 @@ y que aún no hemos definidas las variables `x` e `y`. La segunda expresión
 `quote(x + y)` funciona correctamente, aún siendo que las variables siguen sin
 existir, por que en realidad `quote()` es capaz de capturar la expresión `x +
 y` sin evaluarla, producto de la **ENE**, ni más ni menos. Capturar una
-expresión, nos permite manejar la evaluación y fundamentalmente dos cosas
+expresión, nos permi:xa!
+te manejar la evaluación y fundamentalmente dos cosas
 importantes: el _Cuando_ y el _Como_.
 
 El _Cuando_ nos permite salvar la expresión sin evaluar, en una variable, en un
@@ -403,5 +404,31 @@ eval(exp)
 
 [1] 7
 ```
+
+`exp <- quote(x + y)` crea una expresión (no confundir con el objeto del mismo
+nombre), está expresión o estrictamente hablando, está _quotation_, se construye
+pero no se evalúa. La expresión representa la suma de dos variables, las cuales
+no existen hasta ahora, cuando luego, realmente la evaluamos, el _cuando_,
+definimos el contexto de evaluación asignando valores a estas variables, el
+_como_, de esta forma en cada evaluación, usando `eval(exp)`, el resultado será
+consistente con los valores de las variables en dicho momento. En este ejemplo,
+estamos usando el mismo _environment_, solo que lo hemos ido modificado (al
+modificar las variables) previo a cada evaluación.
+
+Ya tenemos una idea, aunque sea muy elemental, de lo que es una _quotation_:
+código pendiente de evaluación. ¿Y que es entonces una _quasicuotation_? Este
+concepto proviene de las disciplinas lingüísticas, se conoce también como
+[_Quine quotation_](https://en.wikipedia.org/wiki/Quasi-quotation), en honor al
+filosofo y lógico  Willard van Orman Quine. La idea es muy simple, (por favor
+si hay un lingüista en la sala, no me mate) si tenemos una oración que dice
+_"La adicción es aguda"_, ¿de que estamos hablando?, ¿acaso es que la adición
+de alguien no identificado en la frase, es demasiado profunda y difícil de
+tratar, o simplemente estamos comentando que la palabra _adicción_ es aguda?
+
+La idea de la _quaicuotation_ es la de definir un estándar para poder indicar
+cuando una palabra no representa su significado real sino que representa la
+palabra misma, por ejemplo: _"La <adicción> es aguda"_, si nuestro estándar es
+usar los símbolos  `<>`, podríamos estar seguros en este caso, que _adicción_ 
+hace referencia a la propia palabra.
 
 IN progress...
