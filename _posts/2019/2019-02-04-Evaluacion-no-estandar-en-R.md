@@ -427,8 +427,10 @@ tratar, o simplemente estamos comentando que la palabra _adicción_ es aguda?
 
 La idea de la _quaicuotation_ es la de definir un estándar para poder indicar
 cuando una palabra no representa su significado real sino que representa la
-palabra misma, por ejemplo: _"La <adicción> es aguda"_, si nuestro estándar es
-usar los símbolos  `<>`, podríamos estar seguros en este caso, que _adicción_ 
-hace referencia a la propia palabra.
+palabra misma, por ejemplo: _"La [adicción] es aguda"_, si nuestro estándar es
+usar los símbolos `[]`, podríamos estar seguros en este caso, que _adicción_ 
+hace referencia a la propia palabra y no a la dependencia a ciertas sustancias.
+
+
 
 IN progress...
