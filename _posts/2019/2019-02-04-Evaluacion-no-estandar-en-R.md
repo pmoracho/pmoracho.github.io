@@ -431,6 +431,50 @@ palabra misma, por ejemplo: _"La [adicción] es aguda"_, si nuestro estándar es
 usar los símbolos `[]`, podríamos estar seguros en este caso, que _adicción_ 
 hace referencia a la propia palabra y no a la dependencia a ciertas sustancias.
 
+Volvamos al ejemplo anterior:
 
+```r
+exp <- quote(x + y)
+```
+
+Ahora supongamos que nuestra idea, es evaluar `x` de forma diferida, pero `y`
+en el momento de `quote()`, es decir, queremos que `y` se comporte como una
+constante  en la evaluación diferida. Por supuesto, podríamos indicar el valor
+literal, supongamos que `y` queremos que sea `10`, entonces podríamos hacer:
+
+```r
+exp <- quote(x + 10)
+```
+
+Pero, no, la idea es que en realidad ese valor `10` sea indicado por una
+variable que reseolveremos al principio y no en cada evaluación. POara poder
+hacer esto es que necesitamos usar _"quasicuotation"_, veamos como:
+
+```r
+y <- 10
+exp <- bquote(x + .(y))
+
+x <- 1
+paste("El valor de", deparse(exp), "donde x es", x, "es",  eval(exp))
+[1] "El valor de x + 10 donde x es 1 es 11"
+
+x <- 5
+paste("El valor de", deparse(exp), "donde x es", x, "es",  eval(exp))
+[1] "El valor de x + 10 donde x es 5 es 15"
+```
+
+Algunas cosas que nos dice este código:
+
+* Para poder usar  _"quasicuotation"_, necesitamos:
+	- Utilizar la función `bquote()`
+	- Utilizar la notación `.(y)` para indicar que la variable `y` debe ser evaluada para poder construir la expresión
+* Con `deparse(exp)` conseguimos una representación visual de la expresión
+* Y con `eval(exp)`, obviamente evaluamos la expresión
+
+**Importante**: Todo lo anterior, es apenas un ejemplo muy primitivo, es decir,
+usando código R base. Tengan en cuenta, que paquetes con `dplyr` hacen uso de
+otras funciones más modernas y desarrolladadas para implementar lo que se
+conoce com `tidy_avaluation()`, que podríamos decir que es la evalución natural
+de la evaluación NO estándar.
 
 IN progress...
