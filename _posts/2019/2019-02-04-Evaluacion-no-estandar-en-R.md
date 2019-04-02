@@ -447,7 +447,7 @@ exp <- quote(x + 10)
 ```
 
 Pero, no, la idea es que en realidad ese valor `10` sea indicado por una
-variable que reseolveremos al principio y no en cada evaluación. POara poder
+variable que reseolveremos al principio y no en cada evaluación. Para poder
 hacer esto es que necesitamos usar _"quasicuotation"_, veamos como:
 
 ```r
@@ -474,7 +474,7 @@ Algunas cosas que nos dice este código:
 **Importante**: Todo lo anterior, es apenas un ejemplo muy primitivo, es decir,
 usando código R base. Tengan en cuenta, que paquetes con `dplyr` hacen uso de
 otras funciones más modernas y desarrolladadas para implementar lo que se
-conoce com `tidy_avaluation()`, que podríamos decir que es la evalución natural
+conoce com `tidy_avaluation()`, que podríamos decir, es la evolución natural
 de la evaluación NO estándar.
 
 IN progress...
