@@ -26,7 +26,7 @@ por que entender como R evalúa las expresiones y la forma en que podemos, como
 programadores, "intervenir" en este proceso, es darse cuenta que es posible (en
 R) modificar directamente la forma "estándar" y "natural" de evaluación. Esto
 es algo único, al menos para mí y mi limitado conocimiento en lenguajes. Como
-programador, darse cuenta de esto, es como un "cross a la mandíbula" (Arlt
+programador, darse cuenta de esto, es como un "cross a la mandíbula" ([Arlt]
 dixit), un golpe inmediato al sentido común, formado por años de trabajo en
 tantos otros lenguajes: C, C++, Java, Basic, Python, SQL, etc. 
 
@@ -34,7 +34,7 @@ tantos otros lenguajes: C, C++, Java, Basic, Python, SQL, etc.
 > _En la mayoría de los lenguajes de programación, sólo se puede acceder a los
 > valores de los parámetros de una función. En R, también se puede acceder al
 > código utilizado para calcularlos. Esto hace posible evaluar el código en
-> formasno estándar: usar lo que se conoce como evaluación no estándar, o ENE
+> formas no estándar: usar lo que se conoce como evaluación no estándar, o ENE
 > para abreviar. ENE es particularmente útil para las funciones de análisis
 > interactivo de datos porque puede reducir drásticamente la cantidad de
 > escritura._
@@ -44,8 +44,8 @@ tantos otros lenguajes: C, C++, Java, Basic, Python, SQL, etc.
 
 Para empezar, digamos que todos estos lenguajes (también R) evalúan lo que
 ingresamos por teclado de una forma prácticamente idéntica, la llamaremos
-evaluación estándar, pero en R en particular se puede llegar a modificar esto,
-de una forma muy útil a la que llamaremos evaluación No estándar.
+evaluación estándar, **pero en R en particular se puede llegar a modificar esto,
+de una forma muy útil a la que llamaremos evaluación No estándar**.
 
 Es sin duda un tópico avanzado, posiblemente nunca te encuentres con necesidad
 de aplicarlo, pero estoy seguro, que si has escrito algo de código en R, ya lo
@@ -275,9 +275,9 @@ mi_funcion <- function(a, b) {
 
 Cualquiera de las expresiones anteriores dentro de la función, dipararán la
 evaluación. Una asignación a otra variable, necesita de un valor para colocar
-en memopria, la acción colatertal de la función `print()`, necesita del valor
-para mostrarlo en pantalla, el retorno implicito de la función `a + b` también
-evalua la expresión y por último, la función `force()` evaluará la expresión a
+en memoria, la acción colateral de la función `print()`, necesita del valor
+para mostrarlo en pantalla, el retorno implícito de la función `a + b` también
+evalúa la expresión y por último, la función `force()` evaluará la expresión a
 pedido.
 
 
@@ -466,7 +466,7 @@ exp <- quote(x + 10)
 ```
 
 Pero, no, la idea es que en realidad ese valor `10` sea indicado por una
-variable que reseolveremos al principio y no en cada evaluación. Para poder
+variable que resolveremos al principio y no en cada evaluación. Para poder
 hacer esto es que necesitamos usar _"quasicuotation"_, veamos como:
 
 ```r
@@ -492,8 +492,8 @@ Algunas cosas que nos dice este código:
 
 **Importante**: Todo lo anterior, es apenas un ejemplo muy primitivo, es decir,
 usando código R base. Tengan en cuenta, que paquetes con `dplyr` hacen uso de
-otras funciones más modernas y desarrolladadas para implementar lo que se
-conoce com `tidy_avaluation()`, que podríamos decir, es la evolución natural
+otras funciones más modernas y desarrolladas para implementar lo que se
+conoce como `tidy_avaluation()`, que podríamos decir, es la evolución natural
 de la evaluación NO estándar.
 
 
@@ -504,6 +504,8 @@ de la evaluación NO estándar.
 + El interprete **R** permite gracias a la evaluación perezosa, capturar una expresión sin evaluarla
 + Una expresión capturada, es un objeto como cualquier otro, referenciado por un nombre o variable
 + La evaluación puede ser gobernada por nosotros, en el momento que deseemos
-+ La forma de evaluar una expresión también, modicar el entorno, modifica la evaluación
-+ _Quotation_ es la cción de capturar una expresión, 
-+ _Quasiquotation_ nos permite indicar que parte de la expresión se evaluará en el momewnto inicial de la captura de la expresión
++ La forma de evaluar una expresión también, modificar el entorno, modifica la evaluación
++ _Quotation_ es la acción de capturar una expresión, 
++ _Quasiquotation_ nos permite indicar que parte de la expresión se evaluará en el momento inicial de la captura de la expresión
+
+[Arlt]:https://es.wikipedia.org/wiki/Roberto_Arlt
