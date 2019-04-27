@@ -508,4 +508,10 @@ de la evaluación NO estándar.
 + _Quotation_ es la acción de capturar una expresión, 
 + _Quasiquotation_ nos permite indicar que parte de la expresión se evaluará en el momento inicial de la captura de la expresión
 
+## Contenido interesante
+
++ [Expresiones](http://adv-r.had.co.nz/Expressions.html)
++ [Non estándar evaluation](http://adv-r.had.co.nz/Computing-on-the-language.html)
++ [Non-standard evaluation, how tidy eval builds on base R](https://edwinth.github.io/blog/nse/)
+
 [Arlt]:https://es.wikipedia.org/wiki/Roberto_Arlt
