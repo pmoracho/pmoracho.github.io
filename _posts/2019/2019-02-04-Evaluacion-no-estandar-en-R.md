@@ -261,7 +261,27 @@ mi_funcion("amigo", "del alma", "como te quiero")
 >  unused argument ("como te quiero")
 ```
 
-Aquí quiero señalar un concepto fundacional para entender la **ENE**:
+Dijimos, que todo se evalúa caundo realmente se lo necesita y _¿Cuándo
+realmente se necesita algo?_, bueno hay varios momentos, veamos:
+
+```r
+mi_funcion <- function(a, b) {
+    x = a + b       # lo más común  una asignación
+    print(a + b)    # El uso colateral en una función
+    a + b           # El retorno implicito de la función
+    force(a+b)      # Pero también se puede forzar la evaluación
+}
+```
+
+Cualquiera de las expresiones anteriores dentro de la función, dipararán la
+evaluación. Una asignación a otra variable, necesita de un valor para colocar
+en memopria, la acción colatertal de la función `print()`, necesita del valor
+para mostrarlo en pantalla, el retorno implicito de la función `a + b` también
+evalua la expresión y por último, la función `force()` evaluará la expresión a
+pedido.
+
+
+Y por último, quiero señalar un concepto fundacional para entender la **ENE**:
 
 > Hay un "gap" o intervalo entre la ejecución de la función y el momento en que
 > cualquiera de sus parámetros es evaluado realmente. En este intervalo,
@@ -376,8 +396,7 @@ y que aún no hemos definidas las variables `x` e `y`. La segunda expresión
 `quote(x + y)` funciona correctamente, aún siendo que las variables siguen sin
 existir, por que en realidad `quote()` es capaz de capturar la expresión `x +
 y` sin evaluarla, producto de la **ENE**, ni más ni menos. Capturar una
-expresión, nos permi:xa!
-te manejar la evaluación y fundamentalmente dos cosas
+expresión, nos permite manejar la evaluación , pero fundamentalmente dos cosas
 importantes: el _Cuando_ y el _Como_.
 
 El _Cuando_ nos permite salvar la expresión sin evaluar, en una variable, en un
@@ -478,4 +497,13 @@ conoce com `tidy_avaluation()`, que podríamos decir, es la evolución natural
 de la evaluación NO estándar.
 
 
-IN progress...
+## Conclusiones
+
++ Las expresiones se evalúan cuando efectivamente se las necesita ("lazy evaluation")
++ Las expresiones son evaluadas siempre dentro de un determinado contexto, llamado entorno (espacio de memoria)
++ El interprete **R** permite gracias a la evaluación perezosa, capturar una expresión sin evaluarla
++ Una expresión capturada, es un objeto como cualquier otro, referenciado por un nombre o variable
++ La evaluación puede ser gobernada por nosotros, en el momento que deseemos
++ La forma de evaluar una expresión también, modicar el entorno, modifica la evaluación
++ _Quotation_ es la cción de capturar una expresión, 
++ _Quasiquotation_ nos permite indicar que parte de la expresión se evaluará en el momewnto inicial de la captura de la expresión
