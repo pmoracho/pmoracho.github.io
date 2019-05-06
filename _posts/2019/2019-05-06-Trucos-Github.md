@@ -43,3 +43,11 @@ git push
 
 git checkout master
 ```
+
+O en una sola linea:
+
+```sh
+git checkout gh-pages;git pull;git checkout master -- README.md;cp README.md index.md;rm README.md;git add -u;git commit -m "cambios en el index.md";git push;git checkout master
+```
+
+
