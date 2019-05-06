@@ -26,14 +26,26 @@ por que entender como R evalúa las expresiones y la forma en que podemos, como
 programadores, "intervenir" en este proceso, es darse cuenta que es posible (en
 R) modificar directamente la forma "estándar" y "natural" de evaluación. Esto
 es algo único, al menos para mí y mi limitado conocimiento en lenguajes. Como
-programador, darse cuenta de esto, es como un "cross a la mandíbula" (Arlt
+programador, darse cuenta de esto, es como un "cross a la mandíbula" ([Arlt]
 dixit), un golpe inmediato al sentido común, formado por años de trabajo en
 tantos otros lenguajes: C, C++, Java, Basic, Python, SQL, etc. 
 
+
+> _En la mayoría de los lenguajes de programación, sólo se puede acceder a los
+> valores de los parámetros de una función. En R, también se puede acceder al
+> código utilizado para calcularlos. Esto hace posible evaluar el código en
+> formas no estándar: usar lo que se conoce como evaluación no estándar, o ENE
+> para abreviar. ENE es particularmente útil para las funciones de análisis
+> interactivo de datos porque puede reducir drásticamente la cantidad de
+> escritura._
+>
+> Hadley Wickham - Advance R
+
+
 Para empezar, digamos que todos estos lenguajes (también R) evalúan lo que
 ingresamos por teclado de una forma prácticamente idéntica, la llamaremos
-evaluación estándar, pero en R en particular se puede llegar a modificar esto,
-de una forma muy útil a la que llamaremos evaluación No estándar.
+evaluación estándar, **pero en R en particular se puede llegar a modificar esto,
+de una forma muy útil a la que llamaremos evaluación No estándar**.
 
 Es sin duda un tópico avanzado, posiblemente nunca te encuentres con necesidad
 de aplicarlo, pero estoy seguro, que si has escrito algo de código en R, ya lo
@@ -53,7 +65,7 @@ ggplot(df, aes(x=Y2003, y=Y2016)) + geom_point()
 
 Son cuatro expresiones bastante ordinarias, sin embargo todas tiene la
 particularidad que están haciendo uso de la evaluación No estándar, a partir de
-ahora la llamaremos **ENS** en contraste con la estándar que llamaremos **ES**.
+ahora la llamaremos **ENE** en contraste con la estándar que llamaremos **ES**.
 
 ## ¿Qué es una evaluación?
 
@@ -66,8 +78,8 @@ ingresadas por el usuario. No importa si el lenguaje es "interpretado" como R o
 escrito en dicho lenguaje. Este proceso de evaluación se compone de múltiples
 subprocesos, cada compilador o interprete se encargará a su manera de hacerlo,
 pero a los efectos de este artículo, nos basta con tener claro que la
-evaluación es la interpretación de un código ingresado y escrito en un
-lenguaje en particular.
+evaluación es la interpretación de un código ingresado y escrito en un lenguaje
+en particular.
 
 ## ¿Y la evaluación estándar?
 
@@ -92,12 +104,13 @@ otro lenguaje) "ve" las comillas dobles y evalúa que lo que sigue es una cadena
 literal. 
 
 El segundo caso, vemos que `mi_variable` no tiene comillas, ¿que hace el
-interprete de R (y nuevamente de cualquier lenguaje")?  Evalúa que lo que se
-estaría indicando es un identificador, un nombre, o más precisamente el nombre
-de un objeto. En este caso `mi_variable` sin las comillas, es una referencia y
-no una cadena literal. El mensaje de error luego de `print(mi_variable)` nos
-está claramente confirmando esto, no está diciendo que el objeto `mi_variable`
-no existe. Claro, si hasta ahora no lo hemos definido. Lo podemos hacer:
+interprete de R (y nuevamente el de cualquier otro lenguaje")?  Evalúa que lo
+que se estaría indicando es un identificador, un nombre, o más precisamente el
+nombre de un objeto. En este caso `mi_variable` sin las comillas, es una
+referencia y no una cadena literal. El mensaje de error luego de
+`print(mi_variable)` nos está claramente confirmando esto, no está diciendo que
+el objeto `mi_variable` no existe. Claro, si hasta ahora no lo hemos definido.
+Lo podemos hacer:
 
 ```r
 > mi_variable <- "Este es el valor al que apunta el objeto llamado mi_variable"
@@ -127,7 +140,7 @@ pesar de esto, la función `library()`, de foma "mágica", logró entender que l
 que queríamos era cargar el paquete `tidyverse`. Está "magia" se llama
 Evaluación No estándar (**ENE**), `library()` la implementa para evaluar los
 parámetros de entrada, pero también es capaz de evaluar de la forma estándar,
-es decir: `library("tidyverse")`.
+es decir: `library("tidyverse")` es totalmente válido.
 
 Así como lo cuento, parece un tema casi trivial y no demasiado útil, limitado a
 la utilidad de usar o no comillas, pero es mucho más que esto y lo iremos
@@ -137,15 +150,16 @@ exactamente lo mismo:
 ```r
 mtcars[mtcars$cyl>=6 & mtcars$disp > 160 & mtcars$mpg > 15 & 
 	   mtcars$hp > 120 & mtcars$gear == 3, ]
+
 subset(mtcars, cyl >=6 & disp > 160 & mpg > 15 & hp > 120 & gear == 3)
 ```
 
 Un simple filtro complejo de datos, si usamos la función `[` debemos ser muy
 específicos a la hora de escribir las condiciones, podemos ver que escribimos en
 todos los casos el nombre del `data.frame` más `$` y el nombre de la columna.
-Usando `subset()` que implementa **ENS**, la escritura es algo más compacta,
+Usando `subset()` que implementa **ENE**, la escritura es algo más compacta,
 solo debemos especificar los nombres de columna. Menos caracteres, mejor
-performance de escritura, y sobre todo menores posibilidades de equivocación.
+performance de escritura, y sobre todo menores posibilidades de error.
 
 Lo que termina ocurriendo con `subset()` y que veremos más adelante es que:
 
@@ -162,15 +176,15 @@ Seguramente has escuchado el término "lazy evaluation", que hace referencia a
 una evaluación diferida, una estrategia que se usa en varios lenguajes de
 programación para retrasar el calculo o ejecución de una expresión hasta el
 momento en que sea realmente necesario. Digamos, sin profundizar demasiado, que
-este tipo de estrategia tiene múltiples beneficios. En la gran
-mayoría de estos lenguajes, este tipo de evaluación debe codificarse
-especialmente, normalmente, creando objetos que implementan este tipo de
-evaluación, es decir este tipo de evaluación es un excepción.
+este tipo de estrategia tiene múltiples beneficios. En la gran mayoría de estos
+lenguajes, este tipo de evaluación debe codificarse especialmente, normalmente,
+creando objetos que implementan este tipo de evaluación, es decir este tipo de
+evaluación es un excepción.
 
-Sin embargo, en R la evaluación perezosa es la norma, todo es evaluado de manera
-"lazy", y particularmente en esta sección, hablaremos en realidad de la
-evaluación perezosa de los parámetros de cualquier función, algo que ninguno de los
-lenguajes mencionados anteriormente lo permite.
+Sin embargo, en R la evaluación perezosa es la norma, todo es evaluado de
+manera "lazy", y particularmente en esta sección, hablaremos en realidad de la
+evaluación perezosa de los parámetros de cualquier función, algo que ninguno de
+los lenguajes mencionados anteriormente lo permite.
 
 En Python por ejemplo, algo como esto, es normalmente aceptado y lo entendemos
 naturalmente como un error de nuestra parte:
@@ -188,10 +202,10 @@ mi_funcion()
 > TypeError: mi_funcion() takes exactly 2 arguments (0 given)
 ```
 
-Al intentar ejecutar `mi_funcion()` el interprete evalúa la misma y los
-parámetros definidos en su firma, como en la llamada no los hemos definido, se nos entrega
-un mensaje de error muy claro `mi_funcion()` espera 2 parámetros y no le estamos
-indicando ninguno.
+Al intentar ejecutar `mi_funcion()` el interprete evalúa esta, y los
+parámetros definidos en su firma, como en la llamada no los hemos definido, se
+nos entrega un mensaje de error muy claro `mi_funcion()` espera 2 parámetros y
+no le estamos indicando ninguno.
 
 En R las cosas son un poco distintas (hay que ir acostumbrándose)
 
@@ -247,11 +261,31 @@ mi_funcion("amigo", "del alma", "como te quiero")
 >  unused argument ("como te quiero")
 ```
 
-Aquí quiero señalar un concepto fundacional para entender la **ENE**:
+Dijimos, que todo se evalúa caundo realmente se lo necesita y _¿Cuándo
+realmente se necesita algo?_, bueno hay varios momentos, veamos:
+
+```r
+mi_funcion <- function(a, b) {
+    x = a + b       # lo más común  una asignación
+    print(a + b)    # El uso colateral en una función
+    a + b           # El retorno implicito de la función
+    force(a+b)      # Pero también se puede forzar la evaluación
+}
+```
+
+Cualquiera de las expresiones anteriores dentro de la función, dipararán la
+evaluación. Una asignación a otra variable, necesita de un valor para colocar
+en memoria, la acción colateral de la función `print()`, necesita del valor
+para mostrarlo en pantalla, el retorno implícito de la función `a + b` también
+evalúa la expresión y por último, la función `force()` evaluará la expresión a
+pedido.
+
+
+Y por último, quiero señalar un concepto fundacional para entender la **ENE**:
 
 > Hay un "gap" o intervalo entre la ejecución de la función y el momento en que
 > cualquiera de sus parámetros es evaluado realmente. En este intervalo,
-> nosotros como programadores, podremos intervenir y trabajar sobre los parámetros
+> nosotros como programadores, podremos intervenir y trabajar sobre estos
 > aún sin necesidad de evaluarlos efectivamente
 
 
@@ -341,15 +375,143 @@ evaluación en sí.
 > a través de la manipulación del _entorno_ actual de evaluación, o mediante la
 > creación y configuración de un _entorno_ totalmente nuevo.
 
+## Quotation (y Quasi-quotation)
 
-## Call stack
+Todavía no encontré una traducción agradable a estos términos. Hablar de
+"citación" y "quasi-citación", tal vez es lo más cercano, pero no suena bien.
+Quotation en R es un mecanismo por el cual podemos "capturar" una expresión sin
+evaluarla. La forma más básica de hacerlo es mediante la función `quote()`:
+
+```r
+x + y
+Error: objeto 'x' no encontrado
+
+quote(x + y)
+x + y
+```
+
+¿Qué podemos deducir de esto? Hay una expresión `x + y`, en la primer
+sentencia, el error claramente nos confirma que estamos evaluando la expresión
+y que aún no hemos definidas las variables `x` e `y`. La segunda expresión
+`quote(x + y)` funciona correctamente, aún siendo que las variables siguen sin
+existir, por que en realidad `quote()` es capaz de capturar la expresión `x +
+y` sin evaluarla, producto de la **ENE**, ni más ni menos. Capturar una
+expresión, nos permite manejar la evaluación , pero fundamentalmente dos cosas
+importantes: el _Cuando_ y el _Como_.
+
+El _Cuando_ nos permite salvar la expresión sin evaluar, en una variable, en un
+archivo, en una base de datos (¿por que no?), y usarla luego cuando realmente
+la necesitemos. El _Como_ nos permite manejar el contexto en que se evaluará la
+expresión pudiendo manipular completamente las variables y el entorno de la
+propia expresión.
+
+Un ejemplo práctico:
+
+```r
+exp <- quote(x + y)
+
+x <- 1
+y <- 2
+eval(exp)
+
+[1] 3
 
 
-## Quotation y Quasicuotation
+x <- 5
+y <- 2
+eval(exp)
 
-IN progres...
+[1] 7
+```
+
+`exp <- quote(x + y)` crea una expresión (no confundir con el objeto del mismo
+nombre), está expresión o estrictamente hablando, está _quotation_, se construye
+pero no se evalúa. La expresión representa la suma de dos variables, las cuales
+no existen hasta ahora, cuando luego, realmente la evaluamos, el _cuando_,
+definimos el contexto de evaluación asignando valores a estas variables, el
+_como_, de esta forma en cada evaluación, usando `eval(exp)`, el resultado será
+consistente con los valores de las variables en dicho momento. En este ejemplo,
+estamos usando el mismo _environment_, solo que lo hemos ido modificado (al
+modificar las variables) previo a cada evaluación.
+
+Ya tenemos una idea, aunque sea muy elemental, de lo que es una _quotation_:
+código pendiente de evaluación. ¿Y que es entonces una _quasicuotation_? Este
+concepto proviene de las disciplinas lingüísticas, se conoce también como
+[_Quine quotation_](https://en.wikipedia.org/wiki/Quasi-quotation), en honor al
+filosofo y lógico  Willard van Orman Quine. La idea es muy simple, (por favor
+si hay un lingüista en la sala, no me mate) si tenemos una oración que dice
+_"La adicción es aguda"_, ¿de que estamos hablando?, ¿acaso es que la adición
+de alguien no identificado en la frase, es demasiado profunda y difícil de
+tratar, o simplemente estamos comentando que la palabra _adicción_ es aguda?
+
+La idea de la _quaicuotation_ es la de definir un estándar para poder indicar
+cuando una palabra no representa su significado real sino que representa la
+palabra misma, por ejemplo: _"La [adicción] es aguda"_, si nuestro estándar es
+usar los símbolos `[]`, podríamos estar seguros en este caso, que _adicción_ 
+hace referencia a la propia palabra y no a la dependencia a ciertas sustancias.
+
+Volvamos al ejemplo anterior:
+
+```r
+exp <- quote(x + y)
+```
+
+Ahora supongamos que nuestra idea, es evaluar `x` de forma diferida, pero `y`
+en el momento de `quote()`, es decir, queremos que `y` se comporte como una
+constante  en la evaluación diferida. Por supuesto, podríamos indicar el valor
+literal, supongamos que `y` queremos que sea `10`, entonces podríamos hacer:
+
+```r
+exp <- quote(x + 10)
+```
+
+Pero, no, la idea es que en realidad ese valor `10` sea indicado por una
+variable que resolveremos al principio y no en cada evaluación. Para poder
+hacer esto es que necesitamos usar _"quasicuotation"_, veamos como:
+
+```r
+y <- 10
+exp <- bquote(x + .(y))
+
+x <- 1
+paste("El valor de", deparse(exp), "donde x es", x, "es",  eval(exp))
+[1] "El valor de x + 10 donde x es 1 es 11"
+
+x <- 5
+paste("El valor de", deparse(exp), "donde x es", x, "es",  eval(exp))
+[1] "El valor de x + 10 donde x es 5 es 15"
+```
+
+Algunas cosas que nos dice este código:
+
+* Para poder usar  _"quasicuotation"_, necesitamos:
+	- Utilizar la función `bquote()`
+	- Utilizar la notación `.(y)` para indicar que la variable `y` debe ser evaluada para poder construir la expresión
+* Con `deparse(exp)` conseguimos una representación visual de la expresión
+* Y con `eval(exp)`, obviamente evaluamos la expresión
+
+**Importante**: Todo lo anterior, es apenas un ejemplo muy primitivo, es decir,
+usando código R base. Tengan en cuenta, que paquetes con `dplyr` hacen uso de
+otras funciones más modernas y desarrolladas para implementar lo que se
+conoce como `tidy_avaluation()`, que podríamos decir, es la evolución natural
+de la evaluación NO estándar.
 
 
+## Conclusiones
 
++ Las expresiones se evalúan cuando efectivamente se las necesita ("lazy evaluation")
++ Las expresiones son evaluadas siempre dentro de un determinado contexto, llamado entorno (espacio de memoria)
++ El interprete **R** permite gracias a la evaluación perezosa, capturar una expresión sin evaluarla
++ Una expresión capturada, es un objeto como cualquier otro, referenciado por un nombre o variable
++ La evaluación puede ser gobernada por nosotros, en el momento que deseemos
++ La forma de evaluar una expresión también, modificar el entorno, modifica la evaluación
++ _Quotation_ es la acción de capturar una expresión, 
++ _Quasiquotation_ nos permite indicar que parte de la expresión se evaluará en el momento inicial de la captura de la expresión
 
+## Contenido interesante
 
++ [Expresiones](http://adv-r.had.co.nz/Expressions.html)
++ [Non estándar evaluation](http://adv-r.had.co.nz/Computing-on-the-language.html)
++ [Non-standard evaluation, how tidy eval builds on base R](https://edwinth.github.io/blog/nse/)
+
+[Arlt]:https://es.wikipedia.org/wiki/Roberto_Arlt
