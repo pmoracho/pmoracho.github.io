@@ -47,13 +47,13 @@ mycd ()
 	#############################################################################
 	# The first time if not exist dir stack and exist $histdirfile (load it)
 	#############################################################################
-	lines=`dirs -v|wc -l`
-	if [ $lines -lt 2 ] && [ -f $histdirfile ]; then
-	  actual=`pwd`
-		while read directory ; do
-			pushd "$directory" 2>/dev/null 1>/dev/null
-		done < $histdirfile
-		cd "$actual"
+	lines=$(dirs -v|wc -l)
+	if [ "$lines" -lt 2 ] && [ -f "$histdirfile" ]; then
+	  actual=$(pwd)
+		while read -r directory ; do
+			pushd "$directory" 2>/dev/null 1>/dev/null || return
+		done < "$histdirfile"
+		cd "$actual" || return
 	fi 
 	#############################################################################
 	# List paths (cd --) for compatibility with Petar Marinov func, replace
@@ -72,7 +72,7 @@ mycd ()
 		if [[ $search == "" ]]; then
 			dirs -v -l | gawk '{printf("\033[1;33m%2d\033[0m %s\n",$1,$2)}'
 		else
-			dirs -v -l | grep -i -e $search | gawk '{printf("\033[1;33m%2d\033[0m %s\n",$1,$2)}'
+			dirs -v -l | grep -i -e "$search" | gawk '{printf("\033[1;33m%2d\033[0m %s\n",$1,$2)}'
 		fi
 		return 0
 	fi
@@ -96,8 +96,8 @@ mycd ()
 	#############################################################################
 	# Now change to the new dir and add to the top of the stack
 	#############################################################################
-	pushd "${the_new_dir}" > /dev/null
-	[[ $? -ne 0 ]] && return 1
+	pushd "${the_new_dir}" > /dev/null || return 1
+	# [[ $? -ne 0 ]] && return 1
 	the_new_dir=$(pwd)
 	#############################################################################
 	# Trim down everything beyond maxitems + 1 entry and save in $histdirfile
@@ -107,7 +107,7 @@ mycd ()
 	#############################################################################
 	# Save to $histdirfile
 	#############################################################################
-	dirs -l -p|sort|uniq>$histdirfile
+    $(dirs -l -p|sort|uniq>$histdirfile)
 	#############################################################################
 	# Remove any other occurence of this dir, skipping the top of the stack
 	#############################################################################
@@ -117,7 +117,7 @@ mycd ()
 		[[ ${x2:0:1} == '~' ]] && x2="${HOME}${x2:1}"
 		if [[ "${x2}" == "${the_new_dir}" ]]; then
 			popd -n +$cnt 2>/dev/null 1>/dev/null
-			cnt=cnt-1
+			cnt=$((cnt-1))
 		fi
 	done
 	return 0
