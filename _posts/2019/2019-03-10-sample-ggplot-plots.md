@@ -216,9 +216,9 @@ ggplot(midwest, aes(x=area, y=poptotal)) +
     xlim(c(0, 0.1)) + 
     ylim(c(0, 500000)) + 
     labs(subtitle="Area Vs Población", 
-         y="Poblacíon", 
-         x="Area", 
-         title="Ejemplo de un Scatterplot", 
+         y = "Poblacíon", 
+         x = "Area", 
+         title = "Ejemplo de un Scatterplot", 
          caption = "Fuente: midwest") +
     theme_elegante()
 ```
@@ -229,11 +229,11 @@ ggplot(midwest, aes(x=area, y=poptotal)) +
 ggplot(mpg, aes(cty, hwy)) +
     geom_point() + 
     geom_smooth(method="lm", se=F) +
-    labs(subtitle="Consumo en la ciudad versus autopista", 
-         y="Autopista", 
-         x="Ciudad", 
-         title="Millas por galón", 
-         caption="Fuente: midwest") +
+    labs(subtitle = "Consumo en la ciudad versus autopista", 
+         y = "Autopista", 
+         x = "Ciudad", 
+         title = "Millas por galón", 
+         caption = "Fuente: midwest") +
     theme_elegante()
 ```
 
@@ -245,7 +245,7 @@ levels(diamonds$cut) <- c("Pobre", "Bueno", "Muy bueno", "Premium", "Ideal")
 ggplot(data=diamonds, aes(x = carat, y = price, color = cut)) + 
     geom_point(alpha = 1, size = .01, aes(color = cut)) + 
     labs(title = "Precio vs. Quilates", 
-       subtitle = "¿Cual es la corelación entre el precio y los quilates?",
+       subtitle = "¿Cuál es la corelación entre el precio y los quilates?",
        x = "Quilates", 
        y = "Precio",
        caption = "pmoracho.github.io" ) + 
@@ -270,7 +270,7 @@ ggplot(mpg, aes(displ, cty)) +
     theme_elegante() +
     theme(panel.border= element_rect(fill = NA, colour = "grey70", size = rel(1))) +
     labs(title = "Cilindrda vs consumo en ciudad", 
-       subtitle = "¿Cual es la relación entre la cilindarada y el consumo por cilindros/transmisión?",
+       subtitle = "¿Cuál es la relación entre la cilindarada y el consumo por cilindros/transmisión?",
        x = "Cilindrada", 
        y = "Consumo",
        caption = "pmoracho.github.io" ) + 
@@ -314,8 +314,8 @@ library(ggplot2)
 library(lubridate)
 
 ggplot(data = diamonds, aes(x = carat, y = price, color = cut)) + 
-    labs(title = "Precio vs. Quilatest", 
-       subtitle = "What is the correlation between the price of a diamond its carat? ",
+    labs(title = "Precio vs. Quilates", 
+       subtitle = "¿Cuál es la corelación entr el precio y los quilates? ",
        x = "Carat", 
        y = "Price",
        caption = "www.datatoinsight.io" ) + 
@@ -773,10 +773,73 @@ ggplot(data=cambodia) +
   scale_x_continuous(limits=c(-500,2000),  breaks= c(seq(0,2000,by=1000), cambodia$StartDate, cambodia$EndDate[4]))+
   xlab("Time")+
   ylab("Periods of History")+
-  theme_bw() + theme(panel.grid.minor = element_blank(), panel.grid.major =   element_blank(), axis.title.y=element_blank(),axis.text.y=element_blank(),  axis.ticks.y=element_blank()) +
+  theme_elegante() + 
+    theme(panel.grid.minor = element_blank(), panel.grid.major =   element_blank(), axis.title.y=element_blank(),axis.text.y=element_blank(),  axis.ticks.y=element_blank()) +
   theme(aspect.ratio = .2)+
   theme(legend.position="none") + 
-  geom_text(aes(x=StartDate-100 + (EndDate- StartDate)/2,y=0.05,label=Period,angle=25,hjust=0)) + theme_elegante()
+  geom_text(aes(x=StartDate-100 + (EndDate- StartDate)/2,y=0.05,label=Period,angle=25,hjust=0)) 
 ```
 
 <img src="/images/2019/2019-03-10-sample-ggplot-plots_files/figure-markdown_github/timeplot-1.png" style="display: block; margin-left: auto; margin-right: auto" />
+
+Gantt diagram
+-------------
+
+``` r
+library(tidyverse)
+library(lubridate)
+library(scales)
+library(Cairo)
+
+# Alternatively you can put all this in a CSV file with the same columns and
+# then load it with read_csv()
+# tasks <- read_csv("path/to/the/file")
+
+tasks <- tribble(
+  ~Start,       ~End,         ~Project,          ~Task,
+  "2015-11-15", "2015-11-20", "Data collection", "Use IssueCrawler to expand lists",
+  "2015-11-21", "2015-11-25", "Data collection", "Complete INGO databases",
+  "2015-11-16", "2015-12-15", "Data collection", "Find all INGO legislation",
+  "2015-12-15", "2015-12-25", "Data collection", "Code INGO restrictions",
+  "2015-11-15", "2015-11-25", "Data collection", "Develop general INGO survey",
+  "2015-11-25", "2015-12-31", "Data collection", "Administer survey",
+  "2015-12-25", "2015-12-31", "Data analysis",   "Model stability and restrictions",
+  "2016-01-01", "2016-02-02", "Writing",         "Chapter on formal restrictions (H1)",
+  "2016-01-15", "2016-02-15", "Writing",         "Paper or chapter on survey results (H3 and H4)",
+  "2016-03-16", "2016-03-19", "Writing",         "ISA conference in Atlanta",
+  "2016-02-01", "2016-03-01", "Data collection", "Historical INGO restrictions in China",
+  "2016-02-01", "2016-03-01", "Data collection", "Historical INGO restrictions in Egypt",
+  "2016-05-01", "2016-06-01", "Data collection", "Fieldwork in London and Beijing",
+  "2016-03-01", "2016-04-01", "Data analysis",   "Analyze restrictions in China and Egypt",
+  "2016-04-01", "2016-06-01", "Data analysis",   "Analyze INGO activities",
+  "2016-04-01", "2016-06-15", "Writing",         "Chapter on application of restrictions (H2)",
+  "2016-05-01", "2016-07-01", "Writing",         "Chapter on INGO ideal points (H3)",
+  "2016-05-01", "2016-07-01", "Writing",         "Chapter on INGO flexibility (H4)",
+  "2016-07-01", "2016-08-01", "Writing",         "Theory",
+  "2016-08-01", "2016-09-15", "Writing",         "Conclusion",
+  "2016-08-01", "2016-09-15", "Writing",         "Introduction"
+)
+
+# Convert data to long for ggplot
+tasks.long <- tasks %>%
+  mutate(Start = ymd(Start),
+         End = ymd(End)) %>%
+  gather(date.type, task.date, -c(Project, Task)) %>%
+  arrange(date.type, task.date) %>%
+  mutate(Task = factor(Task, levels=rev(unique(Task)), ordered=TRUE))
+
+# Calculate where to put the dotted lines that show up every three entries
+x.breaks <- seq(length(tasks$Task) + 0.5 - 3, 0, by=-3)
+
+# Build plot
+ggplot(tasks.long, aes(x=Task, y=task.date, colour=Project)) + 
+    geom_line(size=6) + 
+    geom_vline(xintercept=x.breaks, colour="grey80", linetype="dotted") + 
+    guides(colour=guide_legend(title=NULL)) +
+    labs(x=NULL, y=NULL) + coord_flip() +
+    scale_y_date(date_breaks="2 months", labels=date_format("%b ‘%y")) +
+    theme_elegante() + 
+    theme(axis.text.x=element_text(angle=45, hjust=1))
+```
+
+<img src="/images/2019/2019-03-10-sample-ggplot-plots_files/figure-markdown_github/gantt-1.png" style="display: block; margin-left: auto; margin-right: auto" />
