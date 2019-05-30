@@ -128,6 +128,33 @@ electrónicos.
   sobre **MOBI**. Las notas en los textos, con **MOBI** me abren una nueva
   página, con **AZW3**, me mantiene en la página actual y se abre un "pop up"
 
+* Soy muy fan del blog de Daniel Marin, por lo que me gusta cada cierto tiempo
+  bajarme las últimas actualizaciones y leerlas en mi kindle. Para esto
+  configuré la siguiente "receta" en el programador de descargas:  
+
+    ```python
+    #!/usr/bin/env python2
+    # vim:fileencoding=utf-8
+    from __future__ import unicode_literals, division, absolute_import, print_function
+    from calibre.web.feeds.news import BasicNewsRecipe
+
+    class AdvancedUserRecipe1426093931(BasicNewsRecipe):
+    title          			= 'Eureka - Ciencias del Espacio by Daniel Marin'
+    oldest_article 			= 30
+    max_articles_per_feed 	= 100
+    auto_cleanup   			= True
+    __author__  			= 'Daniel Marin'
+    description 			= 'Noticias del Blog Eureka'  
+    conversion_options = { 
+                           'language'    : 'Español',
+                           'publisher'   : 'Daniel Marin',
+                           'authors'     : 'Daniel Marin',
+                           'smarten_punctuation' : True
+                         }          
+    feeds          = [
+        ('Eureka', 'http://danielmarin.naukas.com/feed/'),
+    ]
+    ```
 
 # Enlaces imprescindibles
 
