@@ -128,9 +128,10 @@ electrónicos.
   sobre **MOBI**. Las notas en los textos, con **MOBI** me abren una nueva
   página, con **AZW3**, me mantiene en la página actual y se abre un "pop up"
 
-* Soy muy fan del blog de Daniel Marin, por lo que me gusta cada cierto tiempo
-  bajarme las últimas actualizaciones y leerlas en mi kindle. Para esto
-  configuré la siguiente "receta" en el programador de descargas:  
+* Soy muy fan del [blog de Daniel Marin](https://danielmarin.naukas.com/), por
+  lo que me gusta cada cierto tiempo bajarme las últimas actualizaciones y
+  leerlas en mi kindle. Para esto configuré la siguiente "receta" en el
+  programador de descargas:  
 
     ```python
     #!/usr/bin/env python2
