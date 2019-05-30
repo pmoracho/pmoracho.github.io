@@ -5,7 +5,7 @@ date: 2016-12-26
 show_meta: true
 comments: true
 published: true
-modified: '2017-01-05 22:28 -0300'
+modified: '2019-05-30 22:28 -0300'
 mathjax: false
 gistembed: false
 noindex: false
@@ -21,12 +21,12 @@ tags:
 
 ![kindle.jpg]({{site.baseurl}}/images/kindle.jpg)
 
-Hace algo más de tres años compré un **kindle paperwhite v2 de Amazon**, fue
-una decisión que demoré mucho tiempo en tomar. Soy uno de esos románticos del
-papel escrito y al olor a libro nuevo o viejo. Debo decir, pasado tanto tiempo,
-que no me equivoqué. Los beneficios de la lectura en dispositivos de tinta
-electrónica (no estoy hablando de "tablets") son muchos como para
-despreciarlos.  <!-- break -->
+Hace algo más de tres años compré un **kindle paperwhite v2 de Amazon**, más
+precisamente Julio de 2013, fue una decisión que demoré mucho tiempo en tomar.
+Soy uno de esos románticos del papel escrito y al olor a libro nuevo o viejo.
+Debo decir, pasado tanto tiempo, que no me equivoqué. Los beneficios de la
+lectura en dispositivos de tinta electrónica (no estoy hablando de "tablets")
+son muchos como para despreciarlos.  <!-- break -->
 
 ## Espacio
 
@@ -34,7 +34,7 @@ Es tal la cantidad de libros que tengo y tan poco el espacio que dispongo, que
 seguir adquiriéndolos en papel es sumamente complicado de sostener. Por otro
 lado, suponiendo que algún día tuviera espacio suficiente como para armar ese
 concepto romántico del estudio / biblioteca personal, realmente, vale la pena?
-o acaso, no deja de ser un "esnobismo" como tantos otros? un capricho del siglo
+o acaso, ¿no deja de ser un "esnobismo" como tantos otros? ¿un capricho del siglo
 pasado?. Te lo entiendo si sos un escritor, periodista, cineasta, filósofo o te
 sobra espacio y plata, pero para un simple mortal como yo, con familia y un
 departamento chico es un lujo casi imposible.
@@ -65,7 +65,7 @@ integrado. Simple, una duda en una palabra, se la selecciona y automáticamente
 se desplegará un "popup" con la descripción de la misma, incluso tenemos el
 acceso a la Wikipedia en caso de contar con conectividad por medio de Wifi.
 Los diccionarios son configurables, incluso pueden instalarse diccionarios de
-traducción, por ejemplo para inglés castellano. El kindle además lleva esto
+traducción, por ejemplo para inglés - castellano. El kindle además lleva esto
 mucho más allá, cada palabra consultada se va incorporando a un índice que
 podemos consultar en cualquier momento para repasar las dudas que tengamos.
 Esto con un libro físico implicaría tener un diccionario (también físico)
@@ -73,7 +73,7 @@ importante al lado, ni pensar en tener que transportar esta configuración.
 
 ## Transportabilidad
 
-Llevar encima la obra completa de Dostoyevsky: cuánto pesaría semejante
+Llevar encima la obra completa de Dostoyevsky ¿cuánto pesaría semejante
 conjunto de libros? En un Kindle ocupan una porción muy pequeña de la capacidad
 total. Incluso un modelo antiguo como el que tengo, con 2 gbytes, luego de más
 de tres años no llegué a completar su capacidad, estamos hablando de más de 250
@@ -108,10 +108,25 @@ todos estos contenidos.
 
 
 * [Calibre](https://calibre-ebook.com/), por otro lado permite convertir varios
-tipos de documentos, pero me resulto fántastico el trabajo que puede llegar a
+tipos de documentos, pero me resulto fantástico el trabajo que puede llegar a
 hacer con los feeds RSS, por ejemplo, podemos eventualmente de manera
 automatizada, descargarnos las noticias de algún medio tradicional y leerles
 por la mañana cual diario de papel.
+
+## Obsolescencia tecnológica
+
+Es mitad del 2019 y estoy actualizando algo el contenido de este texto, mi
+kindle aún activo, funcional y con espacio para seguir cargándole libros. La
+batería aún trabaja los suficientemente bien como para cargarla cada dos o tres
+semanas. Notable. Pocos equipos electrónicos que tengo han sobrevivido tanto
+tiempo y en inmejorables condiciones como mi pequeño lector de libros
+electrónicos.
+
+# Trucos
+
+* En Calibre, el formato por defecto que mejor me funciona es **AZW3** por
+  sobre **MOBI**. Las notas en los textos, con **MOBI** me abren una nueva
+  página, con **AZW3**, me mantiene en la página actual y se abre un "pop up"
 
 
 # Enlaces imprescindibles
@@ -119,13 +134,12 @@ por la mañana cual diario de papel.
 * [Calibre](https://calibre-ebook.com/): Fundamental instalarlo, el
   administrador de tu biblioteca electrónica. Conversión al vuelo de formato
   **epub** al que requiere el dispositivo. Descarga de sitios sindicados por
-  rss a un libro electrónico.
+  rss a un libro electrónico. Nota: por lo que veo Kovid Goyal el autor de
+  Calibre ya está trabajando en la migración a [Python
+  3](https://github.com/kovidgoyal/calibre/blob/master/README.python3), muy
+  buena noticia.
 
 * [Epublibre](https://www.epublibre.org): Espectacular sitio con un catálogo
   sensacional de títulos en español principalmente y muy actualizados, por
   supuesto solo lo recomiendo para la descarga de libros de dominio público
   únicamente.
-
-* [Zbigz](https://www.zbigz.com/): Está página es muy útil para la descarga de
-  torrents de manera online, útil para descargar del sitio mencionado en el
-  punto anterior.
