@@ -199,6 +199,14 @@ que R evaluará como tal
 "
 ```
 
+# Configurar paths a las RBuildTools
+
+Si `R` no logra encontrar este paquete para compilar algún código C o C++, una posibilidad es ajustar el path:
+
+``` R
+Sys.setenv(PATH = paste("C:/RBuildTools/3.5/bin", Sys.getenv("PATH"), sep=";"))
+Sys.setenv(BINPREF = "C:/RBuildTools/3.5/mingw_$(WIN)/bin/")
+```
 
 [merge]:https://stat.ethz.ch/R-manual/R-devel/library/base/html/merge.html
 [dataframes]:https://stat.ethz.ch/R-manual/R-devel/library/base/html/data.frame.html
