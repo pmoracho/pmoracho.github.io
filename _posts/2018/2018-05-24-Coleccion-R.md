@@ -35,13 +35,14 @@ mencionados.
 
 ### En Inglés
 
+
 + [R for Data Science]: Un clásico de **Garrett Grolemund** y **Hadley Wickham**. Muy
-  claramente se describen las principales areas y tareas de la ciencia de
-  Datos. En versión **Knitr**.
+claramente se describen las principales areas y tareas de la ciencia de
+Datos. En versión **Knitr**.
 
 + [R in a Nutshell]: El libro de Joseph Adler, (2010, 636 páginas). Gran
-  profundidad en el lenguaje y una parte bastante completa de estadística
-  aplicada.
+profundidad en el lenguaje y una parte bastante completa de estadística
+aplicada.
 
 + [Advanced R](http://adv-r.had.co.nz/): De Hadley Wickham, Advanced R presenta herramientas y técnicas útiles para atacar muchos tipos de problemas de programación de R, ayudándole a evitar errores y callejones sin salida. Con más de diez años de experiencia programando en R, el autor ilustra la elegancia, belleza y flexibilidad en el corazón de R. Del 2014, en versión Knitr.
 + [Introductory Statistics with R](http://www.academia.dk/BiologiskAntropologi/Epidemiologi/PDF/Introductory_Statistics_with_R__2nd_ed.pdf): De Peter Daalgard, este libro proporciona una introducción a la R a nivel elemental, dirigida tanto a científicos no estadísticos en varios campos como a estudiantes de estadística. El modo principal de presentación es a través de ejemplos de código con comentarios liberales del código y la salida, tanto desde el punto de vista computacional como estadístico. Se puede descargar un paquete R suplementario que contiene los conjuntos de datos. Del 2008.
