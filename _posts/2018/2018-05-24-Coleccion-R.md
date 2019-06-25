@@ -29,6 +29,7 @@ Este es mi compendio de enlaces a el material bibliográfico de **R** publicado 
 + [Advanced R](http://adv-r.had.co.nz/): De Hadley Wickham, Advanced R presenta herramientas y técnicas útiles para atacar muchos tipos de problemas de programación de R, ayudándole a evitar errores y callejones sin salida. Con más de diez años de experiencia programando en R, el autor ilustra la elegancia, belleza y flexibilidad en el corazón de R. Del 2014, en versión Knitr.
 + [Introductory Statistics with R](http://www.academia.dk/BiologiskAntropologi/Epidemiologi/PDF/Introductory_Statistics_with_R__2nd_ed.pdf): De Peter Daalgard, este libro proporciona una introducción a la R a nivel elemental, dirigida tanto a científicos no estadísticos en varios campos como a estudiantes de estadística. El modo principal de presentación es a través de ejemplos de código con comentarios liberales del código y la salida, tanto desde el punto de vista computacional como estadístico. Se puede descargar un paquete R suplementario que contiene los conjuntos de datos. Del 2008.
 + [R packages](http://r-pkgs.had.co.nz/): De Hadley Wickham. Convierta su código R en paquetes que otros puedan descargar y usar fácilmente. Este práctico libro le muestra cómo combinar funciones R reutilizables, datos de muestra y documentación aplicando la filosofía de desarrollo de paquetes del autor Hadley Wickham. En el proceso, trabajará con `devtools`, `roxygen` y `testthat`, un conjunto de paquetes R que automatizan tareas de desarrollo comunes. Devtools resume las mejores prácticas que Hadley ha aprendido durante años de trabajar con este lenguaje de programación.
++ [An Introduction to Statistical Learning](http://www-bcf.usc.edu/~gareth/ISL/ISLR%20Seventh%20Printing.pdf): Tiene curso online (ver más abajo)
 
 ### En español
 
@@ -81,8 +82,29 @@ Los clásicos "machetes".
 
 ## Tutoriales y Cursos
 
-### En español
+### En inglés
 
++ [Aprendizaje
++ supervisado](https://lagunita.stanford.edu/courses/HumanitiesSciences/StatLearning/Winter2016/about?fbclid=IwAR1wNXaXvBwA-XqH3l1b6fBQTLopGMcO5fEa_IhJ2cJy02FbELvs6XZ4_0k):Este
++ es un curso de nivel introductorio
+  en aprendizaje supervisado, con un enfoque en métodos de regresión y
+  clasificación. El programa incluye: regresión lineal y polinómica, regresión
+  logística y análisis discriminante lineal; validación cruzada y métodos de
+  bootstrap, selección de modelos y métodos de regularización (ridge and
+  lasso); modelos no lineales, splines y modelos aditivos generalizados;
+  métodos basados en árboles, randomforest y boosting; máquinas de soporte
+  vectorial. Se discuten algunos métodos de aprendizaje no supervisados:
+  componentes principales y agrupación (k-medios y jerárquicos). Las
+  conferencias cubren todo el material de An Introduction to Statistical
+  Learning, con aplicaciones en R de James, Witten, Hastie y Tibshirani
+  (Springer, 2013). El pdf de este libro está disponible gratuitamente en el
+  sitio web del libro. Interesante y gratuito. Cuando tenga algo de tiempo lo
+  haré y veremos que tal.
+
++ [R Programming - Data Science using R](https://www.udemy.com/r-programming-h/learn/lecture/13681704#overview)
+
+
+### En español
 
 + [R para Análisis Científicos Reproducibles](https://swcarpentry.github.io/r-novice-gapminder-es/):
 El objetivo de esta lección es enseñar a las programadoras principiantes a
