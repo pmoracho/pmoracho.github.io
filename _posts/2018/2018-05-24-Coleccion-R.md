@@ -38,9 +38,15 @@ mencionados.
 
 + [R for Data Science] : Un clásico de **Garrett Grolemund** y **Hadley Wickham**. Muy claramente se describen las principales areas y tareas de la ciencia de Datos. En versión **Knitr**.
 + [R in a Nutshell] : El libro de Joseph Adler, (2010, 636 páginas). Gran profundidad en el lenguaje y una parte bastante completa de estadística aplicada.
-+ [Advanced R](http://adv-r.had.co.nz/): De Hadley Wickham, Advanced R presenta herramientas y técnicas útiles para atacar muchos tipos de problemas de programación de R, ayudándole a evitar errores y callejones sin salida. Con más de diez años de experiencia programando en R, el autor ilustra la elegancia, belleza y flexibilidad en el corazón de R. Del 2014, en versión Knitr.
-+ [Introductory Statistics with R](http://www.academia.dk/BiologiskAntropologi/Epidemiologi/PDF/Introductory_Statistics_with_R__2nd_ed.pdf): De Peter Daalgard, este libro proporciona una introducción a la R a nivel elemental, dirigida tanto a científicos no estadísticos en varios campos como a estudiantes de estadística. El modo principal de presentación es a través de ejemplos de código con comentarios liberales del código y la salida, tanto desde el punto de vista computacional como estadístico. Se puede descargar un paquete R suplementario que contiene los conjuntos de datos. Del 2008.
-+ [R packages](http://r-pkgs.had.co.nz/): De Hadley Wickham. Convierta su código R en paquetes que otros puedan descargar y usar fácilmente. Este práctico libro le muestra cómo combinar funciones R reutilizables, datos de muestra y documentación aplicando la filosofía de desarrollo de paquetes del autor Hadley Wickham. En el proceso, trabajará con `devtools`, `roxygen` y `testthat`, un conjunto de paquetes R que automatizan tareas de desarrollo comunes. Devtools resume las mejores prácticas que Hadley ha aprendido durante años de trabajar con este lenguaje de programación.
+
++ [Advanced R] : De **Hadley Wickham**, presenta herramientas y
+  técnicas útiles para atacar muchos tipos de problemas de programación de R,
+  anudándole a evitar errores y callejones sin salida. Con más de diez años de
+  experiencia programando en R, el autor ilustra la elegancia, belleza y
+  flexibilidad en el corazón de R. Del 2014, en versión **Knitr**. 
+
++ [Introductory Statistics with R](http://www.academia.dk/BiologiskAntropologi/Epidemiologi/PDF/Introductory_Statistics_with_R__2nd_ed.pdf): **De Peter Daalgard**, este libro proporciona una introducción a R a nivel elemental, dirigida tanto a científicos no estadísticos en varios campos como a estudiantes de estadística. El modo principal de presentación es a través de ejemplos de código con comentarios liberales del código y la salida, tanto desde el punto de vista computacional como estadístico. Se puede descargar un paquete R suplementario que contiene los conjuntos de datos. Del 2008.
++ [R packages](http://r-pkgs.had.co.nz/): De **Hadley Wickham**. Convierta su código R en paquetes que otros puedan descargar y usar fácilmente. Este práctico libro le muestra cómo combinar funciones R reutilizables, datos de muestra y documentación aplicando la filosofía de desarrollo de paquetes del autor. En el proceso, trabajará con `devtools`, `roxygen` y `testthat`, un conjunto de paquetes R que automatizan tareas de desarrollo comunes. Devtools resume las mejores prácticas que Hadley ha aprendido durante años de trabajar con este lenguaje de programación.
 + [An Introduction to Statistical Learning](http://www-bcf.usc.edu/~gareth/ISL/ISLR%20Seventh%20Printing.pdf): Tiene curso online (ver más abajo)
 
 ### En español
@@ -133,3 +139,4 @@ programación R, y no en el análisis estadístico.
 [R for Data Science]:https://r4ds.had.co.nz/
 [kindle]:/2016/2016-12-26-mi-vida-despues-del-kindle.md
 [R in a Nutshell]:https://visualization.sites.clemson.edu/reu/resources/RText.pdf
+[Advanced R]:http://adv-r.had.co.nz
