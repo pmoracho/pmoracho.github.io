@@ -36,8 +36,13 @@ mencionados.
 ### En Inglés
 
 
-+ [R for Data Science] : Un clásico de **Garrett Grolemund** y **Hadley Wickham**. Muy claramente se describen las principales areas y tareas de la ciencia de Datos. En versión **Knitr**.
-+ [R in a Nutshell] : El libro de Joseph Adler, (2010, 636 páginas). Gran profundidad en el lenguaje y una parte bastante completa de estadística aplicada.
++ [R for Data Science] : Un clásico de **Garrett Grolemund** y **Hadley
+  Wickham**. Muy claramente se describen las principales areas y tareas de la
+  ciencia de Datos. En versión **Knitr**.
+
++ [R in a Nutshell] : El libro de **Joseph Adler**, (2010, 636 páginas). Gran
+  profundidad en el lenguaje y una parte bastante completa de estadística
+  aplicada.
 
 + [Advanced R] : De **Hadley Wickham**, presenta herramientas y
   técnicas útiles para atacar muchos tipos de problemas de programación de R,
@@ -45,18 +50,54 @@ mencionados.
   experiencia programando en R, el autor ilustra la elegancia, belleza y
   flexibilidad en el corazón de R. Del 2014, en versión **Knitr**. 
 
-+ [Introductory Statistics with R](http://www.academia.dk/BiologiskAntropologi/Epidemiologi/PDF/Introductory_Statistics_with_R__2nd_ed.pdf): **De Peter Daalgard**, este libro proporciona una introducción a R a nivel elemental, dirigida tanto a científicos no estadísticos en varios campos como a estudiantes de estadística. El modo principal de presentación es a través de ejemplos de código con comentarios liberales del código y la salida, tanto desde el punto de vista computacional como estadístico. Se puede descargar un paquete R suplementario que contiene los conjuntos de datos. Del 2008.
-+ [R packages](http://r-pkgs.had.co.nz/): De **Hadley Wickham**. Convierta su código R en paquetes que otros puedan descargar y usar fácilmente. Este práctico libro le muestra cómo combinar funciones R reutilizables, datos de muestra y documentación aplicando la filosofía de desarrollo de paquetes del autor. En el proceso, trabajará con `devtools`, `roxygen` y `testthat`, un conjunto de paquetes R que automatizan tareas de desarrollo comunes. Devtools resume las mejores prácticas que Hadley ha aprendido durante años de trabajar con este lenguaje de programación.
-+ [An Introduction to Statistical Learning](http://www-bcf.usc.edu/~gareth/ISL/ISLR%20Seventh%20Printing.pdf): Tiene curso online (ver más abajo)
+* [Introductory Statistics with R](http://www.academia.dk/BiologiskAntropologi/Epidemiologi/PDF/Introductory_Statistics_with_R__2nd_ed.pdf):
+  **De Peter Daalgard**, este libro proporciona una introducción a R a nivel
+  elemental, dirigida tanto a científicos no estadísticos en varios campos
+  como a estudiantes de estadística. El modo principal de presentación es a
+  través de ejemplos de código con comentarios liberales del código y la
+  salida, tanto desde el punto de vista computacional como estadístico. Se
+  puede descargar un paquete R suplementario que contiene los conjuntos de
+  datos. Del 2008.
+
+* [R packages](http://r-pkgs.had.co.nz/): De **Hadley Wickham**. Convierta su
+  código R en paquetes que otros puedan descargar y usar fácilmente. Este
+  práctico libro le muestra cómo combinar funciones R reutilizables, datos de
+  muestra y documentación aplicando la filosofía de desarrollo de paquetes del
+  autor. En el proceso, trabajará con `devtools`, `roxygen` y `testthat`, un
+  conjunto de paquetes R que automatizan tareas de desarrollo comunes. Devtools
+  resume las mejores prácticas que Hadley ha aprendido durante años de trabajar
+  con este lenguaje de programación.
+
++ [An Introduction to Statistical Learning](http://www-bcf.usc.edu/~gareth/ISL/ISLR%20Seventh%20Printing.pdf):
+  Tiene curso online (ver más abajo)
 
 ### En español
 
-+ [El arte de programar en R](https://cran.r-project.org/doc/contrib/Santana_El_arte_de_programar_en_R.pdf): De Julio Sergio Santana Sepúlveda (198 páginas), uno de los poco libros de calidad en Español, del año 2014. Orientado únicamente al lenguaje.
-+ [R para Principiantes](https://cran.r-project.org/doc/contrib/rdebuts_es.pdf): Emmanuel Paradis, Institut des Sciences de l’Evolution Universit Montpellier II. (2003, 61 páginas) El objetivo de este documento es proporcionar un punto de partida para personas interesadas en comenzar a utilzar R. 
-+ [Introducción a R](https://cran.r-project.org/doc/contrib/R-intro-1.1.0-espanol.1.pdf): R Development Core Team (2000, 106 páginas) Estas notas sobre R están escritas a partir de un conjunto de notas que describían los entornos S y S-Plus escritas por Bill Venables y Dave Smith. Hemos realizado un pequeño número de cambios para reflejar las diferencias entre R y S.	
-+ [Cartas sobre Estadística](https://cran.r-project.org/doc/contrib/Risk-Cartas-sobre-Estadistica.pdf): Dr. Ing. Marcelo R. Risk, Facultad Regional Buenos Aires, Universidad Tecnológica Nacional, Argentina (2003, 57 páginas)
-+ [Introducción a la programación estadística con R para profesores](http://www.ugr.es/~batanero/pages/ARTICULOS/libroR.pdf): José Miguel, Contreras García, Elena Molina Portillo, Pedro Arteaga Cezón (2010, 161 páginas)
-+ [R for Data Science en Español](https://es.r4ds.hadley.nz/): Actualmente en desarrollo, la versión traducida de este clásico. 
++ [El arte de programar en
+  R](https://cran.r-project.org/doc/contrib/Santana_El_arte_de_programar_en_R.pdf):
+  De Julio Sergio Santana Sepúlveda (198 páginas), uno de los poco libros de
+  calidad en Español, del año 2014. Orientado únicamente al lenguaje.
++ [R para
+  Principiantes](https://cran.r-project.org/doc/contrib/rdebuts_es.pdf):
+  Emmanuel Paradis, Institut des Sciences de l’Evolution Universit Montpellier
+  II. (2003, 61 páginas) El objetivo de este documento es proporcionar un punto
+  de partida para personas interesadas en comenzar a utilzar R. 
++ [Introducción a
+  R](https://cran.r-project.org/doc/contrib/R-intro-1.1.0-espanol.1.pdf): R
+  Development Core Team (2000, 106 páginas) Estas notas sobre R están escritas
+  a partir de un conjunto de notas que describían los entornos S y S-Plus
+  escritas por Bill Venables y Dave Smith. Hemos realizado un pequeño número de
+  cambios para reflejar las diferencias entre R y S.	
++ [Cartas sobre
+  Estadística](https://cran.r-project.org/doc/contrib/Risk-Cartas-sobre-Estadistica.pdf):
+  Dr. Ing. Marcelo R. Risk, Facultad Regional Buenos Aires, Universidad
+  Tecnológica Nacional, Argentina (2003, 57 páginas)
++ [Introducción a la programación estadística con R para
+  profesores](http://www.ugr.es/~batanero/pages/ARTICULOS/libroR.pdf): José
+  Miguel, Contreras García, Elena Molina Portillo, Pedro Arteaga Cezón (2010,
+  161 páginas)
++ [R for Data Science en Español](https://es.r4ds.hadley.nz/): Actualmente en
+  desarrollo, la versión traducida de este clásico. 
 
 ## Cheat Sheets
 
@@ -102,8 +143,7 @@ Los clásicos "machetes".
 
 ### En inglés
 
-+ [Aprendizaje supervisado](https://lagunita.stanford.edu/courses/HumanitiesSciences/StatLearning/Winter2016/about?fbclid=IwAR1wNXaXvBwA-XqH3l1b6fBQTLopGMcO5fEa_IhJ2cJy02FbELvs6XZ4_0k):
-  Este es un curso de nivel introductorio
++ [Aprendizaje supervisado] : Este es un curso de nivel introductorio
   en aprendizaje supervisado, con un enfoque en métodos de regresión y
   clasificación. El programa incluye: regresión lineal y polinómica, regresión
   logística y análisis discriminante lineal; validación cruzada y métodos de
@@ -118,25 +158,32 @@ Los clásicos "machetes".
   sitio web del libro. Interesante y gratuito. Cuando tenga algo de tiempo lo
   haré y veremos que tal.
 
-+ [R Programming - Data Science using R](https://www.udemy.com/r-programming-h/learn/lecture/13681704#overview)
++ [R Programming - Data Science using R] : Curso de Udemy.
+
++ [Amazon trainning] : Amazon abrió el material de entrenamiento interno, hay
+  cosas muy buenas, por ejemplo el de matemáticas para Machine Learning.
+  Lamentablemente no he visto nada de R, se ve que apuestan totalmente a Python
 
 
 ### En español
 
-+ [R para Análisis Científicos Reproducibles](https://swcarpentry.github.io/r-novice-gapminder-es/):
-El objetivo de esta lección es enseñar a las programadoras principiantes a
-escribir códigos modulares y buenas prácticas en el uso de R para el análisis de
-datos. R nos provee un conjunto de paquetes desarrollados por terceros, éstos se
-usan comúnmente en diversas disciplinas científicas para el análisis
-estadístico. Encontramos que muchos científicos que asisten a los talleres de
-**Software Carpentry** utilizan R y quieren aprender más. La importancia de estos
-materiales es proporcionar a los asistentes con una base sólida en los
-fundamentos de R, y enseñar las mejores prácticas del cómputo científico:
-desglose del análisis en módulos, automatización tareas y encapsulamiento. Ten
-en cuenta que éste taller se enfoca en los fundamentos del lenguaje de
-programación R, y no en el análisis estadístico.
++ [R para Análisis Científicos Reproducibles](https://swcarpentry.github.io/r-novice-gapminder-es/): El
+  objetivo de esta lección es enseñar a las programadoras principiantes a
+  escribir códigos modulares y buenas prácticas en el uso de R para el análisis
+  de datos. R nos provee un conjunto de paquetes desarrollados por terceros,
+  éstos se usan comúnmente en diversas disciplinas científicas para el análisis
+  estadístico. Encontramos que muchos científicos que asisten a los talleres de
+  **Software Carpentry** utilizan R y quieren aprender más. La importancia de
+  estos materiales es proporcionar a los asistentes con una base sólida en los
+  fundamentos de R, y enseñar las mejores prácticas del cómputo científico:
+  desglose del análisis en módulos, automatización tareas y encapsulamiento.
+  Ten en cuenta que éste taller se enfoca en los fundamentos del lenguaje de
+  programación R, y no en el análisis estadístico.
 
 [R for Data Science]:https://r4ds.had.co.nz/
 [kindle]:/2016/2016-12-26-mi-vida-despues-del-kindle.md
 [R in a Nutshell]:https://visualization.sites.clemson.edu/reu/resources/RText.pdf
 [Advanced R]:http://adv-r.had.co.nz
+[Amazon trainning]:https://www.aws.training/
+[R Programming - Data Science using R]:https://www.udemy.com/r-programming-h/learn/lecture/13681704#overview
+[Aprendizaje supervisado]: https://lagunita.stanford.edu/courses/HumanitiesSciences/StatLearning/Winter2016/about?fbclid=IwAR1wNXaXvBwA-XqH3l1b6fBQTLopGMcO5fEa_IhJ2cJy02FbELvs6XZ4_0k
