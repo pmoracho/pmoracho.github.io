@@ -211,7 +211,9 @@ votos_porcentaje %>%
     filter(total_votos > quantile(total_votos, .3)) -> top
 
 colores <- c("#26a7ed", "#fbfb00", "#b8867b", "#950000", "#996600", "#4d4d4d", "#57BFEB")    
+```
 
+``` r
 votos_porcentaje %>%
     inner_join(top, by = "nombre_meta_agrupacion") %>% 
     ggplot(aes(x=fct_reorder(nombre_meta_agrupacion, porcentaje), 
@@ -225,13 +227,14 @@ votos_porcentaje %>%
          caption="fuente: DINE", 
          x="",
          color=NULL) +
-    ggelegant::theme_elegante_std(base_family = "Raleway") +
-    theme(legend.position="none")
+    theme_elegante_std(base_family = "Raleway") +
+    theme(legend.position="none") +
+    theme(axis.text.x = element_text(size=8))
 ```
 
 ![](/images/2019/2019-08-20-paso-2019-algunos-datos_files/figure-markdown_github/boxplot-1.png)
 
-Es interesante ver el \*\* boxplot\*\* y ver los "outliers" en particular los que caen el limite máximo, son las mesas dónde solo hay votos para una determinada agrupación. Interesante que en estos casos se vulnera fácilmente el secreto del voto.
+Es interesante ver el **boxplot** y ver los "outliers" en particular los que caen el limite máximo, son las mesas dónde solo hay votos para una determinada agrupación. Interesante que en estos casos se vulnera fácilmente el secreto del voto.
 
 ``` r
 # Mesas con el 100% de votos a una agrupación
@@ -256,3 +259,5 @@ votos_porcentaje %>%
     ## 4 FRENTE DE IZQUIERDA Y DE TRABAJADORES - UNIDAD     1     3
     ## 5 MOVIMIENTO AL SOCIALISMO                           1     2
     ## 6 FRENTE NOS                                         1     1
+
+No lo voy a hacer, pero claramente es muy fácil llegar a estas mesas, para luego ir al padrón y relacionar votos con personas, claro aún faltaría saber exactamente quienes votaron y quienes no concurrieron, pero en estos casos es claro que es muy sencillo vulnerar el secreto.
