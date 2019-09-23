@@ -230,3 +230,29 @@ votos_porcentaje %>%
 ```
 
 ![](/images/2019/2019-08-20-paso-2019-algunos-datos_files/figure-markdown_github/boxplot-1.png)
+
+Es interesante ver el \*\* boxplot\*\* y ver los "outliers" en particular los que caen el limite máximo, son las mesas dónde solo hay votos para una determinada agrupación. Interesante que en estos casos se vulnera fácilmente el secreto del voto.
+
+``` r
+# Mesas con el 100% de votos a una agrupación
+votos_porcentaje %>% 
+    filter(porcentaje == 1) %>% 
+    left_join(mesas, by = "id_mesa") %>%
+    left_join(circuitos, by = "id_circuito") %>%
+    left_join(secciones, by = "id_seccion") %>%
+    left_join(distritos, by = "id_distrito") %>%
+    left_join(establecimientos, by = "id_establecimiento") %>% 
+    group_by(nombre_meta_agrupacion) %>% 
+    summarise(mesas=n(), votos=sum(votos)) %>% 
+    arrange(-votos)
+```
+
+    ## # A tibble: 6 x 3
+    ##   nombre_meta_agrupacion                         mesas votos
+    ##   <chr>                                          <int> <dbl>
+    ## 1 FRENTE DE TODOS                                   21  2072
+    ## 2 VOTOS en BLANCO                                   19   354
+    ## 3 JUNTOS POR EL CAMBIO                              20   204
+    ## 4 FRENTE DE IZQUIERDA Y DE TRABAJADORES - UNIDAD     1     3
+    ## 5 MOVIMIENTO AL SOCIALISMO                           1     2
+    ## 6 FRENTE NOS                                         1     1
