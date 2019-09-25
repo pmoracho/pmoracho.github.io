@@ -409,22 +409,22 @@ mesas_100 %>%
   filter(votos >= 100) %>% 
   mutate(url = get_telegrama_url(codigo_mesa),
          cmd = paste0("view_telegrama('", codigo_mesa, "')")) %>% 
-  select(codigo_mesa, nombre_meta_agrupacion, votos, url, cmd) %>% 
+  select(codigo_mesa, nombre_meta_agrupacion, votos, url) %>% 
   kable()
 ```
 
-| codigo\_mesa | nombre\_meta\_agrupacion | votos | url                                                                             | cmd                            |
-| :----------- | :----------------------- | ----: | :------------------------------------------------------------------------------ | :----------------------------- |
-| 0900801352X  | FRENTE DE TODOS          |   213 | <https://www.resultados2019.gob.ar/opt/jboss/rct/tally/pages/0900801352X/1.png> | view\_telegrama(‘0900801352X’) |
-| 2200100229X  | JUNTOS POR EL CAMBIO     |   111 | <https://www.resultados2019.gob.ar/opt/jboss/rct/tally/pages/2200100229X/1.png> | view\_telegrama(‘2200100229X’) |
-| 2200500851X  | FRENTE DE TODOS          |   246 | <https://www.resultados2019.gob.ar/opt/jboss/rct/tally/pages/2200500851X/1.png> | view\_telegrama(‘2200500851X’) |
-| 2200601184X  | FRENTE DE TODOS          |   244 | <https://www.resultados2019.gob.ar/opt/jboss/rct/tally/pages/2200601184X/1.png> | view\_telegrama(‘2200601184X’) |
-| 2200901327X  | FRENTE DE TODOS          |   243 | <https://www.resultados2019.gob.ar/opt/jboss/rct/tally/pages/2200901327X/1.png> | view\_telegrama(‘2200901327X’) |
-| 2201801812X  | FRENTE DE TODOS          |   171 | <https://www.resultados2019.gob.ar/opt/jboss/rct/tally/pages/2201801812X/1.png> | view\_telegrama(‘2201801812X’) |
-| 2202202007X  | FRENTE DE TODOS          |   239 | <https://www.resultados2019.gob.ar/opt/jboss/rct/tally/pages/2202202007X/1.png> | view\_telegrama(‘2202202007X’) |
-| 2202202012X  | FRENTE DE TODOS          |   279 | <https://www.resultados2019.gob.ar/opt/jboss/rct/tally/pages/2202202012X/1.png> | view\_telegrama(‘2202202012X’) |
-| 2202402154X  | FRENTE DE TODOS          |   260 | <https://www.resultados2019.gob.ar/opt/jboss/rct/tally/pages/2202402154X/1.png> | view\_telegrama(‘2202402154X’) |
-| 0200700142X  | VOTOS en BLANCO          |   272 | <https://www.resultados2019.gob.ar/opt/jboss/rct/tally/pages/0200700142X/1.png> | view\_telegrama(‘0200700142X’) |
+| codigo\_mesa | nombre\_meta\_agrupacion | votos | url                                                                             |
+| :----------- | :----------------------- | ----: | :------------------------------------------------------------------------------ |
+| 0900801352X  | FRENTE DE TODOS          |   213 | <https://www.resultados2019.gob.ar/opt/jboss/rct/tally/pages/0900801352X/1.png> |
+| 2200100229X  | JUNTOS POR EL CAMBIO     |   111 | <https://www.resultados2019.gob.ar/opt/jboss/rct/tally/pages/2200100229X/1.png> |
+| 2200500851X  | FRENTE DE TODOS          |   246 | <https://www.resultados2019.gob.ar/opt/jboss/rct/tally/pages/2200500851X/1.png> |
+| 2200601184X  | FRENTE DE TODOS          |   244 | <https://www.resultados2019.gob.ar/opt/jboss/rct/tally/pages/2200601184X/1.png> |
+| 2200901327X  | FRENTE DE TODOS          |   243 | <https://www.resultados2019.gob.ar/opt/jboss/rct/tally/pages/2200901327X/1.png> |
+| 2201801812X  | FRENTE DE TODOS          |   171 | <https://www.resultados2019.gob.ar/opt/jboss/rct/tally/pages/2201801812X/1.png> |
+| 2202202007X  | FRENTE DE TODOS          |   239 | <https://www.resultados2019.gob.ar/opt/jboss/rct/tally/pages/2202202007X/1.png> |
+| 2202202012X  | FRENTE DE TODOS          |   279 | <https://www.resultados2019.gob.ar/opt/jboss/rct/tally/pages/2202202012X/1.png> |
+| 2202402154X  | FRENTE DE TODOS          |   260 | <https://www.resultados2019.gob.ar/opt/jboss/rct/tally/pages/2202402154X/1.png> |
+| 0200700142X  | VOTOS en BLANCO          |   272 | <https://www.resultados2019.gob.ar/opt/jboss/rct/tally/pages/0200700142X/1.png> |
 
 O incluso, ver directamente la imagen, mediante:
 
