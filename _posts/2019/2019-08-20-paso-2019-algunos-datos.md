@@ -262,7 +262,7 @@ votos_porcentaje %>%
     theme(axis.text.x = element_text(size=8))
 ```
 
-![](/images/2019/2019-08-20-paso-2019-algunos-datos_files/figure-gfm/boxplot-1.png)<!-- -->
+<img src="/images/2019/2019-08-20-paso-2019-algunos-datos_files/figure-gfm/boxplot-1.png" style="display: block; margin: auto;" />
 
 Es interesante ver el **boxplot** y ver los “outliers” en particular los
 que caen el limite máximo, son las mesas dónde solo hay votos para una
@@ -482,4 +482,4 @@ ggplot(dat, aes(xmin=xmin, xmax=xmax, ymin=ymin, ymax=ymax)) +
   theme_elegante_std(base_family = "Raleway") 
 ```
 
-![](/images/2019/2019-08-20-paso-2019-algunos-datos_files/figure-gfm/hist_setup_a-1.png)<!-- -->
+<img src="/images/2019/2019-08-20-paso-2019-algunos-datos_files/figure-gfm/hist-1.png" style="display: block; margin: auto;" />
