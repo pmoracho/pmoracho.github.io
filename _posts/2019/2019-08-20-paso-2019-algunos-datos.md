@@ -75,13 +75,15 @@ data.frame(tabla = c("mesas_totales",
                           mesas_totales_lista %>% distinct(CODIGO_MESA) %>% nrow(),
                           mesas_totales_agrp_politica %>% distinct(CODIGO_MESA) %>% nrow()
                           )
-           )
+           ) %>% 
+    kable()
 ```
 
-    ##                         tabla registros
-    ## 1               mesas_totales    100142
-    ## 2         mesas_totales_lista    100148
-    ## 3 mesas_totales_agrp_politica    100148
+| tabla                          | registros |
+| :----------------------------- | --------: |
+| mesas\_totales                 |    100142 |
+| mesas\_totales\_lista          |    100148 |
+| mesas\_totales\_agrp\_politica |    100148 |
 
 Podemos ver que `mesas_totales`tiene dos mesas menos que el resto de las
 tablas. Particularmente son las siguientes:
