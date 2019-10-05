@@ -481,7 +481,8 @@ Y ahora sí, veamos los datos:
 ``` r
 top_10_distritos %>% 
   ggplot(aes(x=fct_reorder(area,diferencia),y=diferencia)) +
-  geom_bar(stat='identity', aes(fill=agrupacion), width=.5) +
+  geom_bar(stat='identity', aes(fill=agrupacion), width=.7) +
+  geom_text(aes(label=format(abs(diferencia), nsmall=0, big.mark=",")),  vjust=0.38, col="#666666") +
   scale_fill_manual(labels = function(x) str_wrap(x, 20), values = colores) + 
   scale_y_continuous(labels = scales::comma) +
   coord_flip() +
@@ -490,8 +491,37 @@ top_10_distritos %>%
          caption="fuente: DINE", 
          x="",
          color=NULL) +
-    theme_elegante_std(base_family = "Raleway") +
-    theme(axis.text.y = element_text(size=8))
+    theme(axis.text.y = element_text(size=8)) +
+    theme_elegante_std(base_family = "Raleway")
 ```
 
 <img src="/images/2019/2019-08-20-paso-2019-algunos-datos_files/figure-markdown_github/distritos_plot-1.png" style="display: block; margin: auto;" />
+
+¿En cuantas mesas ganó cada agrupación?
+---------------------------------------
+
+``` r
+votos_porcentaje %>% 
+  select(nombre_meta_agrupacion, id_mesa, votos) %>% 
+  arrange(id_mesa, -votos) %>% 
+  group_by(id_mesa) %>% 
+  mutate(nr = row_number()) %>% 
+  filter(nr == 1) %>% 
+  group_by(nombre_meta_agrupacion) %>% 
+  summarize(mesas = n()) %>% 
+  arrange(-mesas) %>% 
+  kable()
+```
+
+| nombre\_meta\_agrupacion                       |  mesas|
+|:-----------------------------------------------|------:|
+| FRENTE DE TODOS                                |  65656|
+| JUNTOS POR EL CAMBIO                           |  30512|
+| CONSENSO FEDERAL                               |    122|
+| VOTOS en BLANCO                                |     77|
+| FRENTE DE IZQUIERDA Y DE TRABAJADORES - UNIDAD |     23|
+| FRENTE NOS                                     |     16|
+| MOVIMIENTO AL SOCIALISMO                       |      5|
+| UNITE POR LA LIBERTAD Y LA DIGNIDAD            |      4|
+| FRENTE PATRIOTA                                |      3|
+| MOVIMIENTO DE ACCION VECINAL                   |      1|
