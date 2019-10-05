@@ -32,13 +32,17 @@ La justicia electoral publicó una serie de tablas que representa los datos de l
 Antes de empezar
 ----------------
 
-La fuente oficial dónde descargar los datos es esta: <http://descargaresultados.s3-sa-east-1.amazonaws.com/resultados.zip>, son varios archivos delimitados por el piepe (`|`), sin embargo, elaboré un paquete que ya trae precargados estos datos y además incorpora una reformulación de los mismos bajo un modelo relacional clásico, que para el que este acostunbrado a trabajar con bases de datos, como yo, seguramente es una foma más cómoda. El paquete se llama [paso2019](https://github.com/pmoracho/paso2019), se puede descar e instalar en **`R`** o bien, si ya disponemos de `devtools`, simplemente podremos hacer:
+La fuente oficial dónde descargar los datos es esta: <http://descargaresultados.s3-sa-east-1.amazonaws.com/resultados.zip>, son varios archivos delimitados por el pipe (`|`), sin embargo, elaboré un paquete que ya trae precargados estos datos y además incorpora una reformulación de los mismos bajo un modelo relacional clásico, que para el que este acostunbrado a trabajar con bases de datos, como yo, seguramente es una foma más cómoda. El paquete se llama [paso2019](https://github.com/pmoracho/paso2019), se puede descar e instalar en **`R`** o bien, si ya disponemos de `devtools`, simplemente podremos hacer:
 
 ``` r
-devtools::install("pmoracho/paso2019")
+devtools::install_gitgub("pmoracho/paso2019")
 ```
 
-Luego simplemente cargamos el paquete junto con los otros que vamos a necesitar
+Luego simplemente cargamos el paquete junto con los otros que vamos a necesitar. `ggelegant` es otro paquete que armé, que contiene un tema para **ggplot2** en el que estoy trabajando, igual que el anterior:
+
+``` r
+devtools::install_gitgub("pmoracho/ggelegant")
+```
 
 ``` r
 library("paso2019")
@@ -65,16 +69,13 @@ data.frame(tabla = c("mesas_totales",
     kable()
 ```
 
-    ## Warning: The `printer` argument is deprecated as of rlang 0.3.0.
-    ## This warning is displayed once per session.
-
 | tabla                          |  registros|
 |:-------------------------------|----------:|
 | mesas\_totales                 |     100142|
 | mesas\_totales\_lista          |     100148|
 | mesas\_totales\_agrp\_politica |     100148|
 
-Podemos ver que `mesas_totales`tiene dos mesas menos que el resto de las tablas. Particularmente son las siguientes:
+Podemos ver que `mesas_totales`tiene seis mesas menos que el resto de las tablas. Particularmente son las siguientes:
 
 ``` r
 mesas_totales_lista %>% 
@@ -92,7 +93,7 @@ mesas_totales_lista %>%
 | 0207900649X  |
 | 0207900738X  |
 
-La otra inconsistencia notable, es entre esta información y la que se publica en la página web: <https://resultados.gob.ar/>, la mesas escrutadas según esta página son 100,156 mesas, los datos descargados, indican en el mejor de los casos 100,148 mesas, es decir 8 mesas menos.
+La otra inconsistencia notable, es entre esta información y la que se publica en la página web: <https://resultados.gob.ar>, la mesas escrutadas según esta página son 100,156 mesas, los datos descargados, indican en el mejor de los casos 100,148 mesas, es decir 8 mesas menos.
 
 Preguntas
 ---------
@@ -196,6 +197,8 @@ En los datos originales, los **VOTOS en BLANCO** no se consideran al nivel de un
 
 Miremos la categoría de Predidente y Vice:
 
+primero los datos:
+
 ``` r
 votos %>% 
     filter(id_categoria == 137) %>% 
@@ -218,6 +221,8 @@ votos_porcentaje %>%
 colores <- c("#26a7ed", "#fbfb00", "#b8867b", "#950000", "#996600", "#4d4d4d", "#57BFEB")    
 ```
 
+Y ahora la gráfica:
+
 ``` r
 votos_porcentaje %>%
     inner_join(top, by = "nombre_meta_agrupacion") %>% 
@@ -239,7 +244,7 @@ votos_porcentaje %>%
 
 <img src="/images/2019/2019-08-20-paso-2019-algunos-datos_files/figure-markdown_github/boxplot-1.png" style="display: block; margin: auto;" />
 
-Es interesante ver el **boxplot** y ver los "outliers" en particular los que caen el limite máximo, son las mesas dónde solo hay votos para una determinada agrupación. Interesante que revisar estos casos vulnera fácilmente el secreto del voto.
+Es interesante ver el **boxplot** y ver los "outliers" en particular los que caen el limite máximo, son las mesas dónde solo hay votos para una determinada agrupación. Interesante que al revisar estos casos vulneramos fácilmente el secreto del voto.
 
 ``` r
 # Mesas con el 100% de votos a una agrupación
@@ -283,6 +288,7 @@ No lo voy a hacer, pero claramente es muy fácil llegar a estas mesas, para lueg
 Es raro no, que todos los votos vayan a una única agrupación ¿no? sin embargo, estamos hablando de 63 mesas sobre 100,148, y no llegan a ser más de 2600 votos, por lo que no seamos suspicaces en esto. Podemos claro estudiar más en detalle el tema:
 
 ``` r
+# Revisemos 10 casos
 mesas_100 %>% 
   select(nombre_meta_agrupacion,
          nombre_distrito,
@@ -292,74 +298,22 @@ mesas_100 %>%
          codigo_mesa,
          votos) %>% 
   arrange(-votos) %>% 
+  head(10) %>% 
   kable()
 ```
 
-| nombre\_meta\_agrupacion                       | nombre\_distrito    | nombre\_seccion     | nombre\_circuito                   | nombre\_establecimiento                | codigo\_mesa |  votos|
-|:-----------------------------------------------|:--------------------|:--------------------|:-----------------------------------|:---------------------------------------|:-------------|------:|
-| FRENTE DE TODOS                                | SANTIAGO DEL ESTERO | RÍO HONDO           | CIRCUITO POZUELOS                  | ESCUELA N° 829                         | 2202202012X  |    279|
-| VOTOS en BLANCO                                | BUENOS AIRES        | BAHÍA BLANCA        | CIRCUITO 74                        | ESCUELA EP N°70/ES N°25                | 0200700142X  |    272|
-| FRENTE DE TODOS                                | SANTIAGO DEL ESTERO | SAN MARTÍN          | CIRCUITO ATOJ POZO                 | ESCUELA N° 747                         | 2202402154X  |    260|
-| FRENTE DE TODOS                                | SANTIAGO DEL ESTERO | ATAMISQUI           | CIRCUITO MEDELLIN                  | ESCUELA N° 507                         | 2200500851X  |    246|
-| FRENTE DE TODOS                                | SANTIAGO DEL ESTERO | BANDA               | CIRCUITO CHAUPI POZO               | ESCUELA N° 66 MAURO CARRANZA           | 2200601184X  |    244|
-| FRENTE DE TODOS                                | SANTIAGO DEL ESTERO | CHOYA               | CIRCUITO VILLA LA PUNTA            | COLEGIO SECUNDARIO JUAN N. BURES       | 2200901327X  |    243|
-| FRENTE DE TODOS                                | SANTIAGO DEL ESTERO | RÍO HONDO           | CIRCUITO VINARA                    | ESCUELA N° 867                         | 2202202007X  |    239|
-| FRENTE DE TODOS                                | FORMOSA             | MATACOS             | CIRCUITO 82                        | EPEP N° 438                            | 0900801352X  |    213|
-| FRENTE DE TODOS                                | SANTIAGO DEL ESTERO | PELLEGRINI          | CIRCUITO AHI VEREMOS               | ESCUELA N° 1006                        | 2201801812X  |    171|
-| JUNTOS POR EL CAMBIO                           | SANTIAGO DEL ESTERO | CAPITAL             | CIRCUITO ESTE                      | COLEGIO SAN FRANCISCO                  | 2200100229X  |    111|
-| FRENTE DE TODOS                                | SANTIAGO DEL ESTERO | MORENO              | CIRCUITO STAYLE                    | ESCUELA N° 842                         | 2201601635X  |     63|
-| FRENTE DE TODOS                                | SANTIAGO DEL ESTERO | MITRE               | CIRCUITO ALBARDON                  | ESCUELA N° 578                         | 2201501631X  |     40|
-| JUNTOS POR EL CAMBIO                           | CATAMARCA           | BELÉN               | CIRCUITO 113A                      | ESC. PROV. NRO. 474                    | 0301300806X  |     27|
-| FRENTE DE TODOS                                | FORMOSA             | PATIÑO              | CIRCUITO 51                        | EPEP N° 13 REP. ARGENTINA              | 0900601105X  |     26|
-| FRENTE DE TODOS                                | CHACO               | TAPENAGA            | CIRCUITO 72                        | E.G.B. 15 RAUL A PIAT                  | 0600901439X  |     25|
-| VOTOS en BLANCO                                | CHACO               | MAYOR L. J. FONTANA | CIRCUITO 77                        | E.E.T. 25                              | 0601101494X  |     23|
-| JUNTOS POR EL CAMBIO                           | BUENOS AIRES        | CORONEL DORREGO     | CIRCUITO 235                       | ESCUELA EP N°6                         | 0202500035X  |     13|
-| VOTOS en BLANCO                                | LA RIOJA            | CAPITAL             | CIRCUITO LA RIOJA (CAPITAL)        | ESC. PROV. 369 MESTRO HUMBERTO PEREYRA | 1200100128X  |     13|
-| JUNTOS POR EL CAMBIO                           | SANTA FE            | VERA                | CIRCUITO GUAYCURU                  | C.E.R.N°270 GRAL.J.DE S.MARTIN         | 2102208136X  |     10|
-| JUNTOS POR EL CAMBIO                           | CATAMARCA           | BELÉN               | CIRCUITO 110                       | ESC. PROV. NRO. 468                    | 0301300797X  |      8|
-| FRENTE DE TODOS                                | FORMOSA             | PATIÑO              | CIRCUITO 065 A                     | EPEP N° 162                            | 0900601217X  |      8|
-| VOTOS en BLANCO                                | SAN LUIS            | PEDERNERA           | CIRCUITO CIUDAD V.MERCEDES (3001B) | EPA NØ10 M.E.V.LUCERO-PRIMARIA         | 1900300621X  |      6|
-| JUNTOS POR EL CAMBIO                           | CÓRDOBA             | RÍO CUARTO          | CIRCUITO 173                       | ESC JOSE DE SAN MARTIN                 | 0401305963X  |      5|
-| VOTOS en BLANCO                                | SAN LUIS            | PUEYRREDÓN          | CIRCUITO SAN LUIS (1014)           | INST.SAN LUIS REY DE FRANCIA           | 1900100279X  |      5|
-| VOTOS en BLANCO                                | SAN LUIS            | GOBERNADOR DUPUY    | CIRCUITO BUENA ESPERANZA           | ESC.EPEM NØ4 CORTES APARICIO           | 1900901188X  |      5|
-| JUNTOS POR EL CAMBIO                           | BUENOS AIRES        | OLAVARRÍA           | CIRCUITO 716                       | ESCUELA ES N°17                        | 0208400232X  |      4|
-| JUNTOS POR EL CAMBIO                           | BUENOS AIRES        | TRENQUE LAUQUEN     | CIRCUITO 961B                      | ESCUELA EP N°12                        | 0211500117X  |      4|
-| JUNTOS POR EL CAMBIO                           | CÓRDOBA             | TULUMBA             | CIRCUITO 365                       | ESC LUIS E JUNCOS(EX NAC 212)          | 0402508446X  |      4|
-| FRENTE DE TODOS                                | ENTRE RÍOS          | FEDERAL             | CIRCUITO LAS ACHIRAS               | ESC PROV N° 32 "BRIG GRAL URDINARRAIN" | 0801402861X  |      4|
-| JUNTOS POR EL CAMBIO                           | SAN LUIS            | AYACUCHO            | CIRCUITO EL CALDEN                 | ESC.NØ196 MTRA.M.DE RAMIREZ            | 1900701154X  |      4|
-| VOTOS en BLANCO                                | BUENOS AIRES        | MERLO               | CIRCUITO 652A                      | ESCUELA EP N°23                        | 0207700315X  |      4|
-| VOTOS en BLANCO                                | SAN LUIS            | PEDERNERA           | CIRCUITO CIUDAD V.MERCEDES (3016)  | ESC. NØ43 DR. TOMAS JOFRE              | 1900300808X  |      4|
-| VOTOS en BLANCO                                | SAN LUIS            | PEDERNERA           | CIRCUITO CIUDAD V.MERCEDES (3016)  | ESC. NØ43 DR. TOMAS JOFRE              | 1900300808X  |      4|
-| VOTOS en BLANCO                                | SAN LUIS            | BELGRANO            | CIRCUITO LA CALERA                 | CTRO.EDUC.NØ7 GEOL.R.GUIÑAZU           | 1900801174X  |      4|
-| JUNTOS POR EL CAMBIO                           | BUENOS AIRES        | TRES ARROYOS        | CIRCUITO 977                       | ESCUELA EP N°28                        | 0211700156X  |      3|
-| FRENTE DE IZQUIERDA Y DE TRABAJADORES - UNIDAD | CATAMARCA           | BELÉN               | CIRCUITO 111                       | ESC. PROV. NRO. 347                    | 0301300800X  |      3|
-| VOTOS en BLANCO                                | CÓRDOBA             | CRUZ DEL EJE        | CIRCUITO 42                        | ESCUELA PROV.M. MORENO                 | 0400404111X  |      3|
-| JUNTOS POR EL CAMBIO                           | BUENOS AIRES        | GENERAL VILLEGAS    | CIRCUITO 411                       | ESCUELA EP N°45                        | 0205500078X  |      2|
-| JUNTOS POR EL CAMBIO                           | BUENOS AIRES        | SAN PEDRO           | CIRCUITO 922                       | ESCUELA EP N°22                        | 0210800152X  |      2|
-| MOVIMIENTO AL SOCIALISMO                       | CATAMARCA           | VALLE VIEJO         | CIRCUITO 76                        | ESC. PROV. NRO. 272                    | 0300800654X  |      2|
-| FRENTE DE TODOS                                | CÓRDOBA             | GENERAL SAN MARTÍN  | CIRCUITO 88                        | ESC.R.DE ESCALADA                      | 0400604435X  |      2|
-| FRENTE DE TODOS                                | CHACO               | PRIMERO DE MAYO     | CIRCUITO 31                        | E.G.B. 278 FRANCISCO SOUILHE           | 0600201048X  |      2|
-| FRENTE DE TODOS                                | FORMOSA             | LAISHÍ              | CIRCUITO 022 C                     | EPES N° 18 LIB. G. SAN MARTIN          | 0900200594X  |      2|
-| FRENTE DE TODOS                                | FORMOSA             | PATIÑO              | CIRCUITO 060 A                     | EPEP N° 9 DR. N. AVELLANEDA            | 0900601189X  |      2|
-| VOTOS en BLANCO                                | BUENOS AIRES        | EZEIZA              | CIRCUITO 289                       | COLEGIO SAN IGNACIO (EP/ES)            | 0213200059X  |      2|
-| VOTOS en BLANCO                                | SAN LUIS            | PEDERNERA           | CIRCUITO NUEVA ESCOCIA             | ESC.NØ200 CAP FAUSTO GAVAZZI           | 1900300885X  |      2|
-| VOTOS en BLANCO                                | SANTIAGO DEL ESTERO | SILIPICA            | CIRCUITO MANOGASTA                 | ESCUELA N° 810 SANTA BARBARA           | 2202302135X  |      2|
-| JUNTOS POR EL CAMBIO                           | BUENOS AIRES        | CARLOS TEJEDOR      | CIRCUITO 171                       | ESCUELA EP N°5/ES N°5                  | 0202000021X  |      1|
-| JUNTOS POR EL CAMBIO                           | BUENOS AIRES        | NECOCHEA            | CIRCUITO 687                       | ESCUELA EP N°5                         | 0208200231X  |      1|
-| JUNTOS POR EL CAMBIO                           | BUENOS AIRES        | NECOCHEA            | CIRCUITO 687                       | ESCUELA EP N°5                         | 0208200231X  |      1|
-| JUNTOS POR EL CAMBIO                           | BUENOS AIRES        | TRES ARROYOS        | CIRCUITO 969                       | ESCUELA EP N°6                         | 0211700155X  |      1|
-| JUNTOS POR EL CAMBIO                           | CHACO               | LIBERTAD            | CIRCUITO 36                        | E.G.B. 113                             | 0600301083X  |      1|
-| JUNTOS POR EL CAMBIO                           | CHACO               | GENERAL BELGRANO    | CIRCUITO 116                       | E.G.B. 515 I I DE BARRERA              | 0601802235X  |      1|
-| FRENTE DE TODOS                                | FORMOSA             | PATIÑO              | CIRCUITO 47                        | EPEP N° 100                            | 0900601077X  |      1|
-| FRENTE DE TODOS                                | SAN LUIS            | SAN MARTÍN          | CIRCUITO CRUZ DE CAÑA              | ESC.NØ285 GDRO.D.ORTIZ                 | 1900500991X  |      1|
-| FRENTE DE TODOS                                | SAN LUIS            | AYACUCHO            | CIRCUITO EL RINCON                 | ESC.NØ298 MTRO.E.DARACT                | 1900701112X  |      1|
-| FRENTE NOS                                     | SAN LUIS            | BELGRANO            | CIRCUITO LOMAS BLANCAS             | EX ESC.NØ336 MTRO.DIOG.TABOADA         | 1900801171X  |      1|
-| JUNTOS POR EL CAMBIO                           | SANTA FE            | GENERAL OBLIGADO    | CIRCUITO EL RICARDITO              | C.E.R.N°322 MARTIN M.DE GUEMES         | 2100701577X  |      1|
-| VOTOS en BLANCO                                | CATAMARCA           | CAPAYÁN             | CIRCUITO 13                        | ESC. PROV. NRO. 266                    | 0300200407X  |      1|
-| VOTOS en BLANCO                                | CÓRDOBA             | SANTA MARÍA         | CIRCUITO 320                       | OLEGARIO V ANDRADE (CIRC 322)          | 0402107952X  |      1|
-| VOTOS en BLANCO                                | SANTA FE            | SAN JERÓNIMO        | CIRCUITO GALVEZ                    | ESC.NAC.SUP.DE COMERCIO N°44           | 2101807172X  |      1|
-| VOTOS en BLANCO                                | TUCUMÁN             | CAPITAL             | CIRCUITO 16                        | COLEGIO NTRA SRA DE MONSERRAT          | 2300100771X  |      1|
-| VOTOS en BLANCO                                | TUCUMÁN             | CRUZ ALTA           | CIRCUITO 167                       | ESCUELA JOSE COLOMBRES                 | 2301202913X  |      1|
+| nombre\_meta\_agrupacion | nombre\_distrito    | nombre\_seccion | nombre\_circuito        | nombre\_establecimiento          | codigo\_mesa |  votos|
+|:-------------------------|:--------------------|:----------------|:------------------------|:---------------------------------|:-------------|------:|
+| FRENTE DE TODOS          | SANTIAGO DEL ESTERO | RÍO HONDO       | CIRCUITO POZUELOS       | ESCUELA N° 829                   | 2202202012X  |    279|
+| VOTOS en BLANCO          | BUENOS AIRES        | BAHÍA BLANCA    | CIRCUITO 74             | ESCUELA EP N°70/ES N°25          | 0200700142X  |    272|
+| FRENTE DE TODOS          | SANTIAGO DEL ESTERO | SAN MARTÍN      | CIRCUITO ATOJ POZO      | ESCUELA N° 747                   | 2202402154X  |    260|
+| FRENTE DE TODOS          | SANTIAGO DEL ESTERO | ATAMISQUI       | CIRCUITO MEDELLIN       | ESCUELA N° 507                   | 2200500851X  |    246|
+| FRENTE DE TODOS          | SANTIAGO DEL ESTERO | BANDA           | CIRCUITO CHAUPI POZO    | ESCUELA N° 66 MAURO CARRANZA     | 2200601184X  |    244|
+| FRENTE DE TODOS          | SANTIAGO DEL ESTERO | CHOYA           | CIRCUITO VILLA LA PUNTA | COLEGIO SECUNDARIO JUAN N. BURES | 2200901327X  |    243|
+| FRENTE DE TODOS          | SANTIAGO DEL ESTERO | RÍO HONDO       | CIRCUITO VINARA         | ESCUELA N° 867                   | 2202202007X  |    239|
+| FRENTE DE TODOS          | FORMOSA             | MATACOS         | CIRCUITO 82             | EPEP N° 438                      | 0900801352X  |    213|
+| FRENTE DE TODOS          | SANTIAGO DEL ESTERO | PELLEGRINI      | CIRCUITO AHI VEREMOS    | ESCUELA N° 1006                  | 2201801812X  |    171|
+| JUNTOS POR EL CAMBIO     | SANTIAGO DEL ESTERO | CAPITAL         | CIRCUITO ESTE           | COLEGIO SAN FRANCISCO            | 2200100229X  |    111|
 
 ¿Que observamos? muchas mesas con pocos votos, por lo que es mucho más probable que vayan todos a una única agrupación, ni hablar de las mesas que tienen 1 solo voto (eso será motivo para otro análisis). Sin embargo también hay varias mesas con una cantidad importante de votos, por ejemplo, con más de 100 votos hay 10 mesas, la mayoría de los votos se los lleva el **FRENTE de TODOS**, una de **VOTO en BLANCO** y otra para **JUNTOS por el CAMBIO**. Si queremos estudiar estos casos y verificar si existió algún error de carga, podríamos obtener las `urls` de las imagenes de los telegramas:
 
