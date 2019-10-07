@@ -1,5 +1,5 @@
 ---
-title: "Algunos datos de las paso 2019"
+title: "Algunos datos (tal vez interesantes) de las paso 2019"
 author: "Patricio Moracho"
 date: "19 de agosto de 2019"
 post_date: 2019-08-20
@@ -15,7 +15,7 @@ noindex: false
 hide_printmsg: false
 sitemap: true
 summaryfeed: false
-description: Algunos datos (tal vez) interesantes de las Paso 2019
+description: Algunos datos (tal vez interesantes) de las Paso 2019
 tags:
   - desarrollo
   - R
@@ -126,6 +126,8 @@ En este análisis hemos considerado las mesas no escrutadas, aquellas dónde la 
 
 ### ¿Quién ganó en la categoría de Presidente y Vice?
 
+Acá es dónde tenemos que plantear todas las relaciones para llegar a la información que necesitamos, alquien que venga del mundo de las bases de datos se sentirá cómodo, los que vienen de la estadística, lo verán demasiado complejo tal vez.
+
 ``` r
 votos %>% 
   left_join(listas, by = "id_lista") %>% 
@@ -157,7 +159,7 @@ votos %>%
 | MOVIMIENTO DE ACCION VECINAL                   |     36324|   0.0014894|  0.9986648|
 | PARTIDO AUTONOMISTA                            |     32562|   0.0013352|  1.0000000|
 
-Acá es dónde tenemos que plantear todas las relaciones para llegar a la información que necesitamos, alquien que venga del mundo de las bases de datos se sentirá cómodo, los que vienen de la estadística, lo verán demasiado complejo tal vez. De cualquier manera, con las tablas originales podemos hacer algo similar:
+De cualquier manera, con las tablas originales podemos hacer algo parecido:
 
 ``` r
 mesas_totales_lista %>% 
@@ -192,12 +194,10 @@ mesas_totales_lista %>%
 
 En los datos originales, los **VOTOS en BLANCO** no se consideran al nivel de una agrupación, por lo que no se ven en el agrupado por estas, hay que ir a buscarlos a `mesas_totales`, en el modelo nuevo estos se consideran como si fueran una agrupación más, lo que es más consistente con ley que regula las Paso.
 
-¿Cómo fue la distribución de votos?
------------------------------------
+¿Cómo fue la distribución de votos de las agrupaciones más importantes?
+-----------------------------------------------------------------------
 
-Miremos la categoría de Predidente y Vice:
-
-primero los datos:
+Miremos la categoría de Predidente y Vice, primero armamos los datos:
 
 ``` r
 votos %>% 
@@ -244,7 +244,7 @@ votos_porcentaje %>%
 
 <img src="/images/2019/2019-08-20-paso-2019-algunos-datos_files/figure-markdown_github/boxplot-1.png" style="display: block; margin: auto;" />
 
-Es interesante ver el **boxplot** y ver los "outliers" en particular los que caen el limite máximo, son las mesas dónde solo hay votos para una determinada agrupación. Interesante que al revisar estos casos vulneramos fácilmente el secreto del voto.
+Es interesante ver el **boxplot** y prestar atención a los "outliers", en particular los que caen el limite máximo, son las mesas dónde solo hay votos para una determinada agrupación. Interesante que al revisar estos casos vulneramos fácilmente el secreto del voto.
 
 ``` r
 # Mesas con el 100% de votos a una agrupación
@@ -315,7 +315,7 @@ mesas_100 %>%
 | FRENTE DE TODOS          | SANTIAGO DEL ESTERO | PELLEGRINI      | CIRCUITO AHI VEREMOS    | ESCUELA N° 1006                  | 2201801812X  |    171|
 | JUNTOS POR EL CAMBIO     | SANTIAGO DEL ESTERO | CAPITAL         | CIRCUITO ESTE           | COLEGIO SAN FRANCISCO            | 2200100229X  |    111|
 
-¿Que observamos? muchas mesas con pocos votos, por lo que es mucho más probable que vayan todos a una única agrupación, ni hablar de las mesas que tienen 1 solo voto (eso será motivo para otro análisis). Sin embargo también hay varias mesas con una cantidad importante de votos, por ejemplo, con más de 100 votos hay 10 mesas, la mayoría de los votos se los lleva el **FRENTE de TODOS**, una de **VOTO en BLANCO** y otra para **JUNTOS por el CAMBIO**. Si queremos estudiar estos casos y verificar si existió algún error de carga, podríamos obtener las `urls` de las imagenes de los telegramas:
+¿Que observamos? muchas mesas con pocos votos, por lo que es mucho más probable que vayan todos a una única agrupación, ni hablar de las mesas que tienen 1 solo voto (eso podría ser motivo para otro análisis). Sin embargo también hay varias mesas con una cantidad importante de votos, por ejemplo, con más de 100 votos hay 10 mesas, la mayoría de los votos se los lleva el **FRENTE de TODOS**, una de **VOTO en BLANCO** y otra para **JUNTOS por el CAMBIO**. Si queremos estudiar estos casos y verificar si existió algún error de carga, podríamos obtener las `urls` de las imagenes de los telegramas:
 
 ``` r
 mesas_100 %>% 
@@ -358,14 +358,26 @@ La otra curiosidad que me surgió es:
 
 ### ¿Cual es la distribución de votos por mesa?
 
-Siempre dentro de la categoría Presidente y Vice, la media es de 253 votos por mesa, con una curva centrada alrededor de los 300 votos por mesas y con cierto sesgo hacía la derecha.
-
 ``` r
 # Calculamos los votos totales por mesa
 votos_porcentaje %>%
   group_by(id_mesa) %>% 
   summarize(total_votos = sum(votos)) -> mesas_votos
+```
 
+    ## Warning: The `printer` argument is deprecated as of rlang 0.3.0.
+    ## This warning is displayed once per session.
+
+``` r
+summary(mesas_votos$total_votos)
+```
+
+    ##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+    ##     1.0   244.0   261.0   252.9   274.0   351.0
+
+Siempre dentro de la categoría Presidente y Vice, la media de votos por mesa es de 253, con una curva centrada alrededor de los 300 votos por mesas y con un claro sesgo hacía la derecha. La mesa con mayor cantidad de votos tuvo 351.
+
+``` r
 # Calculamos la media de votos por mesa
 media_total_votos <- round(mean(mesas_votos$total_votos),0)
 
@@ -399,7 +411,7 @@ ggplot(dat, aes(xmin=xmin, xmax=xmax, ymin=ymin, ymax=ymax)) +
 
 ### ¿Y.. cuales fueron los distritos que más votos aportaron a las principales agrupaciones?
 
-En esta elección hubo dos grandes fuerzas, el **FRENTE de TODOS** y **JUNTOS por el CAMBIO**, veamos dónde unos sacaron mayor diferencia sobre los otros. Primero preparamos los datos de los 10 distritos más importantes para cada agrupación:
+En esta elección hubo dos grandes fuerzas, el **FRENTE de TODOS** y **JUNTOS por el CAMBIO**, veamos dónde unos sacaron mayor diferencia sobre los otros. Primero preparamos los datos de los 10 distritos más importantes para cada una de estas agrupaciones:
 
 ``` r
 votos_porcentaje %>% 
@@ -451,8 +463,8 @@ top_10_distritos %>%
 
 <img src="/images/2019/2019-08-20-paso-2019-algunos-datos_files/figure-markdown_github/distritos_plot-1.png" style="display: block; margin: auto;" />
 
-¿En cuantas mesas ganó cada agrupación?
----------------------------------------
+¿Y en cuantas mesas ganó cada agrupación?
+-----------------------------------------
 
 ``` r
 votos_porcentaje %>% 
