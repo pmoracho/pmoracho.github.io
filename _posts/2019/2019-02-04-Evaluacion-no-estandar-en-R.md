@@ -514,4 +514,3 @@ de la evaluación NO estándar.
 + [Non estándar evaluation](http://adv-r.had.co.nz/Computing-on-the-language.html)
 + [Non-standard evaluation, how tidy eval builds on base R](https://edwinth.github.io/blog/nse/)
 
-[Arlt]:https://es.wikipedia.org/wiki/Roberto_Arlt
