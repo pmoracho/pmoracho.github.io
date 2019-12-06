@@ -1,7 +1,7 @@
 ---
 title: "Configurando un Linux Mint en una Ideapad 540"
 author: "Patricio Moracho"
-date: "5 de diciembre de 2019"
+date: 2019-12-05
 post_date: 2019-12-05
 layout: post
 categories: cat
