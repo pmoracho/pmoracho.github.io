@@ -34,7 +34,7 @@ encuentren en la BIOS del equipo por lo que no hay que ni escribirlos ni
 memorizarlos. 
 
 De cualquier forma, hoy es posible descargar una ISO válida, directamente desde
-[Microsot][Microsot], el booteable, con [unetbootin][unetbootin], bajo linux,
+[ms][Microsot], el booteable, con [unetbootin][unetbootin], bajo linux,
 en el sistema de Microsoft no tuve buenas experiencias, en este sentido.
 
 Elegimos como SO, **[Linux Mint 19 "Tara" mate version][mint]**, hace años que uso este sabor,
@@ -42,6 +42,6 @@ variante **xfce**, así que ya estoy bastante acostumbrado y francamente ya
 perdí el interés en estar probando sistemas e interfaces nuevas todo el tiempo.
 
 
-[Microsoft]: https://www.microsoft.com/es-es/software-download/windows10ISO
+[ms]: https://www.microsoft.com/es-es/software-download/windows10ISO
 [unetbootin]: https://unetbootin.github.io/linux_download.html
 [mint]: https://linuxmint.com/edition.php?id=256
