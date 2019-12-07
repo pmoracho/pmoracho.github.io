@@ -92,6 +92,14 @@ El id del hardware es `27c6:55b4`, todavía no esta en la lista del hardware
 soportado, no hay otra cosa que esperar, una lástima, por que lo he llegado a
 probar en Windows y es sumamente práctico.
 
+## Postinstalación
+
+A continuación la lista de cosas que hacemos luego de instalar el equipo.
+
+1. Actualizar el sistema
+
+        sudo apt update && sudo apt upgrade -y
+
 [ms]: https://www.microsoft.com/es-es/software-download/windows10ISO
 [unetbootin]: https://unetbootin.github.io/linux_download.html
 [mint]: https://linuxmint.com/edition.php?id=256
