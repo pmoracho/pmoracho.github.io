@@ -89,7 +89,8 @@ completa [aquí][listdev], para saber que dispositivo tenemos:
     Bus 001 Device 004: ID 0bda:c024 Realtek Semiconductor Corp. 
 
 El id del hardware es `27c6:55b4`, todavía no esta en la lista del hardware
-soportado.
+soportado, no hay otra cosa que esperar, una lástima, por que lo he llegado a
+probar en Windows y es sumamente práctico.
 
 [ms]: https://www.microsoft.com/es-es/software-download/windows10ISO
 [unetbootin]: https://unetbootin.github.io/linux_download.html
