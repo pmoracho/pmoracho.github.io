@@ -34,7 +34,7 @@ encuentren en la BIOS del equipo por lo que no hay que ni escribirlos ni
 memorizarlos. 
 
 De cualquier forma, hoy es posible descargar una ISO válida, directamente desde
-[ms][Microsot], el booteable, con [unetbootin][unetbootin], bajo linux,
+[Microsoft][ms], el booteable, con [unetbootin][unetbootin], bajo linux,
 en el sistema de Microsoft no tuve buenas experiencias, en este sentido.
 
 Elegimos como SO, **[Linux Mint 19 "Tara" mate version][mint]**, hace años que
@@ -60,19 +60,41 @@ el driver de la placa, al menos en el caso de esta placa:
     > inxi -F|grep RTL8821CE
     Network:   Device-1: Realtek RTL8821CE 802.11ac PCIe Wireless Network Adapter driver: rtl8821ce
 
-Claro que al no tener red, habrá que clonar el respoitorio en un medio
-extarible ("pendrive"):
+Podemos usar el repositorio de los driver de Realtek RTL8821CE Driver para
+ArchLinux.  Claro que al no tener red, habrá que clonar el respoitorio en un
+medio extraible ("pendrive"):
 
     git clone https://github.com/tomaspinho/rtl8821ce.git
+
+En el caso de Mint, ya tenemos todas las herramientas de compilación
+instaladas, lo cual es postivo, por que no tenemos red.
+
     cd rtl8821ce
     sudo ./dkms-install.sh
 
 Y listo..
 
+### Escanner de huella
+
+Esto lamentablemente, al menos a la fecha, no tiene solución. Si bien ya existe
+el soporte de este tipo de dispositivos, básicamente el [proyecto][fprint]. El
+problema es que particularmente el hardware todavía no está soportado, la lista
+completa [aquí][listdev], para saber que dispositivo tenemos:
+
+    |---> # lsusb
+    Bus 002 Device 001: ID 1d6b:0003 Linux Foundation 3.0 root hub
+    Bus 001 Device 005: ID 0458:6001 KYE Systems Corp. (Mouse Systems) GF3000F Ethernet Adapter
+    Bus 001 Device 003: ID 13d3:56b2 IMC Networks 
+    Bus 001 Device 002: ID 27c6:55b4  
+    Bus 001 Device 004: ID 0bda:c024 Realtek Semiconductor Corp. 
+
+El id del hardware es `27c6:55b4`, todavía no esta en la lista del hardware
+soportado.
 
 [ms]: https://www.microsoft.com/es-es/software-download/windows10ISO
 [unetbootin]: https://unetbootin.github.io/linux_download.html
 [mint]: https://linuxmint.com/edition.php?id=256
 [mintiso]: https://torrents.linuxmint.com/torrents/linuxmint-19.2-mate-64bit.iso.torrent
 [wifi]: https://github.com/tomaspinho/rtl8821ce
-
+[fprint]: https://launchpad.net/~fingerprint/+archive/ubuntu/fingerprint-gui
+[listdev]: https://fprint.freedesktop.org/supported-devices.html
