@@ -60,11 +60,19 @@ el driver de la placa, al menos en el caso de esta placa:
     > inxi -F|grep RTL8821CE
     Network:   Device-1: Realtek RTL8821CE 802.11ac PCIe Wireless Network Adapter driver: rtl8821ce
 
+Claro que al no tener red, habrá que clonar el respoitorio en un medio
+extarible ("pendrive"):
 
+    git clone https://github.com/tomaspinho/rtl8821ce.git
+    cd rtl8821ce
+    sudo ./dkms-install.sh
 
+Y listo..
 
 
 [ms]: https://www.microsoft.com/es-es/software-download/windows10ISO
 [unetbootin]: https://unetbootin.github.io/linux_download.html
 [mint]: https://linuxmint.com/edition.php?id=256
 [mintiso]: https://torrents.linuxmint.com/torrents/linuxmint-19.2-mate-64bit.iso.torrent
+[wifi]: https://github.com/tomaspinho/rtl8821ce
+
