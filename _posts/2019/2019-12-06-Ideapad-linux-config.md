@@ -1,7 +1,7 @@
 ---
 title: "Configurando un Linux Mint en una Ideapad 540"
 author: "Patricio Moracho"
-date: "5 de diciembre de 2019"
+date: 2019-12-05
 post_date: 2019-12-05
 layout: post
 categories: cat
@@ -34,7 +34,7 @@ encuentren en la BIOS del equipo por lo que no hay que ni escribirlos ni
 memorizarlos. 
 
 De cualquier forma, hoy es posible descargar una ISO válida, directamente desde
-[Microsot][Microsot], el booteable, con [unetbootin][unetbootin], bajo linux,
+[ms][Microsot], el booteable, con [unetbootin][unetbootin], bajo linux,
 en el sistema de Microsoft no tuve buenas experiencias, en este sentido.
 
 Elegimos como SO, **[Linux Mint 19 "Tara" mate version][mint]**, hace años que
@@ -64,7 +64,7 @@ el driver de la placa, al menos en el caso de esta placa:
 
 
 
-[Microsoft]: https://www.microsoft.com/es-es/software-download/windows10ISO
+[ms]: https://www.microsoft.com/es-es/software-download/windows10ISO
 [unetbootin]: https://unetbootin.github.io/linux_download.html
 [mint]: https://linuxmint.com/edition.php?id=256
 [mintiso]: https://torrents.linuxmint.com/torrents/linuxmint-19.2-mate-64bit.iso.torrent
