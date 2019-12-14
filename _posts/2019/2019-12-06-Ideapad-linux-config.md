@@ -19,7 +19,7 @@ description: Configurando un Linux Mint en una Ideapad 540
 tags:
   - linux
 output:
-  github_page:    
+  github_page:
     jekyllthat::jekylldown
   pdf_document: default
   html_document:
@@ -96,9 +96,49 @@ probar en Windows y es sumamente práctico.
 
 A continuación la lista de cosas que hacemos luego de instalar el equipo.
 
-1. Actualizar el sistema
+1. Habilitar el modo Legacy para las teclas de función.
+
+El comportamiento por defecto de las teclas F1..F12 unicamente se activa si
+combinamos con la tecla Fn. Esto es posible modificarlo desde la BIOS, que de
+paso, se entra presionando F2, luego simplemente buscar el ítem "Hot Key"
+
+2. Actualizar el sistema
 
         sudo apt update && sudo apt upgrade -y
+
+3. Instalar codecs multimedia
+
+        sudo apt-get install mint-meta-codecs
+
+4. Crear un snapshot del sistema con `timeshift`
+5. Deshabilitar aplicaciones que se crgan al inicio del sistema
+6. Habilitar y configurara el firewall
+7. Limpiar el sistema
+
+        sudo apt-get autoclean
+        sudo apt-get clean
+        sudo apt-get autoremove
+
+## Algunas soluciones a problemas varios
+
+1. `Guake` se "cuelga" al salir.
+
+        sudo apt install --reinstall libutempter0
+
+2. Error: `lightdm: PAM adding faulty module: pam_kwallet5.so`, según consta en
+   `journalctl --no-pager -b -p3`. [Este post][pam] explica bastante bien el
+   problema y la solución. Simplemente editar estos archivos
+
+        sudo xed /etc/pam.d/lightdm 
+        sudo xed /etc/pam.d/lightdm-greeter
+        
+   y hay que editar, y comentar estas líneas
+
+        #auth optional pam_kwallet.so
+        #auth optional pam_kwallet5.so
+
+        #session optional pam_kwallet.so auto_start
+        #session optional pam_kwallet5.so auto_start 
 
 [ms]: https://www.microsoft.com/es-es/software-download/windows10ISO
 [unetbootin]: https://unetbootin.github.io/linux_download.html
@@ -107,3 +147,4 @@ A continuación la lista de cosas que hacemos luego de instalar el equipo.
 [wifi]: https://github.com/tomaspinho/rtl8821ce
 [fprint]: https://launchpad.net/~fingerprint/+archive/ubuntu/fingerprint-gui
 [listdev]: https://fprint.freedesktop.org/supported-devices.html
+[pam]: https://forums.linuxmint.com/viewtopic.php?t=286950
