@@ -74,23 +74,6 @@ instaladas, lo cual es postivo, por que no tenemos red.
 
 Y listo..
 
-### Escanner de huella
-
-Esto lamentablemente, al menos a la fecha, no tiene solución. Si bien ya existe
-el soporte de este tipo de dispositivos, básicamente el [proyecto][fprint]. El
-problema es que particularmente el hardware todavía no está soportado, la lista
-completa [aquí][listdev], para saber que dispositivo tenemos:
-
-    |---> # lsusb
-    Bus 002 Device 001: ID 1d6b:0003 Linux Foundation 3.0 root hub
-    Bus 001 Device 005: ID 0458:6001 KYE Systems Corp. (Mouse Systems) GF3000F Ethernet Adapter
-    Bus 001 Device 003: ID 13d3:56b2 IMC Networks 
-    Bus 001 Device 002: ID 27c6:55b4  
-    Bus 001 Device 004: ID 0bda:c024 Realtek Semiconductor Corp. 
-
-El id del hardware es `27c6:55b4`, todavía no esta en la lista del hardware
-soportado, no hay otra cosa que esperar, una lástima, por que lo he llegado a
-probar en Windows y es sumamente práctico.
 
 ## Postinstalación
 
@@ -139,6 +122,48 @@ paso, se entra presionando F2, luego simplemente buscar el ítem "Hot Key"
 
         #session optional pam_kwallet.so auto_start
         #session optional pam_kwallet5.so auto_start 
+
+   Este sencillo cambio, tiene un impacto muy visible en el proceso de login
+   gráfico. Al menos 2 segundos de ahorro en tiempo entre que se ingresa el
+   usuario y finalmente se pide la contraseña.
+
+## Problemas aún sin solución
+
+### Escanner de huella
+
+Esto lamentablemente, al menos a la fecha, no tiene solución. Si bien ya existe
+el soporte de este tipo de dispositivos, básicamente el [proyecto][fprint]. El
+problema es que particularmente el hardware todavía no está soportado, la lista
+completa [aquí][listdev], para saber que dispositivo tenemos:
+
+    |---> # lsusb
+    Bus 002 Device 001: ID 1d6b:0003 Linux Foundation 3.0 root hub
+    Bus 001 Device 005: ID 0458:6001 KYE Systems Corp. (Mouse Systems) GF3000F Ethernet Adapter
+    Bus 001 Device 003: ID 13d3:56b2 IMC Networks 
+    Bus 001 Device 002: ID 27c6:55b4  
+    Bus 001 Device 004: ID 0bda:c024 Realtek Semiconductor Corp. 
+
+El id del hardware es `27c6:55b4`, todavía no esta en la lista del hardware
+soportado, no hay otra cosa que esperar, una lástima, por que lo he llegado a
+probar en Windows y es sumamente práctico.
+
+### Google Chrome y Compiz
+
+Hay un comportamiento muy raro y muy molesto de **chrome**, entiendo que con
+**compiz** ya que no lo he reproducido en un esritorio sin este. Para
+verificarlo:
+
+1. Abirmos **chrome**
+
+2. Minimizamos el navegador
+
+3. El rectángulo donde hace segundos estuvo abierto el navegador, queda
+   totalmente deshabilitada, es decir, no podemos hacer ningún click funcional
+   en este. Puede que esta zona sea el escritorio y entonces perdemos la
+   capacidad de hacer click sobre lo eventuales íconos, o bien otra aplicación,
+   dónde cualquier control de la "ex" zona  **chrome** queda deshabilitado,
+   hasta que la app dispare un evento de "refresh". 
+
 
 [ms]: https://www.microsoft.com/es-es/software-download/windows10ISO
 [unetbootin]: https://unetbootin.github.io/linux_download.html
