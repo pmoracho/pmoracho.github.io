@@ -428,8 +428,9 @@ Siempre dentro de la categoría Presidente y Vice, la media de votos por mesa es
 de 253, con una curva centrada alrededor de los 300 votos por mesas y con un
 claro sesgo hacía la derecha. La mesa con mayor cantidad de votos tuvo 351.
 
-``` r # Calculamos la media de votos por mesa media_total_votos <-
-round(mean(mesas_votos$total_votos),0)
+``` r
+# Calculamos la media de votos por mesa
+media_total_votos <- round(mean(mesas_votos$total_votos),0)
 
 # Para evitar un geom_histogram que es muy lento es que
 # generamos esta función que hace lo mismo dibujando las
