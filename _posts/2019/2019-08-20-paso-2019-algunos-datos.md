@@ -282,13 +282,22 @@ particular los que caen el limite máximo, son las mesas dónde solo hay votos
 para una determinada agrupación. Interesante que al revisar estos casos
 vulneramos fácilmente el secreto del voto.
 
-``` r # Mesas con el 100% de votos a una agrupación votos_porcentaje %>%
-filter(porcentaje == 1) %>% left_join(mesas, by = "id_mesa") %>%
-left_join(circuitos, by = "id_circuito") %>% left_join(secciones, by =
-"id_seccion") %>% left_join(distritos, by = "id_distrito") %>%
-left_join(establecimientos, by = "id_establecimiento") %>%
-select(nombre_meta_agrupacion, nombre_distrito, nombre_seccion,
-nombre_circuito, nombre_establecimiento, codigo_mesa, votos) -> mesas_100
+``` r
+# Mesas con el 100% de votos a una agrupación
+votos_porcentaje %>% 
+  filter(porcentaje == 1) %>% 
+  left_join(mesas, by = "id_mesa") %>%
+  left_join(circuitos, by = "id_circuito") %>%
+  left_join(secciones, by = "id_seccion") %>%
+  left_join(distritos, by = "id_distrito") %>%
+  left_join(establecimientos, by = "id_establecimiento") %>% 
+  select(nombre_meta_agrupacion,
+         nombre_distrito,
+         nombre_seccion,
+         nombre_circuito,
+         nombre_establecimiento,
+         codigo_mesa,
+         votos) -> mesas_100
 
 mesas_100 %>% 
   group_by(nombre_meta_agrupacion) %>% 
@@ -419,9 +428,8 @@ Siempre dentro de la categoría Presidente y Vice, la media de votos por mesa es
 de 253, con una curva centrada alrededor de los 300 votos por mesas y con un
 claro sesgo hacía la derecha. La mesa con mayor cantidad de votos tuvo 351.
 
-``` r
-# Calculamos la media de votos por mesa
-media_total_votos <- round(mean(mesas_votos$total_votos),0)
+``` r # Calculamos la media de votos por mesa media_total_votos <-
+round(mean(mesas_votos$total_votos),0)
 
 # Para evitar un geom_histogram que es muy lento es que
 # generamos esta función que hace lo mismo dibujando las
