@@ -1,7 +1,7 @@
 ---
 title: "Algunos datos (tal vez interesantes) de las paso 2019"
 author: "Patricio Moracho"
-date: "19 de agosto de 2019"
+date: 2019-08-20
 post_date: 2019-08-20
 layout: post
 categories: cat
@@ -27,24 +27,39 @@ output:
     df_print: paged
 ---
 
-La justicia electoral publicó una serie de tablas que representa los datos de los telegramas con el escrutinio de cada mesa. Una buena oportunidad para practicar un poco con **`R`** y de paso intentar responder algunas preguntas.
+La justicia electoral publicó una serie de tablas que representa los datos de
+los telegramas con el escrutinio de cada mesa. Una buena oportunidad para
+practicar un poco con **`R`** y de paso intentar responder algunas preguntas.
 
 Antes de empezar
 ----------------
 
-La fuente oficial dónde descargar los datos es esta: <http://descargaresultados.s3-sa-east-1.amazonaws.com/resultados.zip>, son varios archivos delimitados por el pipe (`|`), sin embargo, elaboré un paquete que ya trae precargados estos datos y además incorpora una reformulación de los mismos bajo un modelo relacional clásico, que para el que este acostunbrado a trabajar con bases de datos, como yo, seguramente es una foma más cómoda. El paquete se llama [paso2019](https://github.com/pmoracho/paso2019), se puede descar e instalar en **`R`** o bien, si ya disponemos de `devtools`, simplemente podremos hacer:
+La fuente oficial dónde descargar los datos es esta:
+<http://descargaresultados.s3-sa-east-1.amazonaws.com/resultados.zip>, son
+varios archivos delimitados por el pipe (`|`), sin embargo, elaboré un paquete
+que ya trae precargados estos datos y además incorpora una reformulación de los
+mismos bajo un modelo relacional clásico, que para el que este acostunbrado a
+trabajar con bases de datos, como yo, seguramente es una foma más cómoda. El
+paquete se llama [paso2019](https://github.com/pmoracho/paso2019), se puede
+descar e instalar en **`R`** o bien, si ya disponemos de `devtools`,
+simplemente podremos hacer:
 
 ``` r
 devtools::install_gitgub("pmoracho/paso2019")
 ```
 
-Luego simplemente cargamos el paquete junto con los otros que vamos a necesitar. `ggelegant` es otro paquete que armé, que contiene un tema para **ggplot2** en el que estoy trabajando, igual que el anterior:
+Luego simplemente cargamos el paquete junto con los otros que vamos a
+necesitar. `ggelegant` es otro paquete que armé, que contiene un tema para
+**ggplot2** en el que estoy trabajando, igual que el anterior:
 
 ``` r
 devtools::install_gitgub("pmoracho/ggelegant")
 ```
 
-**Importante**: A la fecha, los datos, telegramas y la página, están "off-line" a la espera de la elección definitiva del 27 de octubre. Del paquete `paso2019` se podrán usar todos los datos, pero las rutinas que consultan y visualizan los telegramas, lamentablemente ya no funcionan.
+**Importante**: A la fecha, los datos, telegramas y la página, están "off-line"
+a la espera de la elección definitiva del 27 de octubre. Del paquete `paso2019`
+se podrán usar todos los datos, pero las rutinas que consultan y visualizan los
+telegramas, lamentablemente ya no funcionan.
 
 ``` r
 library("paso2019")
@@ -56,7 +71,9 @@ library("ggelegant")
 Aclaraciones iniciales
 ----------------------
 
-Hay algunas inconsistencias en los datos que en algún momento puede llamar la atención. Por empezar hay una inconsistencia entre las tres tablas de mesas, descargadas del sitio oficial de los resultados. Podemos verificarlo así:
+Hay algunas inconsistencias en los datos que en algún momento puede llamar la
+atención. Por empezar hay una inconsistencia entre las tres tablas de mesas,
+descargadas del sitio oficial de los resultados. Podemos verificarlo así:
 
 ``` r
 data.frame(tabla = c("mesas_totales", 
@@ -77,7 +94,8 @@ data.frame(tabla = c("mesas_totales",
 | mesas\_totales\_lista          |     100148|
 | mesas\_totales\_agrp\_politica |     100148|
 
-Podemos ver que `mesas_totales`tiene seis mesas menos que el resto de las tablas. Particularmente son las siguientes:
+Podemos ver que `mesas_totales`tiene seis mesas menos que el resto de las
+tablas. Particularmente son las siguientes:
 
 ``` r
 mesas_totales_lista %>% 
@@ -95,7 +113,10 @@ mesas_totales_lista %>%
 | 0207900649X  |
 | 0207900738X  |
 
-La otra inconsistencia notable, es entre esta información y la que se publica en la página web: <https://resultados.gob.ar>, la mesas escrutadas según esta página son 100,156 mesas, los datos descargados, indican en el mejor de los casos 100,148 mesas, es decir 8 mesas menos.
+La otra inconsistencia notable, es entre esta información y la que se publica
+en la página web: <https://resultados.gob.ar>, la mesas escrutadas según esta
+página son 100,156 mesas, los datos descargados, indican en el mejor de los
+casos 100,148 mesas, es decir 8 mesas menos.
 
 Preguntas
 ---------
@@ -124,11 +145,17 @@ mesas %>%
 | Si        |    100568|   97.511975|
 | No        |      2566|    2.488025|
 
-En este análisis hemos considerado las mesas no escrutadas, aquellas dónde la cantidad de votos de todas las listas asociadas es cero. Aquí también hay una discrepancia con la página, la cual informa un 98.6% de mesas escrutadas y en el caso de los datos publicados, el porcentaje es algo menor 97.54%.
+En este análisis hemos considerado las mesas no escrutadas, aquellas dónde la
+cantidad de votos de todas las listas asociadas es cero. Aquí también hay una
+discrepancia con la página, la cual informa un 98.6% de mesas escrutadas y en
+el caso de los datos publicados, el porcentaje es algo menor 97.54%.
 
 ### ¿Quién ganó en la categoría de Presidente y Vice?
 
-Acá es dónde tenemos que plantear todas las relaciones para llegar a la información que necesitamos, alquien que venga del mundo de las bases de datos se sentirá cómodo, los que vienen de la estadística, lo verán demasiado complejo tal vez.
+Acá es dónde tenemos que plantear todas las relaciones para llegar a la
+información que necesitamos, alquien que venga del mundo de las bases de datos
+se sentirá cómodo, los que vienen de la estadística, lo verán demasiado
+complejo tal vez.
 
 ``` r
 votos %>% 
@@ -194,7 +221,11 @@ mesas_totales_lista %>%
 | MOVIMIENTO DE ACCION VECINAL                   |     36324|   0.0015372|
 | PARTIDO AUTONOMISTA                            |     32562|   0.0013780|
 
-En los datos originales, los **VOTOS en BLANCO** no se consideran al nivel de una agrupación, por lo que no se ven en el agrupado por estas, hay que ir a buscarlos a `mesas_totales`, en el modelo nuevo estos se consideran como si fueran una agrupación más, lo que es más consistente con ley que regula las Paso.
+En los datos originales, los **VOTOS en BLANCO** no se consideran al nivel de
+una agrupación, por lo que no se ven en el agrupado por estas, hay que ir a
+buscarlos a `mesas_totales`, en el modelo nuevo estos se consideran como si
+fueran una agrupación más, lo que es más consistente con ley que regula las
+Paso.
 
 ¿Cómo fue la distribución de votos de las agrupaciones más importantes?
 -----------------------------------------------------------------------
@@ -246,24 +277,18 @@ votos_porcentaje %>%
 
 <img src="/images/2019/2019-08-20-paso-2019-algunos-datos_files/figure-markdown_github/boxplot-1.png" style="display: block; margin: auto;" />
 
-Es interesante ver el **boxplot** y prestar atención a los "outliers", en particular los que caen el limite máximo, son las mesas dónde solo hay votos para una determinada agrupación. Interesante que al revisar estos casos vulneramos fácilmente el secreto del voto.
+Es interesante ver el **boxplot** y prestar atención a los "outliers", en
+particular los que caen el limite máximo, son las mesas dónde solo hay votos
+para una determinada agrupación. Interesante que al revisar estos casos
+vulneramos fácilmente el secreto del voto.
 
-``` r
-# Mesas con el 100% de votos a una agrupación
-votos_porcentaje %>% 
-  filter(porcentaje == 1) %>% 
-  left_join(mesas, by = "id_mesa") %>%
-  left_join(circuitos, by = "id_circuito") %>%
-  left_join(secciones, by = "id_seccion") %>%
-  left_join(distritos, by = "id_distrito") %>%
-  left_join(establecimientos, by = "id_establecimiento") %>% 
-  select(nombre_meta_agrupacion,
-         nombre_distrito,
-         nombre_seccion,
-         nombre_circuito,
-         nombre_establecimiento,
-         codigo_mesa,
-         votos) -> mesas_100
+``` r # Mesas con el 100% de votos a una agrupación votos_porcentaje %>%
+filter(porcentaje == 1) %>% left_join(mesas, by = "id_mesa") %>%
+left_join(circuitos, by = "id_circuito") %>% left_join(secciones, by =
+"id_seccion") %>% left_join(distritos, by = "id_distrito") %>%
+left_join(establecimientos, by = "id_establecimiento") %>%
+select(nombre_meta_agrupacion, nombre_distrito, nombre_seccion,
+nombre_circuito, nombre_establecimiento, codigo_mesa, votos) -> mesas_100
 
 mesas_100 %>% 
   group_by(nombre_meta_agrupacion) %>% 
@@ -285,9 +310,15 @@ mesas_100 %>%
 | VOTOS en BLANCO                                |     19|    354|
 | FRENTE DE TODOS                                |     21|   2072|
 
-No lo voy a hacer, pero claramente es muy fácil llegar a estas mesas, para luego ir al padrón y relacionar votos con personas, claro aún faltaría saber exactamente quienes votaron y quienes no concurrieron, pero en estos casos es claro que es muy sencillo vulnerar el secreto del voto.
+No lo voy a hacer, pero claramente es muy fácil llegar a estas mesas, para
+luego ir al padrón y relacionar votos con personas, claro aún faltaría saber
+exactamente quienes votaron y quienes no concurrieron, pero en estos casos es
+claro que es muy sencillo vulnerar el secreto del voto.
 
-Es raro no, que todos los votos vayan a una única agrupación ¿no? sin embargo, estamos hablando de 63 mesas sobre 100,148, y no llegan a ser más de 2600 votos, por lo que no seamos suspicaces en esto. Podemos claro estudiar más en detalle el tema:
+Es raro no, que todos los votos vayan a una única agrupación ¿no? sin embargo,
+estamos hablando de 63 mesas sobre 100,148, y no llegan a ser más de 2600
+votos, por lo que no seamos suspicaces en esto. Podemos claro estudiar más en
+detalle el tema:
 
 ``` r
 # Revisemos 10 casos
@@ -317,7 +348,14 @@ mesas_100 %>%
 | FRENTE DE TODOS          | SANTIAGO DEL ESTERO | PELLEGRINI      | CIRCUITO AHI VEREMOS    | ESCUELA N° 1006                  | 2201801812X  |    171|
 | JUNTOS POR EL CAMBIO     | SANTIAGO DEL ESTERO | CAPITAL         | CIRCUITO ESTE           | COLEGIO SAN FRANCISCO            | 2200100229X  |    111|
 
-¿Que observamos? muchas mesas con pocos votos, por lo que es mucho más probable que vayan todos a una única agrupación, ni hablar de las mesas que tienen 1 solo voto (eso podría ser motivo para otro análisis). Sin embargo también hay varias mesas con una cantidad importante de votos, por ejemplo, con más de 100 votos hay 10 mesas, la mayoría de los votos se los lleva el **FRENTE de TODOS**, una de **VOTO en BLANCO** y otra para **JUNTOS por el CAMBIO**. Si queremos estudiar estos casos y verificar si existió algún error de carga, podríamos obtener las `urls` de las imagenes de los telegramas:
+¿Que observamos? muchas mesas con pocos votos, por lo que es mucho más probable
+que vayan todos a una única agrupación, ni hablar de las mesas que tienen 1
+solo voto (eso podría ser motivo para otro análisis). Sin embargo también hay
+varias mesas con una cantidad importante de votos, por ejemplo, con más de 100
+votos hay 10 mesas, la mayoría de los votos se los lleva el **FRENTE de
+TODOS**, una de **VOTO en BLANCO** y otra para **JUNTOS por el CAMBIO**. Si
+queremos estudiar estos casos y verificar si existió algún error de carga,
+podríamos obtener las `urls` de las imagenes de los telegramas:
 
 ``` r
 mesas_100 %>% 
@@ -377,7 +415,9 @@ summary(mesas_votos$total_votos)
     ##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
     ##     1.0   244.0   261.0   252.9   274.0   351.0
 
-Siempre dentro de la categoría Presidente y Vice, la media de votos por mesa es de 253, con una curva centrada alrededor de los 300 votos por mesas y con un claro sesgo hacía la derecha. La mesa con mayor cantidad de votos tuvo 351.
+Siempre dentro de la categoría Presidente y Vice, la media de votos por mesa es
+de 253, con una curva centrada alrededor de los 300 votos por mesas y con un
+claro sesgo hacía la derecha. La mesa con mayor cantidad de votos tuvo 351.
 
 ``` r
 # Calculamos la media de votos por mesa
@@ -413,7 +453,10 @@ ggplot(dat, aes(xmin=xmin, xmax=xmax, ymin=ymin, ymax=ymax)) +
 
 ### ¿Y.. cuales fueron los distritos que más votos aportaron a las principales agrupaciones?
 
-En esta elección hubo dos grandes fuerzas, el **FRENTE de TODOS** y **JUNTOS por el CAMBIO**, veamos dónde unos sacaron mayor diferencia sobre los otros. Primero preparamos los datos de los 10 distritos más importantes para cada una de estas agrupaciones:
+En esta elección hubo dos grandes fuerzas, el **FRENTE de TODOS** y **JUNTOS
+por el CAMBIO**, veamos dónde unos sacaron mayor diferencia sobre los otros.
+Primero preparamos los datos de los 10 distritos más importantes para cada una
+de estas agrupaciones:
 
 ``` r
 votos_porcentaje %>% 
