@@ -102,6 +102,10 @@ paso, se entra presionando F2, luego simplemente buscar el ítem "Hot Key"
         sudo apt clean
         sudo apt autoremove
 
+8. Muy recomendado en la red el uso de [`TLP`][tlp]:
+
+        sudo apt install tlp tlp-rdw 
+        
 ## Eliminando lo innecesario
 
 En lo personal nunca le encontré utilidad al servidor [`avahi-daemon`][avahi],
@@ -116,7 +120,7 @@ por que son dependencias del sistema
 
 Por otro lado también [`oFono Mobile telephony stack`][ofono] es un componenete al que
 por ahora no le he encontrado utilidad y es un demonio que queda funcionando,
-por lo que es candidato a ser removido  
+por lo que es candidato a ser removido:
 
 
     sudo apt remove ofono
@@ -195,3 +199,4 @@ verificarlo:
 [pam]: https://forums.linuxmint.com/viewtopic.php?t=286950
 [avahi]: https://linux.die.net/man/8/avahi-daemon
 [ofono]: https://01.org/ofono
+[tlp]: https://linrunner.de/en/tlp/docs/tlp-linux-advanced-power-management.html
