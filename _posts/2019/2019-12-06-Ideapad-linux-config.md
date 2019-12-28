@@ -91,16 +91,36 @@ paso, se entra presionando F2, luego simplemente buscar el ítem "Hot Key"
 
 3. Instalar codecs multimedia
 
-        sudo apt-get install mint-meta-codecs
+        sudo apt install mint-meta-codecs
 
 4. Crear un snapshot del sistema con `timeshift`
 5. Deshabilitar aplicaciones que se crgan al inicio del sistema
 6. Habilitar y configurara el firewall
 7. Limpiar el sistema
 
-        sudo apt-get autoclean
-        sudo apt-get clean
-        sudo apt-get autoremove
+        sudo apt autoclean
+        sudo apt clean
+        sudo apt autoremove
+
+## Eliminando lo innecesario
+
+En lo personal nunca le encontré utilidad al servidor [`avahi-daemon`][avahi],
+por lo que suelo eliminarlo de las instalaciones
+
+    sudo apt remove avahi-daemon
+    sudo apt remove avahi-utils
+    sudo apt remove libnss-mdns
+
+**Cuidado**: hay muchos otros paquetes `avahi*`, que no deben ser eliminados
+por que son dependencias del sistema
+
+Por otro lado también [`oFono Mobile telephony stack`][ofono] es un componenete al que
+por ahora no le he encontrado utilidad y es un demonio que queda funcionando,
+por lo que es candidato a ser removido  
+
+
+    sudo apt remove ofono
+
 
 ## Algunas soluciones a problemas varios
 
@@ -173,3 +193,5 @@ verificarlo:
 [fprint]: https://launchpad.net/~fingerprint/+archive/ubuntu/fingerprint-gui
 [listdev]: https://fprint.freedesktop.org/supported-devices.html
 [pam]: https://forums.linuxmint.com/viewtopic.php?t=286950
+[avahi]: https://linux.die.net/man/8/avahi-daemon
+[ofono]: https://01.org/ofono
