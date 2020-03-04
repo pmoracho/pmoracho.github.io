@@ -151,6 +151,31 @@ por lo que es candidato a ser removido:
    gráfico. Al menos 2 segundos de ahorro en tiempo entre que se ingresa el
    usuario y finalmente se pide la contraseña.
 
+3. Sobre abundancia de logs
+
+   Tengo, al menos, cada 5 segundos, un registro de log con este patrón:
+
+        [UFW BLOCK] IN=wlp2s0 OUT= MAC=**************************************** SRC=192.168.1.1 DST=224.0.0.1 LEN=28 TOS=0x00 PREC=0x00 TTL=1 ID=5350 PROTO=2 
+
+    Y eventualmente algo así:
+
+        [UFW BLOCK] IN=wlp2s0 OUT= MAC= SRC=192.168.1.5 DST=224.0.0.251 LEN=32 TOS=0x00 PREC=0xC0 TTL=1 ID=0 DF PROTO=2
+    
+    o incluso:
+
+        [UFW BLOCK] IN=wlp2s0 OUT= MAC=**************************************** SRC=192.168.1.4 DST=192.168.1.5 LEN=360 TOS=0x00 PREC=0x00 TTL=64 ID=37885 DF PROTO=UDP SPT=36633 DPT=45189 LEN=340 
+
+    Con algunas IPs de dispositivos de mi red local. Por lo que leí, es trafico
+    multicast, la solución, o mas bien el paliativo es permitir o denegar este
+    trafico desde el `ufw`:
+
+        sudo ufw allow in from 192.168.1.5 to 224.0.0.251
+        sudo ufw allow in from 192.168.1.1 to 224.0.0.1
+        sudo ufw allow in from 192.168.1.4 to 192.168.1.5      # Agrego las eventuales ip's locales
+        sudo service network-manager restart
+
+    
+    
 ## Problemas aún sin solución
 
 ### Escanner de huella
