@@ -1,4 +1,3 @@
-
 ---
 layout: post
 published: true
@@ -17,38 +16,39 @@ tags:
   - desarrollo
 ---
 
+
 ## Hubo un tiempo que fue hermoso
 
-Recuerdo mis primeros años en informática, debo admitirlo, fue en el siglo
-pasado. En esos tiempo los que escribíamos código distinguíamos entre los
-archivos binarios, cualquier cosa que habría que verla con un editor
-hexadecimal, y los archivos de texto, a los que les decíamos "son texto plano",
-era esos que abríamos con cualquier editor de texto. La vida era simple, el
-texto era simplemente una sucesión de caracteres de un solo byte, podíamos
-saber cuantos había, simplemente viendo el tamaño del archivo. Todo buen
-programador en ese entonces, tenía una hoja impresa al lado del monitor con un
-montón de letras y caracteres extraños y un número debajo de cada uno de ellos.
-La llamábamos la tabla **ASCII**. Para nosotros esa era la verdad absoluta, una
-de las tantas biblias que manejábamos, tal vez la mas importante de todas: cada
-caracter que se "tipeaba" tenía una correlación en esa tabla. Y escribíamos
-muchos, y a veces, encima, necesitábamos escribir unos caracteres nada
-habituales en los teclados de esos años, letras `ñ`, acentos de todo tipo, y era
-entonces dónde apelábamos a nuestra biblia de una página. De tanto hacerlo, ya
-habíamos aprendido los trucos, la tecla `alt` y `165` en el teclado numérico
-nos hacía aparecer por arte de magia esa `ñ` imposible de encontrar en el
-teclado, o el `alt` y `160` para hacer una simple `á`. También teníamos unos
-elegantes y algo esotéricos caracteres especiales para dibujar todo tipo de
-recuadros, que nos cansábamos de usar en las interfaces de texto de nuestros
-programas, junto con alguna rutina escrita en **assembler**, copiada seguramente de
-alguna revista, para escribir directamente en la memoria de vídeo y hacer
-que nuestras ventanitas de texto viajaran a la velocidad de la luz en nuestros
-monitores.
+Recuerdo mis primeros años en sistemas, debo admitirlo, fue en el siglo pasado.
+En esos tiempo los que escribíamos código, distinguíamos entre los _archivos
+binarios_, cualquier cosa que había que verla con un editor hexadecimal, y los
+_archivos de texto_, a los que les decíamos "son texto plano", que eran esos
+que abríamos con cualquier editor de texto, tipo el **edlin** o alguno más
+moderno. La vida era simple, el texto era  una sucesión de
+caracteres de un solo byte, podíamos saber cuantos había simplemente viendo el
+tamaño del archivo. Todo buen programador en ese entonces, tenía una hoja
+impresa al lado del monitor con un montón de letras y caracteres extraños y un
+número debajo de cada uno de ellos.  La llamábamos la tabla **ASCII**. Para
+nosotros esa era la verdad absoluta, una de las tantas biblias que manejábamos,
+tal vez la mas importante de todas: cada caracter que se "tipeaba" tenía una
+correlación en esa tabla. Y escribíamos muchos, y a veces, encima,
+necesitábamos escribir unos caracteres nada habituales en los teclados de esos
+años, letras `ñ`, acentos de todo tipo, y era entonces dónde apelábamos a
+nuestra biblia de una página. De tanto hacerlo, ya habíamos aprendido los
+trucos, la tecla `alt` y `165` en el teclado numérico nos hacía aparecer por
+arte de magia esa `ñ` imposible de encontrar en el teclado, o el `alt` y `160`
+para hacer una simple `á`. También teníamos unos elegantes y algo esotéricos
+caracteres especiales para dibujar todo tipo de recuadros, que nos cansábamos
+de usar en las interfaces de texto de nuestros programas, junto con alguna
+rutina escrita en **assembler**, copiada seguramente de alguna revista, para
+escribir directamente en la memoria de vídeo y hacer que nuestras ventanitas de
+texto viajaran a la velocidad de la luz en nuestros monitores.
 
 De vez en cuando nos enterábamos que existían equipos a los que les decían
 "Mainframes" y que, particularmente los de **IBM**, usaban una codificación
-distinta que se llamaba **EBCDIC**, pero iba pasar bastante tiempo hasta que nos
-cruzáramos con un archivo de esos, así que para nosotros, el texto seguía siendo
-simple y sobre todo "plano".
+distinta que se llamaba **EBCDIC**, pero iba pasar bastante tiempo hasta que
+nos cruzáramos con un archivo de esos, así que para nosotros, el texto seguía
+siendo simple y sobre todo "plano".
 
 ## Pero un día empezó la debacle
 
@@ -68,17 +68,11 @@ empezar a considerar el concepto de la codificación.
 
 Un concepto básico: las computadoras no entienden de caracteres ni palabras ni
 textos, son calculadoras avanzadas, solo manejan números. A la hora de definir
-un caracter cualquiera, se le asigna un número. El estándar **ASCII** es
-justamente una forma bastante extendida de definir que número representa cada
-letra. En los comienzos, parecía suficiente con las posibilidades que nos
-ofrecía un simple byte, el cual no es más que un conjunto de 8 bits, es decir, 8
-diferentes estados eléctricos del tipo encendido/apagado, lo cual nos da unas
-256 distintas combinaciones, que es lo mismo que decir, que esa unidad mínima
-de memoria, el byte, puede usarse para representar unos 256 posibles
-caracteres. Bueno, en realidad no exactamente 256, veamos: el estándar
-**ASCII**, al menos el de 1967,  define ciertas cosas:
+un caracter cualquiera, se le asigna un número. El estándar **ASCII** es,
+justamente una forma de definir que número representa cada
+letra. Y desde 1967, establece que::
 
-* Del 0 al 31 y el 127, son números que definen lo que se conoce como
+* Los números del 0 al 31 y el 127, definen lo que se conoce como
   caracteres de control, nada que sirva para representar un verdadero caracter
   de un texto, son simplemente instrucciones especificas que podían ser
   interpretadas por distintos equipos, lo más común: las impresoras (modems y
@@ -95,32 +89,36 @@ caracteres. Bueno, en realidad no exactamente 256, veamos: el estándar
   "imprimibles", este es el rango de códigos/caracteres más básico y estándar,
   definidos claro, a las necesidades de un inglés americano. Dispone de un gran
   número de símbolos, de los dígitos y del abecedario inglés, tanto en
-  minusculas como mayusculas (en un principio solo tenía mayusculas).  Para
+  minúsculas como mayúsculas (en un principio solo tenía mayúsculas).  Para
   nosotros los de habla hispánica, obviamente, nos falta letras como la `ñ` o
   las vocales acentuadas
 
-Hasta 1981, cada caracter tenía 7 bits, lo que es lo mismo decir, que se 
-contemplaba un total de 128 caracteres, pero a partir de es año,  **IBM** por
-las suyas, define una extensión al código **ASCCI** sumandole un bit adicional
-para llegar a los 8 bits que conocemos todos. Con lo que logra dara forma a
-otros 128 caracteres más, esta extensión se la llamó "código de página 437",
-tenía algunas modificaciones a los códigos de control por obsoletos y agregaba
-varios caracteres gráficos y en particular varias letras latinas tan necesarias
-para la gente del occidente europeo. Está codificación se incorporó en la
-primera de las máquinas conocidad luego como computadora personal (PC) de esta
-firma, el resto es historia conocida. La vesión "exetendida", se populariza y
-hoy cuando uno habla de **ASCII** lo hace siempre suponiendo la versión
-extendida, que no es el estándar (esto es bueno tenerlo en claro). 
+Increíblemente, durante más de una década la informática mainstream, no
+consideraba que existíamos los hispanohablantes, de hecho el estándar no
+suponía que existiera otro idioma que no sea el inglés Americano. Hasta 1981,
+cada caracter tenía 7 bits, lo que es lo mismo decir, que se contemplaba un
+total de 128 caracteres, pero a partir de ese año,  **IBM** por las suyas,
+define una extensión al código **ASCCI** sumándole un bit adicional para llegar
+a los 8 bits que conocemos todos. Con lo que logra dar forma a otros 128
+caracteres más, esta extensión se la llamó "código de página 437", tenía
+algunas modificaciones a los códigos de control por obsoletos y agregaba varios
+caracteres gráficos y en particular varias letras latinas tan necesarias para
+la gente del occidente europeo. Está codificación se incorporó en la primera de
+las máquinas conocida luego como computadora personal (PC), el resto es
+historia conocida. La versión "extendida", se populariza y hoy cuando uno habla
+de **ASCII** se lo hace siempre suponiendo la versión extendida, **que no es el
+estándar** (esto es bueno tenerlo en claro). 
 
-Agregar esta simple extensión, le dió la posibilidad a los fabricantes de
-hardware de adaptarla a las necesidades, normalmente regionales, y por que no, eventualmente
-a caprichos de cada uno, después de todos esos pocos bits no forman parte del
-estándar. Y este es el momento donde aparece el concepto "codepage" o
-el código de página, y por supuesto el comienzo de la pesadilla que aún nos
-acompaña. 
+Agregar esta simple extensión, le dio la posibilidad a los fabricantes de
+hardware de adaptarla a las necesidades, normalmente regionales, y por que no,
+eventualmente a caprichos de cada uno, después de todos, esos pocos bits no
+forman parte del estándar. Y este es el momento donde aparece el concepto
+"codepage" o el código de página, y por supuesto el comienzo de la pesadilla
+que aún nos acompaña. 
 
-## 
+## ¿Pesadilla?
 
+Bueno, debo reconocer que soy un poco exagerado.
 
 ## Resumen
 
@@ -130,11 +128,11 @@ acompaña.
   una configuración por defecto.
 * Es fundamental tener conciencia de la codificación de todo lo que escribamos
 * La codificación mas conocida, generalizada y antigua es la del estándar
-  Ascii, que contiene 33 caracteres de control y 95 caracteres
- "imprimibles", entre letras (mayúsculas y minúsculas), dígitos y símbolos
-  varios. Es de origen inglés/americano, por lo que carece de una enorme
-  multitud de caracteres incluso básicos, como en el caso del castellano, son
-  la `ñ`, las vocales acentuadas, las diéresis. 
+  Ascii, que contiene 33 caracteres de control y 95 caracteres "imprimibles",
+  entre letras (mayúsculas y minúsculas), dígitos y símbolos varios. Es de
+  origen inglés/americano, por lo que carece de una enorme multitud de
+  caracteres incluso básicos, como en el caso del castellano, son la `ñ`, las
+  vocales acentuadas, las diéresis. 
 * Originalmente para este estándar solo era necesario contar con 7 bits para
   representar un total de 128 caracteres y códigos de control.
 * IBM varios años después extendió el Ascii, al agregar un bit más y llegar
@@ -146,10 +144,11 @@ acompaña.
   conoce como código de página
 * El código de página son adaptaciones regionales o de los fabricantes de
   hardware que se hace solo sobre esos 128 caracteres adicionales
-* Para los de habla española, lo habitual es hablar de Latin1 o ISO8859, incluso Windows 1252, 
-  originalmente el codepage 850, que incluye los acentos, las letras con
-  diéresis, y por supuesto la `ñ`. Normalmente es la codificación que se usa en
-  el mundo occidental y europeo del oeste. En algunas aplicaciones como el Notepad de Windos se la llama codificación Ansi.
+* Para los de habla española, lo habitual es hablar de Latin1 o ISO8859,
+  incluso Windows 1252, originalmente el codepage 850, que incluye los acentos,
+  las letras con diéresis, y por supuesto la `ñ`. Normalmente es la
+  codificación que se usa en el mundo occidental y europeo del oeste. En
+  algunas aplicaciones como el Notepad de Windos se la llama codificación Ansi.
 * Un texto Ascii es universal únicamente en los 128 caracteres básicos,
   cualquier otro caracter en el grupo de los extendidos ya deja de serlo y para
   poder representarlos correctamente es necesario saber la correcta
@@ -158,19 +157,22 @@ acompaña.
   el archivo, es una información que debemos conocer antes de intentar abrir
   este y por supuesto, no debemos ignorar esto a la hora de salvar cualquiera
   de estos.
-* El estándar Ascii aún agregando la parte extendida, tiene algunos inconvenientes: un número limitado de
-  caracteres, insuficiente para representar la totalidad de estos en
-  muchos idiomas y el problema del código de página, dónde un mismo código
-  puede representar algo en un determinado codepage y otra cosa diferente en
-  otro. 
+* El estándar Ascii aún agregando la parte extendida, tiene algunos
+  inconvenientes: un número limitado de caracteres, insuficiente para
+  representar la totalidad de estos en muchos idiomas y el problema del código
+  de página, dónde un mismo código puede representar algo en un determinado
+  codepage y otra cosa diferente en otro. 
 * Unicode fue el siguiente estándar creado con el objetivo de lograr ser
   realmente universal y poder dar representación a todos los caracteres en una
   sola codificación.
 * Unicode incluye todos los caracteres de uso común actuales, unos 137374 (a la
-  fecha), contiene muchos alfabetos/idiomas, sistemas ideograficos y símbolos y hasta
-  emoticones. Es un estándar en constante evolución. En Unicode cada caracter tiene un único código numérico, por lo que una letra ñ no dependerá de ningún código de página, siempre será un ñ en cualquier aplicación que sea compatible con Unicode.
-* La forma de codificación más sencilla es la conocida como **UTF-32**, donde cada
-  caracter es representado por un número de 32 bits / 8 bytes fijos
+  fecha), contiene muchos alfabetos/idiomas, sistemas ideograficos y símbolos y
+  hasta emoticones. Es un estándar en constante evolución. En Unicode cada
+  caracter tiene un único código numérico, por lo que una letra ñ no dependerá
+  de ningún código de página, siempre será un ñ en cualquier aplicación que sea
+  compatible con Unicode.
+* La forma de codificación más sencilla es la conocida como **UTF-32**, donde
+  cada caracter es representado por un número de 32 bits / 8 bytes fijos
 * Sin embargo la forma más extendida de codificación Unicode es UTF-8, en sus
   variantes con y sin BOM
 * El BOM o Byte order mark, es un conjunto de bytes (de 2 a 4) al comienzo del
@@ -178,13 +180,13 @@ acompaña.
   (little rnfian/big enddian)
 * UTF-8 (y UTF-16) manejan simbolos de longitud variable, esto implica, que
   cada caracter puede tener una longitud variable, en el caso de utf-8 puede
-  ser de 8 bits, hasta 32 bits. Esto según el caracter. Por
-  compatibilidad con la codificación Ascii, cualquier caracter de los 128
-  estándares, se codifica con un único byte. Esto implica que una archivo Ascii
-  con caracteres no extendidos es totalmente intercambiable con uno UTF-8. El
-  problema claro lo tendremos siempre con los caracteres extendidos, dónde en
-  ASCII seguirá siendo de un byte (y deberemos saber el codepage) y en UTF-8
-  será de 2 o 3 bytes, dependiendo del caracter. 
+  ser de 8 bits, hasta 32 bits. Esto según el caracter. Por compatibilidad con
+  la codificación Ascii, cualquier caracter de los 128 estándares, se codifica
+  con un único byte. Esto implica que una archivo Ascii con caracteres no
+  extendidos es totalmente intercambiable con uno UTF-8. El problema claro lo
+  tendremos siempre con los caracteres extendidos, dónde en ASCII seguirá
+  siendo de un byte (y deberemos saber el codepage) y en UTF-8 será de 2 o 3
+  bytes, dependiendo del caracter. 
 
 
 ## Recomendaciones
