@@ -125,68 +125,75 @@ Bueno, debo reconocer que soy un poco exagerado.
 * No existe algo llamado texto plano
 * Un archivo de texto siempre tiene una codificación, podemos ignorar esto,
   pero el archivo de todas formas la tiene, normalmente la aplicaciones tienen
-  una configuración por defecto.
+  una configuración por defecto
 * Es fundamental tener conciencia de la codificación de todo lo que escribamos
-* La codificación mas conocida, generalizada y antigua es la del estándar
-  Ascii, que contiene 33 caracteres de control y 95 caracteres "imprimibles",
-  entre letras (mayúsculas y minúsculas), dígitos y símbolos varios. Es de
-  origen inglés/americano, por lo que carece de una enorme multitud de
-  caracteres incluso básicos, como en el caso del castellano, son la `ñ`, las
-  vocales acentuadas, las diéresis. 
+* La codificación mas conocida, generalizada y antigua (1967) es la del
+  estándar **Ascii**, que contiene 33 caracteres de control y 95 caracteres
+  "imprimibles", entre letras (mayúsculas y minúsculas), dígitos y símbolos
+  varios. Es de origen inglés/americano, por lo que carece de una enorme
+  multitud de caracteres incluso básicos, como en el caso del castellano, son
+  la `ñ`, las vocales acentuadas o las diéresis. 
 * Originalmente para este estándar solo era necesario contar con 7 bits para
   representar un total de 128 caracteres y códigos de control.
-* IBM varios años después extendió el Ascii, al agregar un bit más y llegar
-  finalmente al byte tradicional. Esto introdujo la posibilidad de representar
-  128 caracteres más.
-* Es importante notar que hoy, cuando hablamos de Ascii, hablamos de la versión
-  extendida que no es el estándar propiamente dicho.
-* Estos 128 caracteres adicionales, son variables dependiendo de algo que se
-  conoce como código de página
+* IBM varios años después (en 1981) extendió el Ascii, al agregar un bit más y
+  llegar finalmente al byte tradicional. Esto introdujo la posibilidad de
+  representar 128 caracteres más. Es importante notar que hoy, cuando hablamos
+  de **Ascii**, hablamos de la versión extendida que no es el estándar
+  propiamente dicho.
+* Estos 128 caracteres adicionales, son variables, ya que no forman parte del
+  estándar. A partir de estos bits adicionales es que aparece el concepto de
+  código de página.
 * El código de página son adaptaciones regionales o de los fabricantes de
   hardware que se hace solo sobre esos 128 caracteres adicionales
-* Para los de habla española, lo habitual es hablar de Latin1 o ISO8859,
-  incluso Windows 1252, originalmente el codepage 850, que incluye los acentos,
-  las letras con diéresis, y por supuesto la `ñ`. Normalmente es la
-  codificación que se usa en el mundo occidental y europeo del oeste. En
-  algunas aplicaciones como el Notepad de Windos se la llama codificación Ansi.
-* Un texto Ascii es universal únicamente en los 128 caracteres básicos,
+* Para los de habla española, o Europeos occidentales, cuando hablamos de
+  codficaciones de 1 byte por caracter, lo habitual es hablar de **Latin1** o
+  **ISO8859-1**, incluso **Windows 1252** (llamada Ansi en algunos casos),
+  originalmente el codepage **850**, si bien con algunas diferencias mínimas,
+  son las codificaciones mas habituales, que incluye los acentos, las letras
+  con diéresis, y por supuesto la `ñ`. 
+* Un texto **Ascii** es universal únicamente en los 128 caracteres básicos,
   cualquier otro caracter en el grupo de los extendidos ya deja de serlo y para
   poder representarlos correctamente es necesario saber la correcta
-  codificación o código de página.
+  codificación o código de página. La `ñ` que vemos en un texto de 1 byte por
+  caracter puede ser un caracter totalmente distinto en cualquier otra
+  codificación, lo unico que es univeral son los 128 caracteres del estándar
 * El gran problema es que la codificación no es un metadato que se traslada con
   el archivo, es una información que debemos conocer antes de intentar abrir
   este y por supuesto, no debemos ignorar esto a la hora de salvar cualquiera
-  de estos.
+  de estos. Poder saber la codificación, solo con el archivo no es un tarea
+  sencilla, en el mejor de los casos se puede iendificarlo con un determinado
+  grado de certeza.
 * El estándar Ascii aún agregando la parte extendida, tiene algunos
-  inconvenientes: un número limitado de caracteres, insuficiente para
+  inconvenientes: un número muy limitado de caracteres, insuficiente para
   representar la totalidad de estos en muchos idiomas y el problema del código
   de página, dónde un mismo código puede representar algo en un determinado
   codepage y otra cosa diferente en otro. 
-* Unicode fue el siguiente estándar creado con el objetivo de lograr ser
-  realmente universal y poder dar representación a todos los caracteres en una
-  sola codificación.
+* Unicode fue el siguiente estándar creado con el objetivo de superar los
+  problemas mencionados, lograr ser realmente universal y poder dar
+  representación a todos los caracteres en una sola codificación.
 * Unicode incluye todos los caracteres de uso común actuales, unos 137374 (a la
   fecha), contiene muchos alfabetos/idiomas, sistemas ideograficos y símbolos y
   hasta emoticones. Es un estándar en constante evolución. En Unicode cada
   caracter tiene un único código numérico, por lo que una letra ñ no dependerá
-  de ningún código de página, siempre será un ñ en cualquier aplicación que sea
-  compatible con Unicode.
+  de ningún código de página, siempre será un `ñ` en cualquier aplicación que
+  sea compatible con Unicode.
 * La forma de codificación más sencilla es la conocida como **UTF-32**, donde
-  cada caracter es representado por un número de 32 bits / 8 bytes fijos
-* Sin embargo la forma más extendida de codificación Unicode es UTF-8, en sus
-  variantes con y sin BOM
-* El BOM o Byte order mark, es un conjunto de bytes (de 2 a 4) al comienzo del
-  archivo como indicativo de la codificación unicode y del orden de los bytes
-  (little rnfian/big enddian)
-* UTF-8 (y UTF-16) manejan simbolos de longitud variable, esto implica, que
-  cada caracter puede tener una longitud variable, en el caso de utf-8 puede
-  ser de 8 bits, hasta 32 bits. Esto según el caracter. Por compatibilidad con
-  la codificación Ascii, cualquier caracter de los 128 estándares, se codifica
-  con un único byte. Esto implica que una archivo Ascii con caracteres no
-  extendidos es totalmente intercambiable con uno UTF-8. El problema claro lo
-  tendremos siempre con los caracteres extendidos, dónde en ASCII seguirá
-  siendo de un byte (y deberemos saber el codepage) y en UTF-8 será de 2 o 3
-  bytes, dependiendo del caracter. 
+  cada caracter es representado por un número de 32 bits / 4 bytes fijos
+* Sin embargo la forma más extendida de codificación Unicode es **UTF-8**, en
+  sus variantes con y sin **BOM**
+* El **BOM** o Byte order mark, es un conjunto de bytes (de 2 a 4) al comienzo
+  del archivo como indicativo de la codificación unicode y del orden de los
+  bytes (little rnfian/big enddian)
+* **UTF-8** (y **UTF-16**) manejan codificaciones de longitud variable, esto
+  implica, que cada caracter puede tener una longitud variable, en el caso de
+  **UTF-8** puede ser de 8 bits y llegar hasta 32 bits, esto según el caracter.
+  Por compatibilidad con la codificación **Ascii**, cualquier caracter de los
+  128 estándares, se codifica con un único byte y respeta el número del
+  estándar antiguo. Esto implica que un archivo **Ascii** con caracteres no
+  extendidos es totalmente intercambiable con uno **UTF-8** o **UTF-16**. El
+  problema claro lo tendremos siempre con los caracteres extendidos, dónde en
+  **ASCII** seguirá siendo de un byte (y deberemos saber el codepage) y en
+  **UTF-8** será de 2 o 3 bytes, dependiendo del caracter. 
 
 
 ## Recomendaciones
@@ -195,18 +202,18 @@ Bueno, debo reconocer que soy un poco exagerado.
   Está lo suficientemente extendida entre aplicaciones y sistemas operativos
   como para considerarla la codificación universal. 
 * El **BOM** esta totalmente desaconsejado por que no todas las aplicaciones lo
-  manejan.
+  sopotan.
 * Al usar **UTF-8** nos evitamos cualquier problema relacionado con el
   "codepage", saber que un archivo es **UTF-8** es el único dato que
   necesitamos saber antes de abrir el archivo, puede ser un texto con
   ideogramas chinos o un simple texto en español, si es **UTF-8** lo podremos
-  abrir y "ver" lo mismo que ve el autor original del archivo. 
+  abrir y "ver" lo mismo que "ve" el autor original del archivo. 
 * Si por alguna razón necesitamos trabajar con archivos en una codificación de
   un solo byte (No **Unicode**), en primer lugar tenemos que tener claro que
   estaremos limitados a un conjunto reducido de caracteres, ni intentar agregar
   emoticones ni otros simbolos del mundo **Unicode**, y en segundo lugar
   deberemos usar, al menos los que somos del mundo occidental, las
   codificaciones comunes de este lado del planeta, normalmente **"Latin1"**, o
-  bien **"ISO-8859-1"**. Y si intercambiamos un archivo, es fundamental saber o
-  dar a conocer cual es exactamente la codificación usada.
+  bien **"ISO-8859-1"** o  **Windows 1252**. Y si intercambiamos un archivo, es
+  fundamental saber o dar a conocer cual es exactamente la codificación usada.
 
