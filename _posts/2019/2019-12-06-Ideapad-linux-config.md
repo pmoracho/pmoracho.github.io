@@ -126,6 +126,24 @@ por lo que es candidato a ser removido:
     sudo apt remove ofono
 
 
+## Audio decente
+
+Este equipo tiene según su especificaciones, audio DOLBY, por lo que
+si lo quería aprovechar al máximo, seguí las recomendaciones de [esta
+respuesta](https://stackoverflow.com/a/56966764/6836377).  La idea entonces:
+
+1. Instalar PulseEffects, esto desde el Gestor de Software, es una aplicación
+   `flatpack`, o bien seguir [estas
+   instrucciones](https://github.com/wwmm/pulseeffects/wiki/Package-Repositories#debian--ubuntu|)
+   
+2. Instalar [estos](https://github.com/JackHack96/PulseEffects-Presets) presets
+
+3. Configurar el **Convolver**, y seleccionar el preset:
+
+    > Dolby ATMOS ((128K MP3)) 1.Default.irs
+
+4. Disfrutar la diferencia, el audio es notablemente mejor y sobre todo con un volumen superior.
+
 ## Algunas soluciones a problemas varios
 
 1. `Guake` se "cuelga" al salir.
