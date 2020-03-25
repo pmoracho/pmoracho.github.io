@@ -265,9 +265,10 @@ Y aquí el resultado final:
 
 Ahora si podemos ver realmente en que provincias los femicidios son más significativos..
 
-La descarga final de los scripts puede hacerse desde [aquí](https://github.com/pmoracho/R.git)
+La descarga final de los scripts puede hacerse desde [aquí][proyecto]
 
 [ejemplo1]:{{site.baseurl}}/images/2017/rplot-01.png
 [ejemplo2]:{{site.baseurl}}/images/2017/rplot-02.png
 [dataframe]:https://stat.ethz.ch/R-manual/R-devel/library/base/html/data.frame.html
 [shapefile]:http://en.wikipedia.org/wiki/Shapefile
+[proyecto]:https://github.com/pmoracho/R/tree/master/femicidios.ar
