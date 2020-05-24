@@ -21,7 +21,7 @@ noindex: false
 hide_printmsg: false
 sitemap: true
 summaryfeed: false
-description: Ejemplos de gráficos con Ggplot2 y el theme_elegante()
+description: Algunos trucos para generar los posts directamente de un Rmd
 tags:
   - desarrollo
   - R
@@ -29,7 +29,7 @@ tags:
 
 ¿R, gráficos, markdown y `githup-pages`? ¿Se puede? ¿Desde `rstudio`?
 
-Bueno, generarar blogs con markdown es sumamente sencillo y está [super documentado](https://bookdown.org/yihui/blogdown/), sin embargo, cuando tienes unas necesidades algo más simples y limitadas, la anterior solución es un poco mucho. El escenario: poder a partir de un código R markdown, generar el contenido markdown especifico para subir a un sitio `github` ya existente, junto con las imagenes relacionadas. No parece mucho, pero tiene su complejidad.
+Bueno, generar blogs con markdown es sumamente sencillo y está [super documentado](https://bookdown.org/yihui/blogdown/), sin embargo, cuando tienes unas necesidades algo más simples y limitadas, la anterior solución es un poco mucho. El escenario: poder a partir de un código R markdown, generar el contenido markdown especifico para subir a un sitio `github` ya existente, junto con las imágenes relacionadas. No parece mucho, pero tiene su complejidad.
 
 ### 1. Instalar [`jeckyllthat`](https://github.com/ColinFay/jekyllthat)
 
@@ -72,7 +72,7 @@ Modificar la cabecera del mismo por un modelo como el siguiente:
 
 ### 3. Configurar la sección `setup` del documento
 
-Es muy importante configurar `knitr::opts_knit$set(base.url='/images/2019/')`, `base_url` debería apuntar a la carpeta dónde se lojan las imagenes. En mi caso, las administro en una estructura como: `<root>/images/<year>`.
+Es muy importante configurar `knitr::opts_knit$set(base.url='/images/2019/')`, `base_url` debería apuntar a la carpeta dónde se alojan las imágenes. En mi caso, las administro en una estructura como: `<root>/images/<year>`.
 
 ### 4. Ejecutar `knitr`, con la opción de salida de `jekylldown`
 
@@ -84,7 +84,7 @@ Esto generará estos documentos
 Lo que resta es:
 
 -   Copiar `<titulo-del-post>.md` a la carpeta de los posts, por ejemplo `_posts/2019`
--   Copiar la carpeta completa y sus archivos `<titulo-del-post>/*.png` a la carpeta de las imagenes que habíamos definido antes, por ejemplo `images/2019`
+-   Copiar la carpeta completa y sus archivos `<titulo-del-post>/*.png` a la carpeta de las imágenes que habíamos definido antes, por ejemplo `images/2019`
 
 Y ahora sí, ¿podemos incluir un plot?
 
