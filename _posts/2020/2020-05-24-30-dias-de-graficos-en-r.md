@@ -129,4 +129,4 @@ covid.data %>%
     theme_elegante_std(base_family = "Ralleway") 
 ```
 
-![](/images/2020/2020-05-24-30-dias-de-graficos-en-r_files/figure-gfm/dia1-1.png)<!-- -->
+![](images/2020/2020-05-24-30-dias-de-graficos-en-r_files/figure-gfm/dia1-1.png)<!-- -->
