@@ -33,8 +33,8 @@ output:
 A raíz de que el 12 de mayo se conmemora el nacimiento de Florence
 Nightingale, la enfermera creadora del diagrama de área polar y
 referente femenina de la visualización de datos, la comunidad
-<https://twitter.com/R4DS_es> lanzó un lindo desafío, [30 gráficos
-30](proyeccto), uno distinto por día. Esta es la lista
+<https://twitter.com/R4DS_es> lanzó un lindo desafío, \[30 gráficos
+30\]\[proyeccto\], uno distinto por día. Esta es la lista
 completa:
 
 | día | fecha       | desafío                                                       |
@@ -76,4 +76,57 @@ En lo personal, mi idea es aprovechar este desafío para:
 
   - Profundizar el conocimiento de **Ggplot2**, ya que intentaremos
     resolver todos usando este paquete
-  - Porbar y eventualmente ajustar, mi tema personalizado
+  - Probar y eventualmente ajustar, mi tema personalizado
+    [`ggelegant`](https://github.com/pmoracho/ggelegant)
+  - Tratar de usar datos actuales y no apoyarme en gráficas de ejemplo
+    ya resueltas
+
+### Día 1: Gráfico de barras / Columnas
+
+Una gráfica de barras o columnas, tal vez una de las más clásicas,
+muestran comparaciones numéricas entre una variable discreta y una serie
+de los valores continuos que toma cada una de estas variables discretas
+o “categorías”. A diferencia de un histograma, los gráficos de barra no
+muetran un desarrollo continuo entre las categorías.
+
+``` r
+library("tidyverse")
+
+if ("ggelegant" %in% rownames(installed.packages())) {
+  library("ggelegant")
+} else {
+  # devtools::install_github("pmoracho/ggelegant")
+  theme_elegante_std <- function(base_family) {}
+}
+
+covid.data <- read.csv("https://opendata.ecdc.europa.eu/covid19/casedistribution/csv", na.strings = "", fileEncoding = "UTF-8-BOM",
+                       stringsAsFactors = FALSE)
+
+last_date <- max(as.Date(covid.data$dateRep,"%d/%m/%Y"))
+covid.data %>% 
+  filter(countriesAndTerritories %in% c('Argentina','Brazil', 'Chile', 'Bolivia', 'Paraguay', 'Uruguay')) %>% 
+  group_by(countriesAndTerritories) %>% 
+  summarize(casos = sum(cases), fallecidos = sum(deaths)) %>% 
+  ungroup() %>% 
+  select(pais = countriesAndTerritories, casos, fallecidos) %>% 
+  gather(referencia, cantidad, -pais) %>% 
+  ggplot(aes(x=pais, fill=referencia, y=cantidad)) +
+    geom_col(position=position_dodge(width=1)) +
+    geom_text(aes(label = format(cantidad, digits=0, big.mark = ',')),  vjust = .6, hjust=1.1,
+              position = position_dodge(width=1)) +
+    coord_flip() +
+    scale_y_log10(
+      breaks = scales::trans_breaks("log10", function(x) 10^x),
+      labels = scales::trans_format("log10", scales::math_format(10^.x))
+    ) +
+    labs(title = paste("COVID-19"), 
+       subtitle = paste("Relación Casos / fallecidos Argentina y vecinos al: ", last_date) , 
+       caption = "Fuente: https://opendata.ecdc.europa.eu/covid19/casedistribution/csv", 
+       y = "log10(Cantidad)", 
+       x = "País"
+    ) +
+    scale_fill_discrete(palette = function(x) c("#67a9cf", "#ef8a62")) +
+    theme_elegante_std(base_family = "Ralleway") 
+```
+
+![](/images/2020/2020-05-24-30-dias-de-graficos-en-r_files/figure-gfm/dia1-1.png)<!-- -->
