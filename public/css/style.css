@@ -91,7 +91,6 @@ abbr[title] {
 }
 code, pre {
     font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
-    border-left: 2px solid rgba(0,0,0,0.1);
 }
 code {
     padding: .25em;
@@ -136,6 +135,7 @@ pre code {
 .highlight pre, blockquote p:last-child {
     margin-bottom: 0;
     padding-left: 20px;
+    border-left: 2px solid rgba(0,0,0,0.1);
 }
 .gist .gist-file {
     font-family: menlo, monaco, "courier new", monospace!important;
