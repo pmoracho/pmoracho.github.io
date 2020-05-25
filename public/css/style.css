@@ -94,7 +94,7 @@ abbr[title] {
 }
 code, pre {
     font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
-    border-left: 2px solid rgba(0,0,0,0.1)
+    border-left: 2px solid rgba(0,0,0,0.1);
 }
 code {
     padding: .25em;
@@ -133,7 +133,8 @@ pre code {
     -webkit-box-shadow: 3px 3px rgba(0, 0, 0, .1);
     box-shadow: 3px 3px rgba(0, 0, 0, .1);*/
     overflow: auto;
-	margin-bottom: 15px;
+    margin-bottom: 15px;
+    
 }
 .highlight pre, blockquote p:last-child {
     margin-bottom: 0;
