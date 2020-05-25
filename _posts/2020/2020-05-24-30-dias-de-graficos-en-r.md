@@ -33,8 +33,8 @@ output:
 A raíz de que el 12 de mayo se conmemora el nacimiento de Florence
 Nightingale, la enfermera creadora del diagrama de área polar y
 referente femenina de la visualización de datos, la comunidad
-<https://twitter.com/R4DS_es> lanzó un lindo desafío, \[30 gráficos
-30\]\[proyeccto\], uno distinto por día. Esta es la lista
+\[@R4DS\_es\] lanzó un lindo desafío, \[30 gráficos 30\]\[proyeccto\],
+uno distinto por día. Esta es la lista
 completa:
 
 | día | fecha       | desafío                                                       |
@@ -130,3 +130,73 @@ covid.data %>%
 ```
 
 <img src="/images/2020/2020-05-24-30-dias-de-graficos-en-r_files/figure-gfm/dia1-1.png" style="display: block; margin: auto;" />
+
+### Día 2: Gráfico de líneas
+
+Son gráficos que muestras la evolución de una o más variables continuas
+en un determinado intervalo, generalmente de tiempo. Lo habitual es que
+el ejex Y tenga un valor cuantitativo y el eje X tiene la seceuncia que
+representa el intervalo, En el plano cartesiano, se establecen los
+puntos X, Y y luego se van conectando estos mediante líneaas rectas.
+
+``` r
+library("tidyverse")
+
+if ("ggelegant" %in% rownames(installed.packages())) {
+  library("ggelegant")
+} else {
+  # devtools::install_github("pmoracho/ggelegant")
+  theme_elegante_std <- function(base_family) {}
+}
+  
+covid.data <- read_csv('https://docs.google.com/spreadsheets/d/16-bnsDdmmgtSxdWbVMboIHo5FRuz76DBxsz_BbsEVWA/export?format=csv&id=16-bnsDdmmgtSxdWbVMboIHo5FRuz76DBxsz_BbsEVWA&gid=0')
+```
+
+    ## Parsed with column specification:
+    ## cols(
+    ##   fecha = col_character(),
+    ##   dia_inicio = col_double(),
+    ##   dia_cuarentena_dnu260 = col_double(),
+    ##   osm_admin_level_2 = col_character(),
+    ##   osm_admin_level_4 = col_character(),
+    ##   osm_admin_level_8 = col_character(),
+    ##   tot_casosconf = col_double(),
+    ##   nue_casosconf_diff = col_double(),
+    ##   tot_fallecidos = col_double(),
+    ##   nue_fallecidos_diff = col_double(),
+    ##   tot_recuperados = col_double(),
+    ##   tot_terapia = col_double(),
+    ##   `test_RT-PCR_negativos` = col_double(),
+    ##   `test_RT-PCR_total` = col_double(),
+    ##   transmision_tipo = col_character(),
+    ##   informe_tipo = col_character(),
+    ##   informe_link = col_character(),
+    ##   observacion = col_character(),
+    ##   covid19argentina_admin_level_4 = col_character()
+    ## )
+
+``` r
+last_date <- max(as.Date(covid.data$fecha,"%d/%m/%Y"))
+
+covid.data %>% 
+  filter(osm_admin_level_4 %in% c('CABA', 'Buenos Aires')) %>% 
+  mutate(fecha = as.Date(fecha, "%d/%m/%Y")) %>% 
+  select(dia=dia_inicio, distrito=osm_admin_level_4, cantidad=nue_casosconf_diff) %>% 
+  ggplot(mapping=aes(x=dia, color=distrito, y=cantidad)) +
+    geom_line() +
+    geom_point() +
+    geom_smooth(method = 'loess',
+                formula = 'y ~ x', alpha = 0.2, size = 1, span = .3, se=FALSE) + 
+    labs(title = paste("COVID-19 en Argentina"), 
+       subtitle = paste0("Variación de los casos diarios en CABA y Buenos Aires por día (al: ", last_date, ")") , 
+       caption = "Fuente: https://github.com/SistemasMapache/Covid19arData", 
+       y = "Casos", 
+       x = "Número de días desde el 1er caso"
+  ) +
+  scale_color_discrete(palette = function(x) c("#67a9cf", "#ef8a62")) +
+  theme_elegante_std(base_family = "Ralleway") 
+```
+
+<img src="/images/2020/2020-05-24-30-dias-de-graficos-en-r_files/figure-gfm/dia2-1.png" style="display: block; margin: auto;" />
+
+\[@R4DS\_es\]: <https://twitter.com/R4DS_es>
