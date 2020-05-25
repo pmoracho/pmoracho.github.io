@@ -94,6 +94,7 @@ abbr[title] {
 }
 code, pre {
     font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+    border-left: 2px solid rgba(0,0,0,0.1)
 }
 code {
     padding: .25em;
@@ -124,7 +125,6 @@ pre code {
     font-size: 100%;
     color: inherit;
     background-color: transparent;
-    border-left: 2px solid rgba(0,0,0,0.1)
 }
 .highlight {
     padding: 2px 2px 2px 2px;
@@ -1453,7 +1453,7 @@ ul#markdown-toc {
  * -----------------------------------------------------------------------------------------------------
  * */
 
- .highlight .hll { background-color: #ffffff }
+ .highlight .hll { background-color: #f9f9f9 }
  .highlight .c { color: #8f5902; font-style: italic } /* Comment */
  .highlight .err { color: #a40000; border: 1px solid #ef2929 } /* Error */
  .highlight .g { color: #000000 } /* Generic */
