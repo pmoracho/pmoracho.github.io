@@ -45,8 +45,8 @@ completa:
 | 3   | 14 de mayo  | puntos / burbujas                                 | ✓           |
 | 4   | 15 de mayo  | gráficos con facetas                              | ✓           |
 | 5   | 16 de mayo  | diagramas de arco                                 | ✓           |
-| 6   | 17 de mayo  | gráficos de donut                                 |             |
-| 7   | 18 de mayo  | gráficos ridgeline                                |             |
+| 6   | 17 de mayo  | gráficos de donut                                 | ✓           |
+| 7   | 18 de mayo  | gráficos ridgeline                                | ✓           |
 | 8   | 19 de mayo  | gráficos de contorno                              |             |
 | 9   | 20 de mayo  | gráficos de áreas apiladas                        |             |
 | 10  | 21 de mayo  | ¡explorar paletas de colores\!                    |             |
@@ -407,3 +407,138 @@ tbl_graph(edges=prepared.data, directed = TRUE) %>%
 ```
 
 <img src="/images/2020/2020-05-24-30-dias-de-graficos-en-r_files/figure-gfm/dia5-1.png" style="display: block; margin: auto;" />
+
+### Día 6: Un gráfico de aros de cebolla
+
+Odio las donas, pero bueno, en realidad se llaman “donuts plots”, una
+variante de un clásico gráfico de torta, solo sin el centro, a
+diferencia de los últimos, los gráficos de donas, al no mostrar el área
+completa, logran que el usuario se enfoque más en la longitud de cada
+sector, lo cual mejora la percepción de los cambios. Además,
+eventualmente permiten usar el área del centro para agregar más
+información.
+
+``` r
+library("tidyverse")
+library("ggrepel")
+
+if ("ggelegant" %in% rownames(installed.packages())) {
+  library("ggelegant")
+} else {
+  # devtools::install_github("pmoracho/ggelegant")
+  theme_elegante_std <- function(base_family) {}
+}
+
+covid.data <- read_csv('https://docs.google.com/spreadsheets/d/16-bnsDdmmgtSxdWbVMboIHo5FRuz76DBxsz_BbsEVWA/export?format=csv&id=16-bnsDdmmgtSxdWbVMboIHo5FRuz76DBxsz_BbsEVWA&gid=0')
+
+last_date <- max(as.Date(covid.data$fecha,"%d/%m/%Y"))
+break_porc <- .95
+covid.data %>% 
+  select(distrito=osm_admin_level_4, casos=nue_casosconf_diff) %>% 
+  group_by(distrito) %>% 
+  summarise(casos=sum(casos)) %>% 
+  mutate(porc = casos / sum(casos)) %>%
+  ungroup() %>% 
+  arrange(-porc) %>% 
+  mutate(cporc = cumsum(porc),
+         distrito = ifelse(cporc < break_porc, distrito, 'Resto')) %>% 
+  group_by(distrito) %>% 
+  summarise(casos = sum(casos),
+            porc = sum(round(porc*100,2))) -> data
+
+data$porc[data$distrito == 'Resto'] <- 100 - sum(data$porc[data$distrito != 'Resto'])
+data %>% 
+  mutate( ymax = cumsum(porc),
+          ymin = lag(ymax, default=0)
+  ) -> data
+
+mac_perc <- sum(data$porc[data$distrito != 'Resto'])
+data$distrito <- with(data, reorder(distrito, porc))
+data %>% 
+  ggplot(aes(ymax=ymax, ymin=ymin, xmax=4, xmin=3, fill=distrito)) +
+  geom_rect(color="gray90", size=1.2) +
+  geom_label_repel(mapping = aes(x=3.5, y=ymin + (ymax - ymin)/2,
+                                 colour =  ifelse(porc > 10, 2, 0),
+                                 label = paste0(distrito, ": ", format(porc, digits=2, trim=FALSE), "%\nCasos:", 
+                                                format(casos, big.mark = ",", trim=FALSE))),
+                   family = "Ralleway", 
+                   nudge_y = 1,
+                   nudge_x = 1) +
+  coord_polar(theta="y") + # Try to remove that to understand how the chart is built initially
+  xlim(c(2, 4)) +
+  labs(title = paste("COVID-19 en Argentina"), 
+       subtitle = paste0("Distribución del ", mac_perc , "% de los casos por distrito\n (Datos al: ", last_date, ")") , 
+       caption = "Fuente: https://github.com/SistemasMapache/Covid19arData"
+  ) +
+  theme_elegante_std(base_family = "Ralleway") +
+  theme(axis.title.x=element_blank(),
+        axis.text.x=element_blank(),
+        axis.ticks.x=element_blank(),
+        axis.title.y=element_blank(),
+        axis.text.y=element_blank(),
+        axis.ticks.y=element_blank(),
+        legend.position = "none") +
+  scale_fill_brewer(palette = "Blues")
+```
+
+<img src="/images/2020/2020-05-24-30-dias-de-graficos-en-r_files/figure-gfm/dia6-1.png" style="display: block; margin: auto;" />
+
+### Día 7: Gráficos “Ridgeline”
+
+Los graficos “ridgeline” mapean la distribución de múltiples variables
+continuas con un conjunto de variables categoricas en la forma de curvas
+“suaves” que permite comparar cada categoría:
+
+``` r
+library("tidyverse")
+library("ggridges")
+
+if ("ggelegant" %in% rownames(installed.packages())) {
+  library("ggelegant")
+} else {
+  # devtools::install_github("pmoracho/ggelegant")
+  theme_elegante_std <- function(base_family) {}
+}
+
+covid.data <- read_csv('https://docs.google.com/spreadsheets/d/16-bnsDdmmgtSxdWbVMboIHo5FRuz76DBxsz_BbsEVWA/export?format=csv&id=16-bnsDdmmgtSxdWbVMboIHo5FRuz76DBxsz_BbsEVWA&gid=0')
+
+last_date <- max(as.Date(covid.data$fecha,"%d/%m/%Y"))
+break_porc <- .95
+
+covid.data %>% 
+  mutate(distrito = osm_admin_level_4, 
+         casos = nue_casosconf_diff) %>% 
+  select(distrito, casos) -> data
+
+data %>% 
+  group_by(distrito) %>% 
+  summarise(casos=sum(casos)) %>% 
+  mutate(porc = casos / sum(casos)) %>%
+  arrange(-porc) %>% 
+  mutate(cporc = cumsum(porc),
+         distrito = ifelse(cporc < break_porc, distrito, 'Resto')) %>% 
+  group_by(distrito) %>% 
+  summarise(casos = sum(casos),
+            porc = sum(round(porc*100,2))) -> principales
+
+perc <- sum(principales$porc[principales$distrito != 'Resto'])
+
+data %>% 
+  left_join(principales, by="distrito") %>% 
+  mutate(distrito = ifelse(is.na(casos.y), 'Resto', distrito)) %>% 
+  select(distrito, casos=casos.x) %>% 
+  ggplot(aes(x = casos, y = distrito, fill = distrito)) +
+    geom_density_ridges() +
+    theme(legend.position = "none") +
+    labs(title = paste("COVID-19 en Argentina"), 
+       subtitle = paste0("Distribución de casos diarios (al: ", last_date, ")\nDetalle en los distritos que suman el ", perc, "% de los casos totales del país") , 
+       caption = "Fuente: https://github.com/SistemasMapache/Covid19arData", 
+       y = "Distritos", 
+       x = "Cantidades de casos diarios"
+    ) +
+    scale_x_continuous(breaks = c(c(0,5, 10, 20, 50), seq(from=75, to=max(data$casos)+25, by = 25))) +
+    theme_elegante_std(base_family = "Ralleway") +
+    theme(legend.position = "none")  
+```
+
+<img src="/images/2020/2020-05-24-30-dias-de-graficos-en-r_files/figure-gfm/dia7-1.png" style="display: block; margin: auto;" />
