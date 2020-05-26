@@ -43,8 +43,8 @@ completa:
 | 1   | 12 de mayo  | barras / columnas                                 | ✓           |
 | 2   | 13 de mayo  | líneas                                            | ✓           |
 | 3   | 14 de mayo  | puntos / burbujas                                 | ✓           |
-| 4   | 15 de mayo  | gráficos con facetas                              |             |
-| 5   | 16 de mayo  | diagramas de arco                                 |             |
+| 4   | 15 de mayo  | gráficos con facetas                              | ✓           |
+| 5   | 16 de mayo  | diagramas de arco                                 | ✓           |
 | 6   | 17 de mayo  | gráficos de donut                                 |             |
 | 7   | 18 de mayo  | gráficos ridgeline                                |             |
 | 8   | 19 de mayo  | gráficos de contorno                              |             |
@@ -344,3 +344,66 @@ data %>%
 ```
 
 <img src="/images/2020/2020-05-24-30-dias-de-graficos-en-r_files/figure-gfm/dia4b-1.png" style="display: block; margin: auto;" />
+
+### Día 5: Un gráfico de Arcos
+
+Los gráficos de arco forman parte de los diagramas de red, en este caso
+los nodos se colocan sobre un eje horizontal y la líneas o arcos señalan
+las relaciones entre cada nodo. Eventualmente se puede ajustar el grosor
+de la líne para incluir una nueva dimensión. En lo personal me resulta
+difíciles de leer pero entiendo que para algunas aplicaciones
+específicas pueden ser útiles. En este ejemplo, trato de mostrar las
+relaciones musicales interpresonales de **Luis Alberto Spinetta** en su
+primera etapa como músico.
+
+``` r
+library("tidyverse")
+library("tidygraph")
+library("ggraph")
+library("igraph")
+
+if ("ggelegant" %in% rownames(installed.packages())) {
+  library("ggelegant")
+} else {
+  # devtools::install_github("pmoracho/ggelegant")
+  theme_elegante_std <- function(base_family) {}
+}
+
+data <- structure(list(persona = structure(c(10L, 10L, 10L, 10L, 10L, 
+                                             10L, 6L, 6L, 12L, 12L, 12L, 12L, 8L, 9L, 2L, 7L, 7L, 3L, 3L, 
+                                             1L, 11L, 5L, 4L, 4L, 13L), .Label = c("Angel del Guercio", "Carlos Xartuch", 
+                                                                                   "Daniel Albertelli", "Edelmiro Molinari", "Eduardo Miró", "Emilio del Guercio", 
+                                                                                   "Guido Meda", "Hector Nuñez", "Horacio Soria", "Luis Alberto Spinetta", 
+                                                                                   "Ricardo Miró", "Rodolfo Garcia", "Santiago Novoa"), class = "factor"), 
+                       grupo = c(" Bundleman", " Los Larkings", " Los Masters", 
+                                 " Los Mods", " Los Sbirros", " Almendra (1967-1969)", " Bundleman", 
+                                 " Almendra (1967-1969)", " Los Larkings", " Los Masters", 
+                                 " Los Mods", " Almendra (1967-1969)", " Los Larkings", " Los Larkings", 
+                                 " Los Larkings", " Los Masters", " Los Mods", " Los Masters", 
+                                 " Los Mods", " Los Sbirros", " Los Sbirros", " Los Sbirros", 
+                                 " Los Sbirros", " Almendra (1967-1969)", " Los Sbirros")), class = "data.frame", row.names = c(NA, 
+                                                                                                                                -25L))
+
+data %>% 
+  select(from = persona, to = grupo, grupo=grupo, name=persona) -> prepared.data
+
+tbl_graph(edges=prepared.data, directed = TRUE) %>% 
+  ggraph(layout = "linear") +
+  geom_edge_arc(aes(color=grupo),  edge_width=1.5, edge_alpha = 0.5, fold = TRUE,) +
+  geom_node_point(size = 2, color="#67a9cf") +
+  geom_node_text(aes(label = str_wrap(name,13)), size = 3, nudge_y =-.7, angle = 90, fontface = "bold",  hjust=.5) +
+  coord_cartesian(clip = "off") + 
+  theme_elegante_std(base_family = "Ralleway") +
+  theme(axis.title.x=element_blank(),
+        axis.text.x=element_blank(),
+        axis.ticks.x=element_blank(),
+        axis.title.y=element_blank(),
+        axis.text.y=element_blank(),
+        axis.ticks.y=element_blank(),
+        legend.position = "none") +
+  labs(title = "Historia musical de Luis Albero Spinetta", 
+       subtitle = "Los comienzos"
+  ) 
+```
+
+<img src="/images/2020/2020-05-24-30-dias-de-graficos-en-r_files/figure-gfm/dia5-1.png" style="display: block; margin: auto;" />
