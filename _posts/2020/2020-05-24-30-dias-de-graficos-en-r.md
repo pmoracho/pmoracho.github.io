@@ -33,8 +33,9 @@ output:
 A raíz de que el 12 de mayo se conmemora el nacimiento de Florence
 Nightingale, la enfermera creadora del diagrama de área polar y
 referente femenina de la visualización de datos, la comunidad
-\[@R4DS\_es\] lanzó un lindo desafío, \[proyecto\], uno distinto por
-día. Esta es la lista
+[@R4DS\_es](https://twitter.com/R4DS_es) lanzó un lindo desafío,
+[proyecto](https://github.com/cienciadedatos/datos-de-miercoles/blob/master/30-dias-de-graficos-2020.md),
+uno distinto por día. Esta es la lista
 completa:
 
 | día | fecha       | desafío                                           | Completado? |
@@ -48,8 +49,8 @@ completa:
 | 7   | 18 de mayo  | gráficos ridgeline                                | ✓           |
 | 8   | 19 de mayo  | gráficos de contorno                              | ✓           |
 | 9   | 20 de mayo  | gráficos de áreas apiladas                        | ✓           |
-| 10  | 21 de mayo  | ¡explorar paletas de colores\!                    |             |
-| 11  | 22 de mayo  | mapas de calor (*heatmap*)                        |             |
+| 10  | 21 de mayo  | ¡explorar paletas de colores\!                    | ✓           |
+| 11  | 22 de mayo  | mapas de calor (*heatmap*)                        | ✓           |
 | 12  | 23 de mayo  | gráficos de paleta (*lollipop*)                   |             |
 | 13  | 24 de mayo  | visualizar datos temporales                       |             |
 | 14  | 25 de mayo  | gráficos de rectángulos/árbol (*treemap*)v        |             |
@@ -77,7 +78,7 @@ En lo personal, mi idea es aprovechar este desafío para:
   - Profundizar el conocimiento de **Ggplot2**, ya que intentaremos
     resolver todos usando este paquete
   - Probar y eventualmente ajustar, mi tema personalizado
-    \[`ggelegant`\]\[ggelegante\]
+    [`ggelegant`](https://github.com/pmoracho/ggelegant)
   - Tratar de usar datos actuales y no apoyarme en gráficas de ejemplo
     ya resueltas
 
@@ -308,7 +309,8 @@ data %>%
 
 <img src="/images/2020/2020-05-24-30-dias-de-graficos-en-r_files/figure-gfm/dia4-1.png" style="display: block; margin: auto;" />
 
-Una linda visualización es la que se legro mediante \[geofaceteAR\]:
+Una linda visualización es la que se legro mediante
+[geofaceteAR](https://github.com/electorArg/geofaceteAR):
 
 ``` r
 library("geofaceteAR")
@@ -663,8 +665,117 @@ ggplot(data, aes(x=dia, y=cantidades, fill=metrica, color=metrica)) +
 ```
 
 <img src="/images/2020/2020-05-24-30-dias-de-graficos-en-r_files/figure-gfm/dia9-1.png" style="display: block; margin: auto;" />
-\[proyecto\]:
-<https://github.com/cienciadedatos/datos-de-miercoles/blob/master/30-dias-de-graficos-2020.md>
-\[ggelegante\]: <https://github.com/pmoracho/ggelegant> \[@R4DS\_es\]:
-<https://twitter.com/R4DS_es> \[geofaceteAR\]:
-<https://github.com/electorArg/geofaceteAR>
+
+### Día 10: Exploración de paletas de colores
+
+Nada del otro mundo, un script para generar una gráfica de ejemplo de
+una paleta determinada de colores, en este ejemplo explorando la del
+paquete `[wesanderson]`
+
+``` r
+library("tidyverse")
+library("wesanderson")
+library("gridExtra")
+
+if ("ggelegant" %in% rownames(installed.packages())) {
+  library("ggelegant")
+} else {
+  # devtools::install_github("pmoracho/ggelegant")
+  theme_elegante_std <- function(base_family) {}
+}
+
+colores <- 20
+paletas <- names(wes_palettes)
+
+data.frame(x=factor(1:colores), y=1) %>% 
+  ggplot(aes(x = x, y = y, fill = x)) + 
+  geom_col() +
+  theme_elegante_std(base_family = "Ralleway") +
+  theme(axis.text.x=element_blank(),
+        axis.ticks.x=element_blank(),
+        axis.title.y=element_blank(),
+        axis.text.y=element_blank(),
+        axis.ticks.y=element_blank(),
+        legend.position = "none")  -> g
+
+plots <- list()
+for (p in paletas) {
+  plots[[p]] <- g + scale_fill_manual(values = wes_palette(colores, name = p, type = "continuous"), name = "") +
+    labs(x = p)
+}
+grid.arrange(grobs = plots, ncol = 2)
+```
+
+<img src="/images/2020/2020-05-24-30-dias-de-graficos-en-r_files/figure-gfm/dia10-1.png" style="display: block; margin: auto;" />
+
+### Día 11: Mapa de Calor
+
+Un mapa de calor muestra la variación en una determinada variable (por
+lo general continua) mediante el uso del color. En este ejemplo mapeamos
+tres variables, el distrito o provincia (categórica), la cantidad de
+días desde el primer contagio (categórica) y la variable continua de la
+cantidad de casos que es la que mapeamos a la dimensión del color.
+
+``` r
+library("tidyverse")
+library("zoo")
+library("forcats")
+library("scales")
+  if ("ggelegant" %in% rownames(installed.packages())) {
+  library("ggelegant")
+} else {
+  # devtools::install_github("pmoracho/ggelegant")
+  theme_elegante_std <- function(base_family) {}
+}
+
+covid.data <- read_csv('https://docs.google.com/spreadsheets/d/16-bnsDdmmgtSxdWbVMboIHo5FRuz76DBxsz_BbsEVWA/export?format=csv&id=16-bnsDdmmgtSxdWbVMboIHo5FRuz76DBxsz_BbsEVWA&gid=0')
+# Dependiendo del horario, la última fila puede ser un placeholder si datos
+# covid.data <- covid.data[covid.data$dia_inicio != max(covid.data$dia_inicio),]
+
+last_date <- max(as.Date(covid.data$fecha,"%d/%m/%Y"))
+first_date <- min(as.Date(covid.data$fecha,"%d/%m/%Y"))
+ndias <- max(covid.data$dia_inicio)
+
+
+dias <- expand.grid(distrito = unique(covid.data$osm_admin_level_4),
+                    dia = 1:ndias,
+                    stringsAsFactors = FALSE)
+dias$fecha = first_date + dias$dia - 1
+dias$casos = 0
+
+dias_rolling <- 3
+dias_ventana <- 14
+
+dias %>% 
+  left_join(covid.data, by=c("distrito" = "osm_admin_level_4", "dia" = "dia_inicio")) %>% 
+  mutate(casos = replace_na(nue_casosconf_diff, 0)) %>% 
+  select(dia, distrito, fecha=fecha.x, casos)  %>% 
+  group_by(dia, distrito, fecha) %>% 
+  summarise(casos = sum(casos)) %>%
+  arrange(distrito, dia) %>% 
+  group_by(distrito) %>% 
+  filter(dia >= ndias - dias_ventana - dias_rolling,
+         distrito != 'Indeterminado') %>% 
+  mutate(roll_casos_3 = rollmean(casos, dias_rolling, align='right', fill=0),
+         s_roll_casos_3 = replace_na((roll_casos_3-min(roll_casos_3))/(max(roll_casos_3)-min(roll_casos_3)),0),
+         label_casos = casos
+  ) %>% 
+  filter(dia >= ndias - dias_ventana ) %>% 
+  ggplot(aes(x = dia, y =   fct_reorder(distrito, casos), fill = s_roll_casos_3)) + 
+    geom_tile(colour="gray80", size=0.2) +
+    geom_text(aes(label=label_casos, color = s_roll_casos_3 > .7)) +
+    scale_color_manual(guide = FALSE, values = c("gray30", "gray90")) +
+    scale_fill_distiller(palette = "YlGnBu", direction = 1, na.value = "white") +
+    labs(title = paste("COVID-19 en Argentina"), 
+       subtitle = paste0("Evolución diaria de los casos por distrito (últimos ", dias_ventana, " días al: ", last_date, ")\n",
+                         "Los números son casos diarios, la escala de color en función del promedio de casos de los últimos ", dias_rolling, " días") , 
+       caption = "Fuente: https://github.com/SistemasMapache/Covid19arData", 
+       x = "Últimos días"
+    ) +
+    theme_elegante_std(base_family = "Ralleway") + 
+    scale_x_continuous(breaks = seq(ndias - dias_ventana, ndias, by = 1)) +
+    theme(axis.title.y=element_blank(),
+        legend.position = "none") 
+```
+
+<img src="/images/2020/2020-05-24-30-dias-de-graficos-en-r_files/figure-gfm/dia11-1.png" style="display: block; margin: auto;" />
