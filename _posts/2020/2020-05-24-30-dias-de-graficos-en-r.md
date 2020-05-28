@@ -46,8 +46,8 @@ completa:
 | 5   | 16 de mayo  | diagramas de arco                                 | ✓           |
 | 6   | 17 de mayo  | gráficos de donut                                 | ✓           |
 | 7   | 18 de mayo  | gráficos ridgeline                                | ✓           |
-| 8   | 19 de mayo  | gráficos de contorno                              |             |
-| 9   | 20 de mayo  | gráficos de áreas apiladas                        |             |
+| 8   | 19 de mayo  | gráficos de contorno                              | ✓           |
+| 9   | 20 de mayo  | gráficos de áreas apiladas                        | ✓           |
 | 10  | 21 de mayo  | ¡explorar paletas de colores\!                    |             |
 | 11  | 22 de mayo  | mapas de calor (*heatmap*)                        |             |
 | 12  | 23 de mayo  | gráficos de paleta (*lollipop*)                   |             |
@@ -603,7 +603,8 @@ covid.data %>%
 ```
 
 <img src="/images/2020/2020-05-24-30-dias-de-graficos-en-r_files/figure-gfm/dia8-1.png" style="display: block; margin: auto;" />
-\#\#\# Día 9: Areas apilads
+
+### Día 9: Areas apiladas
 
 Es una variante del gráfico de areas, que a su vez es una variante del
 de lineas, solo que en este caso se “apilan” más de una variable, lo que
