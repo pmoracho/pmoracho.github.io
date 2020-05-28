@@ -28,7 +28,7 @@ output:
     df_print: paged
 ---
 
-### Introducción
+## Introducción
 
 A raíz de que el 12 de mayo se conmemora el nacimiento de Florence
 Nightingale, la enfermera creadora del diagrama de área polar y
@@ -71,7 +71,7 @@ completa:
 | 29  | 9 de junio  | gráficos de coordenadas paralelas                 |             |
 | 30  | 10 de junio | diagramas de área polar o de Florence Nightingale |             |
 
-### Objetivos
+## Objetivos
 
 En lo personal, mi idea es aprovechar este desafío para:
 
@@ -82,7 +82,7 @@ En lo personal, mi idea es aprovechar este desafío para:
   - Tratar de usar datos actuales y no apoyarme en gráficas de ejemplo
     ya resueltas
 
-### Día 1: Gráfico de barras / Columnas
+## Día 1: Gráfico de barras / Columnas
 
 Una gráfica de barras o columnas, tal vez una de las más clásicas,
 muestran comparaciones numéricas entre una variable discreta y una serie
@@ -138,7 +138,7 @@ covid.data %>%
 
 <img src="/images/2020/2020-05-24-30-dias-de-graficos-en-r_files/figure-gfm/dia1-1.png" style="display: block; margin: auto;" />
 
-### Día 2: Gráfico de líneas
+## Día 2: Gráfico de líneas
 
 Son gráficos que muestras la evolución de una o más variables continuas
 en un determinado intervalo, generalmente de tiempo. Lo habitual es que
@@ -189,7 +189,7 @@ covid.data %>%
 
 <img src="/images/2020/2020-05-24-30-dias-de-graficos-en-r_files/figure-gfm/dia2-1.png" style="display: block; margin: auto;" />
 
-### Día 3: Una gráfica de puntos
+## Día 3: Una gráfica de puntos
 
 También se los conoce como gráficos de dispersión o “Scatterplot”.
 Suelen intentar mostrar la relación entre dos variables continuas por
@@ -261,7 +261,7 @@ covid.data %>%
 
 <img src="/images/2020/2020-05-24-30-dias-de-graficos-en-r_files/figure-gfm/dia3-1.png" style="display: block; margin: auto;" />
 
-### Día 4: Facetas
+## Día 4: Facetas
 
 Las “Facetas” no es un tipo de gráfico sino más bien una forma de
 mostrar uno de estos. Cuando se tiene múltiples variables, muchas veces
@@ -345,7 +345,7 @@ data %>%
 
 <img src="/images/2020/2020-05-24-30-dias-de-graficos-en-r_files/figure-gfm/dia4b-1.png" style="display: block; margin: auto;" />
 
-### Día 5: Un gráfico de Arcos
+## Día 5: Un gráfico de Arcos
 
 Los gráficos de arco forman parte de los diagramas de red, en este caso
 los nodos se colocan sobre un eje horizontal y la líneas o arcos señalan
@@ -408,7 +408,7 @@ tbl_graph(edges=prepared.data, directed = TRUE) %>%
 
 <img src="/images/2020/2020-05-24-30-dias-de-graficos-en-r_files/figure-gfm/dia5-1.png" style="display: block; margin: auto;" />
 
-### Día 6: Un gráfico de aros de cebolla
+## Día 6: Un gráfico de aros de cebolla
 
 Odio las donas, pero bueno, en realidad se llaman “donuts plots”, una
 variante de un clásico gráfico de torta, solo sin el centro, a
@@ -483,7 +483,7 @@ data %>%
 
 <img src="/images/2020/2020-05-24-30-dias-de-graficos-en-r_files/figure-gfm/dia6-1.png" style="display: block; margin: auto;" />
 
-### Día 7: Gráficos “Ridgeline”
+## Día 7: Gráficos “Ridgeline”
 
 Los graficos “ridgeline” mapean la distribución de múltiples variables
 continuas con un conjunto de variables categoricas en la forma de curvas
@@ -543,7 +543,7 @@ data %>%
 
 <img src="/images/2020/2020-05-24-30-dias-de-graficos-en-r_files/figure-gfm/dia7-1.png" style="display: block; margin: auto;" />
 
-### Día 8: Gráfico de contornos
+## Día 8: Gráfico de contornos
 
 Este tipo de gráficos básicamente une puntos x e y que comparte un mismo
 vlor de una tercer variable z, el caso típico, son los mapa
@@ -606,7 +606,7 @@ covid.data %>%
 
 <img src="/images/2020/2020-05-24-30-dias-de-graficos-en-r_files/figure-gfm/dia8-1.png" style="display: block; margin: auto;" />
 
-### Día 9: Areas apiladas
+## Día 9: Areas apiladas
 
 Es una variante del gráfico de areas, que a su vez es una variante del
 de lineas, solo que en este caso se “apilan” más de una variable, lo que
@@ -666,7 +666,7 @@ ggplot(data, aes(x=dia, y=cantidades, fill=metrica, color=metrica)) +
 
 <img src="/images/2020/2020-05-24-30-dias-de-graficos-en-r_files/figure-gfm/dia9-1.png" style="display: block; margin: auto;" />
 
-### Día 10: Exploración de paletas de colores
+## Día 10: Exploración de paletas de colores
 
 Nada del otro mundo, un script para generar una gráfica de ejemplo de
 una paleta determinada de colores, en este ejemplo explorando la del
@@ -708,7 +708,7 @@ grid.arrange(grobs = plots, ncol = 2)
 
 <img src="/images/2020/2020-05-24-30-dias-de-graficos-en-r_files/figure-gfm/dia10-1.png" style="display: block; margin: auto;" />
 
-### Día 11: Mapa de Calor
+## Día 11: Mapa de Calor
 
 Un mapa de calor muestra la variación en una determinada variable (por
 lo general continua) mediante el uso del color. En este ejemplo mapeamos
@@ -780,7 +780,7 @@ dias %>%
 
 <img src="/images/2020/2020-05-24-30-dias-de-graficos-en-r_files/figure-gfm/dia11-1.png" style="display: block; margin: auto;" />
 
-# Día 12: Un gráfico lolipop
+## Día 12: Un gráfico lolipop
 
 ``` r
 library("tidyverse")
