@@ -33,9 +33,8 @@ output:
 A raíz de que el 12 de mayo se conmemora el nacimiento de Florence
 Nightingale, la enfermera creadora del diagrama de área polar y
 referente femenina de la visualización de datos, la comunidad
-[@R4DS\_es](https://twitter.com/R4DS_es) lanzó un lindo desafío,
-[proyecto](https://github.com/cienciadedatos/datos-de-miercoles/blob/master/30-dias-de-graficos-2020.md),
-uno distinto por día. Esta es la lista
+\[@R4DS\_es\] lanzó un lindo desafío, \[proyecto\], uno distinto por
+día. Esta es la lista
 completa:
 
 | día | fecha       | desafío                                           | Completado? |
@@ -78,7 +77,7 @@ En lo personal, mi idea es aprovechar este desafío para:
   - Profundizar el conocimiento de **Ggplot2**, ya que intentaremos
     resolver todos usando este paquete
   - Probar y eventualmente ajustar, mi tema personalizado
-    [`ggelegant`](https://github.com/pmoracho/ggelegant)
+    \[`ggelegant`\]\[ggelegante\]
   - Tratar de usar datos actuales y no apoyarme en gráficas de ejemplo
     ya resueltas
 
@@ -309,8 +308,7 @@ data %>%
 
 <img src="/images/2020/2020-05-24-30-dias-de-graficos-en-r_files/figure-gfm/dia4-1.png" style="display: block; margin: auto;" />
 
-Una linda visualización es la que se legro mediante
-[geofaceteAR](https://github.com/electorArg/geofaceteAR):
+Una linda visualización es la que se legro mediante \[geofaceteAR\]:
 
 ``` r
 library("geofaceteAR")
@@ -542,3 +540,130 @@ data %>%
 ```
 
 <img src="/images/2020/2020-05-24-30-dias-de-graficos-en-r_files/figure-gfm/dia7-1.png" style="display: block; margin: auto;" />
+
+### Día 8: Gráfico de contornos
+
+Este tipo de gráficos básicamente une puntos x e y que comparte un mismo
+vlor de una tercer variable z, el caso típico, son los mapa
+cartográficos , cuyas lineas unen puntos de semejante altura.
+
+``` r
+library("tidyverse")
+library("ggrepel")
+
+if ("ggelegant" %in% rownames(installed.packages())) {
+  library("ggelegant")
+} else {
+  # devtools::install_github("pmoracho/ggelegant")
+  theme_elegante_std <- function(base_family) {}
+}
+
+covid.data <- read.csv("https://opendata.ecdc.europa.eu/covid19/casedistribution/csv", na.strings = "", fileEncoding = "UTF-8-BOM",
+                       stringsAsFactors = FALSE)
+
+hdi <- read.csv("https://data.humdata.org/dataset/05b5d8f1-9e7f-4379-9958-125c203d12ac/resource/4a7fd374-7e35-4c04-b7c8-25e5943aa476/download/hdi_human_development_index_hdig_value.csv", stringsAsFactors = FALSE)
+hdi %>% 
+  group_by(country_code) %>% 
+  arrange(year) %>% 
+  slice(n()) %>% 
+  select(country_code, country, year, value) -> last_hdi
+
+
+last_date <- max(as.Date(covid.data$dateRep,"%d/%m/%Y"))
+paises_de_interes <- c( 'Argentina',
+                        "Niger", "Norway", "EEUU", "Mauritania")
+covid.data %>% 
+  group_by(countriesAndTerritories, countryterritoryCode) %>% 
+  summarize(casos = sum(cases), fallecidos = sum(deaths)) %>% 
+  ungroup() %>% 
+  inner_join(last_hdi,
+             by = c("countryterritoryCode" = "country_code")
+  ) %>% 
+  mutate(pais = ifelse(countriesAndTerritories == 'United_States_of_America', 'EEUU', countriesAndTerritories)) %>% 
+  select(pais, casos, fallecidos, HDI = value) %>% 
+  mutate(pais_etiquetado = ifelse(pais %in% paises_de_interes, paste0(pais, " (casos: ", format(casos, digits=0, big.mark = ',', trim=TRUE), " hdi: ", HDI, ")"), NA)) %>% 
+  ggplot(aes(x=HDI, y=casos)) +
+  geom_point(color = "#67a9cf", alpha=.5, size=3) +
+  geom_smooth(method = 'lm',formula='y ~ x', se=FALSE, color="#ef8a62") +
+  geom_density2d(contour = TRUE, n = 1000) +
+  geom_label_repel(mapping = aes(label = pais_etiquetado),
+                   color="#67a9cf",family = "Ralleway", vjust = -1.2, hjust = 1.1, fontface="bold") +
+
+  scale_y_log10(
+    breaks = scales::trans_breaks("log10", function(x) 10^x),
+    labels = scales::trans_format("log10", scales::math_format(10^.x))
+  ) +
+  labs(title = paste("COVID-19"), 
+       subtitle = paste0("¿Hay relación entre el desarrollo humano y la cantidad de infecciones?\n (Datos al: ", last_date, ")") , 
+       caption = "Fuente: https://opendata.ecdc.europa.eu/covid19/casedistribution/csv", 
+       y = "log10(Cantidad de infectados)", 
+       x = "Human development Index (2013)"
+  ) +
+  theme_elegante_std(base_family = "Ralleway")
+```
+
+<img src="/images/2020/2020-05-24-30-dias-de-graficos-en-r_files/figure-gfm/dia8-1.png" style="display: block; margin: auto;" />
+\#\#\# Día 9: Areas apilads
+
+Es una variante del gráfico de areas, que a su vez es una variante del
+de lineas, solo que en este caso se “apilan” más de una variable, lo que
+es útil para compararlas.
+
+``` r
+library("tidyverse")
+library("ggrepel")
+
+if ("ggelegant" %in% rownames(installed.packages())) {
+  library("ggelegant")
+} else {
+  # devtools::install_github("pmoracho/ggelegant")
+  theme_elegante_std <- function(base_family) {}
+}
+
+covid.data <- read_csv('https://docs.google.com/spreadsheets/d/16-bnsDdmmgtSxdWbVMboIHo5FRuz76DBxsz_BbsEVWA/export?format=csv&id=16-bnsDdmmgtSxdWbVMboIHo5FRuz76DBxsz_BbsEVWA&gid=0')
+covid.data %>% 
+  mutate(fecha=as.Date(fecha,"%d/%m/%Y")) %>% 
+  group_by(dia_inicio,fecha) %>% 
+  summarize(casos = sum(nue_casosconf_diff),
+         fallecidos = sum(nue_fallecidos_diff)) %>% 
+  select(dia = dia_inicio, fecha, casos, fallecidos) %>% 
+  pivot_longer(-c("dia", "fecha"), names_to = 'metrica', values_to='cantidades') -> data
+
+data %>% 
+  left_join(data %>% 
+              group_by(metrica) %>%
+              summarise(cantidades = max(cantidades), maximo = TRUE),
+            by = c("metrica", "cantidades")
+  ) %>% 
+  mutate(maximo = ifelse(maximo, paste0("Pico de ", metrica, " de ", cantidades, "\nel ", fecha), NA)) -> data
+
+last_date <- max(as.Date(covid.data$fecha,"%d/%m/%Y"))
+
+ggplot(data, aes(x=dia, y=cantidades, fill=metrica, color=metrica)) + 
+  geom_area(alpha=0.6 , size=1) +
+  labs(title = paste("COVID-19 en Argentina"), 
+       subtitle = paste0("Variación de casos y fallecimientos por día (al: ", last_date, ")") , 
+       caption = "Fuente: https://github.com/SistemasMapache/Covid19arData", 
+       y = "Cantidades diarias", 
+       x = "Número de días desde el 1er caso"
+  ) +
+  geom_label_repel(mapping = aes(label = maximo),
+                   color = "white",
+                   segment.color="gray90",
+                   family = "Ralleway", 
+                   vjust = -1,
+                   hjust = 1.5,
+                   box.padding = 1,
+                   show.legend = FALSE) +
+  scale_fill_discrete(palette = function(x) c("#67a9cf", "#ef8a62")) +
+  scale_color_discrete(palette = function(x) c("#67a9cf", "#ef8a62")) +
+  guides(color = FALSE, label=FALSE) +
+  theme_elegante_std(base_family = "Ralleway")
+```
+
+<img src="/images/2020/2020-05-24-30-dias-de-graficos-en-r_files/figure-gfm/dia9-1.png" style="display: block; margin: auto;" />
+\[proyecto\]:
+<https://github.com/cienciadedatos/datos-de-miercoles/blob/master/30-dias-de-graficos-2020.md>
+\[ggelegante\]: <https://github.com/pmoracho/ggelegant> \[@R4DS\_es\]:
+<https://twitter.com/R4DS_es> \[geofaceteAR\]:
+<https://github.com/electorArg/geofaceteAR>
