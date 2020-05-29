@@ -51,8 +51,8 @@ completa:
 | 9   | 20 de mayo  | gráficos de áreas apiladas                        | ✓           |
 | 10  | 21 de mayo  | ¡explorar paletas de colores\!                    | ✓           |
 | 11  | 22 de mayo  | mapas de calor (*heatmap*)                        | ✓           |
-| 12  | 23 de mayo  | gráficos de paleta (*lollipop*)                   |             |
-| 13  | 24 de mayo  | visualizar datos temporales                       |             |
+| 12  | 23 de mayo  | gráficos de paleta (*lollipop*)                   | ✓           |
+| 13  | 24 de mayo  | visualizar datos temporales                       | ✓           |
 | 14  | 25 de mayo  | gráficos de rectángulos/árbol (*treemap*)v        |             |
 | 15  | 26 de mayo  | dendorgamas                                       |             |
 | 16  | 27 de mayo  | gráficos de waffle                                |             |
@@ -834,3 +834,58 @@ data %>%
 ```
 
 <img src="/images/2020/2020-05-24-30-dias-de-graficos-en-r_files/figure-gfm/dia12-1.png" style="display: block; margin: auto;" />
+
+## Día 13: Serie temporal
+
+Nada del otro mundo, el clásico gráfico de lineas, en el eje X tenemos
+el tiempo y en el Y un precio, en este caso el vaalor del dólar en
+Argentina en los últimos años, con algunas anotaciones, como ser los
+comiencos de cada presidencia.
+
+``` r
+library("tidyverse")
+library("ggrepel")
+
+if ("ggelegant" %in% rownames(installed.packages())) {
+  library("ggelegant")
+} else {
+  # devtools::install_github("pmoracho/ggelegant")
+  theme_elegante_std <- function(base_family) {}
+}
+
+presidencias <- data.frame(fecha = as.Date(c('2019-12-10', '2015-12-10')), presidencia=c('Alberto Fernández', 'Mauricio Macri'))
+
+dolar <- read.csv("https://apis.datos.gob.ar/series/api/series/?ids=168.1_T_CAMBIOR_D_0_0_26&limit=5000&format=csv", na.strings = "", fileEncoding = "UTF-8-BOM",
+                       stringsAsFactors = FALSE)
+dolar$indice_tiempo = as.Date(dolar$indice_tiempo, format = "%Y-%m-%d")
+dolar %>% 
+  ggplot(mapping = aes(x=indice_tiempo, y=tipo_cambio_bna_vendedor)) + 
+  geom_line(size = 1, color="#67a9cf") +
+  geom_vline(data = presidencias,
+             mapping = aes(xintercept=fecha),
+             color = "#ef8a62",
+             linetype="dashed") +
+  geom_point(data = presidencias,
+             mapping = aes(x=fecha, y=10),
+             color = "#ef8a62",
+             size = 2) +
+  geom_label_repel(data = presidencias,
+                   mapping = aes(x=fecha, y=10, label = presidencia), 
+                   hjust= -1,
+                   color = "#ef8a62",
+                   family = "Ralleway", fontface = 'bold',
+                   arrow = arrow(length = unit(0.03, "npc"), type = "closed", ends = "first")
+  ) +      
+  
+  
+  labs(title = paste("Dólar en Argentina"), 
+       subtitle = paste("Cotización del Banco nación entre el", min(dolar$indice_tiempo), "y el" , max(dolar$indice_tiempo)),
+       caption = "Fuente: https://datos.gob.ar/", 
+       y = "Cotización en $", 
+       x = ""
+  ) +
+  scale_x_date(date_breaks = "12 month", date_labels="%Y-%m") +
+  theme_elegante_std(base_family = "Ralleway") 
+```
+
+<img src="/images/2020/2020-05-24-30-dias-de-graficos-en-r_files/figure-gfm/dia13-1.png" style="display: block; margin: auto;" />
