@@ -57,7 +57,7 @@ completa:
 | 15  | 26 de mayo  | dendorgamas                                       | ✓           |
 | 16  | 27 de mayo  | gráficos de waffle                                | ✓           |
 | 17  | 28 de mayo  | diagramas de sankey                               | ✓           |
-| 18  | 29 de mayo  | visualizar datos espaciales                       |             |
+| 18  | 29 de mayo  | visualizar datos espaciales                       | ✓           |
 | 19  | 30 de mayo  | gráficos de flujo (*stream graph*)                |             |
 | 20  | 31 de mayo  | redes                                             |             |
 | 21  | 1 de junio  | gráficos con anotaciones                          |             |
@@ -137,7 +137,7 @@ covid.data %>%
        x = ""
     ) +
     scale_fill_discrete(palette = function(x) c("#67a9cf", "#ef8a62")) +
-    theme_elegante_std(base_family = "Ralleway") +
+    theme_elegante_std(base_family = "Assistant") +
     theme(plot.caption=element_text( margin=margin(1, 0, -.1, 0, "cm")),
           plot.subtitle = element_text(margin=margin(0, 0, .8, 0, "cm")))
 ```
@@ -193,7 +193,7 @@ covid.data %>%
        x = "Número de días desde el 1er caso"
   ) +
   scale_color_discrete(palette = function(x) c("#67a9cf", "#ef8a62")) +
-  theme_elegante_std(base_family = "Ralleway") 
+  theme_elegante_std(base_family = "Assistant") 
 ```
 
 <img src="/images/2020/2020-05-24-30-dias-de-graficos-en-r_files/figure-gfm/dia2-1.png" style="display: block; margin: auto;" />
@@ -254,9 +254,9 @@ covid.data %>%
     geom_point(color = "#67a9cf", alpha=.5, size=3) +
     geom_smooth(method = 'lm',formula='y ~ x', se=FALSE, color="#ef8a62") +
     geom_label_repel(mapping = aes(label = pais_etiquetado),
-                     color="#67a9cf",family = "Ralleway", vjust = -1.2, hjust = 1.1) +
+                     color="#67a9cf",family = "Assistant", vjust = -1.2, hjust = 1.1) +
                      # nudge_x = 1, nudge_y = 5, color="#67a9cf",
-                     # vjust = -2, family = "Ralleway",  
+                     # vjust = -2, family = "Assistant",  
                      # direction  = "y",
                      # hjust = 2) +
     scale_y_log10(
@@ -269,7 +269,7 @@ covid.data %>%
          y = "log10(Cantidad de infectados)", 
          x = "Human development Index (2013)"
     ) +
-    theme_elegante_std(base_family = "Ralleway") 
+    theme_elegante_std(base_family = "Assistant") 
 ```
 
 <img src="/images/2020/2020-05-24-30-dias-de-graficos-en-r_files/figure-gfm/dia3-1.png" style="display: block; margin: auto;" />
@@ -291,7 +291,11 @@ if ("ggelegant" %in% rownames(installed.packages())) {
   theme_elegante_std <- function(base_family) {}
 }
 
-covid.data <- read_csv('https://docs.google.com/spreadsheets/d/16-bnsDdmmgtSxdWbVMboIHo5FRuz76DBxsz_BbsEVWA/export?format=csv&id=16-bnsDdmmgtSxdWbVMboIHo5FRuz76DBxsz_BbsEVWA&gid=0')
+# Datos originales
+# covid.data <- read_csv('https://docs.google.com/spreadsheets/d/16-bnsDdmmgtSxdWbVMboIHo5FRuz76DBxsz_BbsEVWA/export?format=csv&id=16-bnsDdmmgtSxdWbVMboIHo5FRuz76DBxsz_BbsEVWA&gid=0')
+
+# Datos reproducir la gráfica
+covid.data <- readRDS(url("https://github.com/pmoracho/R/raw/master/data/covid.casos.arg.Rda","rb"))
 
 last_date <- max(as.Date(covid.data$fecha,"%d/%m/%Y"))
 
@@ -317,7 +321,7 @@ data %>%
        x = "Número de días desde el 1er caso"
   ) +
   facet_wrap(~distrito,scales="free") +
-  theme_elegante_std(base_family = "Ralleway") 
+  theme_elegante_std(base_family = "Assistant") 
 ```
 
 <img src="/images/2020/2020-05-24-30-dias-de-graficos-en-r_files/figure-gfm/dia4-1.png" style="display: block; margin: auto;" />
@@ -353,7 +357,7 @@ data %>%
   ) +
   facet_geo(~ distrito, grid = argentina_grid, scales = "free_y") +
   # facet_wrap(~ distrito, scales = "free_y") +
-  theme_elegante_std(base_family = "Ralleway") 
+  theme_elegante_std(base_family = "Assistant") 
 ```
 
 <img src="/images/2020/2020-05-24-30-dias-de-graficos-en-r_files/figure-gfm/dia4b-1.png" style="display: block; margin: auto;" />
@@ -406,7 +410,7 @@ tbl_graph(edges=prepared.data, directed = TRUE) %>%
   geom_node_point(size = 2, color="#67a9cf") +
   geom_node_text(aes(label = str_wrap(name,13)), size = 3, nudge_y =-.7, angle = 90, fontface = "bold",  hjust=.5) +
   coord_cartesian(clip = "off") + 
-  theme_elegante_std(base_family = "Ralleway") +
+  theme_elegante_std(base_family = "Assistant") +
   theme(axis.title.x=element_blank(),
         axis.text.x=element_blank(),
         axis.ticks.x=element_blank(),
@@ -442,7 +446,12 @@ if ("ggelegant" %in% rownames(installed.packages())) {
   theme_elegante_std <- function(base_family) {}
 }
 
-covid.data <- read_csv('https://docs.google.com/spreadsheets/d/16-bnsDdmmgtSxdWbVMboIHo5FRuz76DBxsz_BbsEVWA/export?format=csv&id=16-bnsDdmmgtSxdWbVMboIHo5FRuz76DBxsz_BbsEVWA&gid=0')
+# Datos originales
+# covid.data <- read_csv('https://docs.google.com/spreadsheets/d/16-bnsDdmmgtSxdWbVMboIHo5FRuz76DBxsz_BbsEVWA/export?format=csv&id=16-bnsDdmmgtSxdWbVMboIHo5FRuz76DBxsz_BbsEVWA&gid=0')
+
+# Datos reproducir la gráfica
+covid.data <- readRDS(url("https://github.com/pmoracho/R/raw/master/data/covid.casos.arg.Rda","rb"))
+
 
 last_date <- max(as.Date(covid.data$fecha,"%d/%m/%Y"))
 break_porc <- .95
@@ -474,7 +483,7 @@ data %>%
                                  colour =  ifelse(porc > 10, 2, 0),
                                  label = paste0(distrito, ": ", format(porc, digits=2, trim=FALSE), "%\nCasos:", 
                                                 format(casos, big.mark = ",", trim=FALSE))),
-                   family = "Ralleway", 
+                   family = "Assistant", 
                    nudge_y = 1,
                    nudge_x = 1) +
   coord_polar(theta="y") + # Try to remove that to understand how the chart is built initially
@@ -483,7 +492,7 @@ data %>%
        subtitle = paste0("Distribución del ", mac_perc , "% de los casos por distrito\n (Datos al: ", last_date, ")") , 
        caption = "Fuente: https://github.com/SistemasMapache/Covid19arData"
   ) +
-  theme_elegante_std(base_family = "Ralleway") +
+  theme_elegante_std(base_family = "Assistant") +
   theme(axis.title.x=element_blank(),
         axis.text.x=element_blank(),
         axis.ticks.x=element_blank(),
@@ -513,7 +522,12 @@ if ("ggelegant" %in% rownames(installed.packages())) {
   theme_elegante_std <- function(base_family) {}
 }
 
-covid.data <- read_csv('https://docs.google.com/spreadsheets/d/16-bnsDdmmgtSxdWbVMboIHo5FRuz76DBxsz_BbsEVWA/export?format=csv&id=16-bnsDdmmgtSxdWbVMboIHo5FRuz76DBxsz_BbsEVWA&gid=0')
+# Datos originales
+# covid.data <- read_csv('https://docs.google.com/spreadsheets/d/16-bnsDdmmgtSxdWbVMboIHo5FRuz76DBxsz_BbsEVWA/export?format=csv&id=16-bnsDdmmgtSxdWbVMboIHo5FRuz76DBxsz_BbsEVWA&gid=0')
+
+# Datos reproducir la gráfica
+covid.data <- readRDS(url("https://github.com/pmoracho/R/raw/master/data/covid.casos.arg.Rda","rb"))
+
 
 last_date <- max(as.Date(covid.data$fecha,"%d/%m/%Y"))
 break_porc <- .95
@@ -550,7 +564,7 @@ data %>%
        x = "Cantidades de casos diarios"
     ) +
     scale_x_continuous(breaks = c(c(0,5, 10, 20, 50), seq(from=75, to=max(data$casos)+25, by = 25))) +
-    theme_elegante_std(base_family = "Ralleway") +
+    theme_elegante_std(base_family = "Assistant") +
     theme(legend.position = "none")  
 ```
 
@@ -573,10 +587,14 @@ if ("ggelegant" %in% rownames(installed.packages())) {
   theme_elegante_std <- function(base_family) {}
 }
 
-covid.data <- read.csv("https://opendata.ecdc.europa.eu/covid19/casedistribution/csv", na.strings = "", fileEncoding = "UTF-8-BOM",
-                       stringsAsFactors = FALSE)
+# Para descarga de los datos actualizados
+# covid.data <- read.csv("https://opendata.ecdc.europa.eu/covid19/casedistribution/csv", na.strings = "", fileEncoding = "UTF-8-BOM", stringsAsFactors = FALSE)
+# hdi <- read.csv("https://data.humdata.org/dataset/05b5d8f1-9e7f-4379-9958-125c203d12ac/resource/4a7fd374-7e35-4c04-b7c8-25e5943aa476/downlo
 
-hdi <- read.csv("https://data.humdata.org/dataset/05b5d8f1-9e7f-4379-9958-125c203d12ac/resource/4a7fd374-7e35-4c04-b7c8-25e5943aa476/download/hdi_human_development_index_hdig_value.csv", stringsAsFactors = FALSE)
+# Datos reproducir la gráfica
+covid.data <- readRDS(url("https://github.com/pmoracho/R/raw/master/data/covid.mundial.Rda","rb"))
+hdi <- readRDS(url("https://github.com/pmoracho/R/raw/master/data/hdi.Rda","rb"))
+
 hdi %>% 
   group_by(country_code) %>% 
   arrange(year) %>% 
@@ -602,7 +620,7 @@ covid.data %>%
   geom_smooth(method = 'lm',formula='y ~ x', se=FALSE, color="#ef8a62") +
   geom_density2d(contour = TRUE, n = 1000) +
   geom_label_repel(mapping = aes(label = pais_etiquetado),
-                   color="#67a9cf",family = "Ralleway", vjust = -1.2, hjust = 1.1, fontface="bold") +
+                   color="#67a9cf",family = "Assistant", vjust = -1.2, hjust = 1.1, fontface="bold") +
 
   scale_y_log10(
     breaks = scales::trans_breaks("log10", function(x) 10^x),
@@ -614,7 +632,7 @@ covid.data %>%
        y = "log10(Cantidad de infectados)", 
        x = "Human development Index (2013)"
   ) +
-  theme_elegante_std(base_family = "Ralleway")
+  theme_elegante_std(base_family = "Assistant")
 ```
 
 <img src="/images/2020/2020-05-24-30-dias-de-graficos-en-r_files/figure-gfm/dia8-1.png" style="display: block; margin: auto;" />
@@ -636,7 +654,12 @@ if ("ggelegant" %in% rownames(installed.packages())) {
   theme_elegante_std <- function(base_family) {}
 }
 
-covid.data <- read_csv('https://docs.google.com/spreadsheets/d/16-bnsDdmmgtSxdWbVMboIHo5FRuz76DBxsz_BbsEVWA/export?format=csv&id=16-bnsDdmmgtSxdWbVMboIHo5FRuz76DBxsz_BbsEVWA&gid=0')
+# Datos originales
+# covid.data <- read_csv('https://docs.google.com/spreadsheets/d/16-bnsDdmmgtSxdWbVMboIHo5FRuz76DBxsz_BbsEVWA/export?format=csv&id=16-bnsDdmmgtSxdWbVMboIHo5FRuz76DBxsz_BbsEVWA&gid=0')
+
+# Datos reproducir la gráfica
+covid.data <- readRDS(url("https://github.com/pmoracho/R/raw/master/data/covid.casos.arg.Rda","rb"))
+
 covid.data %>% 
   mutate(fecha=as.Date(fecha,"%d/%m/%Y")) %>% 
   group_by(dia_inicio,fecha) %>% 
@@ -666,7 +689,7 @@ ggplot(data, aes(x=dia, y=cantidades, fill=metrica, color=metrica)) +
   geom_label_repel(mapping = aes(label = maximo),
                    color = "white",
                    segment.color="gray90",
-                   family = "Ralleway", 
+                   family = "Assistant", 
                    vjust = -1,
                    hjust = 1.5,
                    box.padding = 1,
@@ -674,7 +697,7 @@ ggplot(data, aes(x=dia, y=cantidades, fill=metrica, color=metrica)) +
   scale_fill_discrete(palette = function(x) c("#67a9cf", "#ef8a62")) +
   scale_color_discrete(palette = function(x) c("#67a9cf", "#ef8a62")) +
   guides(color = FALSE, label=FALSE) +
-  theme_elegante_std(base_family = "Ralleway")
+  theme_elegante_std(base_family = "Assistant")
 ```
 
 <img src="/images/2020/2020-05-24-30-dias-de-graficos-en-r_files/figure-gfm/dia9-1.png" style="display: block; margin: auto;" />
@@ -703,7 +726,7 @@ paletas <- names(wes_palettes)
 data.frame(x=factor(1:colores), y=1) %>% 
   ggplot(aes(x = x, y = y, fill = x)) + 
   geom_col() +
-  theme_elegante_std(base_family = "Ralleway") +
+  theme_elegante_std(base_family = "Assistant") +
   theme(axis.text.x=element_blank(),
         axis.ticks.x=element_blank(),
         axis.title.y=element_blank(),
@@ -741,9 +764,11 @@ library("scales")
   theme_elegante_std <- function(base_family) {}
 }
 
-covid.data <- read_csv('https://docs.google.com/spreadsheets/d/16-bnsDdmmgtSxdWbVMboIHo5FRuz76DBxsz_BbsEVWA/export?format=csv&id=16-bnsDdmmgtSxdWbVMboIHo5FRuz76DBxsz_BbsEVWA&gid=0')
-# Dependiendo del horario, la última fila puede ser un placeholder si datos
-# covid.data <- covid.data[covid.data$dia_inicio != max(covid.data$dia_inicio),]
+# Datos originales
+# covid.data <- read_csv('https://docs.google.com/spreadsheets/d/16-bnsDdmmgtSxdWbVMboIHo5FRuz76DBxsz_BbsEVWA/export?format=csv&id=16-bnsDdmmgtSxdWbVMboIHo5FRuz76DBxsz_BbsEVWA&gid=0')
+
+# Datos reproducir la gráfica
+covid.data <- readRDS(url("https://github.com/pmoracho/R/raw/master/data/covid.casos.arg.Rda","rb"))
 
 last_date <- max(as.Date(covid.data$fecha,"%d/%m/%Y"))
 first_date <- min(as.Date(covid.data$fecha,"%d/%m/%Y"))
@@ -785,7 +810,7 @@ dias %>%
        caption = "Fuente: https://github.com/SistemasMapache/Covid19arData", 
        x = "Últimos días"
     ) +
-    theme_elegante_std(base_family = "Ralleway") + 
+    theme_elegante_std(base_family = "Assistant") + 
     scale_x_continuous(breaks = seq(ndias - dias_ventana, ndias, by = 1)) +
     theme(axis.title.y=element_blank(),
         legend.position = "none") 
@@ -807,8 +832,12 @@ if ("ggelegant" %in% rownames(installed.packages())) {
   theme_elegante_std <- function(base_family) {}
 }
 
-covid.data <- read.csv("https://opendata.ecdc.europa.eu/covid19/casedistribution/csv", na.strings = "", fileEncoding = "UTF-8-BOM",
-                       stringsAsFactors = FALSE)
+# Para descarga de los datos actualizados
+# covid.data <- read.csv("https://opendata.ecdc.europa.eu/covid19/casedistribution/csv", na.strings = "", fileEncoding = "UTF-8-BOM", stringsAsFactors = FALSE)
+# hdi <- read.csv("https://data.humdata.org/dataset/05b5d8f1-9e7f-4379-9958-125c203d12ac/resource/4a7fd374-7e35-4c04-b7c8-25e5943aa476/downlo
+
+# Datos reproducir la gráfica
+covid.data <- readRDS(url("https://github.com/pmoracho/R/raw/master/data/covid.mundial.Rda","rb"))
 
 last_date <- max(as.Date(covid.data$dateRep,"%d/%m/%Y"))
 covid.data %>% 
@@ -824,7 +853,7 @@ media_fallecidos <- mean(data$fallecidos)
 data %>% 
   filter(nr <= 50) %>% 
   mutate(sobre_media = casos > media_casos,
-         pais = countrycode(code_pais, origin = 'iso3c', destination = 'un.name.es')) %>% 
+         pais = paste0(countrycode(code_pais, origin = 'iso3c', destination = 'un.name.es'), " (", nr, ")")) %>% 
   ggplot(aes(x=fct_reorder(pais, -nr), y=casos, color = sobre_media)) +
   geom_segment(aes( y=0 , xend = pais, yend = casos)) + 
   geom_point() +
@@ -837,13 +866,13 @@ data %>%
        subtitle = paste("Casos por pais al: ", last_date, '\nLos primeros 50 países') , 
        caption = "Fuente: https://opendata.ecdc.europa.eu/covid19/casedistribution/csv", 
        y = "Casos", 
-       x = "País"
+       x = ""
   ) +
   scale_y_continuous(breaks = scales::pretty_breaks(n = 5), limits = c(0, max(data$casos) * 1.01),
                      labels = scales::comma) +
 
   scale_color_manual(labels = c("Sobre la media", "Debajo de la media"), values = c("#67a9cf", "#ef8a62")) +
-  theme_elegante_std(base_family = "Ralleway") 
+  theme_elegante_std(base_family = "Assistant") 
 ```
 
 <img src="/images/2020/2020-05-24-30-dias-de-graficos-en-r_files/figure-gfm/dia12-1.png" style="display: block; margin: auto;" />
@@ -868,8 +897,11 @@ if ("ggelegant" %in% rownames(installed.packages())) {
 
 presidencias <- data.frame(fecha = as.Date(c('2019-12-10', '2015-12-10')), presidencia=c('Alberto Fernández', 'Mauricio Macri'))
 
-dolar <- read.csv("https://apis.datos.gob.ar/series/api/series/?ids=168.1_T_CAMBIOR_D_0_0_26&limit=5000&format=csv", na.strings = "", fileEncoding = "UTF-8-BOM",
-                       stringsAsFactors = FALSE)
+
+# dolar <- read.csv("https://apis.datos.gob.ar/series/api/series/?ids=168.1_T_CAMBIOR_D_0_0_26&limit=5000&format=csv", na.strings = "", fileEncoding = "UTF-8-BOM",
+#                        stringsAsFactors = FALSE)
+dolar <- readRDS(url("https://github.com/pmoracho/R/raw/master/data/dolar.Rda","rb"))
+
 dolar$indice_tiempo = as.Date(dolar$indice_tiempo, format = "%Y-%m-%d")
 dolar %>% 
   ggplot(mapping = aes(x=indice_tiempo, y=tipo_cambio_bna_vendedor)) + 
@@ -886,7 +918,7 @@ dolar %>%
                    mapping = aes(x=fecha, y=10, label = presidencia), 
                    hjust= -1,
                    color = "#ef8a62",
-                   family = "Ralleway", fontface = 'bold',
+                   family = "Assistant", fontface = 'bold',
                    arrow = arrow(length = unit(0.03, "npc"), type = "closed", ends = "first")
   ) +      
   
@@ -898,7 +930,7 @@ dolar %>%
        x = ""
   ) +
   scale_x_date(date_breaks = "12 month", date_labels="%Y-%m") +
-  theme_elegante_std(base_family = "Ralleway") 
+  theme_elegante_std(base_family = "Assistant") 
 ```
 
 <img src="/images/2020/2020-05-24-30-dias-de-graficos-en-r_files/figure-gfm/dia13-1.png" style="display: block; margin: auto;" />
@@ -923,9 +955,11 @@ if ("ggelegant" %in% rownames(installed.packages())) {
   theme_elegante_std <- function(base_family) {}
 }
 
-covid.data <- read_csv('https://docs.google.com/spreadsheets/d/16-bnsDdmmgtSxdWbVMboIHo5FRuz76DBxsz_BbsEVWA/export?format=csv&id=16-bnsDdmmgtSxdWbVMboIHo5FRuz76DBxsz_BbsEVWA&gid=0')
-# Dependiendo del horario, la última fila puede ser un placeholder si datos
-# covid.data <- covid.data[covid.data$dia_inicio != max(covid.data$dia_inicio),]
+# Datos originales
+# covid.data <- read_csv('https://docs.google.com/spreadsheets/d/16-bnsDdmmgtSxdWbVMboIHo5FRuz76DBxsz_BbsEVWA/export?format=csv&id=16-bnsDdmmgtSxdWbVMboIHo5FRuz76DBxsz_BbsEVWA&gid=0')
+
+# Datos reproducir la gráfica
+covid.data <- readRDS(url("https://github.com/pmoracho/R/raw/master/data/covid.casos.arg.Rda","rb"))
 
 last_date <- max(as.Date(covid.data$fecha,"%d/%m/%Y"))
 first_date <- min(as.Date(covid.data$fecha,"%d/%m/%Y"))
@@ -950,10 +984,10 @@ dias %>%
   geom_treemap_subgroup_border() +
   geom_treemap_subgroup_text(place = "centre", grow = T, alpha = .5, colour =
                               "White", fontface = "italic", min.size = 0) +
-  geom_treemap_text(place = "middle", grow = T, reflow = T, alpha = 0.8, colour = "black", family= "Ralleway",
+  geom_treemap_text(place = "middle", grow = T, reflow = T, alpha = 0.8, colour = "black", family= "Assistant",
                     padding.x = grid::unit(3, "mm"),
                     padding.y = grid::unit(3, "mm")) +
-  theme_elegante_std(base_family = "Ralleway") +
+  theme_elegante_std(base_family = "Assistant") +
   labs(title = paste("COVID-19 en Argentina"), 
        subtitle = paste0("Distribución de los casos por distritos al: ", last_date), 
        caption = "Fuente: https://github.com/SistemasMapache/Covid19arData"
@@ -1097,9 +1131,11 @@ plot_ggdendro <- function(hcdata,
   p
 }
 
-covid.data <- read_csv('https://docs.google.com/spreadsheets/d/16-bnsDdmmgtSxdWbVMboIHo5FRuz76DBxsz_BbsEVWA/export?format=csv&id=16-bnsDdmmgtSxdWbVMboIHo5FRuz76DBxsz_BbsEVWA&gid=0')
-# Dependiendo del horario, la última fila puede ser un placeholder si datos
-# covid.data <- covid.data[covid.data$dia_inicio != max(covid.data$dia_inicio),]
+# Datos originales
+# covid.data <- read_csv('https://docs.google.com/spreadsheets/d/16-bnsDdmmgtSxdWbVMboIHo5FRuz76DBxsz_BbsEVWA/export?format=csv&id=16-bnsDdmmgtSxdWbVMboIHo5FRuz76DBxsz_BbsEVWA&gid=0')
+
+# Datos reproducir la gráfica
+covid.data <- readRDS(url("https://github.com/pmoracho/R/raw/master/data/covid.casos.arg.Rda","rb"))
 
 last_date <- max(as.Date(covid.data$fecha,"%d/%m/%Y"))
 first_date <- min(as.Date(covid.data$fecha,"%d/%m/%Y"))
@@ -1133,7 +1169,7 @@ plot_ggdendro(hcdata,
               expand.y    = 0.2,
               nbreaks     = 10) +
   # scale_y_continuous(labels = scales::comma) +
-  theme_elegante_std(base_family = "Ralleway") +
+  theme_elegante_std(base_family = "Assistant") +
   labs(title = paste("COVID-19 en Argentina"), 
        subtitle = paste0("Agrupación de provincias por cantidad de casos en 5 grupos principales (al: ", last_date, ")"), 
        caption = "Fuente: https://github.com/SistemasMapache/Covid19arData",
@@ -1207,7 +1243,7 @@ covid.data %>%
   coord_equal() +
   facet_wrap(~ sexo) +
   scale_fill_manual(values=c("#E69F00", "#56B4E9", "#009E73",  "#0072B2", "#D55E00", "#CC79A7")) +
-  theme_elegante_std(base_family = "Ralleway") +
+  theme_elegante_std(base_family = "Assistant") +
   labs(title = paste("COVID-19 en Argentina"), 
        subtitle = paste0("Clasificación etaria de infectados (al: ", last_date, ")\n"), 
        caption = "Fuente: datos.gob.ar",
@@ -1302,7 +1338,58 @@ plot_data %>%
   ) +
   scale_fill_manual(values = c("firebrick3", "darkorange", "deepskyblue3", "darkorchid1", "seagreen")) +
   scale_color_manual(values = rep("Black",5)) +
-  theme_elegante_std(base_family = "Ralleway")
+  theme_elegante_std(base_family = "Assistant")
 ```
 
 <img src="/images/2020/2020-05-24-30-dias-de-graficos-en-r_files/figure-gfm/dia17-1.png" style="display: block; margin: auto;" />
+
+## Día 18: Datos espaciales
+
+En este casos hacemos un mapa de puntos (“dot map”) dónde cada punto es
+una coordenada geografica y representa una ocurrencia de una variable
+categorica. Usamos el mapa de la Ciudad de Buenos Aires y la
+estadísticas de delito del año 2018, para ubicar estos geograficamente.
+
+``` r
+library("tidyverse")
+library("sf")
+
+if ("ggelegant" %in% rownames(installed.packages())) {
+  library("ggelegant")
+} else {
+  # devtools::install_github("pmoracho/ggelegant")
+  theme_elegante_std <- function(base_family) {}
+}
+
+# delitos <- read.csv("http://cdn.buenosaires.gob.ar/datosabiertos/datasets/mapa-del-delito/delitos_2019.csv", 
+#                     na.strings = "", fileEncoding = "UTF-8-BOM", stringsAsFactors = FALSE)
+# comunas <- st_read('https://bitsandbricks.github.io/data/CABA_comunas.geojson')
+
+delitos <- readRDS(url("https://github.com/pmoracho/R/raw/master/data/delitos.caba.Rda","rb"))
+comunas <- readRDS(url("https://github.com/pmoracho/R/raw/master/data/comunas.caba.Rda","rb"))
+
+delitos %>% 
+  na.exclude() %>% 
+  st_as_sf(coords = c("long","lat"), remove = FALSE,  crs = 4326) %>% 
+  st_join(comunas)-> delitos_puntos
+
+ggplot(delitos_puntos) +
+  geom_sf(data = comunas, fill = "white") +
+  geom_sf(data = delitos_puntos, aes(color=tipo_delito, alpha = 1), size=1) +
+  theme_elegante_std(base_family = "Assistant") + 
+  labs(title = paste("CABA - Mapa del delito"), 
+       subtitle = paste0("Delitos por tipo en la Ciudad de Buenos Aires - Año 2018\n") , 
+       caption = "Fuente: data.buenosaires.gob.ar", 
+       y = "", 
+       x = ""
+  ) +
+  theme(axis.text.x=element_blank(),
+        axis.ticks.x=element_blank(),
+        axis.title.y=element_blank(),
+        axis.text.y=element_blank(),
+        axis.ticks.y=element_blank(),
+        legend.position = "none") +
+  facet_grid(cols = vars(tipo_delito))
+```
+
+<img src="/images/2020/2020-05-24-30-dias-de-graficos-en-r_files/figure-gfm/dia18-1.png" style="display: block; margin: auto;" />
