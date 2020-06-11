@@ -1346,9 +1346,10 @@ plot_data %>%
 ## Día 18: Datos espaciales
 
 En este casos hacemos un mapa de puntos (“dot map”) dónde cada punto es
-una coordenada geografica y representa una ocurrencia de una variable
-categorica. Usamos el mapa de la Ciudad de Buenos Aires y la
-estadísticas de delito del año 2018, para ubicar estos geograficamente.
+una coordenada geográfica y representa una ocurrencia de una variable
+categórica. Usamos el mapa de la Ciudad de Buenos Aires y la
+estadísticas de delitos del año 2018, para ubicar estos
+geográficamente.
 
 ``` r
 library("tidyverse")
@@ -1393,3 +1394,67 @@ ggplot(delitos_puntos) +
 ```
 
 <img src="/images/2020/2020-05-24-30-dias-de-graficos-en-r_files/figure-gfm/dia18-1.png" style="display: block; margin: auto;" />
+
+## Día 19: Streamgraph
+
+Desde el [Catálogo de Visualización de
+Datos](https://datavizcatalogue.com/ES/metodos/grafico_de_flujo.html)
+leemos:
+
+    También conocido como ThemeRiver.
+    
+    Este tipo de visualización es una variación del gráfico de área apilada, que en lugar de tener valores en un eje fijo y recto, tiene los valores alrededor de la línea base central variable. Los gráficos de flujo muestran los cambios en los datos a lo largo del tiempo de diferentes categorías a través del uso de formas fluidas y orgánicas que se asemejan un poco a un arroyo. Esto hace que los diagramas de flujo sean estéticamente agradables y más atractivos de mirar.
+    
+    En un gráfico de flujo, el tamaño de cada forma de flujo individual es proporcional a los valores de cada categoría. El eje que fluye en paralelo al gráfico de flujo se utiliza para dar escala al tiempo. El color puede utilizarse para distinguir cada categoría o para visualizar los valores cuantitativos adicionales en cada categoría a través de la variación del tono de calor.
+    
+    Los gráficos de flujo son ideales para mostrar conjuntos de datos de alto volumen con el fin de descubrir tendencias y patrones a lo largo del tiempo en una amplia categoría. Por ejemplo, los picos estacionales y los valles en forma de arroyo pueden sugerir un patrón prehistórico. Un diagrama de flujo también puede ser utilizado para un gran grupo de activos durante un cierto período de tiempo.
+    
+    La desventaja de los diagramas de flujo es que tienen problemas de legibilidad, ya que muy a menudo son confusos en diagramas de flujo con grandes conjuntos de datos. Las categorías con valores más pequeños a menudo se ahogan para dar paso a categorías con valores mucho más grandes, por lo que es imposible ver todos los datos. Además, es imposible leer los valores exactos visualizados, por lo que generalmente se utiliza un código.
+    
+    Por lo tanto, los diagramas de flujo deben reservarse a audiencias que no tengan intención de pasar mucho tiempo descifrando el gráfico y explorando sus datos. Los diagramas de flujo son mejores para dar una visión más general de los datos. También tienden a funcionar significativamente mejor como una pieza interactiva en lugar de un gráfico estático o impreso.
+
+``` r
+library("tidyverse")
+library("ggTimeSeries")
+
+if ("ggelegant" %in% rownames(installed.packages())) {
+  library("ggelegant")
+} else {
+  # devtools::install_github("pmoracho/ggelegant")
+  theme_elegante_std <- function(base_family) {}
+}
+
+# Datos originales
+# covid.data <- read_csv('https://docs.google.com/spreadsheets/d/16-bnsDdmmgtSxdWbVMboIHo5FRuz76DBxsz_BbsEVWA/export?format=csv&id=16-bnsDdmmgtSxdWbVMboIHo5FRuz76DBxsz_BbsEVWA&gid=0')
+
+# Datos reproducir la gráfica
+covid.data <- readRDS(url("https://github.com/pmoracho/R/raw/master/data/covid.casos.arg.Rda","rb"))
+
+last_date <- max(as.Date(covid.data$fecha,"%d/%m/%Y"))
+first_date <- min(as.Date(covid.data$fecha,"%d/%m/%Y"))
+ndias <- max(covid.data$dia_inicio)
+dias <- expand.grid(distrito = unique(covid.data$osm_admin_level_4),
+                    dia = 1:ndias,
+                    stringsAsFactors = FALSE)
+
+provincias_de_interes <- c('CABA', 'Buenos Aires', 'Chaco','Córdoba', 'Río Negro', 'Tucumán')
+dias %>% 
+  left_join(covid.data, by=c("distrito" = "osm_admin_level_4", "dia" = "dia_inicio")) %>% 
+  mutate(casos = replace_na(nue_casosconf_diff, 0)) %>% 
+  select(dia, distrito, casos)  %>% 
+  arrange(distrito, dia) %>% 
+  filter(distrito %in% provincias_de_interes) %>% 
+  ggplot(aes(x = dia, y = casos, group = distrito, fill = distrito)) +
+  stat_steamgraph(color="gray30", size=.1, alpha=.8) +
+  theme_elegante_std(base_family = "Ralleway") +
+  scale_fill_brewer(palette="Set1") +
+  labs(title = paste("COVID-19 en Argentina"), 
+       subtitle = paste0("Variación de los casos diarios (al: ", last_date, ")\nLas 6 Provincias con mayor número de casos") , 
+       caption = "Fuente: https://github.com/SistemasMapache/Covid19arData", 
+       y = "Casos", 
+       x = "Número de días desde el 1er caso"
+  ) +
+  guides(fill = guide_legend(nrow = 1))
+```
+
+<img src="/images/2020/2020-05-24-30-dias-de-graficos-en-r_files/figure-gfm/dia19-1.png" style="display: block; margin: auto;" />
