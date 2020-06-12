@@ -60,8 +60,8 @@ completa:
 | 18  | 29 de mayo  | visualizar datos espaciales                       | ✓           |
 | 19  | 30 de mayo  | gráficos de flujo (*stream graph*)                | ✓           |
 | 20  | 31 de mayo  | redes                                             | ✓           |
-| 21  | 1 de junio  | gráficos con anotaciones                          |             |
-| 22  | 2 de junio  | visualizar datos textuales                        |             |
+| 21  | 1 de junio  | gráficos con anotaciones                          | ✓           |
+| 22  | 2 de junio  | visualizar datos textuales                        | ✓           |
 | 23  | 3 de junio  | gráficos de proyección solar (*sunburst*)         |             |
 | 24  | 4 de junio  | coropletas                                        |             |
 | 25  | 5 de junio  | gráficos de violín                                |             |
@@ -1537,6 +1537,18 @@ internado_edad %>%
 
 ## Día 21: Anotaciones
 
+Ejemplo de anotaciones en **`ggplot`**, me entretengo un poco armando un
+clasico “meme”. Para esto necesitamos algunas cosas:
+
+  - El Font: \[xkcd.ttf\]. En linux: `system("mkdir
+    ~/.fonts");system("cp xkcd.ttf ~/.fonts")`, luego en R:
+    `extrafont::font_import(pattern = "[X/x]kcd",
+    prompt=FALSE);extrafont::loadfonts()`
+  - El paquete `xkcd`: `install.packages("xkcd",dependencies = TRUE)`
+
+Usamos `[annotate()]` que nos permite agregar no solo texto, sino
+cualquier otro `geom`.
+
 ``` r
 library("tidyverse")
 library("xkcd")
@@ -1575,3 +1587,85 @@ df %>%
 ```
 
 <img src="/images/2020/2020-05-24-30-dias-de-graficos-en-r_files/figure-gfm/dia21-1.png" style="display: block; margin: auto;" />
+
+## Día 22: visualizar datos textuales
+
+Una clásica “nube de palabras”, en este caso de mi cuenta de
+**twitter**. Bastante fácil de implementar con `ggwordcloud` para la
+gráfica y `rtweet` para la parte de extracción de **twitter**.
+
+``` r
+library("tidyverse")
+library("rtweet")
+library("tidytext")
+library("ggwordcloud")
+
+if ("ggelegant" %in% rownames(installed.packages())) {
+  library("ggelegant")
+} else {
+  # devtools::install_github("pmoracho/ggelegant")
+  theme_elegante_std <- function(base_family) {}
+}
+api.security <- readRDS("../twiter.api.security.Rda")
+
+# Twitter API Completar con los datos apropiados
+create_token(
+  app = api.security$app,
+  consumer_key = api.security$consumer_key,
+  consumer_secret = api.security$consumer_secret,
+  access_token = api.security$access_token,
+  access_secret = api.security$access_secret
+)
+```
+
+    ## <Token>
+    ## <oauth_endpoint>
+    ##  request:   https://api.twitter.com/oauth/request_token
+    ##  authorize: https://api.twitter.com/oauth/authenticate
+    ##  access:    https://api.twitter.com/oauth/access_token
+    ## <oauth_app> MarloweApp
+    ##   key:    tsQfhMxysrxhnhKD9RQYCX3Cl
+    ##   secret: <hidden>
+    ## <credentials> oauth_token, oauth_token_secret
+    ## ---
+
+``` r
+# Datos Originales
+# RAE_Corpus_1000 <- read.table(file="http://corpus.rae.es/frec/1000_formas.TXT", skip=1, header=FALSE,
+#                               fileEncoding = "Latin1",
+#                               col.names = c("nr", "word", "Frec.absoluta", "Frec.normalizada"),
+#                               stringsAsFactors = FALSE)
+# 
+# stopwords <- read.csv("https://countwordsfree.com/stopwords/spanish/txt",
+#                       col.names="word", header=FALSE, stringsAsFactors = FALSE)
+
+# Datos reproducibles
+RAE_Corpus_1000 <- readRDS(url("https://github.com/pmoracho/R/raw/master/data/rae_corpus_1000.Rda","rb"))
+stopwords <- readRDS(url("https://github.com/pmoracho/R/raw/master/data/stopwords.Rda","rb"))
+
+twits <- get_timeline("pmoracho", n = 5000)
+twits %>%
+  unnest_tokens(word, text) %>% 
+  select(word) %>% 
+  anti_join(stopwords, by = "word") %>%
+  inner_join(RAE_Corpus_1000, by = c("word"="word")) -> my_words
+  
+my_words %>% 
+  count(word, sort = TRUE)  -> my_words_count
+
+my_words %>%
+  inner_join(my_words_count %>% head(100), by = "word") %>% 
+  # filter(!(word %in% c('https', 'http'))) %>% 
+  count(word) %>% 
+  ggplot(aes(label = word, size=n, color=n)) +
+  geom_text_wordcloud() +
+  scale_size_area(max_size = 20) +
+  theme_elegante_std(base_family = "Ralleway") +
+  labs(title = paste("¿De qué habla @pmoracho?"), 
+       subtitle = paste0("Nube de palabras de las 100 palabras más usadas de la cuenta de twitter"), 
+       caption = "Fuente:@pmoracho",
+       y = "",
+       x = "")
+```
+
+<img src="/images/2020/2020-05-24-30-dias-de-graficos-en-r_files/figure-gfm/dia22-1.png" style="display: block; margin: auto;" />
