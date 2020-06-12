@@ -58,8 +58,8 @@ completa:
 | 16  | 27 de mayo  | gráficos de waffle                                | ✓           |
 | 17  | 28 de mayo  | diagramas de sankey                               | ✓           |
 | 18  | 29 de mayo  | visualizar datos espaciales                       | ✓           |
-| 19  | 30 de mayo  | gráficos de flujo (*stream graph*)                |             |
-| 20  | 31 de mayo  | redes                                             |             |
+| 19  | 30 de mayo  | gráficos de flujo (*stream graph*)                | ✓           |
+| 20  | 31 de mayo  | redes                                             | ✓           |
 | 21  | 1 de junio  | gráficos con anotaciones                          |             |
 | 22  | 2 de junio  | visualizar datos textuales                        |             |
 | 23  | 3 de junio  | gráficos de proyección solar (*sunburst*)         |             |
@@ -1287,7 +1287,7 @@ if ("ggelegant" %in% rownames(installed.packages())) {
   theme_elegante_std <- function(base_family) {}
 }
 
-# Dataos originales
+# Datos originales
 # covid.data <- read.csv(file='https://sisa.msal.gov.ar/datos/descargas/covid-19/files/Covid19Casos.csv', stringsAsFactors = FALSE, fileEncoding = "UTF-16")
 # Datos reproducibles
 covid.data <- readRDS(url("https://github.com/pmoracho/R/raw/master/data/covid.arg.Rda","rb"))
@@ -1458,3 +1458,120 @@ dias %>%
 ```
 
 <img src="/images/2020/2020-05-24-30-dias-de-graficos-en-r_files/figure-gfm/dia19-1.png" style="display: block; margin: auto;" />
+
+## Día 20: Gráfico de redes
+
+``` r
+library("tidyverse")
+library("ggraph")
+library("igraph")
+
+if ("ggelegant" %in% rownames(installed.packages())) {
+  library("ggelegant")
+} else {
+  # devtools::install_github("pmoracho/ggelegant")
+  theme_elegante_std <- function(base_family) {}
+}
+
+# Datos originales
+# covid.data <- read.csv(file='https://sisa.msal.gov.ar/datos/descargas/covid-19/files/Covid19Casos.csv', stringsAsFactors = FALSE, fileEncoding = "UTF-16")
+# Datos reproducibles
+covid.data <- readRDS(url("https://github.com/pmoracho/R/raw/master/data/covid.arg.Rda","rb"))
+
+last_date <- max(covid.data$fecha_apertura, na.rm = TRUE)
+
+covid.data %>% 
+  filter(clasificacion_resumen == 'Confirmado',
+         !is.na(edad),
+         sexo != 'NR') %>% 
+  mutate(internado = !is.na(fecha_internacion),
+         cui = !is.na(fecha_cui_intensivo),
+         arm = replace_na(asistencia_respiratoria_mecanica == "SI",FALSE),
+         fallecido =    replace_na(fallecido == "SI", FALSE),
+         sexo = ifelse(sexo == 'M', 'Masculino', 'Femenino'),
+         internado = ifelse(internado, 'Internado', 'Ambulatorio'),
+         fallecido = ifelse(fallecido, 'Fallecido', 'Recuperado')) %>% 
+  mutate(clasif_edad = case_when(edad <= 6 ~ '0 a 6',
+                                 edad > 6 &  edad <= 14 ~ '7 a 14',
+                                 edad > 14 & edad <= 35 ~ '15 a 35',
+                                 edad > 35 & edad <= 65 ~ '36 a 65',                          
+                                 edad > 65 ~ '>= 66')) %>% 
+  select(sexo, edad, clasif_edad, internado, cui, arm, fallecido) %>%
+  group_by(clasif_edad, sexo, internado, fallecido) %>% 
+  summarise(n = n()) -> plot_data
+
+
+plot_data %>% 
+  group_by(sexo, clasif_edad) %>% 
+  summarise(n=sum(n)) %>% 
+  select(from=sexo, to=clasif_edad, n) -> sexo_edad
+
+plot_data %>% 
+  group_by(internado, clasif_edad) %>% 
+  summarise(n=sum(n)) %>% 
+  select(to=internado, from=clasif_edad, n) -> internado_edad
+
+internado_edad %>%
+  rbind(sexo_edad) %>% 
+  graph_from_data_frame() %>% 
+  ggraph(layout = 'stress') +
+  geom_edge_link(aes(edge_width=n), show.legend = TRUE, alpha=0.5, color = "#67a9cf") +
+  geom_node_point(size=8, color ="#ef8a62") +
+  geom_node_text(aes(label = name), repel = TRUE, family="Ralleway") +
+  theme_elegante_std(base_family = "Ralleway") +
+  labs(title = paste("COVID-19 en Argentina"), 
+       subtitle = paste0("¿Cómo se distribuyen las internaciones entre el sexo y la edad?\nDatos al: ", last_date) , 
+       caption = "Fuente: https://datos.gob.ar/", 
+       y = "", 
+       x = ""
+  ) +
+  guides(fill = guide_legend(nrow = 1)) +
+  theme(axis.text.x=element_blank(),
+        axis.ticks.x=element_blank(),
+        axis.title.y=element_blank(),
+        axis.text.y=element_blank(),
+        axis.ticks.y=element_blank()) 
+```
+
+<img src="/images/2020/2020-05-24-30-dias-de-graficos-en-r_files/figure-gfm/dia20-1.png" style="display: block; margin: auto;" />
+
+## Día 21: Anotaciones
+
+``` r
+library("tidyverse")
+library("xkcd")
+
+# Para instalar el font xkcd en Linux
+# download.file("http://simonsoftware.se/other/xkcd.ttf", dest="xkcd.ttf", mode="wb")
+# system("mkdir ~/.fonts")
+# system("cp xkcd.ttf ~/.fonts")
+# font_import(pattern = "[X/x]kcd", prompt=FALSE)
+# loadfonts()
+
+xaxis <- c(1950,1960, 1970, 1980, 1990, 2000, 2010)
+xaxislbl <- paste0(xaxis, "s")
+
+data.frame(year=seq(from=1940, to=2020, by=10),
+           quality=c(1.2, 1.3, 1.4, 1.8, 1.9, 1.8, 1, 1.5, 2)
+           ) -> df
+df %>% 
+  ggplot(mapping=aes(x=year, y=quality)) +
+  geom_smooth(method = 'loess',
+              color = "black",
+              formula = 'y ~ x', alpha = 0.2, size = 1, span = .6, se=FALSE) + 
+  labs(title = paste("GENERAL QUALITY OF CHARTS AND\nGRAPHS IN SCIENTIFIC PAPERS\n"), 
+       y = "", 
+       x = ""
+  ) +
+  xkcdaxis(c(1945,2020),c(1,2.2)) +
+  annotate("rect", xmin = 1989, xmax = 2015, ymin = .98, ymax = 2.2,  alpha = .4) +
+  annotate("text", x = 2002, y = 2, label = "POWERPOINT/\nMS PAINT ERA", family="xkcd", size=10,) +
+  scale_y_continuous(breaks = c(1,2), labels = c("BAD", "GOOD")) +
+  scale_x_continuous(breaks = xaxis, labels = xaxislbl, limits=c(1930, 2020))  +
+  theme(plot.title=element_text(vjust=1.25, size=24, hjust = 0.5),
+        axis.text.x = element_text(size=24),
+        axis.text.y = element_text(size=20)
+        )
+```
+
+<img src="/images/2020/2020-05-24-30-dias-de-graficos-en-r_files/figure-gfm/dia21-1.png" style="display: block; margin: auto;" />
