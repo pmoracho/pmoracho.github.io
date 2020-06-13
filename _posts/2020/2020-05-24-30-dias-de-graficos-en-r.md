@@ -248,8 +248,8 @@ También se los conoce como gráficos de dispersión o “Scatterplot”.
 Suelen intentar mostrar la relación entre dos variables continuas por
 medio de los patrones que se forman.
 
-En este ejemplo, me pregunto sí, ¿Hay relación entre el desarrollo
-humano y la cantidad de infecciones?, para esto armamos un gráfico de
+En este ejemplo, me pregunto sí, **¿Hay relación entre el desarrollo
+humano y la cantidad de infecciones?**, para esto armamos un gráfico de
 dispersión dónde cada país tiene un punto que correlaciona las variables
 números de infectados (`x`) y el índice de desarrollo humano (`y`),
 además agregamos unas etiquetas que marcan los países en el extremo de
@@ -308,7 +308,8 @@ kable(head(plot_data))
 | Andorra               |   852 |         51 | 0.830 | NA               |
 | Angola                |    96 |          4 | 0.526 | NA               |
 | Antigua\_and\_Barbuda |    26 |          3 | 0.774 | NA               |
-| \#\#\# La gráfica     |       |            |       |                  |
+
+### La gráfica
 
 ``` r
 plot_data %>% 
@@ -343,6 +344,8 @@ mostrar uno de estos. Cuando se tiene múltiples variables, muchas veces
 resulta confuso verlas todas en un mismo gráfico, el facetado permite
 dividir cada variable o grupo en múltiples graficos similares.
 
+### Los datos
+
 ``` r
 library("tidyverse")
 
@@ -370,7 +373,24 @@ data %>%
                group_by(distrito) %>% 
                summarize(cantidad = sum(cantidad)) %>% 
                arrange(-cantidad) %>% 
-               top_n(9), by = c("distrito"), suffix=c("",".y")) %>% 
+               top_n(9), by = c("distrito"), suffix=c("",".y")) -> plot_data
+
+kable(head(plot_data))
+```
+
+| dia | distrito     | cantidad | cantidad.y |
+| --: | :----------- | -------: | ---------: |
+|   1 | CABA         |        1 |      11965 |
+|   4 | Buenos Aires |        1 |       9590 |
+|   7 | Buenos Aires |        8 |       9590 |
+|   8 | CABA         |        1 |      11965 |
+|   8 | Chaco        |        5 |       1118 |
+|   8 | Río Negro    |        1 |        491 |
+
+### La gráfica
+
+``` r
+plot_data %>% 
   ggplot(mapping=aes(x=dia, y=cantidad)) +
   geom_line(color="#67a9cf") +
   geom_point(color="#67a9cf") +
@@ -388,8 +408,7 @@ data %>%
 
 <img src="/images/2020/2020-05-24-30-dias-de-graficos-en-r_files/figure-gfm/dia4-1.png" style="display: block; margin: auto;" />
 
-Una linda visualización es la que se legro mediante
-[geofaceteAR](https://github.com/electorArg/geofaceteAR):
+### Una linda visualización mediante [geofaceteAR](https://github.com/electorArg/geofaceteAR):
 
 ``` r
 library("geofaceteAR")
@@ -435,6 +454,8 @@ específicas pueden ser útiles. En este ejemplo, trato de mostrar las
 relaciones musicales interpresonales de **Luis Alberto Spinetta** en su
 primera etapa como músico.
 
+### Los datos
+
 ``` r
 library("tidyverse")
 library("tidygraph")
@@ -466,6 +487,21 @@ data <- structure(list(persona = structure(c(10L, 10L, 10L, 10L, 10L,
 data %>% 
   select(from = persona, to = grupo, grupo=grupo, name=persona) -> prepared.data
 
+kable(head(prepared.data))
+```
+
+| from                  | to                   | grupo                | name                  |
+| :-------------------- | :------------------- | :------------------- | :-------------------- |
+| Luis Alberto Spinetta | Bundleman            | Bundleman            | Luis Alberto Spinetta |
+| Luis Alberto Spinetta | Los Larkings         | Los Larkings         | Luis Alberto Spinetta |
+| Luis Alberto Spinetta | Los Masters          | Los Masters          | Luis Alberto Spinetta |
+| Luis Alberto Spinetta | Los Mods             | Los Mods             | Luis Alberto Spinetta |
+| Luis Alberto Spinetta | Los Sbirros          | Los Sbirros          | Luis Alberto Spinetta |
+| Luis Alberto Spinetta | Almendra (1967-1969) | Almendra (1967-1969) | Luis Alberto Spinetta |
+
+### La gráfica
+
+``` r
 tbl_graph(edges=prepared.data, directed = TRUE) %>% 
   ggraph(layout = "linear") +
   geom_edge_arc(aes(color=grupo),  edge_width=1.5, edge_alpha = 0.5, fold = TRUE,) +
