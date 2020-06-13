@@ -96,6 +96,8 @@ casos y fallecidos. Usamos una escala logarítmica en el caso del eje `y`
 para que los enormes números de Brasil no nos oculten los datos del
 resto.
 
+### Preparamos los datos:
+
 ``` r
 library("tidyverse")
 
@@ -120,7 +122,30 @@ covid.data %>%
   summarize(casos = sum(cases), fallecidos = sum(deaths)) %>% 
   ungroup() %>% 
   select(pais = countriesAndTerritories, casos, fallecidos) %>% 
-  gather(referencia, cantidad, -pais) %>% 
+  gather(referencia, cantidad, -pais) -> plot_data 
+
+kable(plot_data)
+```
+
+| pais      | referencia | cantidad |
+| :-------- | :--------- | -------: |
+| Argentina | casos      |    24748 |
+| Bolivia   | casos      |    14644 |
+| Brazil    | casos      |   739503 |
+| Chile     | casos      |   142759 |
+| Paraguay  | casos      |     1187 |
+| Uruguay   | casos      |      846 |
+| Argentina | fallecidos |      717 |
+| Bolivia   | fallecidos |      487 |
+| Brazil    | fallecidos |    38406 |
+| Chile     | fallecidos |     2283 |
+| Paraguay  | fallecidos |       11 |
+| Uruguay   | fallecidos |       23 |
+
+### La gráfica
+
+``` r
+plot_data %>% 
   ggplot(aes(x=pais, fill=referencia, y=cantidad)) +
     geom_col(position=position_dodge(width=1)) +
     geom_text(aes(label = format(cantidad, digits=0, big.mark = ',')),  vjust = .6, hjust=1.1,
