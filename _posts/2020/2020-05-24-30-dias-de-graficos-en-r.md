@@ -533,6 +533,8 @@ sector, lo cual mejora la percepción de los cambios. Además,
 eventualmente permiten usar el área del centro para agregar más
 información.
 
+### Los datos
+
 ``` r
 library("tidyverse")
 library("ggrepel")
@@ -549,7 +551,6 @@ if ("ggelegant" %in% rownames(installed.packages())) {
 
 # Datos reproducir la gráfica
 covid.data <- readRDS(url("https://github.com/pmoracho/R/raw/master/data/covid.casos.arg.Rda","rb"))
-
 
 last_date <- max(as.Date(covid.data$fecha,"%d/%m/%Y"))
 break_porc <- .95
@@ -574,6 +575,21 @@ data %>%
 
 mac_perc <- sum(data$porc[data$distrito != 'Resto'])
 data$distrito <- with(data, reorder(distrito, porc))
+
+kable(head(data))
+```
+
+| distrito     | casos |  porc |   ymax |  ymin |
+| :----------- | ----: | ----: | -----: | ----: |
+| Buenos Aires |  9590 | 38.73 |  38.73 |  0.00 |
+| CABA         | 11965 | 48.32 |  87.05 | 38.73 |
+| Chaco        |  1118 |  4.51 |  91.56 | 87.05 |
+| Resto        |  1598 |  6.46 |  98.02 | 91.56 |
+| Río Negro    |   491 |  1.98 | 100.00 | 98.02 |
+
+### La gráfica
+
+``` r
 data %>% 
   ggplot(aes(ymax=ymax, ymin=ymin, xmax=4, xmin=3, fill=distrito)) +
   geom_rect(color="gray90", size=1.2) +
