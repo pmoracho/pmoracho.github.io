@@ -1446,7 +1446,7 @@ dias %>%
   filter(distrito %in% provincias_de_interes) %>% 
   ggplot(aes(x = dia, y = casos, group = distrito, fill = distrito)) +
   stat_steamgraph(color="gray30", size=.1, alpha=.8) +
-  theme_elegante_std(base_family = "Ralleway") +
+  theme_elegante_std(base_family = "Assistant") +
   scale_fill_brewer(palette="Set1") +
   labs(title = paste("COVID-19 en Argentina"), 
        subtitle = paste0("Variación de los casos diarios (al: ", last_date, ")\nLas 6 Provincias con mayor número de casos") , 
@@ -1517,8 +1517,8 @@ internado_edad %>%
   ggraph(layout = 'stress') +
   geom_edge_link(aes(edge_width=n), show.legend = TRUE, alpha=0.5, color = "#67a9cf") +
   geom_node_point(size=8, color ="#ef8a62") +
-  geom_node_text(aes(label = name), repel = TRUE, family="Ralleway") +
-  theme_elegante_std(base_family = "Ralleway") +
+  geom_node_text(aes(label = name), repel = TRUE, family="Assistant") +
+  theme_elegante_std(base_family = "Assistant") +
   labs(title = paste("COVID-19 en Argentina"), 
        subtitle = paste0("¿Cómo se distribuyen las internaciones entre el sexo y la edad?\nDatos al: ", last_date) , 
        caption = "Fuente: https://datos.gob.ar/", 
@@ -1606,30 +1606,16 @@ if ("ggelegant" %in% rownames(installed.packages())) {
   # devtools::install_github("pmoracho/ggelegant")
   theme_elegante_std <- function(base_family) {}
 }
-api.security <- readRDS("../twiter.api.security.Rda")
 
 # Twitter API Completar con los datos apropiados
-create_token(
-  app = api.security$app,
-  consumer_key = api.security$consumer_key,
-  consumer_secret = api.security$consumer_secret,
-  access_token = api.security$access_token,
-  access_secret = api.security$access_secret
-)
-```
+#   create_token(
+#     app = "",
+#     consumer_key = "",
+#     consumer_secret = "",
+#     access_token = "",
+#     access_secret = a"pi.security$access_secret""
+#   )
 
-    ## <Token>
-    ## <oauth_endpoint>
-    ##  request:   https://api.twitter.com/oauth/request_token
-    ##  authorize: https://api.twitter.com/oauth/authenticate
-    ##  access:    https://api.twitter.com/oauth/access_token
-    ## <oauth_app> MarloweApp
-    ##   key:    tsQfhMxysrxhnhKD9RQYCX3Cl
-    ##   secret: <hidden>
-    ## <credentials> oauth_token, oauth_token_secret
-    ## ---
-
-``` r
 # Datos Originales
 # RAE_Corpus_1000 <- read.table(file="http://corpus.rae.es/frec/1000_formas.TXT", skip=1, header=FALSE,
 #                               fileEncoding = "Latin1",
@@ -1660,7 +1646,7 @@ my_words %>%
   ggplot(aes(label = word, size=n, color=n)) +
   geom_text_wordcloud() +
   scale_size_area(max_size = 20) +
-  theme_elegante_std(base_family = "Ralleway") +
+  theme_elegante_std(base_family = "Assistant") +
   labs(title = paste("¿De qué habla @pmoracho?"), 
        subtitle = paste0("Nube de palabras de las 100 palabras más usadas de la cuenta de twitter"), 
        caption = "Fuente:@pmoracho",
@@ -1669,3 +1655,144 @@ my_words %>%
 ```
 
 <img src="/images/2020/2020-05-24-30-dias-de-graficos-en-r_files/figure-gfm/dia22-1.png" style="display: block; margin: auto;" />
+
+## Día 23: Sunburst
+
+``` r
+library("tidyverse")
+
+if ("ggelegant" %in% rownames(installed.packages())) {
+  library("ggelegant")
+} else {
+  # devtools::install_github("pmoracho/ggelegant")
+  theme_elegante_std <- function(base_family) {}
+}
+# Datos originales
+# covid.data <- read_csv('https://docs.google.com/spreadsheets/d/16-bnsDdmmgtSxdWbVMboIHo5FRuz76DBxsz_BbsEVWA/export?format=csv&id=16-bnsDdmmgtSxdWbVMboIHo5FRuz76DBxsz_BbsEVWA&gid=0')
+
+# Datos reproducir la gráfica
+covid.data <- readRDS(url("https://github.com/pmoracho/R/raw/master/data/covid.casos.arg.Rda","rb"))
+
+last_date <- max(as.Date(covid.data$fecha,"%d/%m/%Y"))
+
+provincias_de_interes <- c('Entre Ríos', 'Chaco', 'Córdoba', 'Santa Fe', 'Río Negro', 'Tucumán')
+
+covid.data %>% 
+  mutate(fecha = as.Date(fecha, "%d/%m/%Y")) %>% 
+  select(dia=dia_inicio, fecha, distrito=osm_admin_level_4, cantidad=nue_casosconf_diff) %>% 
+  filter(dia >= max(dia) - 6,
+         !(distrito %in% c('Indeterminado'))) %>% 
+  arrange(distrito, dia) %>% 
+  filter(distrito %in% provincias_de_interes) %>% 
+  mutate(cantidad = ifelse(cantidad <= 0, 0, cantidad), nr=row_number()) -> plot_data
+
+
+plot_data %>% 
+  mutate(angle = 90 - 360 * (nr-0.5) / n(),
+         hjust = ifelse( angle < -90, 1, 0),
+         angle = ifelse(angle < -90, angle+180, angle),
+         text = paste0(cantidad),
+         text2 = max(dia)-dia) -> label_data
+
+plot_data %>% 
+  ggplot(aes(x=nr, y=cantidad+1, fill=distrito)) +
+  geom_bar(stat="identity", alpha=0.5, color="black", size=.05) +
+  ylim(-25,max(plot_data$cantidad)+2) +
+  geom_hline(aes(yintercept=0)) +
+  geom_text(data=label_data, aes(x=nr, y=cantidad+1.2, label=text, hjust=hjust), color="black", fontface="bold",alpha=0.6, size=3, angle = label_data$angle, inherit.aes = FALSE ) +
+  geom_text(data=label_data, aes(x=nr, y=-4, label=text2, hjust=hjust), color="black", fontface="bold",alpha=0.6, size=3, angle = label_data$angle, inherit.aes = FALSE ) +
+  coord_polar() +
+  theme_elegante_std(base_family = "Assistant") +
+  labs(title = "COVID-19 en Argentina", 
+       subtitle = paste0("Casos en los últimos 7 días por distrito al: ", last_date, "\nEntre Ríos, Chaco, Córdoba, Santa Fe, Río Negro y Tucumán"),  
+       caption = "Fuente: https://github.com/SistemasMapache/Covid19arData",
+       y = "",
+       x = "") +
+  guides(fill = guide_legend(nrow = 1)) +
+  theme(
+    legend.position = "bottom",
+    axis.line.x = element_blank(),
+    axis.line.y = element_blank(),
+    axis.line= element_blank(),
+    axis.text = element_blank(),
+    axis.title = element_blank(),
+    axis.title.x = element_blank(),
+    axis.text.x = element_blank(),
+    axis.ticks.x = element_blank(),
+    axis.title.y = element_blank(),
+    axis.text.y = element_blank(),
+    axis.ticks.y = element_blank(),
+    panel.grid = element_blank(),
+    plot.margin = unit(rep(.2,4), "cm"),
+    axis.ticks = element_blank(),
+    legend.background = element_blank(),
+    legend.key = element_blank(),
+    panel.background = element_blank(),
+    panel.border = element_blank(),
+    strip.background = element_blank(),
+    plot.background = element_blank(),
+    panel.grid.major = element_blank(), 
+    panel.grid.minor = element_blank()
+    ) 
+```
+
+<img src="/images/2020/2020-05-24-30-dias-de-graficos-en-r_files/figure-gfm/dia23-1.png" style="display: block; margin: auto;" />
+
+## Día 24: Coropletas
+
+``` r
+library("tidyverse")
+library("sf")
+library("viridis")
+
+if ("ggelegant" %in% rownames(installed.packages())) {
+  library("ggelegant")
+} else {
+  # devtools::install_github("pmoracho/ggelegant")
+  theme_elegante_std <- function(base_family) {}
+}
+
+# delitos <- read.csv("http://cdn.buenosaires.gob.ar/datosabiertos/datasets/mapa-del-delito/delitos_2019.csv", 
+#                     na.strings = "", fileEncoding = "UTF-8-BOM", stringsAsFactors = FALSE)
+# comunas <- st_read('https://bitsandbricks.github.io/data/CABA_comunas.geojson')
+
+delitos <- readRDS(url("https://github.com/pmoracho/R/raw/master/data/delitos.caba.Rda","rb"))
+comunas <- readRDS(url("https://github.com/pmoracho/R/raw/master/data/comunas.caba.Rda","rb"))
+
+
+delitos %>% 
+  na.exclude() %>% 
+  st_as_sf(coords = c("long","lat"), remove = FALSE,  crs = 4326) %>% 
+  st_join(comunas)-> delitos_puntos
+
+delitos_puntos %>% 
+  mutate(n_delito = match(tipo_delito, c("Lesiones", "Hurto (sin violencia)","Robo (con violencia)","Homicidio")),
+         comunas = factor(comuna)) %>% 
+  group_by(barrios,comunas) %>% 
+  summarize(nrank = n()) %>% 
+  as.data.frame() %>% 
+  select(barrios, comunas, nrank) -> ranking_comunas
+
+comunas %>% 
+  left_join(ranking_comunas,  by = "comunas") %>% 
+  ggplot() +
+    geom_sf(aes(fill = nrank), color="gray60") +
+  scale_fill_viridis(option = "inferno", direction = -1) +
+  theme_elegante_std(base_family = "Assistant") + 
+  labs(title = paste("CABA - Mapa del delito"), 
+       subtitle = paste0("Nivel de peligrosidad por comuna - Año 2018\n") , 
+       caption = "Fuente: data.buenosaires.gob.ar", 
+       y = "", 
+       x = "",
+       fill = "Delitos"
+  ) + 
+  theme(axis.text.x=element_blank(),
+        axis.ticks.x=element_blank(),
+        axis.title.y=element_blank(),
+        axis.text.y=element_blank(),
+        axis.ticks.y=element_blank(),
+        legend.title = element_text(face="bold"),
+        legend.position = "right") 
+```
+
+<img src="/images/2020/2020-05-24-30-dias-de-graficos-en-r_files/figure-gfm/dia24-1.png" style="display: block; margin: auto;" />
