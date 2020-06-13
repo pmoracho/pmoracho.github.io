@@ -185,6 +185,8 @@ puntos en cada `x,y` y luego unimos cada uno con un segmento,
 adicionalmente agregamos una curva que refuerza la visión de la
 tendencia.
 
+### Los datos
+
 ``` r
 library("tidyverse")
 
@@ -205,7 +207,24 @@ last_date <- max(as.Date(covid.data$fecha,"%d/%m/%Y"))
 covid.data %>% 
   filter(osm_admin_level_4 %in% c('CABA', 'Buenos Aires')) %>% 
   mutate(fecha = as.Date(fecha, "%d/%m/%Y")) %>% 
-  select(dia=dia_inicio, distrito=osm_admin_level_4, cantidad=nue_casosconf_diff) %>% 
+  select(dia=dia_inicio, distrito=osm_admin_level_4, cantidad=nue_casosconf_diff) -> plot_data
+
+kable(head(plot_data))
+```
+
+| dia | distrito     | cantidad |
+| --: | :----------- | -------: |
+|   1 | CABA         |        1 |
+|   4 | Buenos Aires |        1 |
+|   7 | Buenos Aires |        8 |
+|   8 | CABA         |        1 |
+|   9 | Buenos Aires |        1 |
+|   9 | CABA         |        1 |
+
+### La gráfica
+
+``` r
+plot_data %>% 
   ggplot(mapping=aes(x=dia, color=distrito, y=cantidad)) +
     geom_line() +
     geom_point() +
@@ -236,6 +255,8 @@ números de infectados (`x`) y el índice de desarrollo humano (`y`),
 además agregamos unas etiquetas que marcan los países en el extremo de
 cada variable y la Argentina y una recta de regresión a modo de
 tendencia.
+
+### Los datos
 
 ``` r
 library("tidyverse")
@@ -274,7 +295,23 @@ covid.data %>%
             ) %>% 
   mutate(pais = ifelse(countriesAndTerritories == 'United_States_of_America', 'EEUU', countriesAndTerritories)) %>% 
   select(pais, casos, fallecidos, HDI = value) %>% 
-  mutate(pais_etiquetado = ifelse(pais %in% paises_de_interes, paste0(pais, " (casos: ", format(casos, digits=0, big.mark = ',', trim=TRUE), " hdi: ", HDI, ")"), NA)) %>% 
+  mutate(pais_etiquetado = ifelse(pais %in% paises_de_interes, paste0(pais, " (casos: ", format(casos, digits=0, big.mark = ',', trim=TRUE), " hdi: ", HDI, ")"), NA)) -> plot_data
+
+kable(head(plot_data))
+```
+
+| pais                  | casos | fallecidos |   HDI | pais\_etiquetado |
+| :-------------------- | ----: | ---------: | ----: | :--------------- |
+| Afghanistan           | 21459 |        384 | 0.468 | NA               |
+| Albania               |  1299 |         34 | 0.716 | NA               |
+| Algeria               | 10382 |        724 | 0.717 | NA               |
+| Andorra               |   852 |         51 | 0.830 | NA               |
+| Angola                |    96 |          4 | 0.526 | NA               |
+| Antigua\_and\_Barbuda |    26 |          3 | 0.774 | NA               |
+| \#\#\# La gráfica     |       |            |       |                  |
+
+``` r
+plot_data %>% 
   ggplot(aes(x=HDI, y=casos)) +
     geom_point(color = "#67a9cf", alpha=.5, size=3) +
     geom_smooth(method = 'lm',formula='y ~ x', se=FALSE, color="#ef8a62") +
