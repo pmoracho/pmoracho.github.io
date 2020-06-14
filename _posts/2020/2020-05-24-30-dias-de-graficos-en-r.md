@@ -62,10 +62,10 @@ completa:
 | 20  | 31 de mayo  | redes                                             | ✓           |
 | 21  | 1 de junio  | gráficos con anotaciones                          | ✓           |
 | 22  | 2 de junio  | visualizar datos textuales                        | ✓           |
-| 23  | 3 de junio  | gráficos de proyección solar (*sunburst*)         |             |
-| 24  | 4 de junio  | coropletas                                        |             |
-| 25  | 5 de junio  | gráficos de violín                                |             |
-| 26  | 6 de junio  | diagramas de marimekko                            |             |
+| 23  | 3 de junio  | gráficos de proyección solar (*sunburst*)         | ✓           |
+| 24  | 4 de junio  | coropletas                                        | ✓           |
+| 25  | 5 de junio  | gráficos de violín                                | ✓           |
+| 26  | 6 de junio  | diagramas de marimekko                            | ✓           |
 | 27  | 7 de junio  | ¡gráficos animados\!                              |             |
 | 28  | 8 de junio  | diagramas de cuerdas                              |             |
 | 29  | 9 de junio  | gráficos de coordenadas paralelas                 |             |
@@ -1988,3 +1988,59 @@ plot_data %>%
 ```
 
 <img src="/images/2020/2020-05-24-30-dias-de-graficos-en-r_files/figure-gfm/dia25-1.png" style="display: block; margin: auto;" />
+
+## Día 26: Gráfica de Marimeko
+
+### Los datos:
+
+``` r
+library("tidyverse")
+library("ggmosaic") # devtools::install_github("haleyjeppson/ggmosaic")
+
+if ("ggelegant" %in% rownames(installed.packages())) {
+  library("ggelegant")
+} else {
+  # devtools::install_github("pmoracho/ggelegant")
+  theme_elegante_std <- function(base_family) {}
+}
+
+# delitos <- read.csv("http://cdn.buenosaires.gob.ar/datosabiertos/datasets/mapa-del-delito/delitos_2019.csv", 
+#                     na.strings = "", fileEncoding = "UTF-8-BOM", stringsAsFactors = FALSE)
+
+delitos <- readRDS(url("https://github.com/pmoracho/R/raw/master/data/delitos.caba.Rda","rb"))
+
+delitos %>% 
+  mutate(tipo_delito=factor(tipo_delito, levels = c("Lesiones", "Hurto (sin violencia)", "Robo (con violencia)", "Homicidio")),
+         comuna = factor(comuna)) %>% 
+  na.exclude() %>% 
+  select(comuna, tipo_delito) -> plot_data
+
+kable(head(plot_data))
+```
+
+|   | comuna | tipo\_delito          |
+| - | :----- | :-------------------- |
+| 1 | 4      | Lesiones              |
+| 3 | 15     | Lesiones              |
+| 4 | 10     | Hurto (sin violencia) |
+| 5 | 4      | Robo (con violencia)  |
+| 7 | 9      | Lesiones              |
+| 8 | 12     | Hurto (sin violencia) |
+
+### El gráfico:
+
+``` r
+plot_data %>% 
+  ggplot() +
+  geom_mosaic(aes(x = product(comuna), fill=tipo_delito), offset= 0.003) +
+  theme_elegante_std(base_family = "Ralleway") +
+  labs(title = "Delitos en CABA", 
+       subtitle = paste0("Por Comuna (año 2018)"),  
+       caption = "Fuente: data.buenosaires.gob.ar",
+       y = "",
+       x = "Comunas"
+  ) +
+  scale_fill_manual(values=c("#56B4E9", "#009E73",  "#0072B2", "#E69F00"))
+```
+
+<img src="/images/2020/2020-05-24-30-dias-de-graficos-en-r_files/figure-gfm/dia26-1.png" style="display: block; margin: auto;" />
