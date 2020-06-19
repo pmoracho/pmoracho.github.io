@@ -2169,6 +2169,63 @@ for (f in 1:length(fechas)) {
 }
 
 system(paste0('ffmpeg -y -framerate 2 -i ', out_folder, '/%06d.png -c:v libx264 -r 30 ', getwd(), '/dia27.mp4'))
+system(paste0('ffmpeg -y -ss 30 -t 3 -i ', getwd(), '/dia27.mp4', '-vf "fps=10,scale=1028:-1:flags=lanczos,split[s0][s1];[s0]palettegen[p];[s1][p]paletteuse" -loop 0'), getwd(), '/dia27.gif')
 ```
 
-![your caption here](/images/2020/dia27.mp4)
+![your caption here](/images/2020/dia27.gif)
+
+## Día 28: Gráficos animados
+
+Los gráficos animados son una muy útil herramienta para visualizar la
+evolución de variables, por lo general en el tiempo. En este ejemplo,
+transformo una de las anteriores gráficas (lollipop) en una gráfica
+animada.
+
+### Los datos:
+
+``` r
+library("circlize")
+library("tidyverse")
+
+# Datos originales
+# covid.data <- read.csv(file='https://sisa.msal.gov.ar/datos/descargas/covid-19/files/Covid19Casos.csv', stringsAsFactors = FALSE, fileEncoding = "UTF-16")
+# Datos reproducibles
+covid.data <- readRDS(url("https://github.com/pmoracho/R/raw/master/data/covid.arg.Rda","rb"))
+last_date <- max(covid.data$fecha_apertura, na.rm = TRUE)
+
+covid.data %>% 
+  filter(clasificacion_resumen == 'Confirmado',
+         !is.na(edad),
+         sexo != 'NR') %>% 
+  mutate(internado = !is.na(fecha_internacion),
+         cui = !is.na(fecha_cui_intensivo),
+         arm = replace_na(asistencia_respiratoria_mecanica == "SI",FALSE),
+         fallecido =    replace_na(fallecido == "SI", FALSE),
+         sexo = ifelse(sexo == 'M', 'Masculino', 'Femenino'),
+         internado = ifelse(fecha_internacion != "", 'Internado', 'Ambulatorio'),
+         fallecido = ifelse(fallecido == "SI", 'Fallecido', 'Recuperado')) %>% 
+  mutate(clasif_edad = case_when(edad <= 6 ~ '0 a 6',
+                                 edad > 6 &  edad <= 14 ~ '7 a 14',
+                                 edad > 14 & edad <= 35 ~ '15 a 35',
+                                 edad > 35 & edad <= 65 ~ '36 a 65',                          
+                                 edad > 65 ~ '>= 66')) %>% 
+  select(sexo, edad, clasif_edad, internado, cui, arm, fallecido) %>%
+  mutate(clasif_edad = factor(clasif_edad, c('0 a 6', '7 a 14', '15 a 35', '36 a 65', '>= 66')),
+         internado = factor(internado, c("Ambulatorio", "Internado")),
+         fallecido = factor(fallecido, c("Recuperado", "Fallecido"))
+  ) %>% 
+  group_by(clasif_edad, sexo, internado, fallecido) %>% 
+  summarise(n = n()) -> plot_data
+```
+
+### La gráfica:
+
+``` r
+plot_data %>% 
+  group_by(clasif_edad, sexo) %>% 
+  summarize(n = sum(n)) %>% 
+  select(from=clasif_edad, to=sexo, value=n) %>% 
+  chordDiagram()
+```
+
+<img src="/images/2020/2020-05-24-30-dias-de-graficos-en-r_files/figure-gfm/dia28-1.png" style="display: block; margin: auto;" />
