@@ -66,7 +66,7 @@ completa:
 | 24  | 4 de junio  | coropletas                                        | ✓           |
 | 25  | 5 de junio  | gráficos de violín                                | ✓           |
 | 26  | 6 de junio  | diagramas de marimekko                            | ✓           |
-| 27  | 7 de junio  | ¡gráficos animados\!                              |             |
+| 27  | 7 de junio  | ¡gráficos animados\!                              | ✓           |
 | 28  | 8 de junio  | diagramas de cuerdas                              |             |
 | 29  | 9 de junio  | gráficos de coordenadas paralelas                 |             |
 | 30  | 10 de junio | diagramas de área polar o de Florence Nightingale |             |
@@ -294,20 +294,20 @@ covid.data %>%
             by = c("countryterritoryCode" = "country_code")
             ) %>% 
   mutate(pais = ifelse(countriesAndTerritories == 'United_States_of_America', 'EEUU', countriesAndTerritories)) %>% 
-  select(pais, casos, fallecidos, HDI = value) %>% 
+  select(pais, casos, HDI = value) %>% 
   mutate(pais_etiquetado = ifelse(pais %in% paises_de_interes, paste0(pais, " (casos: ", format(casos, digits=0, big.mark = ',', trim=TRUE), " hdi: ", HDI, ")"), NA)) -> plot_data
 
 kable(head(plot_data))
 ```
 
-| pais                  | casos | fallecidos |   HDI | pais\_etiquetado |
-| :-------------------- | ----: | ---------: | ----: | :--------------- |
-| Afghanistan           | 21459 |        384 | 0.468 | NA               |
-| Albania               |  1299 |         34 | 0.716 | NA               |
-| Algeria               | 10382 |        724 | 0.717 | NA               |
-| Andorra               |   852 |         51 | 0.830 | NA               |
-| Angola                |    96 |          4 | 0.526 | NA               |
-| Antigua\_and\_Barbuda |    26 |          3 | 0.774 | NA               |
+| pais                  | casos |   HDI | pais\_etiquetado |
+| :-------------------- | ----: | ----: | :--------------- |
+| Afghanistan           | 27532 | 0.468 | NA               |
+| Albania               |  1788 | 0.716 | NA               |
+| Algeria               | 11385 | 0.717 | NA               |
+| Andorra               |   855 | 0.830 | NA               |
+| Angola                |   155 | 0.526 | NA               |
+| Antigua\_and\_Barbuda |    26 | 0.774 | NA               |
 
 ### La gráfica
 
@@ -625,6 +625,8 @@ Los graficos “ridgeline” mapean la distribución de múltiples variables
 continuas con un conjunto de variables categoricas en la forma de curvas
 “suaves” que permite comparar cada categoría:
 
+### Los datos:
+
 ``` r
 library("tidyverse")
 library("ggridges")
@@ -667,7 +669,24 @@ perc <- sum(principales$porc[principales$distrito != 'Resto'])
 data %>% 
   left_join(principales, by="distrito") %>% 
   mutate(distrito = ifelse(is.na(casos.y), 'Resto', distrito)) %>% 
-  select(distrito, casos=casos.x) %>% 
+  select(distrito, casos=casos.x) -> plot_data
+  
+kable(head(plot_data))
+```
+
+| distrito     | casos |
+| :----------- | ----: |
+| CABA         |     1 |
+| Resto        |     0 |
+| Resto        |     0 |
+| Buenos Aires |     1 |
+| Resto        |     0 |
+| Resto        |     0 |
+
+### La gráfica:
+
+``` r
+plot_data %>% 
   ggplot(aes(x = casos, y = distrito, fill = distrito)) +
     geom_density_ridges() +
     theme(legend.position = "none") +
@@ -788,11 +807,12 @@ data %>%
               summarise(cantidades = max(cantidades), maximo = TRUE),
             by = c("metrica", "cantidades")
   ) %>% 
-  mutate(maximo = ifelse(maximo, paste0("Pico de ", metrica, " de ", cantidades, "\nel ", fecha), NA)) -> data
+  mutate(maximo = ifelse(maximo, paste0("Pico de ", metrica, " de ", cantidades, "\nel ", fecha), NA)) -> plot_data
 
 last_date <- max(as.Date(covid.data$fecha,"%d/%m/%Y"))
 
-ggplot(data, aes(x=dia, y=cantidades, fill=metrica, color=metrica)) + 
+plot_data %>% 
+  ggplot(aes(x=dia, y=cantidades, fill=metrica, color=metrica)) + 
   geom_area(alpha=0.6 , size=1) +
   labs(title = paste("COVID-19 en Argentina"), 
        subtitle = paste0("Variación de casos y fallecimientos por día (al: ", last_date, ")") , 
@@ -2044,3 +2064,111 @@ plot_data %>%
 ```
 
 <img src="/images/2020/2020-05-24-30-dias-de-graficos-en-r_files/figure-gfm/dia26-1.png" style="display: block; margin: auto;" />
+
+## Día 27: Gráficos animados
+
+Los gráficos animados son una muy útil herramienta para visualizar la
+evolución de variables, por lo general en el tiempo. En este ejemplo,
+transformo una de las anteriores gráficas (lollipop) en una gráfica
+animada.
+
+### Los datos:
+
+``` r
+library("tidyverse")
+library("countrycode")
+
+if ("ggelegant" %in% rownames(installed.packages())) {
+  library("ggelegant")
+} else {
+  # devtools::install_github("pmoracho/ggelegant")
+  theme_elegante_std <- function(base_family) {}
+}
+
+# Para descarga de los datos actualizados
+# covid.data <- read.csv("https://opendata.ecdc.europa.eu/covid19/casedistribution/csv", na.strings = "", fileEncoding = "UTF-8-BOM", stringsAsFactors = FALSE)
+
+# Datos reproducir la gráfica
+covid.data <- readRDS(url("https://github.com/pmoracho/R/raw/master/data/covid.mundial.Rda","rb"))
+
+rango_fechas <- range(unique(as.Date(covid.data$dateRep,"%d/%m/%Y")))
+todas_las_fecha <- seq(from=rango_fechas[1], to=rango_fechas[2], by=1)
+todos_los_paises <- unique(covid.data$countryterritoryCode)
+todos_los_paises <- todos_los_paises[!is.na(todos_los_paises)]
+
+expand_grid(countryterritoryCode=todos_los_paises, 
+            fecha=todas_las_fecha) %>% 
+  left_join(covid.data %>% 
+              mutate(fecha = as.Date(dateRep, "%d/%m/%Y")), 
+            by=c("countryterritoryCode", "fecha")) %>%  
+  inner_join(codelist, by = c("countryterritoryCode" = "iso3c")) %>% 
+  mutate(pais = ifelse(is.na(un.name.es), iso.name.en, un.name.es),
+         continente = continent) %>% 
+  group_by(pais, continente) %>% 
+  mutate(casos = cumsum(replace_na(cases, 0)),
+         fallecidos = cumsum(replace_na(deaths, 0))) %>% 
+  select(pais, continente, fecha, casos, fallecidos)  %>% 
+  mutate(dia=row_number()) %>% 
+  ungroup() %>% 
+  select(pais, dia, fecha, casos) %>% 
+  group_by(fecha) %>% 
+  arrange(-casos) %>% 
+  mutate(nr = row_number(),
+         media = mean(casos),
+         sobre_media = casos > media) %>% 
+  select(pais, fecha, casos, media, sobre_media, nr) %>% 
+  filter(nr <= 50,
+         fecha >= '2020-02-01') %>% 
+  arrange(fecha, nr) -> plot_data
+
+out_folder <- tempdir(check = TRUE)
+fechas <- unique(plot_data$fecha)
+
+kable(head(plot_data))
+```
+
+| pais               | fecha      | casos |    media | sobre\_media | nr |
+| :----------------- | :--------- | ----: | -------: | :----------- | -: |
+| China              | 2020-02-01 | 11809 | 58.79803 | TRUE         |  1 |
+| Tailandia          | 2020-02-01 |    19 | 58.79803 | FALSE        |  2 |
+| Singapur           | 2020-02-01 |    16 | 58.79803 | FALSE        |  3 |
+| Japón              | 2020-02-01 |    15 | 58.79803 | FALSE        |  4 |
+| República de Corea | 2020-02-01 |    12 | 58.79803 | FALSE        |  5 |
+| Australia          | 2020-02-01 |     9 | 58.79803 | FALSE        |  6 |
+
+### La gráfica
+
+``` r
+for (f in 1:length(fechas)) {
+  
+  fecha_actual =  fechas[f]
+  max_casos = max(plot_data$casos[plot_data$fecha == fecha_actual])
+  plot_data %>% 
+    filter(fecha == fecha_actual) %>% 
+    ggplot(aes(x=fct_reorder(pais, -nr), y = casos, color = sobre_media)) +
+    geom_segment(aes( y=0 , xend = pais, yend = casos)) + 
+    geom_point() +
+    coord_flip() +
+    geom_text(aes(label = casos,
+                  vjust = .5,
+                  hjust = -.1),
+              position = position_dodge(width=1)) +
+    labs(title = paste("COVID-19 en el mundo"), 
+         subtitle = paste("Casos por pais al: ", fecha_actual, '\nLos primeros 50 países') , 
+         caption = "Fuente: https://opendata.ecdc.europa.eu/covid19/casedistribution/csv", 
+         y = "Casos", 
+         x = ""
+    ) +
+    scale_y_continuous(breaks = scales::pretty_breaks(n = 5), limits = c(0, max_casos * 1.03),
+                       labels = scales::comma) +
+    
+    scale_color_manual(labels = c("Sobre la media", "Debajo de la media"), values = c("#67a9cf", "#ef8a62")) +
+    theme_elegante_std(base_family = "Ralleway") -> p
+  
+    ggsave(filename = paste0(out_folder, "/", str_pad(f, 6, pad = "0"), ".png"), plot =p, width = 36, height = 22, units = "cm", dpi = 100)
+}
+
+system(paste0('ffmpeg -y -framerate 2 -i ', out_folder, '/%06d.png -c:v libx264 -r 30 ', getwd(), '/dia27.mp4'))
+```
+
+![your caption here](/images/2020/dia27.mp4)
