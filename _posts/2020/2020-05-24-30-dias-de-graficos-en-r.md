@@ -67,9 +67,9 @@ completa:
 | 25  | 5 de junio  | gráficos de violín                                | ✓           |
 | 26  | 6 de junio  | diagramas de marimekko                            | ✓           |
 | 27  | 7 de junio  | ¡gráficos animados\!                              | ✓           |
-| 28  | 8 de junio  | diagramas de cuerdas                              |             |
-| 29  | 9 de junio  | gráficos de coordenadas paralelas                 |             |
-| 30  | 10 de junio | diagramas de área polar o de Florence Nightingale |             |
+| 28  | 8 de junio  | diagramas de cuerdas                              | ✓           |
+| 29  | 9 de junio  | gráficos de coordenadas paralelas                 | ✓           |
+| 30  | 10 de junio | diagramas de área polar o de Florence Nightingale | ✓           |
 
 ## Objetivos
 
@@ -1342,7 +1342,7 @@ if ("ggelegant" %in% rownames(installed.packages())) {
   theme_elegante_std <- function(base_family) {}
 }
 
-# Dataos originales
+# Datos originales
 # covid.data <- read.csv(file='https://sisa.msal.gov.ar/datos/descargas/covid-19/files/Covid19Casos.csv', stringsAsFactors = FALSE, fileEncoding = "UTF-16")
 # Datos reproducibles
 covid.data <- readRDS(url("https://github.com/pmoracho/R/raw/master/data/covid.arg.Rda","rb"))
@@ -2174,12 +2174,15 @@ system(paste0('ffmpeg -y -ss 30 -t 3 -i ', getwd(), '/dia27.mp4', '-vf "fps=10,s
 
 ![your caption here](/images/2020/dia27.gif)
 
-## Día 28: Gráficos animados
+## Día 28: Diagramas de cuerdas
 
 Los gráficos animados son una muy útil herramienta para visualizar la
 evolución de variables, por lo general en el tiempo. En este ejemplo,
 transformo una de las anteriores gráficas (lollipop) en una gráfica
 animada.
+
+NOTA: Con este lamentablemente se murió la esperanza de resolver todo
+gon **ggplot2**
 
 ### Los datos:
 
@@ -2189,8 +2192,9 @@ library("tidyverse")
 
 # Datos originales
 # covid.data <- read.csv(file='https://sisa.msal.gov.ar/datos/descargas/covid-19/files/Covid19Casos.csv', stringsAsFactors = FALSE, fileEncoding = "UTF-16")
-# Datos reproducibles
+# Datos reproducir la gráfica
 covid.data <- readRDS(url("https://github.com/pmoracho/R/raw/master/data/covid.arg.Rda","rb"))
+
 last_date <- max(covid.data$fecha_apertura, na.rm = TRUE)
 
 covid.data %>% 
@@ -2220,6 +2224,13 @@ covid.data %>%
 
 ### La gráfica:
 
+Los diagramas de cuerda se usan para mostrar relaciones entre entidades
+(variables categoricas), la importancia de esa relación puede estar
+definido por una variable continua. De alguna manera es una variante de
+los diagramas de redes, pero organizado de forma circular. Este tipo de
+diagramas se popularizado en 2007 gracias a su uso en las infografías
+presentadas por el New York Times sobre el genoma humano.
+
 ``` r
 plot_data %>% 
   group_by(clasif_edad, sexo) %>% 
@@ -2229,3 +2240,124 @@ plot_data %>%
 ```
 
 <img src="/images/2020/2020-05-24-30-dias-de-graficos-en-r_files/figure-gfm/dia28-1.png" style="display: block; margin: auto;" />
+
+## Día 29: gráficos de coordenadas paralelas
+
+### Los datos:
+
+``` r
+library("tidyverse")
+library("GGally")
+if ("ggelegant" %in% rownames(installed.packages())) {
+  library("ggelegant")
+} else {
+  # devtools::install_github("pmoracho/ggelegant")
+  theme_elegante_std <- function(base_family) {}
+}
+
+# Datos originales
+# covid.data <- read.csv("https://opendata.ecdc.europa.eu/covid19/casedistribution/csv", na.strings = "", fileEncoding = "UTF-8-BOM",
+#                        stringsAsFactors = FALSE)
+
+# Datos para reproducir la gráfica
+covid.data <- readRDS(url("https://github.com/pmoracho/R/raw/master/data/covid.mundial.Rda","rb"))
+
+covid.data %>% 
+  mutate(fecha = as.Date(dateRep, '%d/%m/%Y'),
+         pais = countriesAndTerritories) %>% 
+  filter(continentExp %in% c('America')) %>% 
+  # filter(pais %in% c('Argentina', 'Brazil', 'Chile', 'Paraguay', 'Uruguay', 'Colombia', 'Bolivia', 'Ecuador', 'Peru', 'Venezuela', 'México')) %>% 
+  group_by(pais, popData2019) %>% 
+  summarise(casos = sum(cases), fallecidos = sum(deaths)) %>% 
+  arrange(-casos) %>% 
+  head(10) -> plot_data
+
+kable(head(plot_data))
+```
+
+| pais                        | popData2019 |   casos | fallecidos |
+| :-------------------------- | ----------: | ------: | ---------: |
+| United\_States\_of\_America |   329064917 | 2191052 |     118434 |
+| Brazil                      |   211049519 |  978142 |      47748 |
+| Peru                        |    32510462 |  244388 |       7461 |
+| Chile                       |    18952035 |  225103 |       3841 |
+| Mexico                      |   127575529 |  165455 |      19747 |
+| Canada                      |    37411038 |  100209 |       8300 |
+
+### La gráfica:
+
+``` r
+plot_data %>% 
+  ggparcoord(columns = 2:4, groupColumn = 1) +
+    theme_elegante_std(base_family = "Ralleway") +
+    scale_x_discrete(labels = c("Población", "Casos", "Fallecidos")) +
+    labs(title = paste("COVID-19"), 
+       subtitle = paste("Relación Población / Casos / fallecidos (Top 10 América)") , 
+       caption = "Fuente: https://opendata.ecdc.europa.eu/covid19/casedistribution/csv", 
+       y = "", 
+       x = ""
+  )
+```
+
+<img src="/images/2020/2020-05-24-30-dias-de-graficos-en-r_files/figure-gfm/dia29-1.png" style="display: block; margin: auto;" />
+
+## Día 30: diagramas de área polar o de Florence Nightingale
+
+### Los datos:
+
+``` r
+library("tidyverse")
+
+if ("ggelegant" %in% rownames(installed.packages())) {
+  library("ggelegant")
+} else {
+  # devtools::install_github("pmoracho/ggelegant")
+  theme_elegante_std <- function(base_family) {}
+}
+
+# Datos originales
+# covid.data <- read_csv('https://docs.google.com/spreadsheets/d/16-bnsDdmmgtSxdWbVMboIHo5FRuz76DBxsz_BbsEVWA/export?format=csv&id=16-bnsDdmmgtSxdWbVMboIHo5FRuz76DBxsz_BbsEVWA&gid=0')
+
+# Datos reproducir la gráfica
+covid.data <- readRDS(url("https://github.com/pmoracho/R/raw/master/data/covid.casos.arg.Rda","rb"))
+
+last_date <- max(as.Date(covid.data$fecha,"%d/%m/%Y"))
+
+covid.data %>% 
+  filter(osm_admin_level_4 %in% c('CABA', 'Buenos Aires', 'Chaco', 'Río Negro', 'Córdoba')) %>% 
+  group_by(distrito = osm_admin_level_4) %>% 
+  summarise(casos = sum(nue_casosconf_diff), fallecidos=sum(nue_fallecidos_diff)) %>% 
+  pivot_longer(-distrito) -> plot_data
+
+kable(head(plot_data))
+```
+
+| distrito     | name       | value |
+| :----------- | :--------- | ----: |
+| Buenos Aires | casos      |  9590 |
+| Buenos Aires | fallecidos |   304 |
+| CABA         | casos      | 11965 |
+| CABA         | fallecidos |   262 |
+| Chaco        | casos      |  1118 |
+| Chaco        | fallecidos |    64 |
+
+### La gráfica:
+
+``` r
+plot_data %>% 
+  ggplot(aes(x = distrito, y=value, fill = name)) +
+  geom_col(width = 1, color = "black") +
+  scale_y_sqrt() +
+  coord_polar(start=3*pi/2) +
+  scale_fill_discrete(palette = function(x) c("#67a9cf", "#ef8a62")) +
+  theme_elegante_std(base_family = "Ralleway") +
+  labs(title = paste("COVID-19 en Argentina"), 
+       subtitle = paste0("Total de casos y fallecidos por distrito (al: ", last_date, ")") , 
+       caption = "Fuente: https://github.com/SistemasMapache/Covid19arData", 
+       y = "", 
+       x = ""
+  ) +
+  theme(axis.text.y = element_blank())
+```
+
+<img src="/images/2020/2020-05-24-30-dias-de-graficos-en-r_files/figure-gfm/dia30-1.png" style="display: block; margin: auto;" />
