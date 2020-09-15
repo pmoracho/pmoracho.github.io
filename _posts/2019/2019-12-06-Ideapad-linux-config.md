@@ -260,6 +260,8 @@ Y actaulizamos el kernel en le boot (no debería haber error)
 
     update-initramfs
 
+Fuente: [Possible missing frmware /lib/firmware/i915][drivers-missing]
+
 [ms]: https://www.microsoft.com/es-es/software-download/windows10ISO
 [unetbootin]: https://unetbootin.github.io/linux_download.html
 [mint]: https://linuxmint.com/edition.php?id=256
@@ -271,4 +273,5 @@ Y actaulizamos el kernel en le boot (no debería haber error)
 [avahi]: https://linux.die.net/man/8/avahi-daemon
 [ofono]: https://01.org/ofono
 [tlp]: https://linrunner.de/en/tlp/docs/tlp-linux-advanced-power-management.html
-[interl]: https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git/tree/i915
+[intel]: https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git/tree/i915
+[drivers-missing]: https://askubuntu.com/a/832528/1050086
