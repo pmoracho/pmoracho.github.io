@@ -31,7 +31,7 @@ primero como siempre, instalar Linux. La maquina ya viene con Windows 10 Home,
 si se quiere conservar la licencia lo ideal es crear una ISO de la instalación,
 para luego hacer un usb booteable, interesante, que los números de licencia se
 encuentren en la BIOS del equipo por lo que no hay que ni escribirlos ni
-memorizarlos. 
+memorizarlos.
 
 De cualquier forma, hoy es posible descargar una ISO válida, directamente desde
 [Microsoft][ms], el booteable, con [unetbootin][unetbootin], bajo linux,
@@ -42,11 +42,11 @@ uso este sabor, variante **xfce**, así que ya estoy bastante acostumbrado y
 francamente ya perdí el interés en estar probando sistemas e interfaces nuevas
 todo el tiempo. El proceeso de instalación no puede ser más sencillo, lo que sí,
 la IdeaPad solo tiene puertos usb por lo que habrá que construir un "pendrive"
-booteable desde la [ISO][mintiso]. Muy pocas cosas para configurar, idiomoa, 
-teclado,  zona horaria, usuario, nombre ddel equipo y listo. En pocos 
+booteable desde la [ISO][mintiso]. Muy pocas cosas para configurar, idiomoa,
+teclado,  zona horaria, usuario, nombre ddel equipo y listo. En pocos
 minutos tendremos un SO Linux totalmente funcional. ¿Totalmente?, bueno,
 no exactamente, algunas cosas habrá que meter mano. Hasta hoy hay dos cosas que
-el instalador de Mint no resuelve bien: el hardware de red y el escaner de 
+el instalador de Mint no resuelve bien: el hardware de red y el escaner de
 la huella dactilar. Vamos por parte:
 
 ### Wifi
@@ -104,8 +104,8 @@ paso, se entra presionando F2, luego simplemente buscar el ítem "Hot Key"
 
 8. Muy recomendado en la red el uso de [`TLP`][tlp]:
 
-        sudo apt install tlp tlp-rdw 
-        
+        sudo apt install tlp tlp-rdw
+
 ## Eliminando lo innecesario
 
 En lo personal nunca le encontré utilidad al servidor [`avahi-daemon`][avahi],
@@ -135,7 +135,7 @@ respuesta](https://stackoverflow.com/a/56966764/6836377).  La idea entonces:
 1. Instalar PulseEffects, esto desde el Gestor de Software, es una aplicación
    `flatpack`, o bien seguir [estas
    instrucciones](https://github.com/wwmm/pulseeffects/wiki/Package-Repositories#debian--ubuntu|)
-   
+
 2. Instalar [estos](https://github.com/JackHack96/PulseEffects-Presets) presets
 
 3. Configurar el **Convolver**, y seleccionar el preset:
@@ -154,16 +154,16 @@ respuesta](https://stackoverflow.com/a/56966764/6836377).  La idea entonces:
    `journalctl --no-pager -b -p3`. [Este post][pam] explica bastante bien el
    problema y la solución. Simplemente editar estos archivos
 
-        sudo xed /etc/pam.d/lightdm 
+        sudo xed /etc/pam.d/lightdm
         sudo xed /etc/pam.d/lightdm-greeter
-        
+
    y hay que editar, y comentar estas líneas
 
         #auth optional pam_kwallet.so
         #auth optional pam_kwallet5.so
 
         #session optional pam_kwallet.so auto_start
-        #session optional pam_kwallet5.so auto_start 
+        #session optional pam_kwallet5.so auto_start
 
    Este sencillo cambio, tiene un impacto muy visible en el proceso de login
    gráfico. Al menos 2 segundos de ahorro en tiempo entre que se ingresa el
@@ -173,15 +173,15 @@ respuesta](https://stackoverflow.com/a/56966764/6836377).  La idea entonces:
 
    Tengo, al menos, cada 5 segundos, un registro de log con este patrón:
 
-        [UFW BLOCK] IN=wlp2s0 OUT= MAC=**************************************** SRC=192.168.1.1 DST=224.0.0.1 LEN=28 TOS=0x00 PREC=0x00 TTL=1 ID=5350 PROTO=2 
+        [UFW BLOCK] IN=wlp2s0 OUT= MAC=**************************************** SRC=192.168.1.1 DST=224.0.0.1 LEN=28 TOS=0x00 PREC=0x00 TTL=1 ID=5350 PROTO=2
 
     Y eventualmente algo así:
 
         [UFW BLOCK] IN=wlp2s0 OUT= MAC= SRC=192.168.1.5 DST=224.0.0.251 LEN=32 TOS=0x00 PREC=0xC0 TTL=1 ID=0 DF PROTO=2
-    
+
     o incluso:
 
-        [UFW BLOCK] IN=wlp2s0 OUT= MAC=**************************************** SRC=192.168.1.4 DST=192.168.1.5 LEN=360 TOS=0x00 PREC=0x00 TTL=64 ID=37885 DF PROTO=UDP SPT=36633 DPT=45189 LEN=340 
+        [UFW BLOCK] IN=wlp2s0 OUT= MAC=**************************************** SRC=192.168.1.4 DST=192.168.1.5 LEN=360 TOS=0x00 PREC=0x00 TTL=64 ID=37885 DF PROTO=UDP SPT=36633 DPT=45189 LEN=340
 
     Con algunas IPs de dispositivos de mi red local. Por lo que leí, es trafico
     multicast, la solución, o mas bien el paliativo es permitir o denegar este
@@ -192,8 +192,8 @@ respuesta](https://stackoverflow.com/a/56966764/6836377).  La idea entonces:
         sudo ufw allow in from 192.168.1.4 to 192.168.1.5      # Agrego las eventuales ip's locales
         sudo service network-manager restart
 
-    
-    
+
+
 ## Problemas aún sin solución
 
 ### Escanner de huella
@@ -206,9 +206,9 @@ completa [aquí][listdev], para saber que dispositivo tenemos:
     |---> # lsusb
     Bus 002 Device 001: ID 1d6b:0003 Linux Foundation 3.0 root hub
     Bus 001 Device 005: ID 0458:6001 KYE Systems Corp. (Mouse Systems) GF3000F Ethernet Adapter
-    Bus 001 Device 003: ID 13d3:56b2 IMC Networks 
-    Bus 001 Device 002: ID 27c6:55b4  
-    Bus 001 Device 004: ID 0bda:c024 Realtek Semiconductor Corp. 
+    Bus 001 Device 003: ID 13d3:56b2 IMC Networks
+    Bus 001 Device 002: ID 27c6:55b4
+    Bus 001 Device 004: ID 0bda:c024 Realtek Semiconductor Corp.
 
 El id del hardware es `27c6:55b4`, todavía no esta en la lista del hardware
 soportado, no hay otra cosa que esperar, una lástima, por que lo he llegado a
@@ -229,8 +229,36 @@ verificarlo:
    en este. Puede que esta zona sea el escritorio y entonces perdemos la
    capacidad de hacer click sobre lo eventuales íconos, o bien otra aplicación,
    dónde cualquier control de la "ex" zona  **chrome** queda deshabilitado,
-   hasta que la app dispare un evento de "refresh". 
+   hasta que la app dispare un evento de "refresh".
 
+## Arreglos varios
+
+### `warning` con drivers faltantes
+
+Nada grave, pero con algunas actualizaciones del kernel, empiezan a aparecer estas adevertencias:
+
+    |---> # sudo update-initramfs -u -k all
+    update-initramfs: Generating /boot/initrd.img-5.4.0-47-generic
+    W: Possible missing firmware /lib/firmware/i915/tgl_dmc_ver2_04.bin for module i915
+    W: Possible missing firmware /lib/firmware/i915/skl_guc_33.0.0.bin for module i915
+    W: Possible missing firmware /lib/firmware/i915/bxt_guc_33.0.0.bin for module i915
+    W: Possible missing firmware /lib/firmware/i915/kbl_guc_33.0.0.bin for module i915
+    W: Possible missing firmware /lib/firmware/i915/glk_guc_33.0.0.bin for module i915
+    W: Possible missing firmware /lib/firmware/i915/kbl_guc_33.0.0.bin for module i915
+    W: Possible missing firmware /lib/firmware/i915/icl_guc_33.0.0.bin for module i915
+
+Simplemente, son molestos los mensajes, lo que nos dice, es que estarían
+faltando algunos firmwares (que no usamos), para resolverlo, simplemente hay que
+buscarlos y descargarlos de la página de [Intel][intel]. Hay que hacer click en
+el botón "plain" del driver en cuestión.
+
+Copiamos los `.bin`:
+
+    sudo cp ~/Descarga/*.bin /lib/firmware/i915/
+
+Y actaulizamos el kernel en le boot (no debería haber error)
+
+    update-initramfs
 
 [ms]: https://www.microsoft.com/es-es/software-download/windows10ISO
 [unetbootin]: https://unetbootin.github.io/linux_download.html
@@ -243,3 +271,4 @@ verificarlo:
 [avahi]: https://linux.die.net/man/8/avahi-daemon
 [ofono]: https://01.org/ofono
 [tlp]: https://linrunner.de/en/tlp/docs/tlp-linux-advanced-power-management.html
+[interl]: https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git/tree/i915
