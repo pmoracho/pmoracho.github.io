@@ -85,10 +85,10 @@ En lo personal, mi idea es aprovechar este desafío para:
 ## Día 1: Gráfico de barras / Columnas
 
 Una gráfica de barras o columnas, tal vez una de las más clásicas,
-muestran comparaciones numéricas entre una variable discreta y una serie
-de los valores continuos que toma cada una de estas variables discretas
-o “categorías”. A diferencia de un histograma, los gráficos de barra no
-muestran un desarrollo continuo entre las categorías.
+muestra comparaciones numéricas entre una variable discreta y los
+valores continuos que toma cada una de estas variables o “categorías”. A
+diferencia de un histograma, los gráficos de barra no muestran un
+desarrollo continuo entre las categorías.
 
 Este ejemplo muestra las diferencia de situación con respecto al
 **COVID-19** en Argentina y los países vecinos, en cuanto a cantidad de
@@ -179,9 +179,9 @@ puntos X, Y y luego se van conectando estos mediante líneas rectas.
 
 En este ejemplo, la idea es mostrar la evolución de los casos de
 **COVID-19** en las dos provincias más importantes en cantidad de casos
-de la Argentina, desde el primer infectado, el eje `x` muestra el número
-de días y el `y` la cantidad de casos detectados dicho día. Dibujamos
-puntos en cada `x,y` y luego unimos cada uno con un segmento,
+de la Argentina, desde el primer infectado (día 1), el eje `x` muestra
+el número de días y el `y` la cantidad de casos detectados dicho día.
+Dibujamos puntos en cada `x, y` y luego unimos cada uno con un segmento,
 adicionalmente agregamos una curva que refuerza la visión de la
 tendencia.
 
@@ -250,11 +250,11 @@ medio de los patrones que se forman.
 
 En este ejemplo, me pregunto sí, **¿Hay relación entre el desarrollo
 humano y la cantidad de infecciones?**, para esto armamos un gráfico de
-dispersión dónde cada país tiene un punto que correlaciona las variables
-números de infectados (`x`) y el índice de desarrollo humano (`y`),
-además agregamos unas etiquetas que marcan los países en el extremo de
-cada variable y la Argentina y una recta de regresión a modo de
-tendencia.
+dispersión dónde cada país tiene un punto que correlaciona las
+variables: números de infectados (`x`) y el índice de desarrollo humano
+(`y`), además agregamos unas etiquetas que marcan los países en el
+extremo de cada variable y la Argentina y una recta de regresión a modo
+de tendencia.
 
 ### Los datos
 
@@ -366,26 +366,30 @@ last_date <- max(as.Date(covid.data$fecha,"%d/%m/%Y"))
 
 covid.data %>% 
   mutate(fecha = as.Date(fecha, "%d/%m/%Y")) %>% 
-  select(dia=dia_inicio, distrito=osm_admin_level_4, cantidad=nue_casosconf_diff) -> data
+  select(dia=dia_inicio, distrito=osm_admin_level_4, cantidad=nue_casosconf_diff) %>% 
+  complete(distrito, dia, fill=list(cantidad=0)) %>% 
+  arrange(distrito, dia) -> data
 
 data %>% 
   inner_join(data %>% 
                group_by(distrito) %>% 
                summarize(cantidad = sum(cantidad)) %>% 
                arrange(-cantidad) %>% 
-               top_n(9), by = c("distrito"), suffix=c("",".y")) -> plot_data
+               top_n(9), by = c("distrito"), suffix=c("",".y")) %>% 
+  select(dia, distrito, cantidad) %>% 
+  arrange(dia, distrito) -> plot_data
 
 kable(head(plot_data))
 ```
 
-| dia | distrito     | cantidad | cantidad.y |
-| --: | :----------- | -------: | ---------: |
-|   1 | CABA         |        1 |      11965 |
-|   4 | Buenos Aires |        1 |       9590 |
-|   7 | Buenos Aires |        8 |       9590 |
-|   8 | CABA         |        1 |      11965 |
-|   8 | Chaco        |        5 |       1118 |
-|   8 | Río Negro    |        1 |        491 |
+| dia | distrito     | cantidad |
+| --: | :----------- | -------: |
+|   1 | Buenos Aires |        0 |
+|   1 | CABA         |        1 |
+|   1 | Chaco        |        0 |
+|   1 | Córdoba      |        0 |
+|   1 | Mendoza      |        0 |
+|   1 | Neuquén      |        0 |
 
 ### La gráfica
 
@@ -409,6 +413,12 @@ plot_data %>%
 <img src="/images/2020/2020-05-24-30-dias-de-graficos-en-r_files/figure-gfm/dia4-1.png" style="display: block; margin: auto;" />
 
 ### Una linda visualización mediante [geofaceteAR](https://github.com/electorArg/geofaceteAR):
+
+Este paquete permite facetar siguiendo la estructura geografica, en esta
+caso el de las provincias de Argentina, da una visión muy atractiva y
+clara de los datos, ya no es necesario iterar visualmente hasta
+encontrar la información de un estado, sino que accedemos a la gráfica
+de forma más directa.
 
 ``` r
 library("geofaceteAR")
@@ -437,7 +447,6 @@ data %>%
        x = "Número de días desde el 1er caso"
   ) +
   facet_geo(~ distrito, grid = argentina_grid, scales = "free_y") +
-  # facet_wrap(~ distrito, scales = "free_y") +
   theme_elegante_std(base_family = "Assistant") 
 ```
 
@@ -528,7 +537,7 @@ tbl_graph(edges=prepared.data, directed = TRUE) %>%
 Odio las donas, pero bueno, en realidad se llaman “donuts plots”, una
 variante de un clásico gráfico de torta, solo sin el centro, a
 diferencia de los últimos, los gráficos de donas, al no mostrar el área
-completa, logran que el usuario se enfoque más en la longitud de cada
+completa, logran que el usuario se enfoque más en la proporción de cada
 sector, lo cual mejora la percepción de los cambios. Además,
 eventualmente permiten usar el área del centro para agregar más
 información.
@@ -706,7 +715,7 @@ plot_data %>%
 ## Día 8: Gráfico de contornos
 
 Este tipo de gráficos básicamente une puntos x e y que comparte un mismo
-vlor de una tercer variable z, el caso típico, son los mapa
+valor de una tercer variable z, el caso típico, son los mapa
 cartográficos , cuyas lineas unen puntos de semejante altura.
 
 ``` r
@@ -747,7 +756,24 @@ covid.data %>%
   ) %>% 
   mutate(pais = ifelse(countriesAndTerritories == 'United_States_of_America', 'EEUU', countriesAndTerritories)) %>% 
   select(pais, casos, fallecidos, HDI = value) %>% 
-  mutate(pais_etiquetado = ifelse(pais %in% paises_de_interes, paste0(pais, " (casos: ", format(casos, digits=0, big.mark = ',', trim=TRUE), " hdi: ", HDI, ")"), NA)) %>% 
+  mutate(pais_etiquetado = ifelse(pais %in% paises_de_interes, paste0(pais, " (casos: ", format(casos, digits=0, big.mark = ',', trim=TRUE), " hdi: ", HDI, ")"), NA)) -> plot_data
+  
+kable(head(plot_data))
+```
+
+| pais                  | casos | fallecidos |   HDI | pais\_etiquetado |
+| :-------------------- | ----: | ---------: | ----: | :--------------- |
+| Afghanistan           | 27532 |        546 | 0.468 | NA               |
+| Albania               |  1788 |         39 | 0.716 | NA               |
+| Algeria               | 11385 |        811 | 0.717 | NA               |
+| Andorra               |   855 |         52 | 0.830 | NA               |
+| Angola                |   155 |          7 | 0.526 | NA               |
+| Antigua\_and\_Barbuda |    26 |          3 | 0.774 | NA               |
+
+### La gráfica:
+
+``` r
+plot_data %>% 
   ggplot(aes(x=HDI, y=casos)) +
   geom_point(color = "#67a9cf", alpha=.5, size=3) +
   geom_smooth(method = 'lm',formula='y ~ x', se=FALSE, color="#ef8a62") +
@@ -811,6 +837,21 @@ data %>%
 
 last_date <- max(as.Date(covid.data$fecha,"%d/%m/%Y"))
 
+kable(head(plot_data))
+```
+
+| dia | fecha      | metrica    | cantidades | maximo |
+| --: | :--------- | :--------- | ---------: | :----- |
+|   1 | 2020-03-02 | casos      |          1 | NA     |
+|   1 | 2020-03-02 | fallecidos |          0 | NA     |
+|   2 | 2020-03-03 | casos      |          0 | NA     |
+|   2 | 2020-03-03 | fallecidos |          0 | NA     |
+|   3 | 2020-03-04 | casos      |          0 | NA     |
+|   3 | 2020-03-04 | fallecidos |          0 | NA     |
+
+### La gráfica:
+
+``` r
 plot_data %>% 
   ggplot(aes(x=dia, y=cantidades, fill=metrica, color=metrica)) + 
   geom_area(alpha=0.6 , size=1) +
@@ -932,7 +973,24 @@ dias %>%
          s_roll_casos_3 = replace_na((roll_casos_3-min(roll_casos_3))/(max(roll_casos_3)-min(roll_casos_3)),0),
          label_casos = casos
   ) %>% 
-  filter(dia >= ndias - dias_ventana ) %>% 
+  filter(dia >= ndias - dias_ventana ) -> plot_data
+
+kable(head(plot_data))
+```
+
+| dia | distrito     | fecha      | casos | roll\_casos\_3 | s\_roll\_casos\_3 | label\_casos |
+| --: | :----------- | :--------- | ----: | -------------: | ----------------: | -----------: |
+|  83 | Buenos Aires | 2020-05-23 |   236 |       197.0000 |         0.4371302 |          236 |
+|  84 | Buenos Aires | 2020-05-24 |   315 |       236.6667 |         0.5251479 |          315 |
+|  85 | Buenos Aires | 2020-05-25 |   299 |       283.3333 |         0.6286982 |          299 |
+|  86 | Buenos Aires | 2020-05-26 |   273 |       295.6667 |         0.6560651 |          273 |
+|  87 | Buenos Aires | 2020-05-27 |   296 |       289.3333 |         0.6420118 |          296 |
+|  88 | Buenos Aires | 2020-05-28 |   254 |       274.3333 |         0.6087278 |          254 |
+
+### La gráfica:
+
+``` r
+plot_data %>% 
   ggplot(aes(x = dia, y =   fct_reorder(distrito, casos), fill = s_roll_casos_3)) + 
     geom_tile(colour="gray80", size=0.2) +
     geom_text(aes(label=label_casos, color = s_roll_casos_3 > .7)) +
@@ -987,7 +1045,24 @@ media_fallecidos <- mean(data$fallecidos)
 data %>% 
   filter(nr <= 50) %>% 
   mutate(sobre_media = casos > media_casos,
-         pais = paste0(countrycode(code_pais, origin = 'iso3c', destination = 'un.name.es'), " (", nr, ")")) %>% 
+         pais = paste0(countrycode(code_pais, origin = 'iso3c', destination = 'un.name.es'), " (", nr, ")")) -> plot_data
+
+kable(head(plot_data))
+```
+
+| code\_pais |   casos | fallecidos | nr | sobre\_media | pais                                                |
+| :--------- | ------: | ---------: | -: | :----------- | :-------------------------------------------------- |
+| USA        | 2191052 |     118434 |  1 | TRUE         | Estados Unidos de América (1)                       |
+| BRA        |  978142 |      47748 |  2 | TRUE         | Brasil (2)                                          |
+| RUS        |  561091 |       7790 |  3 | TRUE         | Federación de Rusia (3)                             |
+| IND        |  380532 |      12573 |  4 | TRUE         | India (4)                                           |
+| GBR        |  300469 |      42288 |  5 | TRUE         | Reino Unido de Gran Bretaña e Irlanda del Norte (5) |
+| ESP        |  245268 |         NA |  6 | TRUE         | España (6)                                          |
+
+### La gráfica:
+
+``` r
+plot_data %>% 
   ggplot(aes(x=fct_reorder(pais, -nr), y=casos, color = sobre_media)) +
   geom_segment(aes( y=0 , xend = pais, yend = casos)) + 
   geom_point() +
@@ -1009,7 +1084,7 @@ data %>%
   theme_elegante_std(base_family = "Assistant") 
 ```
 
-<img src="/images/2020/2020-05-24-30-dias-de-graficos-en-r_files/figure-gfm/dia12-1.png" style="display: block; margin: auto;" />
+<img src="/images/2020/2020-05-24-30-dias-de-graficos-en-r_files/figure-gfm/dia12-data-1.png" style="display: block; margin: auto;" />
 
 ## Día 13: Serie temporal
 
@@ -1037,6 +1112,22 @@ presidencias <- data.frame(fecha = as.Date(c('2019-12-10', '2015-12-10')), presi
 dolar <- readRDS(url("https://github.com/pmoracho/R/raw/master/data/dolar.Rda","rb"))
 
 dolar$indice_tiempo = as.Date(dolar$indice_tiempo, format = "%Y-%m-%d")
+
+kable(head(dolar))
+```
+
+| indice\_tiempo | tipo\_cambio\_bna\_vendedor |
+| :------------- | --------------------------: |
+| 2014-11-03     |                        8.49 |
+| 2014-11-04     |                        8.51 |
+| 2014-11-05     |                        8.51 |
+| 2014-11-06     |                        8.51 |
+| 2014-11-07     |                        8.51 |
+| 2014-11-08     |                        8.51 |
+
+### La gráfica:
+
+``` r
 dolar %>% 
   ggplot(mapping = aes(x=indice_tiempo, y=tipo_cambio_bna_vendedor)) + 
   geom_line(size = 1, color="#67a9cf") +
@@ -1110,8 +1201,24 @@ dias %>%
   group_by(distrito) %>% 
   summarise(casos = sum(casos)) %>% 
   arrange(-casos) %>% 
-  mutate(porc = cumsum(casos/sum(casos))) %>% 
+  mutate(porc = cumsum(casos/sum(casos))) -> plot_data
 
+kable(head(plot_data))
+```
+
+| distrito     | casos |      porc |
+| :----------- | ----: | --------: |
+| CABA         | 11965 | 0.4832001 |
+| Buenos Aires |  9590 | 0.8704870 |
+| Chaco        |  1118 | 0.9156369 |
+| Río Negro    |   491 | 0.9354656 |
+| Córdoba      |   466 | 0.9542848 |
+| Santa Fe     |   279 | 0.9655521 |
+
+### La gráfica:
+
+``` r
+plot_data %>%   
   ggplot(aes(area = casos, fill = casos, label=paste0(distrito, ": ", format(casos, big.mark = ".", decimal.mark = ",")),
              subgroup = ifelse(porc <= .95, "95%", ""))) +
   geom_treemap() +
@@ -1383,15 +1490,8 @@ covid.data %>%
        caption = "Fuente: datos.gob.ar",
        y = "",
        x = "") 
-```
-
-<img src="/images/2020/2020-05-24-30-dias-de-graficos-en-r_files/figure-gfm/dia16-1.png" style="display: block; margin: auto;" />
-
-``` r
   2# theme(axis.text.x=element_blank())
 ```
-
-    ## [1] 2
 
 ## Día 17: Un Sankey o Alluvial
 
@@ -2176,10 +2276,12 @@ system(paste0('ffmpeg -y -ss 30 -t 3 -i ', getwd(), '/dia27.mp4', '-vf "fps=10,s
 
 ## Día 28: Diagramas de cuerdas
 
-Los gráficos animados son una muy útil herramienta para visualizar la
-evolución de variables, por lo general en el tiempo. En este ejemplo,
-transformo una de las anteriores gráficas (lollipop) en una gráfica
-animada.
+Los diagramas de cuerda se usan para mostrar relaciones entre entidades
+(variables categoricas), la importancia de esa relación puede estar
+definido por una variable continua. De alguna manera es una variante de
+los diagramas de redes, pero organizado de forma circular. Este tipo de
+diagramas se popularizado en 2007 gracias a su uso en las infografías
+presentadas por el New York Times sobre el genoma humano.
 
 NOTA: Con este lamentablemente se murió la esperanza de resolver todo
 gon **ggplot2**
@@ -2220,16 +2322,20 @@ covid.data %>%
   ) %>% 
   group_by(clasif_edad, sexo, internado, fallecido) %>% 
   summarise(n = n()) -> plot_data
+
+kable(head(plot_data))
 ```
 
-### La gráfica:
+| clasif\_edad | sexo      | internado   | fallecido  |   n |
+| :----------- | :-------- | :---------- | :--------- | --: |
+| 0 a 6        | Femenino  | Ambulatorio | Recuperado | 366 |
+| 0 a 6        | Femenino  | Internado   | Recuperado | 153 |
+| 0 a 6        | Masculino | Ambulatorio | Recuperado | 416 |
+| 0 a 6        | Masculino | Internado   | Recuperado | 165 |
+| 7 a 14       | Femenino  | Ambulatorio | Recuperado | 552 |
+| 7 a 14       | Femenino  | Internado   | Recuperado | 153 |
 
-Los diagramas de cuerda se usan para mostrar relaciones entre entidades
-(variables categoricas), la importancia de esa relación puede estar
-definido por una variable continua. De alguna manera es una variante de
-los diagramas de redes, pero organizado de forma circular. Este tipo de
-diagramas se popularizado en 2007 gracias a su uso en las infografías
-presentadas por el New York Times sobre el genoma humano.
+### La gráfica:
 
 ``` r
 plot_data %>% 
