@@ -1012,6 +1012,9 @@ plot_data %>%
 
 ## Día 12: Un gráfico lolipop
 
+Es básicamente un gráfico de barras, pero se remplaza la barra por una
+línea que se completa con un punto al final dela barra.
+
 ``` r
 library("tidyverse")
 library("forcats")
@@ -1084,7 +1087,7 @@ plot_data %>%
   theme_elegante_std(base_family = "Assistant") 
 ```
 
-<img src="/images/2020/2020-05-24-30-dias-de-graficos-en-r_files/figure-gfm/dia12-data-1.png" style="display: block; margin: auto;" />
+<img src="/images/2020/2020-05-24-30-dias-de-graficos-en-r_files/figure-gfm/dia12-1.png" style="display: block; margin: auto;" />
 
 ## Día 13: Serie temporal
 
@@ -1476,7 +1479,15 @@ covid.data %>%
   group_by(sexo, clasif_edad) %>% 
   summarise(n = n()) %>%
   mutate(freq = round(100*(n / sum(n)),0),
-         clasif_edad = factor(clasif_edad, c('0 a 6', '7 a 14', '15 a 35', '36 a 65', '>= 66'))) %>%
+         clasif_edad = factor(clasif_edad, c('0 a 6', '7 a 14', '15 a 35', '36 a 65', '>= 66'))) -> plot_data
+
+kable(head(plot_data))
+```
+
+### La grafica:
+
+``` r
+plot_data %>% 
   ggplot(aes(fill = clasif_edad, values = freq)) +
   geom_waffle(n_rows = 10, size = 0.33, colour = "white", flip = TRUE) +
   scale_y_continuous(breaks = seq(0, 10, by = 1), labels = function(x) x * 10) +
