@@ -1484,6 +1484,15 @@ covid.data %>%
 kable(head(plot_data))
 ```
 
+| sexo     | clasif\_edad |    n | freq |
+| :------- | :----------- | ---: | ---: |
+| Femenino | \>= 66       | 1339 |   11 |
+| Femenino | 0 a 6        |  519 |    4 |
+| Femenino | 15 a 35      | 4504 |   39 |
+| Femenino | 36 a 65      | 4583 |   39 |
+| Femenino | 7 a 14       |  705 |    6 |
+| Femenino | NA           |    4 |    0 |
+
 ### La grafica:
 
 ``` r
@@ -1501,7 +1510,12 @@ plot_data %>%
        caption = "Fuente: datos.gob.ar",
        y = "",
        x = "") 
-  2# theme(axis.text.x=element_blank())
+```
+
+<img src="/images/2020/2020-05-24-30-dias-de-graficos-en-r_files/figure-gfm/dia16-1.png" style="display: block; margin: auto;" />
+
+``` r
+  # theme(axis.text.x=element_blank())
 ```
 
 ## Día 17: Un Sankey o Alluvial
@@ -1564,6 +1578,21 @@ covid.data %>%
     summarise(n = n()) %>% 
   ungroup() -> plot_data
 
+kable(head(plot_data))
+```
+
+| clasif\_edad | sexo      | internado   | fallecido  |   n |
+| :----------- | :-------- | :---------- | :--------- | --: |
+| 0 a 6        | Femenino  | Ambulatorio | Recuperado | 366 |
+| 0 a 6        | Femenino  | Internado   | Recuperado | 153 |
+| 0 a 6        | Masculino | Ambulatorio | Recuperado | 416 |
+| 0 a 6        | Masculino | Internado   | Recuperado | 165 |
+| 7 a 14       | Femenino  | Ambulatorio | Recuperado | 552 |
+| 7 a 14       | Femenino  | Internado   | Recuperado | 152 |
+
+### La grafica:
+
+``` r
 plot_data %>% 
   ggplot(mapping=aes(y = n,
                      axis1 = fallecido, axis2 = internado, axis3 = sexo, axis4 = clasif_edad)) +
@@ -1619,6 +1648,21 @@ delitos %>%
   st_as_sf(coords = c("long","lat"), remove = FALSE,  crs = 4326) %>% 
   st_join(comunas)-> delitos_puntos
 
+kable(head(plot_data))
+```
+
+| clasif\_edad | sexo      | internado   | fallecido  |   n |
+| :----------- | :-------- | :---------- | :--------- | --: |
+| 0 a 6        | Femenino  | Ambulatorio | Recuperado | 366 |
+| 0 a 6        | Femenino  | Internado   | Recuperado | 153 |
+| 0 a 6        | Masculino | Ambulatorio | Recuperado | 416 |
+| 0 a 6        | Masculino | Internado   | Recuperado | 165 |
+| 7 a 14       | Femenino  | Ambulatorio | Recuperado | 552 |
+| 7 a 14       | Femenino  | Internado   | Recuperado | 152 |
+
+### La grafica:
+
+``` r
 ggplot(delitos_puntos) +
   geom_sf(data = comunas, fill = "white") +
   geom_sf(data = delitos_puntos, aes(color=tipo_delito, alpha = 1), size=1) +
@@ -1743,21 +1787,38 @@ covid.data %>%
                                  edad > 65 ~ '>= 66')) %>% 
   select(sexo, edad, clasif_edad, internado, cui, arm, fallecido) %>%
   group_by(clasif_edad, sexo, internado, fallecido) %>% 
-  summarise(n = n()) -> plot_data
+  summarise(n = n()) -> data
 
 
-plot_data %>% 
+data %>% 
   group_by(sexo, clasif_edad) %>% 
   summarise(n=sum(n)) %>% 
   select(from=sexo, to=clasif_edad, n) -> sexo_edad
 
-plot_data %>% 
+data %>% 
   group_by(internado, clasif_edad) %>% 
   summarise(n=sum(n)) %>% 
   select(to=internado, from=clasif_edad, n) -> internado_edad
 
 internado_edad %>%
-  rbind(sexo_edad) %>% 
+  rbind(sexo_edad) -> plot_data
+
+kable(head(plot_data))
+```
+
+| to        | from     |    n |
+| :-------- | :------- | ---: |
+| Internado | \>= 66   | 2479 |
+| Internado | 0 a 6    | 1100 |
+| Internado | 15 a 35  | 9003 |
+| Internado | 36 a 65  | 9539 |
+| Internado | 7 a 14   | 1381 |
+| \>= 66    | Femenino | 1339 |
+
+### La grafica:
+
+``` r
+plot_data %>% 
   graph_from_data_frame() %>% 
   ggraph(layout = 'stress') +
   geom_edge_link(aes(edge_width=n), show.legend = TRUE, alpha=0.5, color = "#67a9cf") +
@@ -1852,14 +1913,13 @@ if ("ggelegant" %in% rownames(installed.packages())) {
   theme_elegante_std <- function(base_family) {}
 }
 
-# Twitter API Completar con los datos apropiados
-#   create_token(
-#     app = "",
-#     consumer_key = "",
-#     consumer_secret = "",
-#     access_token = "",
-#     access_secret = a"pi.security$access_secret""
-#   )
+# authenticate via web browser
+# token <- create_token(
+#   app = "MarloweApp",
+#   consumer_key = "",
+#   consumer_secret = "",
+#   access_token = "",
+#   access_secret = "")
 
 # Datos Originales
 # RAE_Corpus_1000 <- read.table(file="http://corpus.rae.es/frec/1000_formas.TXT", skip=1, header=FALSE,
@@ -1887,7 +1947,24 @@ my_words %>%
 my_words %>%
   inner_join(my_words_count %>% head(100), by = "word") %>% 
   # filter(!(word %in% c('https', 'http'))) %>% 
-  count(word) %>% 
+  count(word) -> plot_data
+
+kable(head(plot_data))
+```
+
+| word     | n |
+| :------- | -: |
+| acuerdo  | 4 |
+| agua     | 3 |
+| alguien  | 2 |
+| amigos   | 3 |
+| análisis | 2 |
+| año      | 5 |
+
+### La grafica:
+
+``` r
+plot_data %>% 
   ggplot(aes(label = word, size=n, color=n)) +
   geom_text_wordcloud() +
   scale_size_area(max_size = 20) +
@@ -1939,6 +2016,34 @@ plot_data %>%
          text = paste0(cantidad),
          text2 = max(dia)-dia) -> label_data
 
+kable(head(plot_data))
+```
+
+| dia | fecha      | distrito | cantidad | nr |
+| --: | :--------- | :------- | -------: | -: |
+|  91 | 2020-06-03 | Chaco    |        6 |  1 |
+|  92 | 2020-06-04 | Chaco    |       53 |  2 |
+|  93 | 2020-06-05 | Chaco    |       29 |  3 |
+|  94 | 2020-06-06 | Chaco    |       19 |  4 |
+|  95 | 2020-06-07 | Chaco    |       18 |  5 |
+|  96 | 2020-06-08 | Chaco    |       45 |  6 |
+
+``` r
+kable(head(label_data))
+```
+
+| dia | fecha      | distrito | cantidad | nr |    angle | hjust | text | text2 |
+| --: | :--------- | :------- | -------: | -: | -------: | ----: | :--- | ----: |
+|  91 | 2020-06-03 | Chaco    |        6 |  1 | 85.90909 |     0 | 6    |     6 |
+|  92 | 2020-06-04 | Chaco    |       53 |  2 | 77.72727 |     0 | 53   |     5 |
+|  93 | 2020-06-05 | Chaco    |       29 |  3 | 69.54545 |     0 | 29   |     4 |
+|  94 | 2020-06-06 | Chaco    |       19 |  4 | 61.36364 |     0 | 19   |     3 |
+|  95 | 2020-06-07 | Chaco    |       18 |  5 | 53.18182 |     0 | 18   |     2 |
+|  96 | 2020-06-08 | Chaco    |       45 |  6 | 45.00000 |     0 | 45   |     1 |
+
+### La grafica:
+
+``` r
 plot_data %>% 
   ggplot(aes(x=nr, y=cantidad+1, fill=distrito)) +
   geom_bar(stat="identity", alpha=0.5, color="black", size=.05) +
@@ -2019,7 +2124,24 @@ delitos_puntos %>%
   select(barrios, comunas, nrank) -> ranking_comunas
 
 comunas %>% 
-  left_join(ranking_comunas,  by = "comunas") %>% 
+  left_join(ranking_comunas,  by = "comunas") -> plot_data
+
+kable(head(plot_data))
+```
+
+| barrios.x                                                                   | perimetro |     area | comunas | barrios.y                                                                   | nrank | geometry                     |
+| :-------------------------------------------------------------------------- | --------: | -------: | :------ | :-------------------------------------------------------------------------- | ----: | :--------------------------- |
+| CONSTITUCION - MONSERRAT - PUERTO MADERO - RETIRO - SAN NICOLAS - SAN TELMO |  35572.65 | 17802807 | 1       | CONSTITUCION - MONSERRAT - PUERTO MADERO - RETIRO - SAN NICOLAS - SAN TELMO |   814 | MULTIPOLYGON (((-58.36854 -… |
+| RECOLETA                                                                    |  21246.61 |  6140873 | 2       | RECOLETA                                                                    |   296 | MULTIPOLYGON (((-58.39521 -… |
+| BALVANERA - SAN CRISTOBAL                                                   |  10486.26 |  6385991 | 3       | BALVANERA - SAN CRISTOBAL                                                   |   651 | MULTIPOLYGON (((-58.41192 -… |
+| BARRACAS - BOCA - NUEVA POMPEYA - PARQUE PATRICIOS                          |  36277.44 | 21701236 | 4       | BARRACAS - BOCA - NUEVA POMPEYA - PARQUE PATRICIOS                          |  1069 | MULTIPOLYGON (((-58.3552 -3… |
+| ALMAGRO - BOEDO                                                             |  12323.47 |  6660526 | 5       | ALMAGRO - BOEDO                                                             |   643 | MULTIPOLYGON (((-58.41287 -… |
+| CABALLITO                                                                   |  10990.96 |  6851029 | 6       | CABALLITO                                                                   |   536 | MULTIPOLYGON (((-58.43061 -… |
+
+### La grafica:
+
+``` r
+plot_data %>% 
   ggplot() +
     geom_sf(aes(fill = nrank), color="gray60") +
   scale_fill_viridis(option = "inferno", direction = -1) +
