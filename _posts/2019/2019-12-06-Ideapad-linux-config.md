@@ -262,6 +262,38 @@ Y actaulizamos el kernel en le boot (no debería haber error)
 
 Fuente: [Possible missing frmware /lib/firmware/i915][drivers-missing]
 
+### Securizando el equipo
+
+Es una buena idea correr una auditoría de seguridad mediante [lynis][lynis],
+alguna de las sugerencias se pueden ir incorporando:
+
+#### Deshabilitar _"Core Dumps"_
+
+Los volcados de memoria son útiles para debugear programas que fallan, pero
+suele ser una puerta abierta para acceder a la memoria RAM del equipo. En mi
+caso, esta funcionalidad, hasta el mometo, nunca la he llegado a usar, por lo
+que si está de más se deshabilita
+
+
+Para deshabilitar los volcado para todos los usuarios
+
+    su vim /etc/security/limits.conf
+
+Y verificar o agregar:
+
+    * hard core 0
+
+Luego, para asegurarse que ningún programa setuid pueda generar un volcado
+
+    echo 'fs.suid_dumpable = 0' >> /etc/sysctl.conf
+    sysctl -p
+
+Limite Soft
+
+    echo 'ulimit -S -c 0 > /dev/null 2>&1' >> /etc/profile
+
+Fuente: [Linux Disable Core Dumps][core]
+
 [ms]: https://www.microsoft.com/es-es/software-download/windows10ISO
 [unetbootin]: https://unetbootin.github.io/linux_download.html
 [mint]: https://linuxmint.com/edition.php?id=256
@@ -275,3 +307,5 @@ Fuente: [Possible missing frmware /lib/firmware/i915][drivers-missing]
 [tlp]: https://linrunner.de/en/tlp/docs/tlp-linux-advanced-power-management.html
 [intel]: https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git/tree/i915
 [drivers-missing]: https://askubuntu.com/a/832528/1050086
+[lynis]: https://cisofy.com/lynis/
+[core]: https://www.cyberciti.biz/faq/linux-disable-core-dumps/
