@@ -524,6 +524,8 @@ count_patterns_from_3<- function(f, l) if (l > 9) 0 else if (l < 2) l else c(C2 
 
 ## ¿Y como se comportan estas funciones precalculadas?
 
+Midamos los tiempos:
+
 ``` r
 microbenchmark::microbenchmark(count_patterns_from = count_patterns_from("E", 9),
                                count_patterns_from_1 = count_patterns_from_1("E", 9),
@@ -534,10 +536,12 @@ summary(df)
 ```
 
     ##                    expr    min     lq     mean  median     uq      max neval
-    ## 1   count_patterns_from 10.689 11.212 554.9971 13.0415 15.212 5433.324    10
-    ## 2 count_patterns_from_1  8.338  9.345 615.4852 10.3760 16.692 6045.095    10
-    ## 3 count_patterns_from_2  2.991  4.286 731.9152  4.4355  6.031 7276.896    10
-    ## 4 count_patterns_from_3  6.882  7.072 404.4140  8.1320  9.326 3963.085    10
+    ## 1   count_patterns_from 10.443 11.145 544.6781 12.8245 15.234 5332.132    10
+    ## 2 count_patterns_from_1  8.432  8.874 614.7270 10.1980 12.659 6051.479    10
+    ## 3 count_patterns_from_2  3.056  4.087 725.3517  4.2705  6.446 7198.810    10
+    ## 4 count_patterns_from_3  6.593  6.884 400.7109  7.5380  9.150 3928.927    10
+
+Visualmente:
 
 ``` r
 df %>% 
@@ -556,7 +560,7 @@ df %>%
     ) 
 ```
 
-![](/images/2021/2021-07-07-patrones-desbloqueo-android_files/figure-gfm/performance-de-precalculad-1.png)<!-- -->
+<img src="/images/2021/2021-07-07-patrones-desbloqueo-android_files/figure-gfm/performance-de-precalculadas-1.png" style="display: block; margin: auto;" />
 
 Como era de esperar se comportan bastante parecido todas. ¿Y las otras?
 hay varias soluciones no precalculads que me intrigan ver como
