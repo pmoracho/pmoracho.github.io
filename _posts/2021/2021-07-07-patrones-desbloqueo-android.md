@@ -33,14 +33,14 @@ output:
 Cuando me aburro, me pueden encontrar respondiendo preguntas en
 [stackoverflow](https://es.stackoverflow.com/questions) o haciendo
 desafíos en [codewars](https://www.codewars.com/). De este último es el
-interesante desafío: [Screen Locking
+interesante problema: [Screen Locking
 Patterns](https://www.codewars.com/kata/585894545a8a07255e0002f1). La
 idea es bien simple, dado un punto inicial en el patrón de bloqueo de
-Android y una cantidad de puntos, calcular la cantidad de posibles
-patrones. Por supuesto:
+Android, un cuadrado de 3x 3, y un número de puntos, calcular la
+cantidad de posibles patrones. Por supuesto:
 
 -   Los patrones deben ser válidos
--   Longitudes de 0 o de 9 o más puntos tienen que arrojar como
+-   Longitudes de 0 o de más de 10 o más puntos tienen que arrojar como
     resultado 0
 
 Y ¿qué es un patrón válido?
@@ -48,9 +48,9 @@ Y ¿qué es un patrón válido?
 -   Los puntos no deben repetirse
 -   Se va de un punto a otro sin pasar por encima de un tercero, a menos
     que:
--   Por el tercer punto ya se haya pasado. Por ejemplo `A->C` es un
+-   Por el tercer punto ya se haya pasado. Por ejemplo `A -> C` es un
     movimiento inválido, por que en el medio del movimiento se pasa por
-    encima de `B`, sin embargo, es totalmente válido hacer `B->A->C`
+    encima de `B`, sin embargo, es totalmente válido hacer `B -> A -> C`
 
 Hay otra restricción no escrita, la solución debe poder correr en un
 tiempo razonable. ¿Cuán razonable? lo determina el servidor de
@@ -62,10 +62,11 @@ Esta fue la primer pregunta que me hice, ciertamente parece un problema
 para aplicar algún algoritmo de camino o incluso de árboles, pero como
 soy cómodo, elegí la opción fácil: “fuerza bruta”, pero entonces
 ¿podemos calcular previamente todos los caminos posibles y enfocarnos
-luego a encontrar los que son válidos?. Veamos, tenemos un patrón de 3 x
-3, con puntos que no deben repetirse, por lo que en definitiva hay un
-espacio de posibilidades de respuesta no mayor a las permutaciones de
-los 9 puntos sin repeticiones por las 9 posibles longitudes pedidas:
+luego a encontrar los que son válidos descartando aquellos que no lo
+son?. Veamos, tenemos un patrón de 3 x 3, con puntos que no deben
+repetirse, por lo que en definitiva hay un espacio de posibilidades de
+respuesta, que seguro no es mayor a las permutaciones de los 9 puntos
+sin repeticiones por las 9 posibles longitudes pedidas:
 
 ``` r
 factorial(9) * 9
@@ -87,24 +88,26 @@ ordenar estos.
 Ya vimos que el número a manejar es importante pero razonable, ahora
 bien **¿Cómo podemos generar todas las permutaciones de 9 elementos en
 `R`?** Bueno, algo sorprendido, debo decir que no hay ninguna rutina
-“base” para generar las mismas, tampoco es que sea nada del otro mundo,
-con un simple código recursivo lo podemos realizar, pero en la red la
-mayoría de la recomendaciones pasan por usar paquetes adicionales, tales
-como:
+“base” para generar esto, tampoco es que sea nada del otro mundo, con un
+simple código recursivo lo podemos realizar, pero en la red la mayoría
+de la recomendaciones pasan por usar paquetes adicionales, tales como:
 
 -   [permutations](https://cran.r-project.org/web/packages/permutations/)
 -   [gtools](https://www.rdocumentation.org/packages/gtools/versions/3.9.2)
 -   [combinat](https://cran.r-project.org/web/packages/combinat/index.html)
 
 También hay algunas funciones de permutación interesantes para mantener
-el código simple y no recurrir a paquetes adicionales:
+el código simple y no recurrir a paquetes adicionales. no lo probé, pero
+dudo que [codewars](https://www.codewars.com/) permita instalar paquetes
+de terceros:
 
 -   [Learning R: Permutations and Combinations with base
     R](https://www.r-bloggers.com/2019/06/learning-r-permutations-and-combinations-with-base-r/)
 -   [Generating all distinct permutations of a list in
     R](https://stackoverflow.com/questions/11095992/generating-all-distinct-permutations-of-a-list-in-r)
 
-Veamos algunas funciones interesantes y estudiemos su performance:
+Veamos una recopilación de funciones interesantes y estudiemos su
+performance con `microbenchmark`:
 
 ``` r
 # From: https://www.r-bloggers.com/2019/06/learning-r-permutations-and-combinations-with-base-r/
@@ -200,6 +203,8 @@ summary(df)
     ## 4    10
     ## 5    10
 
+Visualmente:
+
 ``` r
 df %>% 
   ggplot(df, mapping=aes(y=expr, x=time, fill=expr)) +
@@ -222,8 +227,7 @@ df %>%
 La rutina dos, sin duda se lleva todos los premios, aunque parece tener
 una larga cola producto de un “outlier”, algo curioso, ya que si bien
 tiene un funcionamiento bastante estable, se verifica siempre que la
-segunda ejecución es la única dónde el tiempo crece hasta 5 veces el
-valor medio.
+segunda ejecución es dónde el tiempo crece hasta 5 veces el valor medio.
 
 ``` r
 library(tidyverse)
@@ -289,13 +293,13 @@ length(M)
 
     ## [1] 3265920
 
-Una de las restricciones, que se nos pide, es la longitud o la cantidad
-de puntos, por lo que deberemos “recortar” la matriz en función de la
-longitud, el problema es que quedaran permutaciones repetidas que
-tendremos que eliminar. La otra restricción es que se nos pide arrancar
-de un determinado punto, por lo que deberemos filtrar nuestra matriz por
-el valor de la primer columna. Imaginemos que se nos pide comenzar el
-patrón desde el punto `D` y que la longitud sea 3:
+Una de las restricciones, que se nos pide, es una longitud o cantidad de
+puntos, por lo que deberemos “recortar” la matriz en función de dicha
+longitud, el problema es que al hacer esto, quedaran permutaciones
+repetidas que tendremos que eliminar. La otra restricción es que se nos
+pide comenzar de un determinado punto, por lo que deberemos filtrar
+nuestra matriz por el valor de la primer columna. Imaginemos que se nos
+pide comenzar el patrón desde el punto `D` y que la longitud sea 3:
 
 ``` r
 l <- 3
@@ -310,17 +314,18 @@ todos
     ## [37] "DGB" "DGC" "DGE" "DGF" "DGH" "DGI" "DHA" "DHB" "DHC" "DHE" "DHF" "DHG"
     ## [49] "DHI" "DIA" "DIB" "DIC" "DIE" "DIF" "DIG" "DIH"
 
-Tenemos entonces, todas las combinaciones desde “D” de longitud 3 de los
-9 puntos. El problema final, es que no todas son válidas. Ya habíamos
-comentado, que no se puede saltear un punto, por ejemplo `D -> F` es una
-combinación inválida por que en el medio está `E` igual ocurre con
-`F -> D` sin embargo, y acá está lo complejo, podría ser válido hacer
-`E -> D -> F` en este caso el conjunto `D -> F` es válido por que ya
-hemos pasado por `E`. Hay una resolución muy interesante en **Python**
+Hemos logrado obtener todas las combinaciones comenzando en `D` y con
+una longitud 3 de los 9 posibles puntos. El problema final, es que no
+todas estas combinaciones son válidas. Ya habíamos comentado, que no se
+puede saltear un punto, por ejemplo `D -> F` es una combinación inválida
+por que en el medio está `E` igual ocurre con `F -> D` sin embargo, y
+acá está lo complejo, podría ser válido hacer `E -> D -> F` en este caso
+el conjunto `D -> F` es válido por que ya hemos pasado por `E`. Hay una
+resolución muy interesante en **Python**
 [aqui](https://stackoverflow.com/a/34613759/6836377) que calcula la
 cantidad de soluciones totales, y maneja un diccionario dónde se guardan
-los movimientos inválidos y el punto para que eventualmente lo sean, en
-`R` sería algo como esto:
+los movimientos inválidos y el punto para que eventualmente dicho patrón
+sea válido, en `R` sería algo como esto:
 
 ``` r
 invalidos <- read.table(text='patron, a_menos_que
@@ -343,15 +348,15 @@ invalidos <- read.table(text='patron, a_menos_que
 ```
 
 Es decir, tenemos un `data.frame` con los movimientos inválidos y una
-columna `a_menos_que` que nos da, para dicho patrón, el punto que
-debería existir antes para considerar al patrón válido.
+columna `a_menos_que` que nos dice, para dicho patrón, el punto que
+debería existir antes para considerarlo válido.
 
 Teniendo esto y las permutaciones arrancando de un punto dado y de la
 longitud solicitada, lo único que restaría es eliminar efectivamente los
 patrones inválidos. Imagino que hay varias formas de hacerlo, yo elegí
-usar expresiones regulares, armando un patrón a partir de `invalidos`
-dónde encontrar aquellos efectivamente inválidos, es decir que no tengan
-un `a_menos_que` antes:
+usar expresiones regulares, armando un patrón `regex` a partir de
+`invalidos` dónde encontrar aquellos efectivamente inválidos, es decir
+que no tengan un `a_menos_que` antes:
 
 ``` r
 patrones <- paste(apply(invalidos, 1, function(x) {paste0("^[^", x[2], "]*", x[1], ".*$|", x[1], ".*", x[2])}), collapse="|")
@@ -436,8 +441,8 @@ count_patterns_from <- function(f, l) {
 ```
 
 Y ya tenemos la función solicitada en el desafío. Un momento: ¿seguro?,
-bueno en realidad no, si bien funciona bien y con tiempos de calculo
-razonable, lamentablemente no tan “razonables” para
+bueno en realidad no, si bien funciona bien y con un tiempo de calculo
+razonable, lamentablemente no tan “razonable” para
 [codewars](https://www.codewars.com/). Qué desepción! tanto trabajo para
 nada, a menos que… no no puede funcionar.. aparte sería una vergüenza..
 bueno al menos podríamos probarlo. ¿Y sí precalculamos el espacio de
@@ -536,10 +541,10 @@ summary(df)
 ```
 
     ##                    expr    min     lq     mean  median     uq      max neval
-    ## 1   count_patterns_from 10.443 11.145 544.6781 12.8245 15.234 5332.132    10
-    ## 2 count_patterns_from_1  8.432  8.874 614.7270 10.1980 12.659 6051.479    10
-    ## 3 count_patterns_from_2  3.056  4.087 725.3517  4.2705  6.446 7198.810    10
-    ## 4 count_patterns_from_3  6.593  6.884 400.7109  7.5380  9.150 3928.927    10
+    ## 1   count_patterns_from 10.729 11.736 592.3144 13.5375 15.871 5796.512    10
+    ## 2 count_patterns_from_1  8.828  9.656 637.8339 10.4460 14.651 6266.660    10
+    ## 3 count_patterns_from_2  3.193  4.183 747.3586  4.7925  8.414 7422.810    10
+    ## 4 count_patterns_from_3  6.916  7.313 459.2330  8.1025 10.659 4508.255    10
 
 Visualmente:
 
@@ -553,7 +558,7 @@ df %>%
     labels = scales::trans_format("log10", scales::math_format(10^.x))
   ) +
   labs(title = paste("Performance"), 
-     subtitle = paste("Varias rutinas de permutación") , 
+     subtitle = paste("de las rutinas precalculadas") , 
      caption = "", 
      y = "", 
      x = "microsegundos"
@@ -564,7 +569,7 @@ df %>%
 
 Como era de esperar se comportan bastante parecido todas. ¿Y las otras?
 hay varias soluciones no precalculads que me intrigan ver como
-funcionan. (Veremo… TO BE CONTINUED)
+funcionan. (Veremos… TO BE CONTINUED)
 
 ## Lecciones aprendidas
 
@@ -572,5 +577,5 @@ funcionan. (Veremo… TO BE CONTINUED)
     programadores, es más, posiblemente sea la que menos “bugs” pueda
     llegar a tener eventualmente.
 -   Una obviedad, la fuerza “bruta” sirve, siempre que el espacio de
-    solución sea acotado
+    solución sea acotado a los limites que impone el hardware
 -   Las expresiones regulares sirven para casi todo.
