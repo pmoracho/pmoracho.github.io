@@ -16,7 +16,6 @@ tags:
   - desarrollo
 ---
 
-# Valores faltantes
 ## Apuntes
 
 ### Tipos de valores faltantes
