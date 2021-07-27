@@ -1,12 +1,7 @@
 ---
-title: "Missing Values"
-author: "Patricio Moracho"
-date: "9 de sseptiembre del 2020"
-post_date: 2020-09-09
 layout: post
-categories: cat
-excerpt_separator: <!--more-->
 published: false
+date: '2020-09-09'
 show_meta: true
 comments: true
 mathjax: false
@@ -15,17 +10,10 @@ noindex: false
 hide_printmsg: false
 sitemap: true
 summaryfeed: false
-description: Información útil para usar Visual Code
+title: "Missing Values"
+description: 
 tags:
-- desarollo
-- r
-- datos
-output:
-  github_page:
-    jekyllthat::jekylldown
-  pdf_document: default
-  html_document:
-    df_print: paged
+  - desarrollo
 ---
 
 # Valores faltantes
