@@ -2,9 +2,9 @@
 layout: default
 ---
 <div class="post">
-	
+
   <h1 itemprop="name" class="post-title">{{ page.title }}</h1>
-  <span class="post-date" itemprop="datePublished" content="{{ page.date | date: "%Y-%m-%d" }}"><i class="fa fa-calendar" title="Date published"> 
+  <span class="post-date" itemprop="datePublished" content="{{ page.date | date: "%Y-%m-%d" }}"><i class="fa fa-calendar" title="Date published">
     <a class="permalink" href="{{ site.url }}{{ page.url }}" itemprop="url" title="Permanent link to this post">
       {% assign m = page.date | date: "%-m" %}
       {{ page.date | date: "%-d" }}
@@ -31,7 +31,7 @@ layout: default
     {% assign pgdate = page.date | date_to_string %}
   {% unless moddate == pgdate | date_to_string %}
   <span class="post-date" itemprop="dateModified" content="{{ page.modified | date: "%Y-%m-%d" }}">
-    <i class="fa fa-edit" title="Last updated"> 
+    <i class="fa fa-edit" title="Last updated">
       {% assign m = page.modified | date: "%-m" %}
       {{ page.modified | date: "%-d" }}
       {% case m %}
@@ -107,4 +107,13 @@ layout: default
   {% endif %}
 </div>
 <div class="page-break"></div>
+
+<div class="donation">
+<form action="https://www.paypal.com/donate" method="post" target="_top">
+    <input type="hidden" name="hosted_button_id" value="LL793XJ7ZA5GW" />
+    <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" border="0" name="submit" title="PayPal - The safer, easier way to pay online!" alt="Donate with PayPal button" />
+    <img alt="" border="0" src="https://www.paypal.com/en_AR/i/scr/pixel.gif" width="1" height="1" />
+    </form>
+</div>
+
 {% if site.disqus_shortname and page.comments == true %}<div id="disqus_thread"></div><!-- /#disqus_thread -->{% endif %}
