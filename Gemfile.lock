@@ -3,11 +3,11 @@ GEM
   specs:
     activesupport (4.2.7)
       i18n (~> 0.7)
-      json (~> 2.3.0)
+      json (>= 2.3.0)
       minitest (~> 5.1)
       thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
-    addressable (2.4.0)
+    addressable (2.8.0)
     backports (3.6.8)
     coffee-script (2.4.1)
       coffee-script-source
