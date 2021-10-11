@@ -58,10 +58,15 @@ layout: default
   {{ content }}
   <hr>
 </div>
+
+<div class="page-break"></div>
+{% include donate.html %}
+
 {% unless page.hide_printmsg == true %}
   {% include printmsgposts.html %}
 {% endunless %}
-<div class="page-break"></div>
+
+
 <div class="related">
 	<h2>Contenido relacionado:</h2>
 	<ul>
@@ -94,6 +99,7 @@ layout: default
 	{% endfor %}
 	</ul>
 </div>
+
 <div class="prevnext">
   {% if page.previous.url %}
     <a class="prevnext-item older" href="{{ site.url }}{{page.previous.url}}" title="{{ page.previous.title }}">Anteriores</a>
@@ -108,12 +114,5 @@ layout: default
 </div>
 <div class="page-break"></div>
 
-<div class="donation">
-<form action="https://www.paypal.com/donate" method="post" target="_top">
-    <input type="hidden" name="hosted_button_id" value="LL793XJ7ZA5GW" />
-    <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" border="0" name="submit" title="PayPal - The safer, easier way to pay online!" alt="Donate with PayPal button" />
-    <img alt="" border="0" src="https://www.paypal.com/en_AR/i/scr/pixel.gif" width="1" height="1" />
-    </form>
-</div>
 
 {% if site.disqus_shortname and page.comments == true %}<div id="disqus_thread"></div><!-- /#disqus_thread -->{% endif %}
