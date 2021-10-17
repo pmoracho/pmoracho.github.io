@@ -6,7 +6,7 @@ permalink:            /blog/:year/:month/:day/:title/
 relative_permalinks:  false
 encoding:             utf-8
 
-# Setup 
+# Setup
 title:                El Blog de pmoracho
 tagline:              'un sitio de autor'
 description:          El Blog de pmoracho...
@@ -34,7 +34,7 @@ future:      true
 syntax_highlighter: rouge
 input: GFM
 
-gems:
+plugins:
   - jekyll-paginate
   - jemoji
   - font-awesome-sass
@@ -43,7 +43,7 @@ gems:
   - jekyll-mentions
   - jekyll-seo-tag
   - jekyll-postfiles
-  
+
 jekyll-mentions:
   base_url: https://twitter.com
 
@@ -68,11 +68,11 @@ owner:
   twitter:        pmoracho
   facebook:       pmoracho
   github:         pmoracho@gmail.com
-  stackexchange:  
+  stackexchange:
   linkedin:       https://www.linkedin.com/in/pmoracho
-  instagram:      
+  instagram:
   flickr:
-  tumblr:  
+  tumblr:
   google_plus:    https://plus.google.com/+pmoracho
   # orcid and google scholar IDs are different than standard username.
   #orcid: xyz123abc
