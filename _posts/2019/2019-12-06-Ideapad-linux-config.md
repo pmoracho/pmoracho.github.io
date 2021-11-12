@@ -94,7 +94,7 @@ paso, se entra presionando F2, luego simplemente buscar el ítem "Hot Key"
         sudo apt install mint-meta-codecs
 
 4. Crear un snapshot del sistema con `timeshift`
-5. Deshabilitar aplicaciones que se crgan al inicio del sistema
+5. Deshabilitar aplicaciones que se cargan al inicio del sistema
 6. Habilitar y configurara el firewall
 7. Limpiar el sistema
 
