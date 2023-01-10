@@ -1,8 +1,7 @@
 ---
 title: "Mis recetas"
 author: "Patricio Moracho"
-date: "05 de diciembre del 2021"
-post_date: 2021-12-05
+date: "2021-12-05"
 layout: post
 categories: cat
 excerpt_separator: <!--more-->
@@ -34,12 +33,13 @@ output:
 * 1 150 cm3 de agua tibia
 
 Combinar todo de la forma tradicional, amasar hasta lograr un bollo liso, luego
-dividir todo en 10 bollitos y dejar descansar 30 minutos. Luego amasar con
-palotr cada bollo hasta que quede bien una tortilla bien finita, inmediatamente
-cociar sobre sarten bien caliente, dar vuelta ni bien empieza a tostarse.
+dividir todo en 10 bollitos y dejar descansar 30 minutos. Luego pasar por
+palote cada bollo hasta que quede una tortilla bien finita, inmediatamente
+cocinar sobre sarten bien caliente, dar vuelta ni bien empieza a tostarse.
 
 Tips:
 
 * Nunca dejar la masa sin tapar, en lo posible en la heladera
 * El espesor debe quedar muy fino, casi transparente
 * El fuego al máximo
+* Usarlas en el día
