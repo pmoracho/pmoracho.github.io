@@ -2,6 +2,7 @@
 title: "Patrones de desbloqueo de Android"
 author: "Patricio Moracho"
 date: "7 de Julio de 2021"
+date: 2021-07-07
 layout: post
 categories: cat
 permalink: /patrones-desbloqueo-android/
