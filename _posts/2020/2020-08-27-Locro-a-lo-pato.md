@@ -1,7 +1,6 @@
 ---
 title: "Locro a lo Pato"
 author: "Patricio Moracho"
-date: "27 de Agosto del 2020"
 post_date: 2020-08-27
 layout: post
 categories: cat

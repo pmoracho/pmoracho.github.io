@@ -1,7 +1,6 @@
 ---
 title: "30 días de gráficos en R"
 author: "Patricio Moracho"
-date: "24 de mayo del 2020"
 post_date: 2020-05-24
 layout: post
 categories: cat

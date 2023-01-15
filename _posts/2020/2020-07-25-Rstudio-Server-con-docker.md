@@ -1,7 +1,6 @@
 ---
 title: "Rstudio Server para múltiples usuarios con Docker"
 author: "Patricio Moracho"
-date: "25 de Julio del 2020"
 post_date: 2020-07-25
 layout: post
 categories: cat

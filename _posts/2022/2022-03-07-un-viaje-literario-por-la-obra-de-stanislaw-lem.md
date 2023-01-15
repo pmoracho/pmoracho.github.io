@@ -1,7 +1,7 @@
 ---
 title: "Un viaje literario por la obra de Stanislaw Lem"
 author: "Patricio Moracho"
-date: "5 de marzo de 2022"
+date: "2022-03-05"
 post_date: 2022-03-05
 layout: post
 categories: cat
