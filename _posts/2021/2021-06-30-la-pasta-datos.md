@@ -1,8 +1,7 @@
 ---
 title: "Pasta - Lo que aprendí hasta hoy"
 author: "Patricio Moracho"
-date: "30 de junio del 2021"
-post_date: 2021-06-30
+date: "2021-06-30"
 layout: post
 categories: cat
 excerpt_separator: <!--more-->
