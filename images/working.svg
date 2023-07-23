@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="188.66646mm"
+   height="35.125759mm"
+   viewBox="0 0 188.66646 35.125759"
+   version="1.1"
+   id="svg56569"
+   inkscape:version="1.1.2 (0a00cf5339, 2022-02-04)"
+   sodipodi:docname="working.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview56571"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:document-units="mm"
+     showgrid="false"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0"
+     inkscape:zoom="0.74029882"
+     inkscape:cx="501.14898"
+     inkscape:cy="325.54422"
+     inkscape:window-width="1920"
+     inkscape:window-height="1021"
+     inkscape:window-x="0"
+     inkscape:window-y="28"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs56566" />
+  <g
+     inkscape:label="Capa 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-7.3965131,-26.569844)">
+    <path
+       fill="#000000"
+       d="m 50.015282,31.587814 v -3.763455 c 0,-0.692437 -0.477347,-1.254515 -1.065506,-1.254515 h -7.458268 c 0,0 0,0 0,0 H 30.836841 c 0,0 0,0 0,0 H 20.182157 c 0,0 0,0 0,0 H 8.4620198 c -0.5881599,0 -1.0655067,0.562078 -1.0655067,1.254515 v 15.053858 c 0,0.692437 0.4773468,1.254515 1.0655067,1.254515 h 3.1963982 v 15.05384 h -1.065506 c -0.58816,0 -1.0655074,0.562079 -1.0655074,1.254515 0,0.692436 0.4773474,1.254516 1.0655074,1.254516 h 8.523721 c 0.588161,0 1.065507,-0.56208 1.065507,-1.254516 0,-0.692436 -0.477346,-1.254515 -1.065507,-1.254515 h -1.065506 v -7.52691 H 39.36046 v 7.52691 h -1.065506 c -0.588161,0 -1.065508,0.562079 -1.065508,1.254515 0,0.692436 0.477347,1.254516 1.065508,1.254516 h 8.523722 c 0.588159,0 1.065506,-0.56208 1.065506,-1.254516 0,-0.692436 -0.477347,-1.254515 -1.065506,-1.254515 h -1.065507 v -15.05384 h 3.196399 c 0.588159,0 1.065506,-0.562078 1.065506,-1.254515 V 31.587814 c 0,0 0,0 0,0 z M 47.884339,31.068531 38.919506,41.62381 H 31.27797 l 10.654684,-12.5449 h 5.951685 z M 20.623304,41.62381 31.27797,29.07891 h 7.641536 l -10.654684,12.5449 z m -10.654684,0 10.654684,-12.5449 h 7.641518 l -10.654667,12.5449 z m 7.641535,-12.5449 -8.0826286,9.516551 V 29.07891 Z m -3.820758,30.107716 v -15.05384 h 2.130927 v 15.05384 z m 4.26187,-10.035887 V 44.132786 H 39.3606 v 5.017953 z m 25.571202,10.035887 h -2.130926 v -15.05384 h 2.130926 z m -1.68985,-17.562816 5.951685,-7.007575 v 7.007575 z"
+       id="path864"
+       style="stroke-width:2.31224" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:19.0446px;line-height:1.25;font-family:Montserrat;-inkscape-font-specification:'Montserrat, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.47612"
+       x="73.156929"
+       y="37.613346"
+       id="text61244"
+       transform="scale(0.73312215,1.3640292)"><tspan
+         sodipodi:role="line"
+         id="tspan61242"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:19.0446px;font-family:Montserrat;-inkscape-font-specification:'Montserrat, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:0.47612"
+         x="73.156929"
+         y="37.613346">Estamos trabajando</tspan></text>
+  </g>
+</svg>
