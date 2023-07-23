@@ -42,7 +42,7 @@ html {
 a {
     color: #268bd2;
     text-decoration: none;
-	font-family: Raleway,"pt sans",helvetica,arial,sans-serif;
+    font-family: 'Montserrat', sans-serif;
 }
 a strong {
     color: inherit;
@@ -214,10 +214,10 @@ body, html {
     overflow-x: hidden;
 }
 html {
-    font-family: 'raleway', "pt serif", georgia, "times new roman", serif;
+    font-family: 'Montserrat', sans-serif;    
 }
 .sidebar, h1, h2, h3, h4, h5, h6 {
-    font-family: 'raleway', "pt sans", helvetica, arial, sans-serif;
+    font-family: 'Montserrat', sans-serif;    
 }
 h1, h2, h3, h4, h5, h6 {
     font-weight: 700;
@@ -382,7 +382,7 @@ a.pagination-item:hover, a.prevnext-item:hover {
 }
 .post-date, .post-tags {
     margin-bottom: 1rem;
-    font-family: 'raleway', "pt sans", helvetica, arial, sans-serif;
+    font-family: 'Montserrat', sans-serif;    
 }
 .page-title, .post-title, .post-title a {
     color: #6d0101;
@@ -430,7 +430,7 @@ span.post-date.indexpg {
     color: inherit;
 }
 .pagination, .prevnext {
-    font-family: 'raleway', "pt sans", helvetica, arial, sans-serif;
+    font-family: 'Montserrat', sans-serif;    
     color: #ccc;
     text-align: center;
     overflow: hidden;
@@ -1055,7 +1055,7 @@ blockquote.style1 {
     padding: .5em 10px;
     quotes: "\201c""\201d";
     color: #000;
-    font-family: tangerine, georgia, 'times new roman', serif;
+    font-family: 'Montserrat', sans-serif;    
     font-size: 200%;
     text-shadow: 4px 4px 6px #aaa;
 }
@@ -1174,7 +1174,7 @@ blockquote.style1 :last-child {
 }
 body {
     background: #fff;
-    font-family: 'raleway', georgia, ‘times new roman’, serif;
+    font-family: 'Montserrat', sans-serif;    
 }
 p {
     font-size: 12pt;
@@ -1258,11 +1258,11 @@ ul#markdown-toc {
 	right: 10px;
 	top: 15px;
 	z-index: 1;
-	font-family: 'raleway', "pt sans",georgia,"times new roman",serif;
+    font-family: 'Montserrat', sans-serif;    
 }
 .super-search__input {
 	border: 0;
-	font-family: 'raleway', "pt sans",georgia,"times new roman",serif;
+    font-family: 'Montserrat', sans-serif;    
 	font-size: 50px;
 	border-left: none;
 	border-right: none;
@@ -1279,7 +1279,7 @@ ul#markdown-toc {
 .super-search__results {
 	text-align: center;
 	list-style: none;
-	font-family: 'raleway', "pt sans",georgia,"times new roman",serif;
+    font-family: 'Montserrat', sans-serif;    
 	padding: 0;
 	overflow-x: hidden;
 	height: calc(100% - 110px);
