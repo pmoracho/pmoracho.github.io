@@ -1,7 +1,7 @@
 ---
 title: "Nuevo Kindle misma vida"
 author: "Patricio Moracho"
-date: 025-06-20
+date: 2025-06-20
 post_date: 2025-06-20
 layout: post
 categories: cat
@@ -57,5 +57,26 @@ Si y No. Vamos por partes:
 * **Software**: El software es más moderno, con una interfaz más limpia y
   rápida, pero la experiencia de lectura sigue siendo la misma.
 
+
+## Los molestos anuncios
+
+Cuando uno compra un kindle en Latinoamérica a un revendedor, lo más habitual es
+que la que obtengas sea la versión con anuncios, que son esos banners que
+aparecen en la pantalla de bloqueo y en la tienda de libros. En mi caso, me
+molestan y mucho. Lamentablemente hace tiempo que Amazon no permite
+desactivarlos de forma gratuita, y hay que pagar una tarifa para eliminarlos,
+unos 20 dólares. Hacer esto tampoco es tan sencillo, el truco es el siguiente:
+
+* Configurar una dirección de facturación y de envío en Amazon.com (USA)
+* Configurar una tarjeta de crédito válida en esa cuenta que tenga
+  habilitado el pago en dólares y que se facture a la dirección de
+  facturación de USA que hemos dado
+* Ir a la página de gestión de dispositivos y seleccionar el Kindle
+* En la sección de "Anuncios" o "Special Offers", seleccionar la opción para
+  desactivar los anuncios y pagar la tarifa correspondiente
+* Una vez hecho esto, los anuncios deberían desaparecer de tu Kindle
+
+Si no se hace esto la opción de desactivar los anuncios, si bien aparece, no
+funciona, da un error no muy claro y no se pueden desactivar.
 
 [Mi vida después del Kindle]: {{site.baseurl}}/_posts/2016/2016-12-26-Mi-vida-despues-del-Kindle.md 
