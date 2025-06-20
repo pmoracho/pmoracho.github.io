@@ -52,10 +52,12 @@ Si y No. Vamos por partes:
   micro-USB del Paperwhite 2da generación ya estaba algo viejo. Sigue sin venir
   un transformador lo que ya es común por estos días
 * **Almacenamiento**: Ahora viene con 16GB de almacenamiento, en mi caso es un
-  número absurdo, ya que nunca he llegado a usar más de 2GB en el Paperwhite 2da
-  generación, pero es bueno saber que tengo espacio de sobra.
+  número absurdo, ya que nunca he llegado a usar más de 2GB en el **Paperwhite 2da
+  generación**, pero es bueno saber que tengo espacio de sobra.
 * **Software**: El software es más moderno, con una interfaz más limpia y
-  rápida, pero la experiencia de lectura sigue siendo la misma.
+  rápida, pero la experiencia de lectura sigue siendo prácticamente la misma.
+* **Bluetooth**: Esto si que es nuevo, permite escuchar audiolibros, pero
+  no es algo que me interese mucho.
 
 
 ## Los molestos anuncios
@@ -78,5 +80,15 @@ unos 20 dólares. Hacer esto tampoco es tan sencillo, el truco es el siguiente:
 
 Si no se hace esto la opción de desactivar los anuncios, si bien aparece, no
 funciona, da un error no muy claro y no se pueden desactivar.
+
+## ¿Qué odio del Kindle?
+
+Poco, solo diría lo cerrado que es este dispositivo.
+
+## Enlaces interesantes
+
+* [Calibre](https://calibre-ebook.com/): El mejor gestor de libros electrónicos
+* [mobileRead](https://www.mobileread.com/forums/): Un foro muy útil para resolver dudas
+
 
 [Mi vida después del Kindle]: {{site.baseurl}}/_posts/2016/2016-12-26-Mi-vida-despues-del-Kindle.md 
