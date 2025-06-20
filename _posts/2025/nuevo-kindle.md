@@ -1,11 +1,14 @@
 ---
+title: "Nuevo Kindle misma vida"
+author: "Patricio Moracho"
+date: 025-06-20
+post_date: 2025-06-20
 layout: post
-title: Nuevo Kindle misma vida
-date: 2025-06-20
+categories: cat
+excerpt_separator: <!--more-->
+published: true
 show_meta: true
 comments: true
-published: true
-modified: '2025-06-20 22:28 -0300'
 mathjax: false
 gistembed: false
 noindex: false
@@ -14,11 +17,14 @@ sitemap: true
 summaryfeed: false
 description: Nuevo Kindle misma vida
 tags:
-  - literatura
-  - opinion
-  - kindle
+  - linux
+output:
+  github_page:
+    jekyllthat::jekylldown
+  pdf_document: default
+  html_document:
+    df_print: paged
 ---
-
 
 ![kindle.jpg]({{site.baseurl}}/images/2025/kindle-12.jpg)
 
