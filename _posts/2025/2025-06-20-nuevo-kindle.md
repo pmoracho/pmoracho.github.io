@@ -59,6 +59,10 @@ Si y No. Vamos por partes:
 * **Bluetooth**: Esto si que es nuevo, permite escuchar audiolibros, pero
   no es algo que me interese mucho.
 
+A ver, creo que no hubiese cambiado de Kindle si no fuera por el regalo, ya que
+el **Paperwhite 2da generación** sigue siendo un dispositivo excelente para leer. Ahora
+bien, el nuevo Kindle es mejor en casi todos los aspectos, y francamente
+disfruto mucho de la experiencia de lectura en este nuevo dispositivo. 
 
 ## Los molestos anuncios
 
@@ -75,7 +79,8 @@ unos 20 dólares. Hacer esto tampoco es tan sencillo, el truco es el siguiente:
   facturación de USA que hemos dado
 * Ir a la página de gestión de dispositivos y seleccionar el Kindle
 * En la sección de "Anuncios" o "Special Offers", seleccionar la opción para
-  desactivar los anuncios y pagar la tarifa correspondiente
+  desactivar los anuncios y pagar la tarifa correspondiente, que a la fecha es de
+  de uno 20 dólares más cerca de 3 dólares de impuestos
 * Una vez hecho esto, los anuncios deberían desaparecer de tu Kindle
 
 Si no se hace esto la opción de desactivar los anuncios, si bien aparece, no
@@ -83,7 +88,8 @@ funciona, da un error no muy claro y no se pueden desactivar.
 
 ## ¿Qué odio del Kindle?
 
-Poco, solo diría lo cerrado que es este dispositivo.
+Poco, solo diría lo cerrado que es este dispositivo y su cubierta antiadherente
+que se degrada con el tiempo y se vuelve pegajosa.
 
 ## Enlaces interesantes
 
