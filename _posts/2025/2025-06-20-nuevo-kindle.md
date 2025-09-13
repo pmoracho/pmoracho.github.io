@@ -28,22 +28,14 @@ output:
 
 ![kindle.jpg]({{site.baseurl}}/images/2025/kindle-12.jpg)
 
-Doce años después desde [Mi vida después del Kindle] tengo uno nuevo de estos
-"aparatitos". Podría seguir usando el mismo **Paperwhite 2da generación** por
-otros tantos años más, la batería aun me aguanta un par de semanas haciendo un
-uso casi diario, no llegué aún a completar los 2 gigabytes de almacenamiento, y
-la pantalla sigue siendo una maravilla para leer, la rutina de descargar libros,
-pasarlos por ***Calibre** y luego al dispositivo y leerlos no ha cambiado en
-nada. Pero regalo tan especial no se puede rechazar, y me he hecho con un
-**Kindle Paperwhite 12va generación**.
-
+    
 ## ¿Vale la pena?
 
 Si y No. Vamos por partes:
 
 * **Pantalla**: La pantalla es más grande, 7" vs 6", y la resolución es
   significativamente mejor, se nota mucho al leer, especialmente con tipografías
-  más pequeñas.
+  más pequeñas. Ver comparación más abajo.
 * **Iluminación**: La luz frontal es más uniforme, ahora si puede "apagarse" por
   completo, y la temperatura de color se puede ajustar, lo que hace que leer de
   noche sea más agradable.
@@ -63,6 +55,11 @@ A ver, creo que no hubiese cambiado de Kindle si no fuera por el regalo, ya que
 el **Paperwhite 2da generación** sigue siendo un dispositivo excelente para leer. Ahora
 bien, el nuevo Kindle es mejor en casi todos los aspectos, y francamente
 disfruto mucho de la experiencia de lectura en este nuevo dispositivo. 
+
+### Comparación de pantallas
+
+![Paperwhite 2da generación]({{site.baseurl}}/images/2025/pw2.jpg)
+![Paperwhite 12va generación]({{site.baseurl}}/images/2025/pw12.jpg)
 
 ## Los molestos anuncios
 
