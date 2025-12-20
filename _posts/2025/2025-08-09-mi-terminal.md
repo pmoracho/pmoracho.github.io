@@ -115,8 +115,8 @@ comandos útiles para mejorar la productividad en la terminal.
 
 #### Atajos de teclado
 
+.. to do
 
 ##### Generales
 
-|Atajo | Acción |
-|---|---|
+.. to do
