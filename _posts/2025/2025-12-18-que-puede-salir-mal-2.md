@@ -1,8 +1,8 @@
 ---
 title: "¿Qué puede salir mal? (II)"
 author: "Patricio Moracho"
-date: 2025-12-18
-post_date: 2025-12-18
+date: 2025-12-20
+post_date: 2025-12-20
 layout: post
 categories: cat
 excerpt_separator: <!--more-->
@@ -91,7 +91,7 @@ tarde o temprano, lo hará por nosotros, y las consecuencias pueden ser nefastas
 Podés seguir pensando que la seguridad es un tema del equipo de Ciberseguridad,
 que eso no es tu problema, pero la realidad es que cuando se comprometa un
 servidor o una infraestructura por que no te tomaste el trabajo de sanitizar un
-parámetro, la respuesta "eso no es era mi problema" no va a ser muy bien
+parámetro, la respuesta "eso no era mi problema" no va a ser muy bien
 recibida. Ocuparse de la seguridad hoy en día debiera ser parte del ADN de todo
 desarrollador de software, casi diría que hoy las escuelas y universidades
 debieran enseñar cuestiones básicas de seguridad antes siquiera de ver
@@ -100,20 +100,20 @@ ataques? claro que no, no nos engañemos, siempre estaremos atrás del problema,
 además somos humanos, y algunos tenemos una naturaleza más propensa a cometer
 errores, pero, en definitiva la dicotomía es: mantener una serie de hábitos
 seguros, de buenas prácticas, y una mentalidad orientada a la seguridad versus
-"eso no es era mi problema".
+"eso no es mi problema".
 
 ## ¿Es correcto que una librería de software ejecute un shell command para averiguar una información puntual?
 
 Acá no tengo muchas dudas. El acceso a una shell en cualquier sistema, librería
-o base de datos debería estar prohibido en la constitución nacional de cada
-país. Es super cómodo, sin duda, necesitás listar una carpeta, averiguar el
-espacio libre, mover un archivo, todo disponible desde un solo lugar, pero es el
-clásico "matar mosquitos a cañonazos". Acá juega el principio de mínima
-responsabilidad, tratemos de evitar a toda costa el uso de shell commands, es
-preferible usar APIs nativas del lenguaje o del mismo sistema operativo si las
-hay. El uso de shell commands es peligroso, debiera ser la última opción, cuando
-realmente con contamos con otras alternativas y debiéramos prestar especial
-cuidado a el tratamiento de los parámetros de entrada.
+o base de datos debería estar explícitamente prohibido en la constitución
+nacional de cada país. Es super cómodo, sin duda, necesitás listar una carpeta,
+averiguar el espacio libre, mover un archivo, todo disponible desde un solo
+lugar, pero es el clásico "matar mosquitos a cañonazos". Acá juega el principio
+de mínima responsabilidad, tratemos de evitar a toda costa el uso de shell
+commands, es preferible usar APIs nativas del lenguaje o del mismo sistema
+operativo si las hay. El uso de shell commands es peligroso, debiera ser la
+última opción, cuando realmente no contamos con otras alternativas y debiéramos
+prestar especial cuidado al tratamiento de los parámetros de entrada.
 
 ## ¿Como desarrollador que consume esta librería, no debería haber sanitizado el parámetro `drive` antes de pasarlo a la función `fsSize()`?
 
@@ -148,7 +148,7 @@ manejo de JSON en .NET? ¿Y podría desarrollarlo de forma mas segura? Ahora, si
 solo necesito una función puntual como `fsSize()`, que eventualmente no sería
 tan difícil de implementar, ¿voy a buscar una librería de terceros? Creo que
 entre estos dos extremos, hay un abanico de posibilidades que dependen del
-contexto y los recursos disponibles. Hay algo algunos principios que podemos
+contexto y los recursos disponibles. Hay algunos principios que podemos
 seguir:
 
 * Menos código = menos problemas

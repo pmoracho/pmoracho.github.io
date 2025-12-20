@@ -116,7 +116,9 @@ del usuario**. Pero creo que hay mucha mas "tela para cortar" en este asunto.
 Mas adelante, buscaré responderme estas preguntas y otras que surjan en el
 camino.
 
+**Continuar leyendo en [¿Qué puede salir mal? (II)]**
+
 
 [CVE]: https://nvd.nist.gov/vuln/detail/CVE-2025-68154
 [systeminformation]: https://github.com/sebhildebrandt/systeminformation
-  
+[¿Qué puede salir mal? (II)]: {{site.baseurl}}/_posts/2025/2025-12-18-que-puede-salir-mal-2.md  
